@@ -1,13 +1,23 @@
 import React from 'react'
+import { Divider, Typography } from '@material-ui/core'
+import { RouteComponentProps, Link } from '@reach/router'
 
-export interface HomeProps {
-	
-}
+import { useIntl } from 'hooks'
+import { SECOND_PAGE } from 'routes'
+import { Counter } from 'components/Counter'
 
-export const Home = (props: HomeProps) => {
+export const Home = (props: RouteComponentProps) => {
+	const intl = useIntl()
+
 	return (
 		<div>
-			 <h1>Hello</h1>
+			<Typography variant="h5">{intl.formatMessage({ id: 'home.title' })}</Typography>
+			<Divider />
+			<br />
+			<Link to={SECOND_PAGE}>{intl.formatMessage({ id: 'home.link' })}</Link>
+			<br />
+			<br />
+			<Counter />
 		</div>
 	)
 }
