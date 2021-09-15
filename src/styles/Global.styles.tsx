@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
 	}
 
 	body {
-		color: ${props => props.theme.text};
+		color: ${props => props.theme.text.main};
 		font-size: 0.875rem;
 	 	font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 		font-weight: 400;

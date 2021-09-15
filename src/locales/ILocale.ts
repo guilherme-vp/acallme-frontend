@@ -1,3 +1,3 @@
-import { enLocales as en } from './en/en'
+import { ptBrLocales as ptBR } from './pt-BR'
 
-export type ILocale = typeof en
+export type ILocale = typeof ptBR
