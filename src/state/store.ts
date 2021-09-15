@@ -1,11 +1,12 @@
 import { createStoreon } from 'storeon'
 
-import { CounterEvents, CounterState, counterModule } from './counter'
 import { GeneralEvents, GeneralState, generalModule } from './general'
 
-export interface AppState extends CounterState, GeneralState {}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface AppState extends GeneralState {}
 
-export interface AppEvents extends CounterEvents, GeneralEvents {}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface AppEvents extends GeneralEvents {}
 
 declare module 'storeon' {
 	export type IStoreonModule<State = AppState, Events = AppEvents> = (
@@ -13,4 +14,4 @@ declare module 'storeon' {
 	) => void
 }
 
-export const store = createStoreon<AppState, AppEvents>([counterModule, generalModule])
+export const store = createStoreon<AppState, AppEvents>([generalModule])
