@@ -47,7 +47,7 @@ export const ptBrLocales = {
 	'home.footer.language': 'Escolha uma língua:',
 	'home.footer.about.title': 'Sobre:',
 	'home.footer.about.description':
-		'A ACall-Me te ajuda a enfrentar o distanciamento social te aproximando dos melhores especialistas para lidar com os problemas causados pela pandemia.',
+		'A ACall Me te ajuda a enfrentar o distanciamento social te aproximando dos melhores especialistas para lidar com os problemas causados pela pandemia.',
 	'home.footer.copyright': 'Copyright © 2021 - Todos os direitos reservados por Vortechs.',
 
 	en: 'Inglês',

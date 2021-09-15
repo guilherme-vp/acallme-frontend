@@ -49,7 +49,7 @@ export const enLocales: ILocale = {
 	'home.footer.language': 'Choose a language:',
 	'home.footer.about.title': 'About:',
 	'home.footer.about.description':
-		'ACall-Me helps to face social distancing by bringing you the best specialists to deal with the mental problems caused by the pandemic.',
+		'ACall Me helps to face social distancing by bringing you the best specialists to deal with the mental problems caused by the pandemic.',
 	'home.footer.copyright': 'Copyright © 2021 - All Rights Reserved by Vortechs.',
 
 	// Languages
