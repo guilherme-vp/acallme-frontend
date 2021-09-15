@@ -31,7 +31,7 @@ export const Initial = () => {
 							</Grid>
 							<Grid item xs={12}>
 								<Button variant="contained" sx={{ fontWeight: 600 }}>
-									{intl.formatMessage({ id: 'home.section.initial.apointment' })}
+									{intl.formatMessage({ id: 'home.section.initial.appointment' })}
 								</Button>
 							</Grid>
 						</Grid>
@@ -39,7 +39,7 @@ export const Initial = () => {
 				</Grid>
 				<Hidden mdDown>
 					<Grid container item md xs={12} justifyContent="center" alignItems="flex-end">
-						<Image src={doctorImage} alt="initial-pointing-doctor" />
+						<Image src={doctorImage} alt="initial-pointing-doctor" loading="lazy" />
 					</Grid>
 				</Hidden>
 				<Grid container item>
