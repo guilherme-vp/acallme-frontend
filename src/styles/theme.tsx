@@ -10,7 +10,7 @@ export const theme = {
 		main: '#F8F9FE'
 	},
 	text: {
-		main: '#1b2c51',
+		main: '#1D2B4E',
 		description: '#656A80',
 		link: '#4a90e2'
 	},
