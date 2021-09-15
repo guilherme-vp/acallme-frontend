@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import { useIntl as useBaseIntl, IntlShape as Shape } from 'react-intl'
 
-import { enLocales } from '../locales/en/en'
+import { ptBrLocales } from '../locales/pt-BR'
 import { ILocale } from '../locales/ILocale'
 
 interface MessageDescriptor {
@@ -30,7 +30,7 @@ export const useIntl = (): IntlShape => {
 			values?: Parameters<IntlShape['formatMessage']>[1]
 		): ReturnType<IntlShape['formatMessage']> =>
 			formatMessage(
-				{ ...descriptor, defaultMessage: enLocales[descriptor.id] },
+				{ ...descriptor, defaultMessage: ptBrLocales[descriptor.id] },
 				{ bold: str => <strong>{str}</strong>, linebreak: <br />, ...values }
 			)
 	}
