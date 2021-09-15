@@ -16,14 +16,16 @@ export const theme = {
 	},
 	grey: {
 		main: '#918C9B',
-		secondary: '#B5BED2'
+		secondary: '#B5BED2',
+		darker: '#666b7f'
 	},
 	tags: {
 		black: '#000000',
 		white: '#FFFFFF'
 	},
 	border: {
-		thin: '#EBEFF2'
+		thin: '#EBEFF2',
+		darker: '#E2E2EA'
 	}
 }
 
