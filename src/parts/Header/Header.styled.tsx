@@ -4,6 +4,8 @@ import styled from 'styled-components'
 export const Container = styled(Toolbar)`
 	height: 77px;
 	padding: 16px;
+	border-bottom-left-radius: 24px;
+	border-bottom-right-radius: 24px;
 
 	@media only screen and (min-width: 600px) {
 		&.MuiToolbar-gutters {
@@ -49,7 +51,6 @@ export const RightContent = styled.nav`
 export const ContactButton = styled(Button)`
 	padding: 6px 20px;
 	border-radius: 25px;
-	background-color: ${props => props.theme.colors.primary};
 	color: ${props => props.theme.tags.white};
 	font-weight: 500;
 `

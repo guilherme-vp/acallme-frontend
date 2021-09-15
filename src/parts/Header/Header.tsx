@@ -54,7 +54,7 @@ export const Header = () => {
 							</Grid>
 							<Hidden smDown>
 								<Grid item>
-									<ContactButton>
+									<ContactButton variant="contained">
 										{intl.formatMessage({ id: 'home.header.contact' })}
 									</ContactButton>
 								</Grid>
