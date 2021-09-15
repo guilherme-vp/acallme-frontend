@@ -39,7 +39,8 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 			secondary: theme.text.description
 		},
 		common: {
-			black: theme.tags.black
+			black: theme.tags.black,
+			white: theme.tags.white
 		},
 		grey: {
 			'600': theme.grey.main
