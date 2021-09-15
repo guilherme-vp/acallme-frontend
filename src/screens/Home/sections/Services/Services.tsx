@@ -56,16 +56,7 @@ export const Services = () => {
 				</Grid>
 				<Grid container mt={5} justifyContent="center">
 					{services.map(({ alt, icon }, index) => (
-						<Grid
-							key={alt}
-							container
-							item
-							xs={6}
-							md={3}
-							justifyContent="space-between"
-							spacing={1}
-							padding={2}
-						>
+						<Grid key={alt} container item xs={6} md={3} spacing={1} padding={2}>
 							<Grid item xs={12}>
 								<Icon src={icon} alt={alt} />
 							</Grid>
