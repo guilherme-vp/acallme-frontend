@@ -1,6 +1,7 @@
 import React from 'react'
 import { AppBar, Grid, Button, useMediaQuery, Theme, Hidden } from '@material-ui/core'
 import { useIntl } from 'hooks'
+import { SmoothLink } from 'components/SmoothLink'
 import {
 	ContactButton,
 	Container,
@@ -9,7 +10,6 @@ import {
 	RightContent,
 	Title
 } from './Header.styled'
-import { SmoothLink } from './components'
 
 export const Header = () => {
 	const intl = useIntl()
@@ -52,6 +52,7 @@ export const Header = () => {
 									</Button>
 								</SmoothLink>
 							</Grid>
+
 							<Hidden smDown>
 								<Grid item>
 									<ContactButton variant="contained">
