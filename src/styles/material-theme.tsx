@@ -143,15 +143,20 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 		},
 		MuiSelect: {
 			styleOverrides: {
+				root: {
+					border: `1px solid ${theme.border.thin}`,
+					padding: '12px 15px'
+				},
 				icon: {
-					right: 10
+					right: 2
 				},
 				selectMenu: {
 					borderRadius: 'inherit'
 				},
 				select: {
 					'&:focus': {
-						borderRadius: 'inherit'
+						borderRadius: 'inherit',
+						borderColor: theme.border.darker
 					}
 				}
 			}
@@ -163,15 +168,15 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 			styleOverrides: {
 				root: {
 					borderRadius: 6,
-					border: '1px solid',
+					border: `1px solid ${theme.border.thin}`,
 					fontSize: pxToRem(15),
 					marginTop: '0 !important',
 					'&.Mui-focused': {
-						borderColor: theme.colors.primary
+						borderColor: theme.border.darker
 					}
 				},
 				input: {
-					padding: '14px 15px 15px',
+					padding: '14px 16px 15px',
 					'&::placeholder': {
 						color: theme.grey.main
 					}
@@ -202,7 +207,7 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 		MuiDivider: {
 			styleOverrides: {
 				root: {
-					borderColor: theme.border.thin
+					borderColor: theme.border.darker
 				},
 				wrapper: {
 					color: theme.border.thin,
