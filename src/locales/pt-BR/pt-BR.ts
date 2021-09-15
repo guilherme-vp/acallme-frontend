@@ -9,9 +9,9 @@ export const ptBrLocales = {
 	'home.section.initial.description':
 		'Encontre o especialista e o tratamento ideais em poucos cliques. Comece agora a se tratar via Teleconsulta, a distância não é um problema.',
 	'home.section.initial.appointment': 'Agende uma Consulta',
-	'home.section.initial.box.patients': 'Pacientes Todos os Dias',
-	'home.section.initial.box.years': 'Anos de Experiência',
-	'home.section.initial.box.records': 'Prontuários Realizados',
+	'home.section.initial.box.patients': 'Pacientes Cadastrados',
+	'home.section.initial.box.specialists': 'Especialistas Cadastrados',
+	'home.section.initial.box.cases': 'Casos tratados',
 
 	'home.section.about.title': 'Cuidando de Você e da Sua Saúde a Todo Tempo',
 	'home.section.about.description':

@@ -7,7 +7,7 @@ export const ContentBox = () => {
 	const intl = useIntl()
 
 	const nPatients = 500
-	const yearsExperience = 1
+	const nSpecialists = 500
 	const nDiagnosis = 350
 
 	return (
@@ -27,11 +27,11 @@ export const ContentBox = () => {
 				<BoxDivider />
 				<SectionGrid>
 					<Grid item>
-						<Typography variant="display2">{yearsExperience}</Typography>
+						<Typography variant="display2">{nSpecialists}+</Typography>
 					</Grid>
 					<Grid item>
 						<Description>
-							{intl.formatMessage({ id: 'home.section.initial.box.years' })}
+							{intl.formatMessage({ id: 'home.section.initial.box.specialists' })}
 						</Description>
 					</Grid>
 				</SectionGrid>
@@ -43,7 +43,7 @@ export const ContentBox = () => {
 					</Grid>
 					<Grid item>
 						<Description>
-							{intl.formatMessage({ id: 'home.section.initial.box.records' })}
+							{intl.formatMessage({ id: 'home.section.initial.box.cases' })}
 						</Description>
 					</Grid>
 				</SectionGrid>

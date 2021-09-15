@@ -11,9 +11,9 @@ export const enLocales: ILocale = {
 	'home.section.initial.description':
 		'Find the ideal specialist and treatment in just a few clicks. Start now to treat yourself via Teleconsultation, distance is not a problem.',
 	'home.section.initial.appointment': 'Book an Appointment',
-	'home.section.initial.box.patients': 'Patients Every Day',
-	'home.section.initial.box.years': 'Years Experience',
-	'home.section.initial.box.records': 'Diagnosis',
+	'home.section.initial.box.patients': 'Registered Patients',
+	'home.section.initial.box.specialists': 'Registered Specialists',
+	'home.section.initial.box.cases': 'Treated Cases',
 
 	'home.section.about.title': 'Taking Care of You and Your Health Every Time',
 	'home.section.about.description':
