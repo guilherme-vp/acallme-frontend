@@ -2,6 +2,20 @@
 	"name": "react-app-config",
 	"version": "0.1.0",
 	"private": true,
+	"contributors": [
+		{
+			"name": "Daniel Augusto Sato Yamashita"
+		},
+		{
+			"name": "Guilherme Vieira de Paiva"
+		},
+		{
+			"name": "João Henrique Freire de Sá"
+		},
+		{
+			"name": "Rodrigo Avella"
+		}
+	],
 	"dependencies": {
 		"@material-ui/core": "^5.0.0-alpha.28",
 		"@material-ui/icons": "^5.0.0-alpha.28",
