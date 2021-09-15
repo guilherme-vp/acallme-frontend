@@ -10,8 +10,7 @@ export const BoxContainer = styled(Box)`
 
 	@media only screen and (max-width: 968px) {
 		margin-top: 24px;
-		padding-left: 24px;
-		padding-right: 24px;
+		padding: 12px 24px;
 	}
 `
 
