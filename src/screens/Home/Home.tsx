@@ -1,5 +1,4 @@
 import React from 'react'
-import { LanguagePicker } from 'components/LanguagePicker'
 import { Container } from './Home.styled'
 import { Initial, About, Services } from './sections'
 
@@ -8,7 +7,6 @@ export const Home = () => (
 		<Initial />
 		<About />
 		<Services />
-		<LanguagePicker />
 	</Container>
 )
 
