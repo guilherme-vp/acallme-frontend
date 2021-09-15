@@ -5,7 +5,7 @@ export const ptBrLocales = {
 	'home.header.services': 'Serviços',
 	'home.header.contact': 'Entre em Contato',
 
-	'home.section.initial.title': 'Oferecendo o Melhor Para a Sua Ansiedade',
+	'home.section.initial.title': 'Oferecendo o Melhor Para a Sua Saúde Mental',
 	'home.section.initial.description':
 		'Encontre o especialista e o tratamento ideais em poucos cliques. Comece agora a se tratar via Teleconsulta, a distância não é um problema.',
 	'home.section.initial.appointment': 'Agende uma Consulta',
@@ -22,6 +22,25 @@ export const ptBrLocales = {
 	'home.section.about.bullet.3': 'Segurança Digital',
 	'home.section.about.bullet.4': 'Help Center 24x7',
 	'home.section.about.learnMore': 'Saiba Mais',
+
+	'home.section.services.title': 'Qualidade Para Você e Aqueles Que Você Ama.',
+	'home.section.services.description':
+		'Aqui nós oferecemos os melhores serviços que o seu tratamento necessita, tenha um atendimento de alta qualidade exclusivo agora mesmo.',
+	'home.section.services.service.1.title': 'Teleconsultas',
+	'home.section.services.service.1.description':
+		'Provemos o melhor das consultas onlines disponibilizando um acesso direto ao seu especialista.',
+	'home.section.services.service.2.title': 'Agendamento 24x7',
+	'home.section.services.service.2.description':
+		'Agende sua Teleconsulta para qualquer dia a qualquer hora que você quiser.',
+	'home.section.services.service.3.title': 'Tratamento Contínuo',
+	'home.section.services.service.3.description':
+		'Analise o progresso do seu tratamento após cada consulta ou acessando seu histórico de consultas.',
+	'home.section.services.service.4.title': 'Atendimento via ChatBot',
+	'home.section.services.service.4.description':
+		'Deseja realizar um pré-diagnóstico? Utilize nossa ChatBot <bold>Anya</bold>.',
+	// 'home.section.services.service.5.title': 'Segurança',
+	// 'home.section.services.service.5.description':
+	// 'Asseguramos a proteção de todos os dados fornecidos, conforme a LGPD.',
 
 	en: 'Inglês',
 	'pt-BR': 'Português'
