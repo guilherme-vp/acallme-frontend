@@ -44,6 +44,14 @@ export const enLocales: ILocale = {
 	// 'home.section.services.service.5.description':
 	// 'We ensure the protection of all data, as established by the LGDP',
 
+	'home.footer.address': 'Av. Paulista 1207 - São Paulo, SP - BR',
+	'home.footer.contact': 'Call us: +55 (99) 9 9999-9999',
+	'home.footer.language': 'Choose a language:',
+	'home.footer.about.title': 'About:',
+	'home.footer.about.description':
+		'ACall-Me helps to face social distancing by bringing you the best specialists to deal with the mental problems caused by the pandemic.',
+	'home.footer.copyright': 'Copyright © 2021 - All Rights Reserved by Vortechs.',
+
 	// Languages
 	en: 'English',
 	'pt-BR': 'Portuguese'
