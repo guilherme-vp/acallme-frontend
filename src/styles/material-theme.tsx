@@ -100,7 +100,7 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 					borderRadius: '25px'
 				},
 				contained: {
-					padding: '8px 16px'
+					padding: '8px 22px'
 				},
 				containedSizeSmall: {
 					padding: '6px 10px'
