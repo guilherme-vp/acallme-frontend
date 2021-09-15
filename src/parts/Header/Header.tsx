@@ -19,7 +19,7 @@ export const Header = () => {
 		<AppBar position="fixed" style={{ border: 'none' }}>
 			<Container>
 				<Content>
-					<Title variant="h1">A Call Me</Title>
+					<Title variant="h1">ACall Me</Title>
 
 					<RightContent>
 						<Grid container alignItems="center" spacing={smDown ? 1 : 4}>
