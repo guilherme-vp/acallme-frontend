@@ -27,7 +27,7 @@ export const ScrollToTop = ({ anchorId }: ScrollProps) => {
 	return (
 		<Zoom in={trigger}>
 			<BottomContainer onClick={handleClick} role="presentation">
-				<Fab sx={{ boxShadow: 'none' }} color="primary" size="small">
+				<Fab sx={{ boxShadow: 'none' }} color="secondary" size="small">
 					<ArrowIcon />
 				</Fab>
 			</BottomContainer>
