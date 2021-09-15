@@ -1,13 +1,9 @@
+import { Divider } from '@material-ui/core'
 import styled from 'styled-components'
 
 export const Container = styled.div`
 	min-height: 100vh;
 	background-color: ${props => props.theme.background.main};
-`
-
-export const Main = styled.main`
-	flex-grow: 1;
-	display: flex;
 	padding: 16px;
 
 	@media only screen and (min-width: 600px) {
@@ -24,4 +20,13 @@ export const Main = styled.main`
 		padding-left: 144px;
 		padding-right: 144px;
 	}
+`
+
+export const Main = styled.main`
+	flex-grow: 1;
+	display: flex;
+`
+
+export const LayoutDivider = styled(Divider).attrs({ flexItem: true })`
+	margin: 24px 0;
 `
