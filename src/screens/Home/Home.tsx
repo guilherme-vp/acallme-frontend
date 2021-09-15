@@ -1,19 +1,11 @@
 import React from 'react'
-import { Divider, Typography } from '@material-ui/core'
-import { RouteComponentProps } from '@reach/router'
+import { Container } from './Home.styled'
+import { Initial } from './sections'
 
-import { useIntl } from 'hooks'
-
-export const Home = (props: RouteComponentProps) => {
-	const intl = useIntl()
-
-	return (
-		<div>
-			<Typography variant="h5">{intl.formatMessage({ id: 'home.title' })}</Typography>
-			<Divider />
-			<br />
-		</div>
-	)
-}
+export const Home = () => (
+	<Container>
+		<Initial />
+	</Container>
+)
 
 export default Home
