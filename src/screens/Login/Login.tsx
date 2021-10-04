@@ -60,7 +60,7 @@ const Login = () => {
 						</Grid>
 
 						<Grid container item>
-							<form method="get">
+							<form method="post">
 								<Grid container item spacing={2}>
 									<Grid item xs={12}>
 										<Dados>
