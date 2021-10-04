@@ -50,7 +50,7 @@ export const Dados = styled.div`
 		background-color: #ffffffb0;
 		outline: none;
 		border-radius: 4px;
-		padding: 8px 40px;
+		padding: 8px 24px;
 		transition: 0.3s;
 		:focus {
 			border-color: #0c99ac;
@@ -61,24 +61,14 @@ export const Dados = styled.div`
 	.icon {
 		position: absolute;
 		top: 10px;
-		left: 0px;
-		padding: 0px 14px;
+		left: 8px;
 	}
 	.iconEye {
 		position: absolute;
 		top: 10px;
-		right: 0px;
-		padding: 0px 14px;
+		right: 8px;
 		svg {
 			cursor: pointer;
-		}
-	}
-	@media (max-width: 1280px) {
-		.icon {
-			padding: 0px 8px;
-		}
-		input {
-			padding: 8px 24px;
 		}
 	}
 `
