@@ -90,8 +90,8 @@ const Login = () => {
 
 									<Grid item xs={12}>
 										<DivButtonDados>
-											<input type="submit" name="Login" />
-											<button>Criar Conta</button>
+											<input type="submit" name="Login" value="Login" />
+											<input type="button" name="Criar conta" value="Criar conta" />
 										</DivButtonDados>
 									</Grid>
 								</Grid>
