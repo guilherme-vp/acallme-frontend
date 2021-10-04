@@ -1,11 +1,10 @@
 import React from 'react'
-
-import Login from 'screens/Login/Login'
+import SignUpPatient from 'screens/SingUpPatient/SingUpPatient'
 import { DefaultLayout } from './layouts/default'
 
 const App = () => (
 	<DefaultLayout>
-		<Login />
+		<SignUpPatient />
 	</DefaultLayout>
 )
 
