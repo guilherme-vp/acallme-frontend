@@ -33,6 +33,7 @@
 		"history": "^5.0.0",
 		"react": "^16.14.0",
 		"react-dom": "^16.14.0",
+		"react-icons": "^4.3.1",
 		"react-intl": "^5.20.10",
 		"react-scripts": "3.4.4",
 		"react-scroll": "^1.8.4",
