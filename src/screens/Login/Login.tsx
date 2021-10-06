@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-
+import { useIntl } from 'hooks'
 import { Grid } from '@material-ui/core'
 import { BiEnvelope } from 'react-icons/bi'
 import { AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { DivLogin, ContainerLogin, Dados, DivButtonDados, DivInfo } from './Login.styled'
 
 const Login = () => {
+	const intl = useIntl()
 	const [ativo, setAtivo] = useState(false)
 
 	function olhar() {
@@ -49,7 +50,7 @@ const Login = () => {
 					>
 						<Grid item>
 							<DivInfo>
-								<h1>Bem-Vindo !</h1>
+								<h1>{intl.formatMessage({ id: 'login.welcome' })}</h1>
 								<p>
 									Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque
 									consequuntur molestiae exercitationem corporis ullam necessitatibus eum
@@ -74,7 +75,7 @@ const Login = () => {
 											<AiOutlineLock className="icon" />
 											<input
 												type={ativo ? 'text' : 'password'}
-												placeholder="Senha"
+												placeholder={intl.formatMessage({ id: 'login.option.password' })}
 												name="senha"
 												required
 											/>
@@ -86,14 +87,22 @@ const Login = () => {
 
 									<Grid item xs={12}>
 										<a href="./" style={{ color: '#0e63f4' }}>
-											Esqueceu a senha?
+											{intl.formatMessage({ id: 'login.a.forgetPassword' })}
 										</a>
 									</Grid>
 
 									<Grid item xs={12}>
 										<DivButtonDados>
-											<input type="submit" name="Login" value="Login" />
-											<input type="button" name="Criar conta" value="Criar conta" />
+											<input
+												type="submit"
+												name="Login"
+												value={intl.formatMessage({ id: 'login.submit' })}
+											/>
+											<input
+												type="button"
+												name="Criar conta"
+												value={intl.formatMessage({ id: 'login.createAccount' })}
+											/>
 										</DivButtonDados>
 									</Grid>
 								</Grid>
