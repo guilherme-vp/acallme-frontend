@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 
 export const ContainerSign = styled.div`
@@ -60,19 +59,21 @@ export const Dados = styled.div`
 
 export const DivSubmit = styled.div`
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	margin-top: 20px;
 	input {
 		width: 80%;
-		border: 2px solid #aaa;
-		background-color: #ffffffb0;
+		margin-bottom: 8px;
+		border: none;
+		color: white;
+		background-color: #0e63f4;
 		outline: none;
 		border-radius: 16px;
 		padding: 8px;
 		:hover {
-			border-color: #0c99ac;
-			background-color: #f3f1f1;
+			background-color: #0844ac;
 		}
 	}
 `

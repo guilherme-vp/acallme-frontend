@@ -39,7 +39,7 @@ const SignUpPatient = () => {
 					alignItems="center"
 				>
 					<Grid item xs={12}>
-						<h1 style={{ textAlign: 'center', marginBottom: '16px' }}>
+						<h1 style={{ textAlign: 'center', marginBottom: '16px', color: '#0e63f4' }}>
 							Cadastro de Paciente
 						</h1>
 
@@ -93,6 +93,7 @@ const SignUpPatient = () => {
 
 							<DivSubmit>
 								<input type="submit" value="Criar Conta" />
+								<a href=".">Já tem uma conta? Faça login</a>
 							</DivSubmit>
 						</form>
 					</Grid>
