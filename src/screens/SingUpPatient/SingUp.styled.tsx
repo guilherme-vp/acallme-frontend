@@ -34,7 +34,7 @@ export const Dados = styled.div`
 		padding: 8px 30px;
 		transition: 0.3s;
 		:focus {
-			border-color: #0c99ac;
+			border-color: #0e63f4;
 			background-color: #f3f1f1;
 		}
 	}
