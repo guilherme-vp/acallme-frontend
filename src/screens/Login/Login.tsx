@@ -85,7 +85,9 @@ const Login = () => {
 									</Grid>
 
 									<Grid item xs={12}>
-										<a href="./">Esqueceu a senha?</a>
+										<a href="./" style={{ color: '#0e63f4' }}>
+											Esqueceu a senha?
+										</a>
 									</Grid>
 
 									<Grid item xs={12}>
