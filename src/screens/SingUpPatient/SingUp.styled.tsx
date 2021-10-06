@@ -10,7 +10,7 @@ export const ContainerSign = styled.div`
 	align-items: center;
 	#imagem {
 		img {
-			width: 500px;
+			width: 80%;
 		}
 	}
 	@media (max-width: 1280px) {
@@ -63,7 +63,7 @@ export const DivSubmit = styled.div`
 	align-items: center;
 	justify-content: center;
 	margin-top: 20px;
-	input {
+	button {
 		width: 80%;
 		margin-bottom: 8px;
 		border: none;
@@ -75,5 +75,8 @@ export const DivSubmit = styled.div`
 		:hover {
 			background-color: #0844ac;
 		}
+	}
+	a {
+		color: ${props => props.theme.text.link};
 	}
 `

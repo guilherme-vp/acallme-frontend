@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid } from '@material-ui/core'
+import { Grid, Button } from '@material-ui/core'
 import { AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BiEnvelope } from 'react-icons/bi'
 import { BsPerson } from 'react-icons/bs'
@@ -11,13 +11,13 @@ import telefone from './img/telefone.svg'
 
 const SignUpPatient = () => {
 	const intl = useIntl()
-	const [ativo, setAtivo] = useState(false)
+	const [active, setActive] = useState(false)
 
-	function olhar() {
-		if (ativo === true) {
-			setAtivo(false)
+	function look() {
+		if (active === true) {
+			setActive(false)
 		} else {
-			setAtivo(true)
+			setActive(true)
 		}
 	}
 
@@ -27,7 +27,7 @@ const SignUpPatient = () => {
 				<Grid item lg={8} id="imagem">
 					<img
 						src="https://www.epays.com.br/wp-content/uploads/2020/09/img2-1024x683.png"
-						alt="pessoas"
+						alt="person-with-notebook"
 					/>
 				</Grid>
 
@@ -45,7 +45,7 @@ const SignUpPatient = () => {
 							{intl.formatMessage({ id: 'signupPatient.title' })}
 						</h1>
 
-						<form action="" method="post">
+						<form>
 							<Dados>
 								<input
 									type="text"
@@ -63,14 +63,14 @@ const SignUpPatient = () => {
 
 							<Dados>
 								<input
-									type={ativo ? 'text' : 'password'}
+									type={active ? 'text' : 'password'}
 									placeholder={intl.formatMessage({ id: 'signupPatient.option.senha' })}
 									name="senha"
 									required
 								/>
 								<AiOutlineLock className="icon" />
-								<div onClick={olhar} className="iconEye">
-									{ativo ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+								<div onClick={look} className="iconEye">
+									{active ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
 								</div>
 							</Dados>
 
@@ -109,10 +109,9 @@ const SignUpPatient = () => {
 							</Dados>
 
 							<DivSubmit>
-								<input
-									type="submit"
-									value={intl.formatMessage({ id: 'signupPatient.submit' })}
-								/>
+								<Button type="submit">
+									{intl.formatMessage({ id: 'signupPatient.submit' })}
+								</Button>
 								<a href=".">{intl.formatMessage({ id: 'signupPatient.a.login' })}</a>
 							</DivSubmit>
 						</form>
