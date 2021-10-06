@@ -53,11 +53,10 @@ export const Dados = styled.div`
 		padding: 8px 24px;
 		transition: 0.3s;
 		:focus {
-			border-color: #0c99ac;
+			border-color: #0e63f4;
 			background-color: #f3f1f1;
 		}
 	}
-
 	.icon {
 		position: absolute;
 		top: 10px;
@@ -88,17 +87,16 @@ export const DivButtonDados = styled.div`
 	width: 80%;
 	input,
 	button {
-		background-color: #ffffffb0;
+		background-color: #0e63f4;
 		padding: 8px;
 		width: 40%;
 		border-radius: 16px;
-		border: 1px solid black;
-		color: black;
+		border: none;
+		color: white;
 		margin-right: 16px;
 		cursor: pointer;
 		:hover {
-			background-color: #0c99ac;
-			color: white;
+			background-color: #0947b3;
 		}
 	}
 `
