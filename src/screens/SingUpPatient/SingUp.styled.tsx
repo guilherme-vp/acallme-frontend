@@ -34,7 +34,7 @@ export const Dados = styled.div`
 		padding: 8px 30px;
 		transition: 0.3s;
 		:focus {
-			border-color: #0e63f4;
+			border-color: ${props => props.theme.input.borderFocus};
 			background-color: #f3f1f1;
 		}
 	}
@@ -66,14 +66,11 @@ export const DivSubmit = styled.div`
 	button {
 		width: 80%;
 		margin-bottom: 8px;
-		border: none;
-		color: white;
-		background-color: #0e63f4;
-		outline: none;
-		border-radius: 16px;
+		color: ${props => props.theme.button.color};
+		background-color: ${props => props.theme.button.background};
 		padding: 8px;
 		:hover {
-			background-color: #0844ac;
+			background-color: ${props => props.theme.button.hover};
 		}
 	}
 	a {
