@@ -1,19 +1,22 @@
 import React, { useState } from 'react'
 import { useIntl } from 'hooks'
-import { Grid } from '@material-ui/core'
+import { Grid, Button } from '@material-ui/core'
 import { BiEnvelope } from 'react-icons/bi'
+import { useTheme } from 'styled-components'
 import { AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { DivLogin, ContainerLogin, Dados, DivButtonDados, DivInfo } from './Login.styled'
 
 const Login = () => {
 	const intl = useIntl()
-	const [ativo, setAtivo] = useState(false)
+	const [active, setActive] = useState(false)
 
-	function olhar() {
-		if (ativo === true) {
-			setAtivo(false)
+	const theme = useTheme()
+
+	function look() {
+		if (active === true) {
+			setActive(false)
 		} else {
-			setAtivo(true)
+			setActive(true)
 		}
 	}
 
@@ -29,13 +32,11 @@ const Login = () => {
 						alignItems="center"
 						id="imagem"
 					>
-						<Grid item>
-							<img
-								src="https://i1.wp.com/sensorweb.com.br/wp-content/uploads/2019/08/header_25_09_19.png?fit=845%2C684&ssl=1"
-								alt="medico e paciente"
-								style={{ width: '500px' }}
-							/>
-						</Grid>
+						<img
+							src="https://i1.wp.com/sensorweb.com.br/wp-content/uploads/2019/08/header_25_09_19.png?fit=845%2C684&ssl=1"
+							alt="specialists-patients"
+							style={{ width: '80%' }}
+						/>
 					</Grid>
 
 					<Grid
@@ -61,7 +62,7 @@ const Login = () => {
 						</Grid>
 
 						<Grid container item>
-							<form method="post">
+							<form>
 								<Grid container item spacing={2}>
 									<Grid item xs={12}>
 										<Dados>
@@ -74,35 +75,31 @@ const Login = () => {
 										<Dados>
 											<AiOutlineLock className="icon" />
 											<input
-												type={ativo ? 'text' : 'password'}
+												type={active ? 'text' : 'password'}
 												placeholder={intl.formatMessage({ id: 'login.option.password' })}
 												name="senha"
 												required
 											/>
-											<div onClick={olhar} className="iconEye">
-												{ativo ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+											<div onClick={look} className="iconEye">
+												{active ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
 											</div>
 										</Dados>
 									</Grid>
 
 									<Grid item xs={12}>
-										<a href="./" style={{ color: '#0e63f4' }}>
+										<a href="./" style={{ color: theme.text.link }}>
 											{intl.formatMessage({ id: 'login.a.forgetPassword' })}
 										</a>
 									</Grid>
 
 									<Grid item xs={12}>
 										<DivButtonDados>
-											<input
-												type="submit"
-												name="Login"
-												value={intl.formatMessage({ id: 'login.submit' })}
-											/>
-											<input
-												type="button"
-												name="Criar conta"
-												value={intl.formatMessage({ id: 'login.createAccount' })}
-											/>
+											<Button type="submit" name="Login">
+												{intl.formatMessage({ id: 'login.submit' })}
+											</Button>
+											<Button type="button" name="Criar-conta">
+												{intl.formatMessage({ id: 'login.createAccount' })}
+											</Button>
 										</DivButtonDados>
 									</Grid>
 								</Grid>

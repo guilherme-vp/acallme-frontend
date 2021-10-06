@@ -17,10 +17,6 @@ export const ContainerLogin = styled.div`
 	align-items: center;
 	justify-content: center;
 
-	a {
-		text-decoration: none;
-		color: #0c99ac;
-	}
 	@media (max-width: 1280px) {
 		#imagem {
 			display: none;
@@ -33,9 +29,6 @@ export const ContainerLogin = styled.div`
 		border: none;
 		border-radius: 0;
 		padding: 0 16px;
-		body {
-			overflow-x: hidden;
-		}
 	}
 `
 
@@ -52,8 +45,8 @@ export const Dados = styled.div`
 		border-radius: 4px;
 		padding: 8px 24px;
 		transition: 0.3s;
-		:focus {
-			border-color: #0e63f4;
+		&:focus {
+			border-color: ${props => props.theme.input.borderFocus};
 			background-color: #f3f1f1;
 		}
 	}
@@ -85,18 +78,14 @@ export const DivInfo = styled.div`
 export const DivButtonDados = styled.div`
 	display: flex;
 	width: 80%;
-	input,
 	button {
-		background-color: #0e63f4;
+		background-color: ${props => props.theme.button.background};
+		color: ${props => props.theme.button.color};
 		padding: 8px;
 		width: 40%;
-		border-radius: 16px;
-		border: none;
-		color: white;
 		margin-right: 16px;
-		cursor: pointer;
-		:hover {
-			background-color: #0947b3;
+		&:hover {
+			background-color: ${props => props.theme.button.hover};
 		}
 	}
 `
