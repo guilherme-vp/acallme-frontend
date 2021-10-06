@@ -5,10 +5,12 @@ import { BiEnvelope } from 'react-icons/bi'
 import { BsPerson } from 'react-icons/bs'
 import { FaTransgenderAlt, FaBaby } from 'react-icons/fa'
 import { HiOutlineIdentification } from 'react-icons/hi'
+import { useIntl } from 'hooks'
 import { ContainerSign, Dados, DivSubmit } from './SingUp.styled'
 import telefone from './img/telefone.svg'
 
 const SignUpPatient = () => {
+	const intl = useIntl()
 	const [ativo, setAtivo] = useState(false)
 
 	function olhar() {
@@ -40,12 +42,17 @@ const SignUpPatient = () => {
 				>
 					<Grid item xs={12}>
 						<h1 style={{ textAlign: 'center', marginBottom: '16px', color: '#0e63f4' }}>
-							Cadastro de Paciente
+							{intl.formatMessage({ id: 'signupPatient.title' })}
 						</h1>
 
 						<form action="" method="post">
 							<Dados>
-								<input type="text" name="nome" placeholder="Nome Completo" required />
+								<input
+									type="text"
+									name="nome"
+									placeholder={intl.formatMessage({ id: 'signupPatient.option.name' })}
+									required
+								/>
 								<BsPerson className="icon" />
 							</Dados>
 
@@ -57,7 +64,7 @@ const SignUpPatient = () => {
 							<Dados>
 								<input
 									type={ativo ? 'text' : 'password'}
-									placeholder="Senha"
+									placeholder={intl.formatMessage({ id: 'signupPatient.option.senha' })}
 									name="senha"
 									required
 								/>
@@ -74,9 +81,15 @@ const SignUpPatient = () => {
 
 							<Dados>
 								<select name="genero" id="genero" required>
-									<option value="h">Homem</option>
-									<option value="m">Mulher</option>
-									<option value="nb">Não Binário</option>
+									<option value="h">
+										{intl.formatMessage({ id: 'signupPatient.option.genre.man' })}
+									</option>
+									<option value="m">
+										{intl.formatMessage({ id: 'signupPatient.option.genre.woman' })}
+									</option>
+									<option value="nb">
+										{intl.formatMessage({ id: 'signupPatient.option.genre.nb' })}
+									</option>
 								</select>
 								<FaTransgenderAlt className="icon" />
 							</Dados>
@@ -88,12 +101,19 @@ const SignUpPatient = () => {
 
 							<Dados>
 								<img src={telefone} alt="telefone" className="icon" />
-								<input type="number" name="telefone" placeholder="Telefone" />
+								<input
+									type="number"
+									name="telefone"
+									placeholder={intl.formatMessage({ id: 'signupPatient.option.cellphone' })}
+								/>
 							</Dados>
 
 							<DivSubmit>
-								<input type="submit" value="Criar Conta" />
-								<a href=".">Já tem uma conta? Faça login</a>
+								<input
+									type="submit"
+									value={intl.formatMessage({ id: 'signupPatient.submit' })}
+								/>
+								<a href=".">{intl.formatMessage({ id: 'signupPatient.a.login' })}</a>
 							</DivSubmit>
 						</form>
 					</Grid>
