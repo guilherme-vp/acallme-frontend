@@ -39,6 +39,7 @@
 		"consistent-return": "off",
 		"no-underscore-dangle": "off",
 		"func-names": "off",
+		"react/react-in-jsx-scope": "off",
 		"class-methods-use-this": "off",
 		"no-useless-constructor": "off",
 		"no-unused-vars": "off",
