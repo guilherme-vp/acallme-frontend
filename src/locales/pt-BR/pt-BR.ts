@@ -59,6 +59,12 @@ export const ptBrLocales = {
 	'signupPatient.option.cellphone': 'Telefone',
 	'signupPatient.submit': 'Criar Conta',
 	'signupPatient.a.login': 'Já tem uma conta? Faça login',
+	'login.welcome': 'Bem-Vindo!',
+	'login.option.password': 'Senha',
+	'login.a.forgetPassword': 'Esqueceu a senha?',
+	'login.submit': 'Entrar',
+	'login.createAccount': 'Criar conta',
+
 	en: 'Inglês',
 	'pt-BR': 'Português'
 }
