@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Button } from '@material-ui/core'
+import { Grid, Button, IconButton } from '@material-ui/core'
 import { AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BiEnvelope } from 'react-icons/bi'
 import { BsPerson } from 'react-icons/bs'
@@ -69,9 +69,9 @@ const SignUpPatient = () => {
 									required
 								/>
 								<AiOutlineLock className="icon" />
-								<div onClick={look} className="iconEye">
+								<IconButton onClick={look} className="iconEye">
 									{active ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-								</div>
+								</IconButton>
 							</Dados>
 
 							<Dados>
