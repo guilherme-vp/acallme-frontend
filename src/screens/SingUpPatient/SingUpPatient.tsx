@@ -8,6 +8,7 @@ import { HiOutlineIdentification } from 'react-icons/hi'
 import { useIntl } from 'hooks'
 import { ContainerSign, Dados, DivSubmit } from './SingUp.styled'
 import telefone from './img/telefone.svg'
+import { Link } from 'react-router-dom'
 
 const SignUpPatient = () => {
 	const intl = useIntl()
@@ -112,7 +113,7 @@ const SignUpPatient = () => {
 								<Button type="submit">
 									{intl.formatMessage({ id: 'signupPatient.submit' })}
 								</Button>
-								<a href=".">{intl.formatMessage({ id: 'signupPatient.a.login' })}</a>
+								<Link to='/login'>{intl.formatMessage({ id: 'signupPatient.a.login' })}</Link>
 							</DivSubmit>
 						</form>
 					</Grid>

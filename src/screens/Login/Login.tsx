@@ -5,6 +5,7 @@ import { BiEnvelope } from 'react-icons/bi'
 import { useTheme } from 'styled-components'
 import { AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { DivLogin, ContainerLogin, Dados, DivButtonDados, DivInfo } from './Login.styled'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
 	const intl = useIntl()
@@ -35,7 +36,6 @@ const Login = () => {
 						<img
 							src="https://i1.wp.com/sensorweb.com.br/wp-content/uploads/2019/08/header_25_09_19.png?fit=845%2C684&ssl=1"
 							alt="specialists-patients"
-							style={{ width: '80%' }}
 						/>
 					</Grid>
 
@@ -94,12 +94,14 @@ const Login = () => {
 
 									<Grid item xs={12}>
 										<DivButtonDados>
-											<Button type="submit" name="Login">
+											<Button type="submit" name="cogin">
 												{intl.formatMessage({ id: 'login.submit' })}
 											</Button>
-											<Button type="button" name="Criar-conta">
-												{intl.formatMessage({ id: 'login.createAccount' })}
-											</Button>
+											<Link to='/cadastro'>
+												<Button type="button" name="criar-conta">
+													{intl.formatMessage({ id: 'login.createAccount' })}
+												</Button>
+											</Link>
 										</DivButtonDados>
 									</Grid>
 								</Grid>
