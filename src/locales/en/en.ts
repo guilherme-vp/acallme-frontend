@@ -52,6 +52,11 @@ export const enLocales: ILocale = {
 		'ACall Me helps to face social distancing by bringing you the best specialists to deal with the mental problems caused by the pandemic.',
 	'home.footer.copyright': 'Copyright © 2021 - All Rights Reserved by Vortechs.',
 
+	'login.welcome': 'Welcome!',
+	'login.option.password': 'Password',
+	'login.a.forgetPassword': 'Forgot password?',
+	'login.submit': 'Login',
+	'login.createAccount': 'Create account',
 	// Languages
 	en: 'English',
 	'pt-BR': 'Portuguese'
