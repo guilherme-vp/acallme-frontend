@@ -6,6 +6,7 @@ export const enLocales: ILocale = {
 	'home.header.about': 'About',
 	'home.header.services': 'Services',
 	'home.header.contact': 'Contact Us',
+	'home.header.login': 'Login',
 
 	'home.section.initial.title': 'Offering The Best For Your Mental Health',
 	'home.section.initial.description':

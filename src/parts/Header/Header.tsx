@@ -1,5 +1,6 @@
 import React from 'react'
 import { AppBar, Grid, Button, useMediaQuery, Theme, Hidden } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 import { useIntl } from 'hooks'
 import { SmoothLink } from 'components/SmoothLink'
 import {
@@ -55,9 +56,11 @@ export const Header = () => {
 
 							<Hidden smDown>
 								<Grid item>
+									<Link to='/login'>
 									<ContactButton variant="contained">
-										{intl.formatMessage({ id: 'home.header.contact' })}
+										{intl.formatMessage({ id: 'home.header.login' })}
 									</ContactButton>
+									</Link>
 								</Grid>
 							</Hidden>
 						</Grid>
