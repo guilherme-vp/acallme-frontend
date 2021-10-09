@@ -26,6 +26,14 @@ export const theme = {
 	border: {
 		thin: '#EBEFF2',
 		darker: '#E2E2EA'
+	},
+	button: {
+		background: '#0e63f4',
+		hover: '#0947b3',
+		color: 'white'
+	},
+	input: {
+		borderFocus: '#0e63f4'
 	}
 }
 
