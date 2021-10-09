@@ -57,6 +57,17 @@ export const enLocales: ILocale = {
 	'login.a.forgetPassword': 'Forgot password?',
 	'login.submit': 'Login',
 	'login.createAccount': 'Create account',
+
+	'signupPatient.title': 'Register of patient',
+	'signupPatient.option.name': 'Full Name',
+	'signupPatient.option.senha': 'Password',
+	'signupPatient.option.genre.man': 'Man',
+	'signupPatient.option.genre.woman': 'Woman',
+	'signupPatient.option.genre.nb': 'Non-Binary',
+	'signupPatient.option.cellphone': 'Telephone',
+	'signupPatient.submit': 'Create Account',
+	'signupPatient.a.login': 'Have an account already? Login',
+
 	// Languages
 	en: 'English',
 	'pt-BR': 'Portuguese'

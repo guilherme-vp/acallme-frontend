@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useIntl } from 'hooks'
-import { Grid, Button } from '@material-ui/core'
+import { Grid, Button, IconButton } from '@material-ui/core'
 import { BiEnvelope } from 'react-icons/bi'
 import { useTheme } from 'styled-components'
 import { AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
@@ -80,9 +80,9 @@ const Login = () => {
 												name="senha"
 												required
 											/>
-											<div onClick={look} className="iconEye">
+											<IconButton onClick={look} className="iconEye">
 												{active ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-											</div>
+											</IconButton>
 										</Dados>
 									</Grid>
 
