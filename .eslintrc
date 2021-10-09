@@ -43,6 +43,16 @@
 		"no-useless-constructor": "off",
 		"no-unused-vars": "off",
 		"no-extra-parens": "off",
+		"react/react-in-jsx-scope": "warn",
+		"react/jsx-filename-extension": [
+			1,
+			{
+				"extensions": [
+					".ts",
+					".tsx"
+				]
+			}
+		],
 		"no-case-declarations": "off",
 		"object-shorthand": "error",
 		"no-template-curly-in-string": "error",
@@ -98,14 +108,8 @@
 				"avoidEscape": false
 			}
 		],
-		"react/jsx-filename-extension": [
-			1,
-			{
-				"extensions": [".tsx"]
-			}
-		],
 		"react/jsx-one-expression-per-line": "off",
-		"react/jsx-curly-spacing": [
+	/* 	"react/jsx-curly-spacing": [
 			2,
 			{
 				"when": "never",
@@ -114,7 +118,7 @@
 				},
 				"children": true
 			}
-		],
+		], */
 		"react/jsx-indent": [2, "tab"],
 		"react/jsx-props-no-spreading": "off",
 		"react/prop-types": "off",
