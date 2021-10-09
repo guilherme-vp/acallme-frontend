@@ -77,7 +77,7 @@ const Login = () => {
 											<input
 												type={active ? 'text' : 'password'}
 												placeholder={intl.formatMessage({ id: 'login.option.password' })}
-												name="senha"
+												name="password"
 												required
 											/>
 											<IconButton onClick={look} className="iconEye">
@@ -94,11 +94,11 @@ const Login = () => {
 
 									<Grid item xs={12}>
 										<DivButtonDados>
-											<Button type="submit" name="cogin">
+											<Button name="login">
 												{intl.formatMessage({ id: 'login.submit' })}
 											</Button>
 											<Link to='/cadastro'>
-												<Button type="button" name="criar-conta">
+												<Button type="button" name="create-account">
 													{intl.formatMessage({ id: 'login.createAccount' })}
 												</Button>
 											</Link>

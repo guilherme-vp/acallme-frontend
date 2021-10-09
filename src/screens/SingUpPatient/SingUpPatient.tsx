@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Button } from '@material-ui/core'
+import { Grid, Button, IconButton } from '@material-ui/core'
 import { AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BiEnvelope } from 'react-icons/bi'
 import { BsPerson } from 'react-icons/bs'
@@ -50,7 +50,7 @@ const SignUpPatient = () => {
 							<Dados>
 								<input
 									type="text"
-									name="nome"
+									name="name"
 									placeholder={intl.formatMessage({ id: 'signupPatient.option.name' })}
 									required
 								/>
@@ -66,13 +66,13 @@ const SignUpPatient = () => {
 								<input
 									type={active ? 'text' : 'password'}
 									placeholder={intl.formatMessage({ id: 'signupPatient.option.senha' })}
-									name="senha"
+									name="password"
 									required
 								/>
 								<AiOutlineLock className="icon" />
-								<div onClick={look} className="iconEye">
+								<IconButton onClick={look} className="iconEye">
 									{active ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-								</div>
+								</IconButton>
 							</Dados>
 
 							<Dados>
@@ -81,7 +81,7 @@ const SignUpPatient = () => {
 							</Dados>
 
 							<Dados>
-								<select name="genero" id="genero" required>
+								<select name="genre" id="genero" required>
 									<option value="h">
 										{intl.formatMessage({ id: 'signupPatient.option.genre.man' })}
 									</option>
@@ -104,13 +104,13 @@ const SignUpPatient = () => {
 								<img src={telefone} alt="telefone" className="icon" />
 								<input
 									type="number"
-									name="telefone"
+									name="cellphone"
 									placeholder={intl.formatMessage({ id: 'signupPatient.option.cellphone' })}
 								/>
 							</Dados>
 
 							<DivSubmit>
-								<Button type="submit">
+								<Button>
 									{intl.formatMessage({ id: 'signupPatient.submit' })}
 								</Button>
 								<Link to='/login'>{intl.formatMessage({ id: 'signupPatient.a.login' })}</Link>
