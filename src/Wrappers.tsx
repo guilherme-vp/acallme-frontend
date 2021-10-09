@@ -14,6 +14,7 @@ export const Wrappers: React.FC = ({ children }) => {
 	return (
 		<StylesWrapper>
 			<IntlProvider locale={language} defaultLocale="pt-BR" messages={locales[language]}>
+				{/* @ts-ignore */}
 				<LocalizationProvider dateAdapter={DateFnsUtils}>{children}</LocalizationProvider>
 			</IntlProvider>
 		</StylesWrapper>

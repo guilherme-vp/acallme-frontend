@@ -1,51 +1,40 @@
 import styled from 'styled-components'
 
-export const DivLogin = styled.div`
-	width: 100vw;
+export const ContainerSign = styled.div`
+	width: 80%;
 	height: 80vh;
+	margin: 0 auto;
 	display: flex;
+	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-`
-
-export const ContainerLogin = styled.div`
-	width: 100%;
-	height: 100%;
-	border-radius: 10px;
-	padding: 0 24px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
+	#imagem {
+		img {
+			width: 80%;
+		}
+	}
 	@media (max-width: 1280px) {
 		#imagem {
 			display: none;
 		}
 	}
-
-	@media (max-width: 960px) {
-		width: 100%;
-		height: 100%;
-		border: none;
-		border-radius: 0;
-		padding: 0 16px;
-	}
 `
 
 export const Dados = styled.div`
 	position: relative;
-	justify-content: space-around;
-	align-items: center;
-
-	input {
+	display: flex;
+	flex-direction: column;
+	margin: 8px auto;
+	input,
+	select {
 		width: 100%;
 		border: 2px solid #aaa;
 		background-color: #ffffffb0;
 		outline: none;
 		border-radius: 4px;
-		padding: 8px 24px;
+		padding: 8px 30px;
 		transition: 0.3s;
-		&:focus {
+		:focus {
 			border-color: ${props => props.theme.input.borderFocus};
 			background-color: #f3f1f1;
 		}
@@ -54,6 +43,7 @@ export const Dados = styled.div`
 		position: absolute;
 		top: 10px;
 		left: 8px;
+		width: 16px;
 	}
 	.iconEye {
 		position: absolute;
@@ -63,29 +53,28 @@ export const Dados = styled.div`
 			cursor: pointer;
 		}
 	}
-`
-
-export const DivInfo = styled.div`
-	width: 100%;
-	h1 {
-		margin-bottom: 16px;
-	}
-	p {
-		text-align: justify;
+	input[type='date'] {
+		padding: 6px 30px;
 	}
 `
 
-export const DivButtonDados = styled.div`
+export const DivSubmit = styled.div`
 	display: flex;
-	width: 80%;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 20px;
 	button {
-		background-color: ${props => props.theme.button.background};
+		width: 80%;
+		margin-bottom: 8px;
 		color: ${props => props.theme.button.color};
+		background-color: ${props => props.theme.button.background};
 		padding: 8px;
-		width: 40%;
-		margin-right: 16px;
-		&:hover {
+		:hover {
 			background-color: ${props => props.theme.button.hover};
 		}
+	}
+	a {
+		color: ${props => props.theme.text.link};
 	}
 `
