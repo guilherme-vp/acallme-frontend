@@ -27,6 +27,7 @@ export const Dados = styled.div`
 	margin: 8px auto;
 	input,
 	select {
+		width: 100%;
 		border: 2px solid #aaa;
 		background-color: #ffffffb0;
 		outline: none;
