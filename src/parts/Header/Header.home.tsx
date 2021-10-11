@@ -12,7 +12,7 @@ import {
 	Title
 } from './Header.styled'
 
-export const Header = () => {
+export const HeaderHome = () => {
 	const intl = useIntl()
 	const smDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'))
 
@@ -73,4 +73,4 @@ export const Header = () => {
 	)
 }
 
-export default Header
+export default HeaderHome

@@ -6,7 +6,7 @@ import { Instagram, Facebook, Twitter } from '@mui/icons-material'
 import { useTheme } from 'styled-components'
 import { LanguagePicker } from 'components/LanguagePicker'
 
-export const Footer = () => {
+export const FooterHome = () => {
 	const theme = useTheme()
 	const intl = useIntl()
 	const isSmDown = useMediaQuery((materialTheme: Theme) =>
@@ -119,4 +119,4 @@ export const Footer = () => {
 	)
 }
 
-export default Footer
+export default FooterHome
