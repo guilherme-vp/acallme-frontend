@@ -1,24 +1,26 @@
-import { ThemeOptions, createMuiTheme, alpha } from '@material-ui/core/styles'
 import { theme as colorTheme, Theme } from './theme'
 import { pxToRem } from '../utils/px-to-rem'
+import { alpha, createTheme, ThemeOptions } from '@mui/material'
+import type {} from '@mui/lab/themeAugmentation'
 
-const baseTheme = createMuiTheme()
+const baseTheme = createTheme()
 
-declare module '@material-ui/core/styles/createTypography' {
-	interface Typography {
+declare module '@mui/material/styles' {
+	interface TypographyVariants {
 		display1: React.CSSProperties
 		display2: React.CSSProperties
 		display3: React.CSSProperties
 	}
 
-	interface TypographyOptions {
+	interface TypographyVariantsOptions {
 		display1?: React.CSSProperties
 		display2?: React.CSSProperties
 		display3?: React.CSSProperties
 	}
 }
 
-declare module '@material-ui/core/Typography/Typography' {
+// Update the Typography's variant prop options
+declare module '@mui/material/Typography' {
 	interface TypographyPropsVariantOverrides {
 		display1: true
 		display2: true
@@ -130,10 +132,10 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 					borderBottomColor: theme.border.thin
 				},
 				positionFixed: {
-					zIndex: baseTheme.zIndex.drawer + 1
+					zIndex: (baseTheme.zIndex as any).drawer + 1
 				},
 				positionAbsolute: {
-					zIndex: baseTheme.zIndex.drawer + 1
+					zIndex: (baseTheme.zIndex as any).drawer + 1
 				},
 				colorPrimary: {
 					backgroundColor: theme.background.main,
@@ -149,9 +151,6 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 				},
 				icon: {
 					right: 2
-				},
-				selectMenu: {
-					borderRadius: 'inherit'
 				},
 				select: {
 					'&:focus': {
@@ -234,4 +233,4 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 	}
 })
 
-export const materialTheme = createMuiTheme(materialBaseTheme(colorTheme))
+export const materialTheme = createTheme(materialBaseTheme(colorTheme))
