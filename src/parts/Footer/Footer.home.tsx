@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import { useMediaQuery, Theme, Typography, Hidden, Divider, Grid } from '@mui/material'
 import { useIntl } from 'hooks'
