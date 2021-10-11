@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { alpha } from '@material-ui/core/styles'
+import { alpha } from '@mui/material/styles'
 
 export const ListGlow = styled.ul`
 	list-style: none;

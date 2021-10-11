@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, Typography } from '@material-ui/core'
+import { Box, Divider, Grid, Typography } from '@mui/material'
 import styled from 'styled-components'
 
 export const BoxContainer = styled(Box)`

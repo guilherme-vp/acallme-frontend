@@ -7,7 +7,7 @@ export const theme = {
 		darker: '#1D2B4E'
 	},
 	background: {
-		main: '#F8F9FE'
+		main: '#e2f3ff'
 	},
 	text: {
 		main: '#1D2B4E',
