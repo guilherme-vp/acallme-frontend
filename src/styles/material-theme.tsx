@@ -1,9 +1,6 @@
-import { alpha, createTheme, ThemeOptions } from '@mui/system'
+import { alpha, createTheme, ThemeOptions } from '@mui/material/styles'
 import { theme as colorTheme, Theme } from './theme'
 import { pxToRem } from '../utils/px-to-rem'
-import type {} from '@mui/lab/themeAugmentation'
-
-const baseTheme = createTheme()
 
 declare module '@mui/material/styles' {
 	interface TypographyVariants {
@@ -130,12 +127,6 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 				root: {
 					borderBottom: '1px solid',
 					borderBottomColor: theme.border.thin
-				},
-				positionFixed: {
-					zIndex: (baseTheme.zIndex as any).drawer + 1
-				},
-				positionAbsolute: {
-					zIndex: (baseTheme.zIndex as any).drawer + 1
 				},
 				colorPrimary: {
 					backgroundColor: theme.background.main,
