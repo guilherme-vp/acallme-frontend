@@ -110,7 +110,7 @@ const SignUpPatient = () => {
 							</Dados>
 
 							<DivSubmit>
-								<Button>
+								<Button type="submit">
 									{intl.formatMessage({ id: 'signupPatient.submit' })}
 								</Button>
 								<Link to='/login'>{intl.formatMessage({ id: 'signupPatient.a.login' })}</Link>
