@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route, Switch, BrowserRouter } from 'react-router-dom'
-import Home from 'screens/Home'
-import Login from 'screens/Login/Login'
-import SignUpPatient from 'screens/SingUpPatient/SingUpPatient'
+import { Home } from 'screens/Home'
+import { Login } from 'screens/Login'
+import { SignUp } from 'screens/SignUp'
 import { DefaultLayout } from './layouts/default'
 
 const App = () => (
@@ -16,7 +16,7 @@ const App = () => (
 					<Login />
 				</Route>
 				<Route path="/cadastro">
-					<SignUpPatient />
+					<SignUp />
 				</Route>
 			</DefaultLayout>
 		</Switch>
