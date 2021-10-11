@@ -1,26 +1,31 @@
 import React from 'react'
-import { Route, Switch, BrowserRouter } from 'react-router-dom'
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
 import { Home } from 'screens/Home'
 import { Login } from 'screens/Login'
 import { SignUp } from 'screens/SignUp'
-import { DefaultLayout } from './layouts/default'
+import { HomeLayout } from './layouts/Home'
+import { AuthLayout } from './layouts/Auth'
 
 const App = () => (
-	<BrowserRouter>
+	<Router>
 		<Switch>
-			<DefaultLayout>
-				<Route path="/" exact>
+			<Route path="/" exact>
+				<HomeLayout>
 					<Home />
-				</Route>
-				<Route path="/login">
+				</HomeLayout>
+			</Route>
+			<Route path="/login">
+				<AuthLayout>
 					<Login />
-				</Route>
-				<Route path="/cadastro">
+				</AuthLayout>
+			</Route>
+			<Route path="/signup">
+				<AuthLayout>
 					<SignUp />
-				</Route>
-			</DefaultLayout>
+				</AuthLayout>
+			</Route>
 		</Switch>
-	</BrowserRouter>
+	</Router>
 )
 
 export default App
