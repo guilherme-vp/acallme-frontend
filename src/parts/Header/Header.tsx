@@ -1,5 +1,6 @@
 import React from 'react'
 import { AppBar, Grid, Button, useMediaQuery, Theme, Hidden } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 import { useIntl } from 'hooks'
 import { SmoothLink } from 'components/SmoothLink'
 import {
@@ -19,7 +20,9 @@ export const Header = () => {
 		<AppBar position="fixed" style={{ border: 'none' }}>
 			<Container>
 				<Content>
-					<Title variant="h1">ACall Me</Title>
+					<Link to='/'>
+						<Title variant="h1">ACall Me</Title>
+					</Link>
 
 					<RightContent>
 						<Grid container alignItems="center" spacing={smDown ? 1 : 4}>
@@ -55,9 +58,11 @@ export const Header = () => {
 
 							<Hidden smDown>
 								<Grid item>
+									<Link to='/login'>
 									<ContactButton variant="contained">
-										{intl.formatMessage({ id: 'home.header.contact' })}
+										{intl.formatMessage({ id: 'home.header.login' })}
 									</ContactButton>
+									</Link>
 								</Grid>
 							</Hidden>
 						</Grid>

@@ -4,6 +4,7 @@ export const ptBrLocales = {
 	'home.header.about': 'Sobre',
 	'home.header.services': 'Serviços',
 	'home.header.contact': 'Entre em Contato',
+	'home.header.login': 'Login',
 
 	'home.section.initial.title': 'Oferecendo o Melhor Para a Sua Saúde Mental',
 	'home.section.initial.description':

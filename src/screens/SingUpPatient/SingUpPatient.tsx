@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Button } from '@material-ui/core'
+import { Grid, Button, IconButton } from '@material-ui/core'
 import { AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BiEnvelope } from 'react-icons/bi'
 import { BsPerson } from 'react-icons/bs'
@@ -8,6 +8,7 @@ import { HiOutlineIdentification } from 'react-icons/hi'
 import { useIntl } from 'hooks'
 import { ContainerSign, Dados, DivSubmit } from './SingUp.styled'
 import telefone from './img/telefone.svg'
+import { Link } from 'react-router-dom'
 
 const SignUpPatient = () => {
 	const intl = useIntl()
@@ -49,7 +50,7 @@ const SignUpPatient = () => {
 							<Dados>
 								<input
 									type="text"
-									name="nome"
+									name="name"
 									placeholder={intl.formatMessage({ id: 'signupPatient.option.name' })}
 									required
 								/>
@@ -65,13 +66,13 @@ const SignUpPatient = () => {
 								<input
 									type={active ? 'text' : 'password'}
 									placeholder={intl.formatMessage({ id: 'signupPatient.option.senha' })}
-									name="senha"
+									name="password"
 									required
 								/>
 								<AiOutlineLock className="icon" />
-								<div onClick={look} className="iconEye">
+								<IconButton onClick={look} className="iconEye">
 									{active ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-								</div>
+								</IconButton>
 							</Dados>
 
 							<Dados>
@@ -80,7 +81,7 @@ const SignUpPatient = () => {
 							</Dados>
 
 							<Dados>
-								<select name="genero" id="genero" required>
+								<select name="gender" id="genero" required>
 									<option value="h">
 										{intl.formatMessage({ id: 'signupPatient.option.genre.man' })}
 									</option>
@@ -103,7 +104,7 @@ const SignUpPatient = () => {
 								<img src={telefone} alt="telefone" className="icon" />
 								<input
 									type="number"
-									name="telefone"
+									name="cellphone"
 									placeholder={intl.formatMessage({ id: 'signupPatient.option.cellphone' })}
 								/>
 							</Dados>
@@ -112,7 +113,7 @@ const SignUpPatient = () => {
 								<Button type="submit">
 									{intl.formatMessage({ id: 'signupPatient.submit' })}
 								</Button>
-								<a href=".">{intl.formatMessage({ id: 'signupPatient.a.login' })}</a>
+								<Link to='/login'>{intl.formatMessage({ id: 'signupPatient.a.login' })}</Link>
 							</DivSubmit>
 						</form>
 					</Grid>
