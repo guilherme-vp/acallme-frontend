@@ -94,7 +94,7 @@ const Login = () => {
 
 									<Grid item xs={12}>
 										<DivButtonDados>
-											<Button name="login">
+											<Button type="submit" name="login">
 												{intl.formatMessage({ id: 'login.submit' })}
 											</Button>
 											<Link to='/cadastro'>
