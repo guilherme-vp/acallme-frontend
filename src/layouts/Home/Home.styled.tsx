@@ -1,5 +1,5 @@
 import { Divider } from '@mui/material'
-import styled from 'styled-components'
+import styled from '@mui/styled-engine-sc'
 
 export const Container = styled.div`
 	min-height: 100vh;
