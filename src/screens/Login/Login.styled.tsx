@@ -16,10 +16,10 @@ export const ContainerLogin = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	#imagem{
-		img{
-			width: 70%;			
-		}	
+	#imagem {
+		img {
+			width: 70%;
+		}
 	}
 	@media (max-width: 1280px) {
 		#imagem {
@@ -90,8 +90,8 @@ export const DivButtonDados = styled.div`
 		&:hover {
 			background-color: ${props => props.theme.button.hover};
 		}
-	a{
-		width: 40%;
-	}
+		a {
+			width: 40%;
+		}
 	}
 `

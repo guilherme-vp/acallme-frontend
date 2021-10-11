@@ -4,10 +4,10 @@ import { Grid, Button, IconButton } from '@mui/material'
 import { BiEnvelope } from 'react-icons/bi'
 import { useTheme } from 'styled-components'
 import { AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
-import { DivLogin, ContainerLogin, Dados, DivButtonDados, DivInfo } from './Login.styled'
 import { Link } from 'react-router-dom'
+import { DivLogin, ContainerLogin, Dados, DivButtonDados, DivInfo } from './Login.styled'
 
-const Login = () => {
+export const Login = () => {
 	const intl = useIntl()
 	const [active, setActive] = useState(false)
 
