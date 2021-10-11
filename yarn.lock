@@ -1593,13 +1593,6 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@material-ui/styled-engine-sc@^5.0.0-alpha.25":
-  version "5.0.0-alpha.25"
-  resolved "https://registry.yarnpkg.com/@material-ui/styled-engine-sc/-/styled-engine-sc-5.0.0-alpha.25.tgz#91d5cc881e485482d268f2b0c4640982e766e6f6"
-  integrity sha512-ESIfd4T8iPvH3h5H73YW1oK/ym7CFEEd+KQEZVE/fnLw4DeppoEfe3Myh50wFAtFzPIHRl3JVo4QafsabjQVaA==
-  dependencies:
-    prop-types "^15.7.2"
-
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -1619,6 +1612,13 @@
     clsx "^1.1.1"
     prop-types "^15.7.2"
     react-is "^17.0.2"
+
+"@mui/icons-material@^5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@mui/icons-material/-/icons-material-5.0.3.tgz#2a9d4f9078f375cef40f63a240b59cefa4a27eec"
+  integrity sha512-Lktn+4GNnXdVrOCUUvNNvOD9VyrGazWBsJy0BQeQgBe/+IjFMdlcNrDEUIlGlA5ZXOq7Mr/Mv9Os02mgF65jiw==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
 
 "@mui/lab@^5.0.0-alpha.50":
   version "5.0.0-alpha.50"
@@ -1665,6 +1665,13 @@
   dependencies:
     "@babel/runtime" "^7.15.4"
     "@mui/utils" "^5.0.1"
+    prop-types "^15.7.2"
+
+"@mui/styled-engine-sc@^5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@mui/styled-engine-sc/-/styled-engine-sc-5.0.3.tgz#cb6bb674bfbc447db1a4aa095df5f676dd899438"
+  integrity sha512-Fe3VxYbZMQg/9G9NiF092FpeDAgu90jUgiTzeIUqRNPBgW85Q/EP1uECUAtTG85HPRtkl6iXPUE8oAWxxmxl9A==
+  dependencies:
     prop-types "^15.7.2"
 
 "@mui/styled-engine@^5.0.1":
