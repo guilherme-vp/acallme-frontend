@@ -98,7 +98,7 @@ const Login = () => {
 												{intl.formatMessage({ id: 'login.submit' })}
 											</Button>
 											<Link to='/cadastro'>
-												<Button type="button" name="create-account">
+												<Button name="create-account">
 													{intl.formatMessage({ id: 'login.createAccount' })}
 												</Button>
 											</Link>
