@@ -81,7 +81,7 @@ const SignUpPatient = () => {
 							</Dados>
 
 							<Dados>
-								<select name="genre" id="genero" required>
+								<select name="gender" id="genero" required>
 									<option value="h">
 										{intl.formatMessage({ id: 'signupPatient.option.genre.man' })}
 									</option>
