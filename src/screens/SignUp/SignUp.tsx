@@ -5,12 +5,12 @@ import { BiEnvelope } from 'react-icons/bi'
 import { BsPerson } from 'react-icons/bs'
 import { FaTransgenderAlt, FaBaby } from 'react-icons/fa'
 import { HiOutlineIdentification } from 'react-icons/hi'
-import { useIntl } from 'hooks'
-import { ContainerSign, Dados, DivSubmit } from './SingUp.styled'
-import telefone from './img/telefone.svg'
 import { Link } from 'react-router-dom'
+import { useIntl } from '../../hooks'
+import { ContainerSign, Dados, DivSubmit } from './SignUp.styled'
+import telefone from '../../assets/icons/telefone.svg'
 
-const SignUpPatient = () => {
+export const SignUp = () => {
 	const intl = useIntl()
 	const [active, setActive] = useState(false)
 
@@ -125,4 +125,4 @@ const SignUpPatient = () => {
 	)
 }
 
-export default SignUpPatient
+export default SignUp
