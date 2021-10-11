@@ -1,4 +1,4 @@
-import { Divider } from '@material-ui/core'
+import { Divider } from '@mui/material'
 import styled from 'styled-components'
 
 export const Container = styled.div`

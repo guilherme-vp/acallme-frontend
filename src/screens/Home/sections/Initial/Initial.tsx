@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Grid, Hidden, Typography } from '@material-ui/core'
+import { Button, Grid, Hidden, Typography } from '@mui/material'
 
 import { useIntl } from 'hooks'
 import { ContentBox } from 'components/ContentBox'

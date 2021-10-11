@@ -1,6 +1,6 @@
 import React from 'react'
-import { Fab, useScrollTrigger, Zoom } from '@material-ui/core'
-import { KeyboardArrowUp as ArrowIcon } from '@material-ui/icons'
+import { Fab, useScrollTrigger, Zoom } from '@mui/material'
+import { KeyboardArrowUp as ArrowIcon } from '@mui/icons-material'
 
 import { BottomContainer } from './ScrollToTop.styled'
 

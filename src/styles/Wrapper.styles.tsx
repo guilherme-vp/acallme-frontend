@@ -1,6 +1,6 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
-import { ThemeProvider as MuiThemeProvider } from '@mui/material'
+import { ThemeProvider as MuiThemeProvider } from '@mui/system'
 
 import { theme } from './theme'
 import { materialTheme } from './material-theme'

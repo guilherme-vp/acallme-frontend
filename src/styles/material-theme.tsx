@@ -1,6 +1,6 @@
 import { theme as colorTheme, Theme } from './theme'
 import { pxToRem } from '../utils/px-to-rem'
-import { alpha, createTheme, ThemeOptions } from '@mui/material'
+import { alpha, createTheme, ThemeOptions } from '@mui/system'
 import type {} from '@mui/lab/themeAugmentation'
 
 const baseTheme = createTheme()

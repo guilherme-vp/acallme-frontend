@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Button, IconButton } from '@material-ui/core'
+import { Grid, Button, IconButton } from '@mui/material'
 import { AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BiEnvelope } from 'react-icons/bi'
 import { BsPerson } from 'react-icons/bs'
@@ -113,7 +113,9 @@ const SignUpPatient = () => {
 								<Button type="submit">
 									{intl.formatMessage({ id: 'signupPatient.submit' })}
 								</Button>
-								<Link to='/login'>{intl.formatMessage({ id: 'signupPatient.a.login' })}</Link>
+								<Link to="/login">
+									{intl.formatMessage({ id: 'signupPatient.a.login' })}
+								</Link>
 							</DivSubmit>
 						</form>
 					</Grid>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@mui/material'
 
 import { useIntl } from 'hooks'
 
@@ -7,7 +7,6 @@ import heart from 'assets/icons/heart.png'
 import videoChat from 'assets/icons/video-chat.png'
 import schedule from 'assets/icons/schedule.png'
 import smiley from 'assets/icons/smiley.png'
-// import lock from 'assets/icons/lock.png'
 
 import { FullPageSection } from '../../components/Section'
 import { Icon } from '../../components/Icon'

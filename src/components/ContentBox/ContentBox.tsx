@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@mui/material'
 import { useIntl } from 'hooks'
 import React from 'react'
 import { BoxContainer, BoxDivider, Description, SectionGrid } from './ContentBox.styled'

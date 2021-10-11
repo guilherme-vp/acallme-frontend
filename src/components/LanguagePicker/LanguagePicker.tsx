@@ -1,5 +1,5 @@
 import React from 'react'
-import { Select } from '@material-ui/core'
+import { Select, SelectChangeEvent } from '@mui/material'
 
 import { useIntl, useStoreon } from '../../hooks'
 import { AvailableLanguages, Locales } from '../../locales'
@@ -10,8 +10,8 @@ export const LanguagePicker = () => {
 	const { dispatch, language } = useStoreon('language')
 	const intl = useIntl()
 
-	const handleChange = (event: React.ChangeEvent<{ value: Locales }>) => {
-		const newLanguage = event.target.value
+	const handleChange = (event: SelectChangeEvent<Locales>) => {
+		const newLanguage = event.target.value as Locales
 
 		dispatch('language/change', newLanguage)
 	}
