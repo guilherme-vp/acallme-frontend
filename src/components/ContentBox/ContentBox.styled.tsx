@@ -1,5 +1,5 @@
 import { Box, Divider, Grid, Typography } from '@mui/material'
-import styled from '@mui/styled-engine-sc'
+import styled from 'styled-components'
 
 export const BoxContainer = styled(Box)`
 	background-color: ${props => props.theme.colors.darker};

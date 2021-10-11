@@ -1,4 +1,4 @@
-import styled from '@mui/styled-engine-sc'
+import styled from 'styled-components'
 import { alpha } from '@mui/material/styles'
 
 export const ListGlow = styled.ul`

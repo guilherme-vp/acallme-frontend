@@ -1,4 +1,4 @@
-import styled from '@mui/styled-engine-sc'
+import styled from 'styled-components'
 
 export const DivLogin = styled.div`
 	width: 100vw;

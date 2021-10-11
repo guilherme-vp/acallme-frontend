@@ -1,4 +1,4 @@
-import styled from '@mui/styled-engine-sc'
+import styled from 'styled-components'
 
 export const FullPageSection = styled.section`
 	margin: 12px 0 100px;

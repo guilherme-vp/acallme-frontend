@@ -1,4 +1,4 @@
-import styled from '@mui/styled-engine-sc'
+import styled from 'styled-components'
 
 export const BottomContainer = styled.div`
 	position: fixed;
