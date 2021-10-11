@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@mui/styled-engine-sc'
 
 export const Icon = styled.img`
 	width: 45px;

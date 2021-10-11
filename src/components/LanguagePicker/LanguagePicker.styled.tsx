@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@mui/styled-engine-sc'
 import { MenuItem } from '@mui/material'
 
 export const Item = styled(MenuItem)`
