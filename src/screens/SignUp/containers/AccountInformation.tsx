@@ -38,20 +38,6 @@ export const AccountInformation = () => {
 					/>
 				</Grid>
 				<Grid item>
-					<PasswordInput
-						{...register('password', {
-							required: true,
-							pattern: passwordRegex
-						})}
-						helperText="Sua senha deve conter no mínimo 6 caracteres, uma letra maiúscula, uma minúscula e um número"
-						fullWidth
-						required
-						error={!!errors.password}
-						label={intl.formatMessage({ id: 'password' })}
-						isCorrect={allFields.password ? !errors.password : true}
-					/>
-				</Grid>
-				<Grid item>
 					<TextField
 						{...register('cpf', {
 							required: true,
@@ -65,6 +51,20 @@ export const AccountInformation = () => {
 						placeholder="123.456.789-10"
 						name="cpf"
 						autoComplete="cpf"
+					/>
+				</Grid>
+				<Grid item>
+					<PasswordInput
+						{...register('password', {
+							required: true,
+							pattern: passwordRegex
+						})}
+						helperText={intl.formatMessage({ id: 'signup.form.account.password.helper' })}
+						fullWidth
+						required
+						error={!!errors.password}
+						label={intl.formatMessage({ id: 'password' })}
+						isCorrect={allFields.password ? !errors.password : true}
 					/>
 				</Grid>
 			</Grid>

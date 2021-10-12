@@ -79,6 +79,8 @@ export const ptBrLocales = {
 	'signup.form.personal.gender': 'Gênero',
 	'signup.form.personal.phone': 'Telefone de contato',
 	'signup.form.personal.photo': 'Arraste e solte ou selecione uma imagem de seus arquivos',
+	'signup.form.account.password.helper':
+		'Sua senha deve conter no mínimo 6 caracteres, uma letra maiúscula, uma minúscula e um número',
 	restrictedFileFormat: 'Arquivo deve ser ter formato do tipo PNG ou JPEG',
 	maximumFileSize: 'Tamanho máximo é de 2MB',
 

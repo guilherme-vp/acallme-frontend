@@ -87,6 +87,7 @@ export const enLocales: ILocale = {
 	'signup.form.personal.gender': 'Gender',
 	'signup.form.personal.phone': 'Phone number',
 	'signup.form.personal.photo': `Drag 'n'drop a image or select one`,
+	'signup.form.account.password.helper': `Your password must contain at least 6 characters, one number, one uppercase and one lowercase letter.`,
 	restrictedFileFormat: 'File type must be either in PNG or JPEG format',
 	maximumFileSize: 'Max file size is 2MB',
 
