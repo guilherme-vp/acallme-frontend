@@ -6,7 +6,7 @@ import type { AccountForm } from '../SignUp'
 import { cpfRegex, createStringRequirements, emailRegex } from '../../../utils/regexs'
 import { PasswordInput } from '../../../components/PasswordInput'
 
-const passwordRegex = createStringRequirements()
+const passwordRegex = createStringRequirements({ includeSpecial: false })
 
 export const AccountInformation = () => {
 	const intl = useIntl()
