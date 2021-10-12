@@ -32,10 +32,15 @@ export const ImageSelector = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 100%;
+	width: 100%;
+	height: 200px;
 	padding: 16px;
 	border: 2px solid ${props => props.theme.border.darker};
 	border-style: dashed;
+
+	@media only screen and (min-width: 600px) {
+		height: 100%;
+	}
 `
 
 export const ImageAvatar = styled(Avatar)`
