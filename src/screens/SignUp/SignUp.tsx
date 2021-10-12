@@ -8,6 +8,7 @@ import { useIntl } from '../../hooks'
 import { RolesEnum, GenderEnum } from '../../services/entities'
 import { Role } from './containers/Role'
 import { PersonalInformation } from './containers/PersonalInformation'
+import { AccountInformation } from './containers/AccountInformation'
 import { capitalizeLetter } from '../../utils/capitalize-letter'
 
 export interface PersonalForm {
@@ -53,7 +54,7 @@ export const SignUp = () => {
 		if (step === 0) {
 			setStep(step + 1)
 		} else if (step === 1) {
-			if (personalMethods.formState.isValid) {
+			if (accountMethods.formState.isValid) {
 				setStep(step + 1)
 			} else {
 				iziToast.error({
@@ -61,7 +62,7 @@ export const SignUp = () => {
 				})
 			}
 		} else if (step === 2) {
-			if (accountMethods.formState.isValid) {
+			if (personalMethods.formState.isValid) {
 				setStep(step + 1)
 			} else {
 				iziToast.error({
@@ -89,11 +90,13 @@ export const SignUp = () => {
 			{step === 0 ? (
 				<Role roleChosen={chosen} handleClick={handleChoseRole} />
 			) : step === 1 ? (
+				<FormProvider {...accountMethods}>
+					<AccountInformation />
+				</FormProvider>
+			) : (
 				<FormProvider {...personalMethods}>
 					<PersonalInformation />
 				</FormProvider>
-			) : (
-				<div />
 			)}
 			<Grid container item justifyContent="center" alignItems="center" mt={5}>
 				{step !== 0 && (
@@ -113,9 +116,9 @@ export const SignUp = () => {
 							step === 0
 								? !chosen
 								: step === 1
-								? !personalMethods.formState.isValid
-								: step === 2
 								? !accountMethods.formState.isValid
+								: step === 2
+								? !personalMethods.formState.isValid
 								: !chosen
 						}
 						onClick={() => handleNextStep()}
