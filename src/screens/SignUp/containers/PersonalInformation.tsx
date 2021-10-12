@@ -94,31 +94,32 @@ export const PersonalInformation = () => {
 				<Grid item>
 					<TextField
 						fullWidth
-						label={intl.formatMessage({ id: 'signup.form.personal.name' })}
+						label={capitalizeLetter(intl.formatMessage({ id: 'name' }))}
 						variant="outlined"
 						placeholder="Ex: Guilherme Vieira"
+						required
 						{...register('name', { required: true, minLength: 3 })}
 					/>
 				</Grid>
 				<Grid item>
 					<FormControl component="fieldset">
 						<FormLabel component="legend">
-							{capitalizeLetter(intl.formatMessage({ id: 'gender' }))}
+							{capitalizeLetter(intl.formatMessage({ id: 'gender' }))}*
 						</FormLabel>
-						<RadioGroup row {...register('gender', { required: true })}>
+						<RadioGroup row>
 							<FormControlLabel
 								value={GenderEnum.F}
-								control={<Radio />}
+								control={<Radio {...register('gender', { required: true })} />}
 								label={capitalizeLetter(intl.formatMessage({ id: 'female' }))}
 							/>
 							<FormControlLabel
 								value={GenderEnum.M}
-								control={<Radio />}
+								control={<Radio {...register('gender', { required: true })} />}
 								label={capitalizeLetter(intl.formatMessage({ id: 'male' }))}
 							/>
 							<FormControlLabel
 								value={GenderEnum.N}
-								control={<Radio />}
+								control={<Radio {...register('gender', { required: true })} />}
 								label={capitalizeLetter(intl.formatMessage({ id: 'other' }))}
 							/>
 						</RadioGroup>
@@ -126,7 +127,7 @@ export const PersonalInformation = () => {
 				</Grid>
 				<Grid item>
 					<DesktopDatePicker
-						label={intl.formatMessage({ id: 'signup.form.personal.birth' })}
+						label={capitalizeLetter(intl.formatMessage({ id: 'birthDate' }))}
 						inputFormat="dd/MM/yyyy"
 						minDate={minDate}
 						maxDate={maxDate}
@@ -134,16 +135,18 @@ export const PersonalInformation = () => {
 						mask="__/__/____"
 						onChange={value => setValue('birth', value)}
 						value={birth}
-						renderInput={props => <TextField {...props} />}
+						renderInput={props => <TextField required {...props} />}
 					/>
 				</Grid>
 				<Grid item>
 					<TextField
+						{...register('phone', { required: true, maxLength: 15, minLength: 11 })}
 						fullWidth
-						label={intl.formatMessage({ id: 'signup.form.personal.phone' })}
+						label={capitalizeLetter(intl.formatMessage({ id: 'phone' }))}
 						variant="outlined"
 						placeholder="Ex: (11) 99999-9999"
-						{...register('phone', { required: true })}
+						required
+						inputProps={{ minLength: 11, maxLength: 15 }}
 					/>
 				</Grid>
 			</Grid>
