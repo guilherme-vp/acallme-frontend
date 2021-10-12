@@ -25,14 +25,14 @@ import { GenderEnum } from '../../../services/entities'
 export const PersonalInformation = () => {
 	const intl = useIntl()
 	const [avatar, setAvatar] = useState<string>()
-	const [avatarFile, setAvatarFile] = useState<File>()
+	const [_, setAvatarFile] = useState<File>()
 	const { register, setValue, watch } = useFormContext<PersonalForm>()
 	const isSmDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'))
 
 	const maxDate = datefns.subYears(new Date(), 18)
 	const minDate = datefns.subYears(new Date(), 90)
 
-	const { birth, gender, phone } = watch()
+	const { birth } = watch()
 
 	const onDrop = useCallback(([file], [error]) => {
 		if (file) {
