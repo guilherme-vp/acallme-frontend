@@ -57,7 +57,7 @@ export const SignUp = () => {
 				setStep(step + 1)
 			} else {
 				iziToast.error({
-					message: intl.formatMessage({ id: 'signup.form.personal.required' })
+					message: intl.formatMessage({ id: 'signup.form.required' })
 				})
 			}
 		} else if (step === 2) {
@@ -65,7 +65,7 @@ export const SignUp = () => {
 				setStep(step + 1)
 			} else {
 				iziToast.error({
-					message: intl.formatMessage({ id: 'signup.form.personal.required' })
+					message: intl.formatMessage({ id: 'signup.form.required' })
 				})
 			}
 		} else if (step === 3) {

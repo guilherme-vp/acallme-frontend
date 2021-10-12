@@ -70,7 +70,7 @@ export const ptBrLocales = {
 	'signup.title.3': 'Informações Profissionais',
 	'signup.choose.next': 'Próximo',
 	'signup.choose.next.last': 'Finalizar',
-	'signup.form.personal.required': 'Você precisa preencher todos os campos obrigatórios',
+	'signup.form.required': 'Você precisa preencher todos os campos obrigatórios',
 	'signup.form.personal.name': 'Nome',
 	'signup.form.personal.birth': 'Data de nascimento',
 	'signup.form.personal.gender': 'Gênero',

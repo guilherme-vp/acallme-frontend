@@ -78,7 +78,7 @@ export const enLocales: ILocale = {
 	'signup.title.3': 'Professional Information',
 	'signup.choose.next': 'Next',
 	'signup.choose.next.last': 'Finish',
-	'signup.form.personal.required': 'You need to fill all required fields',
+	'signup.form.required': 'You need to fill all required fields',
 	'signup.form.personal.name': 'Name',
 	'signup.form.personal.birth': 'Date of Birth',
 	'signup.form.personal.gender': 'Gender',
