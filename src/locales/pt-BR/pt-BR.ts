@@ -66,8 +66,9 @@ export const ptBrLocales = {
 	'signup.title.3': 'Informações Profissionais',
 	'signup.choose.next': 'Próximo',
 	'signup.choose.next.last': 'Finalizar',
-	'signup.form.personal.name': 'Nome:',
-	'signup.form.personal.birth': 'Data de nascimento:',
+	'signup.form.personal.name': 'Nome',
+	'signup.form.personal.birth': 'Data de nascimento',
+	'signup.form.personal.photo': 'Arraste e solte ou selecione uma imagem de seus arquivos',
 
 	'signupPatient.option.name': 'Nome Completo',
 	'signupPatient.option.senha': 'Senha',

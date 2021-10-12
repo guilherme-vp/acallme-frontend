@@ -76,6 +76,7 @@ export const enLocales: ILocale = {
 	'signup.choose.next.last': 'Finish',
 	'signup.form.personal.name': 'Name',
 	'signup.form.personal.birth': 'Date of Birth',
+	'signup.form.personal.photo': `Drag 'n'drop a image or select one`,
 
 	'signupPatient.option.name': 'Full Name',
 	'signupPatient.option.senha': 'Password',
