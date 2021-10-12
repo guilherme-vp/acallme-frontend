@@ -2,13 +2,19 @@ import React from 'react'
 import { Grid, TextField } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
 import { useIntl } from 'hooks'
-import { cpfRegex, createStringRequirements, emailRegex } from 'utils/regexs'
+import { cnpjRegex, cpfRegex, createStringRequirements, emailRegex } from 'utils/regexs'
 import { PasswordInput } from 'components/PasswordInput'
+import { RolesEnum } from 'services/entities'
+import { capitalizeLetter } from 'utils/capitalize-letter'
 import type { AccountForm } from '../SignUp'
 
 const passwordRegex = createStringRequirements({ includeSpecial: false })
 
-export const AccountInformation = () => {
+interface RoleProp {
+	role?: RolesEnum
+}
+
+export const AccountInformation = ({ role }: RoleProp) => {
 	const intl = useIntl()
 	const {
 		register,
@@ -27,7 +33,7 @@ export const AccountInformation = () => {
 							pattern: emailRegex
 						})}
 						fullWidth
-						label={intl.formatMessage({ id: 'email' })}
+						label={capitalizeLetter(intl.formatMessage({ id: 'email' }))}
 						variant="outlined"
 						placeholder="Ex: email@example.com"
 						required
@@ -51,19 +57,41 @@ export const AccountInformation = () => {
 						placeholder="123.456.789-10"
 						name="cpf"
 						autoComplete="cpf"
+						inputProps={{ maxLength: 14 }}
 					/>
 				</Grid>
+				{role === RolesEnum.Specialist && (
+					<Grid item>
+						<TextField
+							{...register('cnpj', {
+								required: true,
+								pattern: cnpjRegex
+							})}
+							fullWidth
+							label={intl.formatMessage({ id: 'cnpj' })}
+							variant="outlined"
+							required
+							error={!!errors.cnpj}
+							placeholder="12.345.678/0001-90"
+							name="cnpj"
+							autoComplete="cnpj"
+							inputProps={{ maxLength: 18 }}
+						/>
+					</Grid>
+				)}
 				<Grid item>
 					<PasswordInput
 						{...register('password', {
 							required: true,
 							pattern: passwordRegex
 						})}
-						helperText={intl.formatMessage({ id: 'signup.form.account.password.helper' })}
+						helperText={capitalizeLetter(
+							intl.formatMessage({ id: 'signup.form.account.password.helper' })
+						)}
 						fullWidth
 						required
 						error={!!errors.password}
-						label={intl.formatMessage({ id: 'password' })}
+						label={capitalizeLetter(intl.formatMessage({ id: 'password' }))}
 						isCorrect={allFields.password ? !errors.password : true}
 					/>
 				</Grid>
