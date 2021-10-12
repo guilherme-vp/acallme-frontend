@@ -11,6 +11,9 @@ export const ptBrLocales = {
 	female: 'feminino',
 	male: 'masculino',
 	other: 'outro',
+	email: 'E-mail',
+	password: 'Senha',
+	cpf: 'CPF',
 
 	'home.title': 'Home',
 	'home.header.home': 'Home',

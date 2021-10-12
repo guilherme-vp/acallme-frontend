@@ -13,6 +13,9 @@ export const enLocales: ILocale = {
 	female: 'female',
 	male: 'male',
 	other: 'other',
+	email: 'E-mail',
+	password: 'Password',
+	cpf: 'CPF',
 
 	'home.title': 'Home',
 	'home.header.home': 'Home',
