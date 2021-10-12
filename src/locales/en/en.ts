@@ -1,6 +1,15 @@
 import { ILocale } from '../ILocale'
 
 export const enLocales: ILocale = {
+	patient: 'patient',
+	specialist: 'specialist',
+	no: 'no',
+	yes: 'yes',
+	accept: 'accept',
+	reject: 'reject',
+	continue: 'continue',
+	goBack: 'previous',
+
 	'home.title': 'Home',
 	'home.header.home': 'Home',
 	'home.header.about': 'About',
@@ -59,7 +68,15 @@ export const enLocales: ILocale = {
 	'login.submit': 'Login',
 	'login.createAccount': 'Create account',
 
-	'signupPatient.title': 'Register of patient',
+	'signup.title.0': `What's your Role?`,
+	'signup.title.1': 'Personal Information',
+	'signup.title.2': 'Contact Information',
+	'signup.title.3': 'Professional Information',
+	'signup.choose.next': 'Next',
+	'signup.choose.next.last': 'Finish',
+	'signup.form.personal.name': 'Name',
+	'signup.form.personal.birth': 'Date of Birth',
+
 	'signupPatient.option.name': 'Full Name',
 	'signupPatient.option.senha': 'Password',
 	'signupPatient.option.genre.man': 'Man',

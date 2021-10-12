@@ -1,4 +1,13 @@
 export const ptBrLocales = {
+	patient: 'paciente',
+	specialist: 'especialista',
+	no: 'não',
+	yes: 'sim',
+	accept: 'aceitar',
+	reject: 'rejeitar',
+	continue: 'continuar',
+	goBack: 'voltar',
+
 	'home.title': 'Home',
 	'home.header.home': 'Home',
 	'home.header.about': 'Sobre',
@@ -51,7 +60,15 @@ export const ptBrLocales = {
 		'A ACall Me te ajuda a enfrentar o distanciamento social te aproximando dos melhores especialistas para lidar com os problemas causados pela pandemia.',
 	'home.footer.copyright': 'Copyright © 2021 - Todos os direitos reservados por Vortechs.',
 
-	'signupPatient.title': 'Cadastro de Paciente',
+	'signup.title.0': 'Qual é Sua Função?',
+	'signup.title.1': 'Informações Pessoais',
+	'signup.title.2': 'Informações de Contato',
+	'signup.title.3': 'Informações Profissionais',
+	'signup.choose.next': 'Próximo',
+	'signup.choose.next.last': 'Finalizar',
+	'signup.form.personal.name': 'Nome:',
+	'signup.form.personal.birth': 'Data de nascimento:',
+
 	'signupPatient.option.name': 'Nome Completo',
 	'signupPatient.option.senha': 'Senha',
 	'signupPatient.option.genre.man': 'Homem',
