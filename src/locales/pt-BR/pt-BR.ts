@@ -83,6 +83,8 @@ export const ptBrLocales = {
 	'signup.title.2': 'Informações Pessoais',
 	'signup.title.3': 'Informações Profissionais',
 	'signup.title.4': 'Detalhes da Sessão',
+	'signup.alreadyHaveAccount': 'Já tem uma conta?',
+	'signup.login': 'Faça Login!',
 	'signup.choose.next': 'Próximo',
 	'signup.choose.next.last': 'Finalizar',
 	'signup.form.required': 'Você precisa preencher todos os campos obrigatórios',
