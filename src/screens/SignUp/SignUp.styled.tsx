@@ -1,80 +1,51 @@
+import { Avatar, Box } from '@mui/material'
 import styled from 'styled-components'
 
-export const ContainerSign = styled.div`
-	width: 80%;
-	height: 80vh;
-	margin: 0 auto;
+export const PhotoContainer = styled(Box)`
 	display: flex;
-	flex-direction: row;
-	justify-content: center;
 	align-items: center;
-	#imagem {
-		img {
-			width: 80%;
-		}
-	}
-	@media (max-width: 1280px) {
-		#imagem {
-			display: none;
-		}
-	}
-`
-
-export const Dados = styled.div`
+	justify-content: center;
+	height: 100%;
+	width: 100%;
 	position: relative;
-	display: flex;
-	flex-direction: column;
-	margin: 8px auto;
-	input,
-	select {
-		width: 100%;
-		border: 2px solid #aaa;
-		background-color: #ffffffb0;
-		outline: none;
-		border-radius: 4px;
-		padding: 8px 30px;
-		transition: 0.3s;
-		:focus {
-			border-color: ${props => props.theme.input.borderFocus};
-			background-color: #f3f1f1;
-		}
-	}
-	.icon {
+
+	.image-selector {
+		font-size: 18px;
 		position: absolute;
-		top: 10px;
-		left: 8px;
-		width: 16px;
+		padding: 4px;
+		border-radius: 50%;
+		background: ${props => props.theme.background.main};
+		border: 1px solid ${props => props.theme.border.darker};
+		bottom: 0;
+		right: 90px;
+		height: 24px;
+		color: ${props => props.theme.colors.darker};
+		cursor: pointer;
 	}
-	.iconEye {
-		position: absolute;
-		top: 10px;
-		right: 8px;
-		svg {
-			cursor: pointer;
-		}
-	}
-	input[type='date'] {
-		padding: 6px 30px;
+
+	input {
+		display: none;
 	}
 `
 
-export const DivSubmit = styled.div`
+export const ImageSelector = styled.div`
 	display: flex;
-	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	margin-top: 20px;
-	button {
-		width: 80%;
-		margin-bottom: 8px;
-		color: ${props => props.theme.button.color};
-		background-color: ${props => props.theme.button.background};
-		padding: 8px;
-		:hover {
-			background-color: ${props => props.theme.button.hover};
-		}
-	}
-	a {
-		color: ${props => props.theme.text.link};
-	}
+	height: 100%;
+	padding: 16px;
+	border: 2px solid ${props => props.theme.border.darker};
+	border-style: dashed;
+`
+
+export const ImageAvatar = styled(Avatar)`
+	width: 150px !important;
+	height: 150px !important;
+	border: 1px solid ${props => props.theme.border.colored};
+`
+
+export const ChosenImage = styled.img`
+	width: 100%;
+	height: 100%;
+	max-width: 200px;
 `
