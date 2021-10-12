@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material'
+import { Divider, Grid } from '@mui/material'
 import styled from 'styled-components'
 
 export const Container = styled(Grid)`
@@ -23,4 +23,8 @@ export const Content = styled(Grid)`
 		margin: 0;
 		padding: 60px 15px;
 	}
+`
+
+export const LayoutDivider = styled(Divider).attrs({ flexItem: true })`
+	margin: 24px 0;
 `
