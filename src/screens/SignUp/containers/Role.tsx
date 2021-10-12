@@ -16,8 +16,8 @@ export const Role = ({ roleChosen, handleClick }: RoleProps) => {
 	const intl = useIntl()
 
 	return (
-		<Grid container justifyContent="center" mt={5} spacing={2}>
-			<Grid container item xs={9} md={5}>
+		<Grid container justifyContent="center" mt={3} spacing={2}>
+			<Grid container item xs={12} md={5}>
 				<CardButton
 					fullWidth
 					variant="outlined"
@@ -30,7 +30,7 @@ export const Role = ({ roleChosen, handleClick }: RoleProps) => {
 					</Typography>
 				</CardButton>
 			</Grid>
-			<Grid container item xs={9} md={5}>
+			<Grid container item xs={12} md={5}>
 				<CardButton
 					fullWidth
 					variant="outlined"

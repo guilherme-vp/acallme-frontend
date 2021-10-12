@@ -69,7 +69,7 @@ export const PersonalInformation = () => {
 		<Grid
 			container
 			justifyContent={isSmDown ? 'center' : 'space-between'}
-			mt={5}
+			mt={3}
 			spacing={2}
 		>
 			<Grid item xs={12} md={5}>

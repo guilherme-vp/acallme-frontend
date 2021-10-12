@@ -18,7 +18,7 @@ export const AccountInformation = () => {
 	const allFields = watch()
 
 	return (
-		<Grid container item mt={5} justifyContent="center">
+		<Grid container item mt={3} justifyContent="center">
 			<Grid container item flexDirection="column" spacing={2} xs={12} md={7}>
 				<Grid item>
 					<TextField
