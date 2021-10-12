@@ -63,7 +63,7 @@ export const enLocales: ILocale = {
 
 	'home.footer.address': 'Av. Paulista 1207 - São Paulo, SP - BR',
 	'home.footer.contact': 'Call us: +55 (99) 9 9999-9999',
-	'home.footer.language': 'Choose a language:',
+	'home.footer.language': 'Choose your language:',
 	'home.footer.about.title': 'About:',
 	'home.footer.about.description':
 		'ACall Me helps to face social distancing by bringing you the best specialists to deal with the mental problems caused by the pandemic.',

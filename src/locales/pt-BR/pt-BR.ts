@@ -61,7 +61,7 @@ export const ptBrLocales = {
 
 	'home.footer.address': 'Av. Paulista 1207 - São Paulo, SP - BR',
 	'home.footer.contact': 'Ligue-nos: +55 (99) 9 9999-9999',
-	'home.footer.language': 'Escolha uma língua:',
+	'home.footer.language': 'Escolha sua língua:',
 	'home.footer.about.title': 'Sobre:',
 	'home.footer.about.description':
 		'A ACall Me te ajuda a enfrentar o distanciamento social te aproximando dos melhores especialistas para lidar com os problemas causados pela pandemia.',
