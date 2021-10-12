@@ -100,13 +100,13 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 					borderRadius: '25px'
 				},
 				contained: {
-					padding: '8px 22px'
+					padding: '8px 30px'
 				},
 				containedSizeSmall: {
 					padding: '6px 10px'
 				},
 				outlined: {
-					padding: '8px 16px',
+					padding: '6px 30px',
 					borderWidth: '2px !important'
 				},
 				text: {
