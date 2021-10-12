@@ -1,10 +1,10 @@
 import React from 'react'
 import { Grid, TextField } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
-import { useIntl } from '../../../hooks'
+import { useIntl } from 'hooks'
+import { cpfRegex, createStringRequirements, emailRegex } from 'utils/regexs'
+import { PasswordInput } from 'components/PasswordInput'
 import type { AccountForm } from '../SignUp'
-import { cpfRegex, createStringRequirements, emailRegex } from '../../../utils/regexs'
-import { PasswordInput } from '../../../components/PasswordInput'
 
 const passwordRegex = createStringRequirements({ includeSpecial: false })
 

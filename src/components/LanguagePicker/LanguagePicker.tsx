@@ -1,8 +1,8 @@
 import React from 'react'
 import { Select, SelectChangeEvent } from '@mui/material'
 
-import { useIntl, useStoreon } from '../../hooks'
-import { AvailableLanguages, Locales } from '../../locales'
+import { useIntl, useStoreon } from 'hooks'
+import { AvailableLanguages, Locales } from 'locales'
 
 import { Item } from './LanguagePicker.styled'
 

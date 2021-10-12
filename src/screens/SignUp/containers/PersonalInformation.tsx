@@ -17,10 +17,10 @@ import { useFormContext } from 'react-hook-form'
 import { MdOutlineAddAPhoto } from 'react-icons/md'
 import iziToast from 'izitoast'
 import { capitalizeLetter } from 'utils/capitalize-letter'
-import { useIntl } from '../../../hooks'
+import { useIntl } from 'hooks'
+import { GenderEnum } from 'services/entities'
 import { ImageAvatar, ImageSelector, PhotoContainer } from '../SignUp.styled'
 import type { PersonalForm } from '../SignUp'
-import { GenderEnum } from '../../../services/entities'
 
 export const PersonalInformation = () => {
 	const intl = useIntl()

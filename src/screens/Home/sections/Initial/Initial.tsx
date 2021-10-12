@@ -4,7 +4,6 @@ import { Button, Grid, Hidden, Typography } from '@mui/material'
 import { useIntl } from 'hooks'
 import { ContentBox } from 'components/ContentBox'
 import doctorImage from 'assets/images/pointing-doctor.png'
-
 import { FullPageSection } from '../../components/Section'
 import { Image } from '../../components/Image'
 
