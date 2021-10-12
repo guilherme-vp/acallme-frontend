@@ -10,9 +10,13 @@ import { RolesEnum, GenderEnum } from 'services/entities'
 import { Link } from 'react-router-dom'
 import { LOGIN } from 'routes'
 import { capitalizeLetter } from 'utils/capitalize-letter'
-import { Role } from './containers/Role'
-import { PersonalInformation } from './containers/PersonalInformation'
-import { AccountInformation } from './containers/AccountInformation'
+import {
+	AccountInformation,
+	PersonalInformation,
+	ProfessionalInformation,
+	Role,
+	SessionDetails
+} from './containers'
 
 export interface PersonalForm {
 	name: string
@@ -26,6 +30,18 @@ export interface AccountForm {
 	email: string
 	password: string
 	cpf: string
+	cnpj?: string
+}
+
+export interface ProfessionalForm {
+	about: string
+	location: string
+	areas: string[]
+}
+
+export interface SessionForm {
+	works: string
+	cost: number
 }
 
 export const SignUp = () => {
@@ -42,6 +58,12 @@ export const SignUp = () => {
 	const accountMethods = useForm<AccountForm>({
 		mode: 'all'
 	})
+	const professionalMethods = useForm<ProfessionalForm>({
+		mode: 'all'
+	})
+	const sessionMethods = useForm<SessionForm>({
+		mode: 'all'
+	})
 
 	const handleChoseRole = (role: RolesEnum) => {
 		setChosen(role)
@@ -53,34 +75,76 @@ export const SignUp = () => {
 		}
 	}
 
-	const handleNextStep = () => {
-		if (step === 0) {
-			setStep(step + 1)
-		} else if (step === 1) {
-			if (accountMethods.formState.isValid) {
-				setStep(step + 1)
-			} else {
-				iziToast.error({
-					message: intl.formatMessage({ id: 'signup.form.required' })
-				})
+	const buttonMessage = ((): string => {
+		if (chosen === RolesEnum.Patient) {
+			if (step === 2) {
+				return intl.formatMessage({ id: 'signup.choose.next.last' })
 			}
-		} else if (step === 2) {
-			if (personalMethods.formState.isValid) {
-				setStep(step + 1)
-			} else {
-				iziToast.error({
-					message: intl.formatMessage({ id: 'signup.form.required' })
-				})
-			}
-		} else if (step === 3) {
-			const a = 'oi'
+
+			return intl.formatMessage({ id: 'signup.choose.next' })
 		}
+
+		if (step === 5) {
+			return intl.formatMessage({ id: 'signup.choose.next.last' })
+		}
+
+		return intl.formatMessage({ id: 'signup.choose.next' })
+	})()
+
+	const buttonDisabled = ((): boolean => {
+		if (step === 0) {
+			return !chosen
+		}
+
+		if (step === 1) {
+			return !accountMethods.formState.isValid
+		}
+
+		if (step === 2) {
+			return !personalMethods.formState.isValid
+		}
+
+		if (chosen === RolesEnum.Patient) {
+			return false
+		}
+
+		if (step === 3) {
+			return !professionalMethods.formState.isValid
+		}
+
+		if (step === 4) {
+			return !sessionMethods.formState.isValid
+		}
+
+		return false
+	})()
+
+	const handleNextStep = (): void => {
+		if (step === 0 && chosen) {
+			return setStep(step + 1)
+		}
+		if (step === 1 && accountMethods.formState.isValid) {
+			return setStep(step + 1)
+		}
+		if (step === 2 && personalMethods.formState.isValid) {
+			return setStep(step + 1)
+		}
+		if (step === 3 && professionalMethods.formState.isValid) {
+			return setStep(step + 1)
+		}
+		if (step === 4 && sessionMethods.formState.isValid) {
+			console.log('Form está certo')
+		}
+
+		iziToast.error({
+			message: intl.formatMessage({ id: 'signup.form.required' })
+		})
 	}
 
 	return (
-		<Grid container item xs={12}>
-			<Grid item xs={12} sx={{ textAlign: 'center' }}>
-				{step !== 3 && (
+		<form noValidate onSubmit={e => e.preventDefault()}>
+			<Grid container item xs={12}>
+				<Grid item xs={12} sx={{ textAlign: 'center' }}>
 					<Typography
 						align="center"
 						variant="display2"
@@ -89,57 +153,54 @@ export const SignUp = () => {
 						{/* @ts-ignore */}
 						{intl.formatMessage({ id: `signup.title.${step}` })}
 					</Typography>
+				</Grid>
+				{step === 0 ? (
+					<Role roleChosen={chosen} handleClick={handleChoseRole} />
+				) : step === 1 ? (
+					<FormProvider {...accountMethods}>
+						<AccountInformation role={chosen} />
+					</FormProvider>
+				) : step === 2 ? (
+					<FormProvider {...personalMethods}>
+						<PersonalInformation />
+					</FormProvider>
+				) : step === 3 ? (
+					<FormProvider {...professionalMethods}>
+						<ProfessionalInformation />
+					</FormProvider>
+				) : (
+					<FormProvider {...sessionMethods}>
+						<SessionDetails />
+					</FormProvider>
 				)}
-			</Grid>
-			{step === 0 ? (
-				<Role roleChosen={chosen} handleClick={handleChoseRole} />
-			) : step === 1 ? (
-				<FormProvider {...accountMethods}>
-					<AccountInformation />
-				</FormProvider>
-			) : (
-				<FormProvider {...personalMethods}>
-					<PersonalInformation />
-				</FormProvider>
-			)}
-			<Grid container item justifyContent="center" alignItems="center" mt={5}>
-				{step !== 0 && (
-					<Grid item mr={2}>
-						<Button onClick={() => handlePreviousStep()}>
-							{capitalizeLetter(
-								intl.formatMessage({
-									id: 'goBack'
-								})
-							)}
-						</Button>
+				<Grid container item justifyContent="center" alignItems="center" mt={5}>
+					{step !== 0 && (
+						<Grid item mr={2}>
+							<Button onClick={() => handlePreviousStep()}>
+								{capitalizeLetter(
+									intl.formatMessage({
+										id: 'goBack'
+									})
+								)}
+							</Button>
+						</Grid>
+					)}
+					<Grid>
+						<LoadingButton
+							disabled={buttonDisabled}
+							onClick={() => handleNextStep()}
+							variant="contained"
+							type="submit"
+						>
+							{capitalizeLetter(buttonMessage)}
+						</LoadingButton>
 					</Grid>
-				)}
-				<Grid>
-					<LoadingButton
-						disabled={
-							step === 0
-								? !chosen
-								: step === 1
-								? !accountMethods.formState.isValid
-								: step === 2
-								? !personalMethods.formState.isValid
-								: !chosen
-						}
-						onClick={() => handleNextStep()}
-						variant="contained"
-					>
-						{capitalizeLetter(
-							intl.formatMessage({
-								id: step !== 2 ? 'signup.choose.next' : 'signup.choose.next.last'
-							})
-						)}
-					</LoadingButton>
-				</Grid>
-				<Grid item>
-					<Link to={LOGIN} />
+					<Grid item>
+						<Link to={LOGIN} />
+					</Grid>
 				</Grid>
 			</Grid>
-		</Grid>
+		</form>
 	)
 }
 
