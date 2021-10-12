@@ -68,8 +68,8 @@ export const ptBrLocales = {
 	'home.footer.copyright': 'Copyright © 2021 - Todos os direitos reservados por Vortechs.',
 
 	'signup.title.0': 'Qual é Sua Função?',
-	'signup.title.1': 'Informações Pessoais',
-	'signup.title.2': 'Informações de Contato',
+	'signup.title.1': 'Informações da Conta',
+	'signup.title.2': 'Informações Pessoais',
 	'signup.title.3': 'Informações Profissionais',
 	'signup.choose.next': 'Próximo',
 	'signup.choose.next.last': 'Finalizar',

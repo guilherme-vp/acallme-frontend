@@ -76,8 +76,8 @@ export const enLocales: ILocale = {
 	'login.createAccount': 'Create account',
 
 	'signup.title.0': `What's your Role?`,
-	'signup.title.1': 'Personal Information',
-	'signup.title.2': 'Contact Information',
+	'signup.title.1': 'Account Information',
+	'signup.title.2': 'Personal Information',
 	'signup.title.3': 'Professional Information',
 	'signup.choose.next': 'Next',
 	'signup.choose.next.last': 'Finish',
