@@ -8,7 +8,8 @@ export const theme = {
 		alternative: '#F49F0E'
 	},
 	background: {
-		main: '#F8F9FE'
+		main: '#F8F9FE',
+		disabled: '#EFEFEF'
 	},
 	text: {
 		main: '#1D2B4E',
