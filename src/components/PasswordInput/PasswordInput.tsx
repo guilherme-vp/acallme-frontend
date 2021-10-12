@@ -1,7 +1,10 @@
 import React, { useState, forwardRef } from 'react'
 
 import { TextField, TextFieldProps, InputAdornment, IconButton } from '@mui/material'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
+import {
+	MdVisibility as VisibilityIcon,
+	MdVisibilityOff as VisibilityOffIcon
+} from 'react-icons/md'
 
 export type PasswordInputProps = TextFieldProps & {
 	isCorrect?: boolean
@@ -37,7 +40,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
 								onMouseDown={handleMouseDownPassword}
 								onMouseUp={handleMouseDownPassword}
 							>
-								{showPassword ? <Visibility /> : <VisibilityOff />}
+								{showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
 							</IconButton>
 						</InputAdornment>
 					)

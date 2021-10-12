@@ -12,7 +12,7 @@ import {
 	Box,
 	IconButton
 } from '@mui/material'
-import { Close as CloseIcon } from '@mui/icons-material'
+import { MdClose as CloseIcon } from 'react-icons/md'
 import { LoadingButton, LoadingButtonProps } from '@mui/lab'
 // eslint-disable-next-line import/no-cycle
 import * as S from './Modal.style'
