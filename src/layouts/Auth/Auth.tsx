@@ -1,8 +1,7 @@
 import React from 'react'
-import { Grid } from '@mui/material'
+import { Grid, Divider } from '@mui/material'
 import { HeaderTitle } from 'parts/Header'
 import { Copyright } from 'parts/Copyright'
-import { Footer } from 'parts/Footer'
 import * as S from './Auth.styled'
 
 export const AuthLayout: React.FC = ({ children }) => (
@@ -19,8 +18,7 @@ export const AuthLayout: React.FC = ({ children }) => (
 			{children}
 		</S.Content>
 		<Grid container flexDirection="column" alignItems="center">
-			<S.LayoutDivider />
-			<Footer />
+			<Divider flexItem sx={{ marginY: 3 }} />
 			<Copyright />
 		</Grid>
 	</S.Container>
