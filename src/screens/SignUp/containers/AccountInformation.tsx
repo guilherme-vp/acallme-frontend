@@ -29,6 +29,7 @@ export const AccountInformation = () => {
 						fullWidth
 						label={intl.formatMessage({ id: 'email' })}
 						variant="outlined"
+						placeholder="Ex: email@example.com"
 						required
 						error={!!errors.email}
 						name="email"
@@ -61,9 +62,8 @@ export const AccountInformation = () => {
 						variant="outlined"
 						required
 						error={!!errors.cpf}
-						placeholder="111.111.111-11"
+						placeholder="123.456.789-10"
 						name="cpf"
-						type="text"
 						autoComplete="cpf"
 					/>
 				</Grid>

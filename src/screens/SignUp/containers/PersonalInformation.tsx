@@ -96,6 +96,7 @@ export const PersonalInformation = () => {
 						fullWidth
 						label={intl.formatMessage({ id: 'signup.form.personal.name' })}
 						variant="outlined"
+						placeholder="Ex: Guilherme Vieira"
 						{...register('name', { required: true, minLength: 3 })}
 					/>
 				</Grid>
@@ -141,6 +142,7 @@ export const PersonalInformation = () => {
 						fullWidth
 						label={intl.formatMessage({ id: 'signup.form.personal.phone' })}
 						variant="outlined"
+						placeholder="Ex: (11) 99999-9999"
 						{...register('phone', { required: true })}
 					/>
 				</Grid>
