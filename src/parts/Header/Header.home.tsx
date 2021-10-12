@@ -3,6 +3,7 @@ import { AppBar, Grid, Button, useMediaQuery, Theme, Hidden } from '@mui/materia
 import { Link } from 'react-router-dom'
 import { useIntl } from 'hooks'
 import { SmoothLink } from 'components/SmoothLink'
+import { LOGIN } from 'routes'
 import {
 	ContactButton,
 	Container,
@@ -58,7 +59,7 @@ export const HeaderHome = () => {
 
 							<Hidden smDown>
 								<Grid item>
-									<Link to="/login">
+									<Link to={LOGIN}>
 										<ContactButton variant="contained">
 											{intl.formatMessage({ id: 'home.header.login' })}
 										</ContactButton>

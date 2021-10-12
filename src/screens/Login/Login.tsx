@@ -5,6 +5,7 @@ import { BiEnvelope } from 'react-icons/bi'
 import { useTheme } from 'styled-components'
 import { AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
+import { SIGNUP } from 'routes'
 import { DivLogin, ContainerLogin, Dados, DivButtonDados, DivInfo } from './Login.styled'
 
 export const Login = () => {
@@ -97,7 +98,7 @@ export const Login = () => {
 											<Button type="submit" name="login">
 												{intl.formatMessage({ id: 'login.submit' })}
 											</Button>
-											<Link to="/cadastro">
+											<Link to={SIGNUP}>
 												<Button name="create-account">
 													{intl.formatMessage({ id: 'login.createAccount' })}
 												</Button>

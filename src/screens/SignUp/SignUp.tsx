@@ -1,15 +1,18 @@
+/* eslint-disable indent */
 import React, { useState } from 'react'
 import { Grid, Button, Typography } from '@mui/material'
 import { useTheme } from 'styled-components'
 import { FormProvider, useForm } from 'react-hook-form'
 import iziToast from 'izitoast'
 import { LoadingButton } from '@mui/lab'
-import { useIntl } from '../../hooks'
-import { RolesEnum, GenderEnum } from '../../services/entities'
+import { useIntl } from 'hooks'
+import { RolesEnum, GenderEnum } from 'services/entities'
+import { Link } from 'react-router-dom'
+import { LOGIN } from 'routes'
+import { capitalizeLetter } from 'utils/capitalize-letter'
 import { Role } from './containers/Role'
 import { PersonalInformation } from './containers/PersonalInformation'
 import { AccountInformation } from './containers/AccountInformation'
-import { capitalizeLetter } from '../../utils/capitalize-letter'
 
 export interface PersonalForm {
 	name: string
@@ -70,6 +73,7 @@ export const SignUp = () => {
 				})
 			}
 		} else if (step === 3) {
+			const a = 'oi'
 		}
 	}
 
@@ -130,6 +134,9 @@ export const SignUp = () => {
 							})
 						)}
 					</LoadingButton>
+				</Grid>
+				<Grid item>
+					<Link to={LOGIN} />
 				</Grid>
 			</Grid>
 		</Grid>
