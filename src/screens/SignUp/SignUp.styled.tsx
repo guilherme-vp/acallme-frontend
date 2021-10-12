@@ -39,8 +39,8 @@ export const ImageSelector = styled.div`
 `
 
 export const ImageAvatar = styled(Avatar)`
-	width: 150px !important;
-	height: 150px !important;
+	width: 220px !important;
+	height: 220px !important;
 	border: 1px solid ${props => props.theme.border.colored};
 `
 
