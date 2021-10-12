@@ -14,7 +14,7 @@ export const AuthLayout: React.FC = ({ children }) => (
 		<Grid item>
 			<HeaderTitle />
 		</Grid>
-		<S.Content container item xs={12} sm={10} md={8}>
+		<S.Content container item xs={12} sm={10}>
 			{children}
 		</S.Content>
 		<Grid item>
