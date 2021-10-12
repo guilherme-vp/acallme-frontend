@@ -4,7 +4,11 @@ export const emailRegex = new RegExp(
 )
 
 export const cpfRegex = new RegExp(
-	/^([0-9]{2}[.]?[0-9]{3}[.]?[0-9]{3}[/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[.]?[0-9]{3}[.]?[0-9]{3}[-]?[0-9]{2})$/
+	/^([0-9]{3}[.]?[0-9]{3}[.]?[0-9]{3}[-]?[0-9]{2})|([0-9]{11})$/
+)
+
+export const cnpjRegex = new RegExp(
+	/^([0-9]{2}[.]?[0-9]{3}[.]?[0-9]{3}[/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{14})$/
 )
 
 function patternFormatter(pattern: string, args: IncludeRequirement): string {
