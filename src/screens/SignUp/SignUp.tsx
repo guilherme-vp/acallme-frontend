@@ -48,6 +48,7 @@ export const SignUp = () => {
 	const intl = useIntl()
 	const [step, setStep] = useState(0)
 	const [chosen, setChosen] = useState<RolesEnum>()
+	const [openModal, setOpenModal] = useState(false)
 	const theme = useTheme()
 	const personalMethods = useForm<PersonalForm>({
 		mode: 'all',
@@ -133,7 +134,12 @@ export const SignUp = () => {
 			return setStep(step + 1)
 		}
 		if (step === 4 && sessionMethods.formState.isValid) {
-			console.log('Form está certo')
+			console.log(chosen)
+			console.log(accountMethods.watch)
+			console.log(personalMethods.watch)
+			console.log(professionalMethods.watch)
+			console.log(sessionMethods.watch)
+			setOpenModal(true)
 		}
 
 		iziToast.error({
@@ -143,7 +149,7 @@ export const SignUp = () => {
 
 	return (
 		<form noValidate onSubmit={e => e.preventDefault()}>
-			<Grid container item xs={12}>
+			<Grid container item xs={12} justifyContent="center">
 				<Grid item xs={12} sx={{ textAlign: 'center' }}>
 					<Typography
 						align="center"
@@ -173,10 +179,18 @@ export const SignUp = () => {
 						<SessionDetails />
 					</FormProvider>
 				)}
-				<Grid container item justifyContent="center" alignItems="center" mt={5}>
+				<Grid
+					container
+					item
+					justifyContent="center"
+					alignItems="center"
+					mt={5}
+					xs={12}
+					md={6}
+				>
 					{step !== 0 && (
 						<Grid item mr={2}>
-							<Button onClick={() => handlePreviousStep()}>
+							<Button variant="outlined" onClick={() => handlePreviousStep()}>
 								{capitalizeLetter(
 									intl.formatMessage({
 										id: 'goBack'
@@ -185,7 +199,7 @@ export const SignUp = () => {
 							</Button>
 						</Grid>
 					)}
-					<Grid>
+					<Grid item>
 						<LoadingButton
 							disabled={buttonDisabled}
 							onClick={() => handleNextStep()}
@@ -195,8 +209,11 @@ export const SignUp = () => {
 							{capitalizeLetter(buttonMessage)}
 						</LoadingButton>
 					</Grid>
-					<Grid item>
-						<Link to={LOGIN} />
+					<Grid item xs={12} mt={2}>
+						<Typography variant="h5" textAlign="center">
+							{intl.formatMessage({ id: 'signup.alreadyHaveAccount' })}{' '}
+							<Link to={LOGIN}>{intl.formatMessage({ id: 'signup.login' })}</Link>
+						</Typography>
 					</Grid>
 				</Grid>
 			</Grid>
