@@ -10,11 +10,11 @@ export const CardButton = styled(Button).withConfig<{ selected?: boolean }>({
 	align-items: center;
 	justify-content: space-between;
 	border-radius: 8px;
-	padding: 40px !important;
+	padding: 40px 20px !important;
 	height: 300px;
 	color: ${props => props.theme.colors.alternative} !important;
 	border: 1px solid
-		${props => (props.selected ? props.theme.border.colored : props.theme.border.thin)} !important;
+		${props => (props.selected ? props.theme.border.colored : props.theme.border.darker)} !important;
 
 	img {
 		width: 100%;
