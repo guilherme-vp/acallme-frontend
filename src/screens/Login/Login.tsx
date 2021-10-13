@@ -5,13 +5,15 @@ import { Grid, Typography, Hidden, TextField, IconButton } from '@mui/material'
 import iziToast from 'izitoast'
 import { useForm } from 'react-hook-form'
 import { MdArrowBack as ArrowBackIcon } from 'react-icons/md'
+import { useMutation, useQuery } from 'react-query'
 import { Link, useHistory } from 'react-router-dom'
 
 import doctorImage from 'assets/images/login-image.png'
 import { PasswordInput } from 'components/PasswordInput'
-import { useIntl } from 'hooks'
+import { useIntl, useStoreon } from 'hooks'
 import { ChoseRole } from 'parts/ChoseRole'
 import { LOGIN, SIGNUP } from 'routes'
+import { loginPatient } from 'services/api/patient'
 import { RolesEnum } from 'services/entities'
 import { capitalizeLetter } from 'utils/capitalize-letter'
 
@@ -23,8 +25,14 @@ export interface LoginForm {
 }
 
 export const Login = () => {
+	const { dispatch } = useStoreon()
 	const intl = useIntl()
 	const history = useHistory()
+	const { isLoading, mutateAsync } = useMutation(loginPatient, {
+		onError: () => {
+			iziToast.error({ message: intl.formatMessage({ id: 'login.error' }) })
+		}
+	})
 	const [step, setStep] = useState(0)
 	const [chosen, setChosen] = useState<RolesEnum>()
 	const {
@@ -39,10 +47,15 @@ export const Login = () => {
 
 	const allFields = watch()
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		const formData = getValues()
-		console.log(formData)
-		history.push(LOGIN)
+		const mutationData = await mutateAsync(formData)
+
+		if (mutationData) {
+			dispatch('user/setToken', mutationData.token)
+			dispatch('user/setUser', mutationData.user)
+			history.push(LOGIN)
+		}
 	}
 
 	const handleChoseRole = (role: RolesEnum) => {
@@ -57,7 +70,7 @@ export const Login = () => {
 		return intl.formatMessage({ id: 'login.submit' })
 	})()
 
-	const handleNextStep = (): void => {
+	const handleNextStep = async (): Promise<void> => {
 		if (step === 0 && chosen) {
 			return setStep(step + 1)
 		}
@@ -178,7 +191,7 @@ export const Login = () => {
 							variant="contained"
 							type="submit"
 							disabled={buttonDisabled}
-							loading={false}
+							loading={isLoading}
 						>
 							{buttonMessage.toUpperCase()}
 						</LoadingButton>
