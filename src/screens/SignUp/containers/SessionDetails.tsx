@@ -1,9 +1,11 @@
-import React from 'react'
 import { Autocomplete, Grid, InputAdornment, TextField } from '@mui/material'
+import React from 'react'
 import { useFormContext } from 'react-hook-form'
+import { useTheme } from 'styled-components'
+
 import { useIntl } from 'hooks'
 import { capitalizeLetter } from 'utils/capitalize-letter'
-import { useTheme } from 'styled-components'
+
 import type { SessionForm } from '../SignUp'
 
 export const SessionDetails = () => {
@@ -50,25 +52,6 @@ export const SessionDetails = () => {
 						}}
 					/>
 				</Grid>
-			</Grid>
-			<Grid container item xs={12} md={7}>
-				<TextField
-					{...register('works', {
-						required: true,
-						maxLength: 500
-					})}
-					fullWidth
-					required
-					multiline
-					label={intl.formatMessage({ id: 'signup.form.session.works' })}
-					variant="outlined"
-					placeholder={intl.formatMessage({
-						id: 'signup.form.session.works.placeholder'
-					})}
-					error={!!errors.works}
-					name="about"
-					rows={5}
-				/>
 			</Grid>
 		</Grid>
 	)
