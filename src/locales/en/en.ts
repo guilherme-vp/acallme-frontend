@@ -27,6 +27,7 @@ export const enLocales: ILocale = {
 	name: 'name',
 	birthDate: 'date of birth',
 	phone: 'phone',
+	start: 'start',
 
 	'home.title': 'Home',
 	'home.header.home': 'Home',
@@ -108,11 +109,10 @@ export const enLocales: ILocale = {
 	'signup.form.session.works': 'How It Works',
 	'signup.form.session.works.placeholder': 'Describe the session process',
 
-	'signupPatient.option.name': 'name',
-	'signupPatient.option.senha': 'password',
-	'signupPatient.option.cellphone': 'cellphone',
-	'signupPatient.submit': 'submit',
-	'signupPatient.a.login': 'login',
+	'signup.modal.success.title': 'Welcome to ACall Me!',
+	'signup.modal.success.description':
+		'Now you can do what is better for your like and health',
+	'signup.modal.success.button': 'Start Now!',
 
 	// Languages
 	en: 'English',

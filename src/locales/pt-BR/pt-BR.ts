@@ -25,6 +25,7 @@ export const ptBrLocales = {
 	name: 'nome',
 	birthDate: 'data de nascimento',
 	phone: 'telefone',
+	start: 'começar',
 
 	'home.title': 'Home',
 	'home.header.home': 'Home',
@@ -101,11 +102,11 @@ export const ptBrLocales = {
 	'signup.form.session.works': 'Como Funciona',
 	'signup.form.session.works.placeholder': 'Descreva o processo da sessão',
 
-	'signupPatient.option.name': 'Nome Completo',
-	'signupPatient.option.senha': 'Senha',
-	'signupPatient.option.cellphone': 'Telefone',
-	'signupPatient.submit': 'Criar Conta',
-	'signupPatient.a.login': 'Já tem uma conta? Faça login',
+	'signup.modal.success.title': 'Bem-vindo à família ACall Me!',
+	'signup.modal.success.description':
+		'Agora você pode fazer o quê é melhor para você e para sua saúde.',
+	'signup.modal.success.button': 'Começar!',
+
 	'login.welcome': 'Bem-Vindo!',
 	'login.option.password': 'Senha',
 	'login.a.forgetPassword': 'Esqueceu a senha?',
