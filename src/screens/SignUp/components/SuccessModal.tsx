@@ -1,12 +1,11 @@
 import React from 'react'
 
-import { Grid, Typography, Button, SvgIcon } from '@mui/material'
-import { RiStarSmileLine as StarIcon } from 'react-icons/ri'
+import { Grid, Typography, Button } from '@mui/material'
+import { useTheme } from 'styled-components'
 
+import { SuccessStar } from 'assets/icons/SuccessStar'
 import { useIntl } from 'hooks'
 import { Modal } from 'parts/Modal'
-import { capitalizeLetter } from 'utils/capitalize-letter'
-import { pxToRem } from 'utils/px-to-rem'
 
 interface SuccessProps {
 	open: boolean
@@ -15,6 +14,7 @@ interface SuccessProps {
 
 export const SuccessModal = ({ onClose, open }: SuccessProps) => {
 	const intl = useIntl()
+	const theme = useTheme()
 	return (
 		<Modal
 			open={open}
@@ -24,23 +24,21 @@ export const SuccessModal = ({ onClose, open }: SuccessProps) => {
 			onOk={onClose}
 			onClose={onClose}
 		>
-			<Grid container justifyContent="center" spacing={2}>
-				<Grid item xs={12}>
-					<SvgIcon sx={{ fontSize: pxToRem(24) }}>
-						<StarIcon />
-					</SvgIcon>
+			<Grid container flexDirection="column" alignItems="center" spacing={1}>
+				<Grid item>
+					<SuccessStar sx={{ fontSize: '10rem', color: theme.tags.yellow }} />
 				</Grid>
-				<Grid item xs={12}>
-					<Typography variant="h5" fontWeight={500}>
+				<Grid item>
+					<Typography textAlign="center" variant="display2" fontWeight={600}>
 						{intl.formatMessage({ id: 'signup.modal.success.title' })}
 					</Typography>
 				</Grid>
-				<Grid item xs={12}>
-					<Typography variant="body1">
+				<Grid item>
+					<Typography color="GrayText" textAlign="center" variant="h4">
 						{intl.formatMessage({ id: 'signup.modal.success.description' })}
 					</Typography>
 				</Grid>
-				<Grid item xs={12} sx={{ mt: 1 }}>
+				<Grid item sx={{ mt: 2 }}>
 					<Button
 						variant="contained"
 						color="primary"
@@ -48,7 +46,7 @@ export const SuccessModal = ({ onClose, open }: SuccessProps) => {
 							onClose()
 						}}
 					>
-						{capitalizeLetter(intl.formatMessage({ id: 'start' }))}
+						{intl.formatMessage({ id: 'start' }).toUpperCase()}
 					</Button>
 				</Grid>
 			</Grid>
