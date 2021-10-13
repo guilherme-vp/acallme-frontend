@@ -102,7 +102,7 @@ export const ptBrLocales = {
 	'signup.form.session.works': 'Como Funciona',
 	'signup.form.session.works.placeholder': 'Descreva o processo da sessão',
 
-	'signup.modal.success.title': 'Bem-vindo à família ACall Me!',
+	'signup.modal.success.title': 'Bem-vindo a ACall Me!',
 	'signup.modal.success.description':
 		'Agora você pode fazer o quê é melhor para você e para sua saúde.',
 	'signup.modal.success.button': 'Começar!',
