@@ -79,7 +79,7 @@ export const ptBrLocales = {
 		'A ACall Me te ajuda a enfrentar o distanciamento social te aproximando dos melhores especialistas para lidar com os problemas causados pela pandemia.',
 	'home.footer.copyright': 'Copyright © 2021 - Todos os direitos reservados por Vortechs.',
 
-	'login.title': 'Bem-Vindo!',
+	'login.title': 'Bem-Vindo de Volta!',
 	'login.description.0': 'Qual é Sua Função?',
 	'login.description.1': 'Insira suas Informações',
 	'login.option.username': 'Email ou CPF',
