@@ -21,7 +21,7 @@ export const ChoseRole = ({ roleChosen, handleClick, cardSize }: RoleProps) => {
 
 	return (
 		<Grid container item justifyContent="center" mt={3} spacing={2}>
-			<Grid container item xs={12} sm={5}>
+			<Grid container item justifyContent="center" sm={5}>
 				<CardButton
 					fullWidth
 					variant="outlined"
@@ -35,7 +35,7 @@ export const ChoseRole = ({ roleChosen, handleClick, cardSize }: RoleProps) => {
 					</Typography>
 				</CardButton>
 			</Grid>
-			<Grid container item xs={12} sm={5}>
+			<Grid container item justifyContent="center" sm={5}>
 				<CardButton
 					fullWidth
 					variant="outlined"

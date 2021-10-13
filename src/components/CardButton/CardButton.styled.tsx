@@ -14,17 +14,13 @@ export const CardButton = styled(Button).withConfig<{
 	justify-content: space-between;
 	border-radius: 8px;
 	padding: ${props => (props.size === 'small' ? '30px 20px' : '40px 20px')}!important;
-	height: 100%;
 	color: ${props => props.theme.colors.alternative} !important;
+	max-width: 350px;
 	border: 1px solid
 		${props => (props.selected ? props.theme.border.colored : props.theme.border.darker)} !important;
 
 	img {
-		width: 150px;
+		width: 170px;
 		margin-bottom: 16px;
-	}
-
-	@media only screen and (min-width: 768px) {
-		height: ${props => (props.size === 'small' ? '200px' : '300px')};
 	}
 `
