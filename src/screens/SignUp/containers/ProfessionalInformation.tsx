@@ -1,9 +1,11 @@
-import React from 'react'
 import { Autocomplete, Grid, TextField } from '@mui/material'
+import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { useIntl } from 'hooks'
+
 import rolesEn from 'data/roles/roles.en.json'
 import rolesPtBR from 'data/roles/roles.pt-br.json'
+import { useIntl } from 'hooks'
+
 import type { ProfessionalForm } from '../SignUp'
 
 export const ProfessionalInformation = () => {
@@ -19,6 +21,7 @@ export const ProfessionalInformation = () => {
 			<Grid container item flexDirection="column" spacing={2} xs={12} md={7}>
 				<Grid item>
 					<TextField
+						// @ts-ignore
 						{...register('about', {
 							required: true,
 							maxLength: 300
@@ -65,7 +68,12 @@ export const ProfessionalInformation = () => {
 										inputRef={ref}
 										required
 										onBlur={e => {
-											if (e.target.value && !value.includes(e.target.value))
+											if (
+												e.target.value &&
+												!value.some(
+													({ name: specialtyName }) => specialtyName === e.target.value
+												)
+											)
 												onChange(e.target.value)
 											onBlur()
 										}}
@@ -75,7 +83,7 @@ export const ProfessionalInformation = () => {
 							/>
 						)}
 						control={control}
-						name="areas"
+						name="specialties"
 					/>
 				</Grid>
 			</Grid>
