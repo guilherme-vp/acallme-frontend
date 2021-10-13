@@ -12,14 +12,13 @@ export const Container = styled(Grid)`
 `
 
 export const Content = styled(Grid)`
-	padding: 40px 20px;
-	border-radius: 10px;
-	min-height: 100%;
+	padding: 60px 15px;
+	border-radius: 0;
+	margin: 0;
 
-	@media only screen and (max-width: 768px) {
-		width: 100%;
-		border-radius: 0;
-		margin: 0;
-		padding: 60px 0;
+	@media only screen and (min-width: 768px) {
+		border-radius: 10px;
+		padding: 40px 20px;
+		min-height: 100%;
 	}
 `
