@@ -96,6 +96,7 @@ export const PersonalInformation = () => {
 			<Grid container item flexDirection="column" spacing={2} xs={12} md>
 				<Grid item>
 					<TextField
+						focused
 						fullWidth
 						label={capitalizeLetter(intl.formatMessage({ id: 'name' }))}
 						variant="outlined"
@@ -138,11 +139,12 @@ export const PersonalInformation = () => {
 						mask="__/__/____"
 						onChange={value => setValue('birth', value)}
 						value={birth}
-						renderInput={props => <TextField required {...props} />}
+						renderInput={props => <TextField focused required {...props} />}
 					/>
 				</Grid>
 				<Grid item>
 					<TextField
+						focused
 						{...register('phone', { required: true, maxLength: 15, minLength: 11 })}
 						fullWidth
 						label={capitalizeLetter(intl.formatMessage({ id: 'phone' }))}
