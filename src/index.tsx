@@ -12,13 +12,13 @@ import { store } from './state/store'
 
 ReactDOM.render(
 	<React.StrictMode>
-		<StoreContext.Provider value={store}>
-			<QueryClientProvider client={queryClient}>
+		<QueryClientProvider client={queryClient}>
+			<StoreContext.Provider value={store}>
 				<AppWrappers>
 					<App />
 				</AppWrappers>
-			</QueryClientProvider>
-		</StoreContext.Provider>
+			</StoreContext.Provider>
+		</QueryClientProvider>
 	</React.StrictMode>,
 	document.getElementById('root')
 )
