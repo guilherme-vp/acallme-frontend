@@ -1,120 +1,212 @@
 import React, { useState } from 'react'
 
-import { Grid, Button, IconButton } from '@mui/material'
-import { AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
-import { BiEnvelope } from 'react-icons/bi'
-import { Link } from 'react-router-dom'
+import { LoadingButton } from '@mui/lab'
+import { Grid, Typography, Hidden, TextField, IconButton } from '@mui/material'
+import iziToast from 'izitoast'
+import { useForm } from 'react-hook-form'
+import { MdArrowBack as ArrowBackIcon } from 'react-icons/md'
+import { useMutation } from 'react-query'
+import { Link, useHistory } from 'react-router-dom'
 import { useTheme } from 'styled-components'
 
-import { useIntl } from 'hooks'
-import { SIGNUP } from 'routes'
+import doctorImage from 'assets/images/login-image.png'
+import { PasswordInput } from 'components/PasswordInput'
+import { useIntl, useStoreon } from 'hooks'
+import { ChoseRole } from 'parts/ChoseRole'
+import { LOGIN, SIGNUP } from 'routes'
+import { loginPatient } from 'services/api/patient'
+import { RolesEnum } from 'services/entities'
+import { capitalizeLetter } from 'utils/capitalize-letter'
 
-import { DivLogin, ContainerLogin, Dados, DivButtonDados, DivInfo } from './Login.styled'
+import { BorderedGrid, Image } from './Login.styled'
+
+export interface LoginForm {
+	username: string
+	password: string
+}
 
 export const Login = () => {
-	const intl = useIntl()
-	const [active, setActive] = useState(false)
-
 	const theme = useTheme()
+	const { dispatch } = useStoreon()
+	const intl = useIntl()
+	const history = useHistory()
+	const { isLoading, mutateAsync } = useMutation(loginPatient, {
+		onError: () => {
+			iziToast.error({ message: intl.formatMessage({ id: 'login.error' }) })
+		}
+	})
+	const [step, setStep] = useState(0)
+	const [chosen, setChosen] = useState<RolesEnum>()
+	const {
+		register,
+		formState: { errors, isValid },
+		watch,
+		getValues,
+		reset
+	} = useForm<LoginForm>({
+		mode: 'all'
+	})
 
-	function look() {
-		if (active === true) {
-			setActive(false)
-		} else {
-			setActive(true)
+	const allFields = watch()
+
+	const handleSubmit = async () => {
+		const formData = getValues()
+		const mutationData = await mutateAsync(formData)
+
+		if (mutationData) {
+			dispatch('user/setToken', mutationData.token)
+			dispatch('user/setUser', mutationData.user)
+			history.push(LOGIN)
 		}
 	}
 
+	const handleChoseRole = (role: RolesEnum) => {
+		setChosen(role)
+	}
+
+	const buttonMessage = ((): string => {
+		if (step === 0) {
+			return intl.formatMessage({ id: 'continue' })
+		}
+
+		return intl.formatMessage({ id: 'login.submit' })
+	})()
+
+	const handleNextStep = async (): Promise<void> => {
+		if (step === 0 && chosen) {
+			return setStep(step + 1)
+		}
+
+		if (step === 1 && isValid) {
+			return handleSubmit()
+		}
+
+		iziToast.error({
+			message: intl.formatMessage({ id: 'login.error' })
+		})
+	}
+
+	const handlePreviousStep = (): void => {
+		reset()
+		setStep(step - 1)
+	}
+
+	const buttonDisabled = ((): boolean => {
+		if (step === 0 || !chosen) {
+			return !chosen
+		}
+
+		if (step === 1) {
+			return !isValid
+		}
+
+		return false
+	})()
+
 	return (
-		<DivLogin>
-			<ContainerLogin>
-				<Grid container justifyContent="center" alignContent="center">
-					<Grid
-						container
-						item
-						lg={7}
-						justifyContent="center"
-						alignItems="center"
-						id="imagem"
-					>
-						<img
-							src="https://i1.wp.com/sensorweb.com.br/wp-content/uploads/2019/08/header_25_09_19.png?fit=845%2C684&ssl=1"
-							alt="specialists-patients"
-						/>
-					</Grid>
-
-					<Grid
-						container
-						item
-						xs={12}
-						md={12}
-						lg={5}
-						spacing={5}
-						justifyContent="center"
-						alignItems="center"
-					>
-						<Grid item>
-							<DivInfo>
-								<h1>{intl.formatMessage({ id: 'login.welcome' })}</h1>
-								<p>
-									Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque
-									consequuntur molestiae exercitationem corporis ullam necessitatibus eum
-									voluptatum fugit, nobis ipsa quae. Repellendus corrupti placeat nam ipsam!
-									Velit, sapiente ullam! Officiis.
-								</p>
-							</DivInfo>
-						</Grid>
-
-						<Grid container item>
-							<form>
-								<Grid container item spacing={2}>
-									<Grid item xs={12}>
-										<Dados>
-											<BiEnvelope className="icon" />
-											<input type="email" placeholder="Email" name="email" required />
-										</Dados>
-									</Grid>
-
-									<Grid item xs={12}>
-										<Dados>
-											<AiOutlineLock className="icon" />
-											<input
-												type={active ? 'text' : 'password'}
-												placeholder={intl.formatMessage({ id: 'login.option.password' })}
-												name="password"
-												required
-											/>
-											<IconButton onClick={look} className="iconEye">
-												{active ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-											</IconButton>
-										</Dados>
-									</Grid>
-
-									<Grid item xs={12}>
-										<a href="./" style={{ color: theme.text.link }}>
-											{intl.formatMessage({ id: 'login.a.forgetPassword' })}
-										</a>
-									</Grid>
-
-									<Grid item xs={12}>
-										<DivButtonDados>
-											<Button type="submit" name="login">
-												{intl.formatMessage({ id: 'login.submit' })}
-											</Button>
-											<Link to={SIGNUP}>
-												<Button name="create-account">
-													{intl.formatMessage({ id: 'login.createAccount' })}
-												</Button>
-											</Link>
-										</DivButtonDados>
-									</Grid>
-								</Grid>
-							</form>
-						</Grid>
-					</Grid>
+		<Grid container justifyContent="space-between" alignItems="center">
+			<Hidden mdDown>
+				<Grid item xs={12} md={6}>
+					<Image loading="lazy" src={doctorImage} alt="login-doctor" />
 				</Grid>
-			</ContainerLogin>
-		</DivLogin>
+			</Hidden>
+			<BorderedGrid
+				container
+				item
+				alignItems="center"
+				justifyContent="center"
+				xs={12}
+				md={5}
+			>
+				<form noValidate onSubmit={e => e.preventDefault()}>
+					<Grid container flexDirection="column" alignItems="center" spacing={2}>
+						<Grid container item xs={12}>
+							{step !== 0 && (
+								<IconButton onClick={() => handlePreviousStep()}>
+									<ArrowBackIcon />
+								</IconButton>
+							)}
+						</Grid>
+						<Grid item>
+							<Typography
+								variant="display3"
+								fontWeight={600}
+								sx={{ color: theme.colors.alternative }}
+								textAlign="center"
+							>
+								{intl.formatMessage({ id: 'login.title' })}
+							</Typography>
+						</Grid>
+						<Grid item>
+							<Typography variant="h3" color="GrayText" fontWeight={600} textAlign="center">
+								{/* @ts-ignore */}
+								{intl.formatMessage({ id: `login.description.${step}` })}
+							</Typography>
+						</Grid>
+					</Grid>
+					{step === 0 ? (
+						<ChoseRole cardSize="small" roleChosen={chosen} handleClick={handleChoseRole} />
+					) : (
+						<Grid
+							container
+							item
+							justifyContent="center"
+							flexDirection="column"
+							spacing={2}
+							mt={4}
+						>
+							<Grid item>
+								<TextField
+									focused
+									{...register('username', { required: true, minLength: 1 })}
+									fullWidth
+									label={capitalizeLetter(intl.formatMessage({ id: 'email' }))}
+									variant="outlined"
+									required
+									error={!!errors.username}
+									name="username"
+									placeholder={intl.formatMessage({
+										id:
+											chosen === RolesEnum.Patient
+												? 'login.option.username.placeholder'
+												: 'login.option.username.specialist.placeholder'
+									})}
+								/>
+							</Grid>
+							<Grid item>
+								<PasswordInput
+									{...register('password', { required: true, minLength: 1 })}
+									focused
+									fullWidth
+									required
+									error={!!errors.password}
+									label={capitalizeLetter(intl.formatMessage({ id: 'password' }))}
+									isCorrect={allFields.password ? !errors.password : true}
+									name="password"
+								/>
+							</Grid>
+						</Grid>
+					)}
+					<Grid container item justifyContent="center" mt={4}>
+						<LoadingButton
+							onClick={() => handleNextStep()}
+							variant="contained"
+							type="submit"
+							disabled={buttonDisabled}
+							loading={isLoading}
+						>
+							{buttonMessage.toUpperCase()}
+						</LoadingButton>
+					</Grid>
+					<Grid item xs={12} mt={4}>
+						<Typography variant="h5" textAlign="center">
+							{intl.formatMessage({ id: 'login.dontHaveAnAccount' })}{' '}
+							<Link to={SIGNUP}>{intl.formatMessage({ id: 'login.createAccount' })}</Link>
+						</Typography>
+					</Grid>
+				</form>
+			</BorderedGrid>
+		</Grid>
 	)
 }
 

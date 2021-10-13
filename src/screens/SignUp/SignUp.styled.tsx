@@ -1,6 +1,12 @@
 import { Avatar, Box } from '@mui/material'
 import styled from 'styled-components'
 
+export const StyledForm = styled.form`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`
+
 export const PhotoContainer = styled(Box)`
 	display: flex;
 	align-items: center;

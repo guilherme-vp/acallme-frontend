@@ -31,6 +31,7 @@ export const AccountInformation = ({ role }: RoleProp) => {
 			<Grid container item flexDirection="column" spacing={2} xs={12} md={7}>
 				<Grid item>
 					<TextField
+						focused
 						{...register('email', {
 							required: true,
 							pattern: emailRegex
@@ -48,6 +49,7 @@ export const AccountInformation = ({ role }: RoleProp) => {
 				</Grid>
 				<Grid item>
 					<TextField
+						focused
 						{...register('cpf', {
 							required: true,
 							pattern: cpfRegex
@@ -66,6 +68,7 @@ export const AccountInformation = ({ role }: RoleProp) => {
 				{role === RolesEnum.Specialist && (
 					<Grid item>
 						<TextField
+							focused
 							{...register('cnpj', {
 								required: true,
 								pattern: cnpjRegex

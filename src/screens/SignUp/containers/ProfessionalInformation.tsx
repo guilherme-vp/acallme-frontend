@@ -22,6 +22,7 @@ export const ProfessionalInformation = () => {
 			<Grid container item flexDirection="column" spacing={2} xs={12} md={7}>
 				<Grid item>
 					<TextField
+						focused
 						// @ts-ignore
 						{...register('about', {
 							required: true,
@@ -42,6 +43,7 @@ export const ProfessionalInformation = () => {
 				</Grid>
 				<Grid item>
 					<TextField
+						focused
 						{...register('location', {
 							required: true
 						})}
@@ -67,6 +69,7 @@ export const ProfessionalInformation = () => {
 								}}
 								renderInput={params => (
 									<TextField
+										focused
 										{...params}
 										name={name}
 										inputRef={ref}

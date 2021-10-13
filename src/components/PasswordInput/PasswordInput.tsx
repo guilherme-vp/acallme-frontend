@@ -23,6 +23,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
 		}
 		return (
 			<TextField
+				focused
 				name="password"
 				error={!isCorrect}
 				type={showPassword ? 'text' : 'password'}

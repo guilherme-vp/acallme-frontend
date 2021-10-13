@@ -29,10 +29,10 @@ export const SessionDetails = () => {
 						sx={{ backgroundColor: theme.background.disabled }}
 						renderInput={params => (
 							<TextField
+								focused
 								{...params}
 								name="duration"
 								defaultValue={hourOptions}
-								focused
 								label={capitalizeLetter(intl.formatMessage({ id: 'duration' }))}
 							/>
 						)}
@@ -40,6 +40,7 @@ export const SessionDetails = () => {
 				</Grid>
 				<Grid item xs>
 					<TextField
+						focused
 						{...register('cost', {
 							required: true
 						})}
