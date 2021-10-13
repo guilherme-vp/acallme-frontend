@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Grid, Divider } from '@mui/material'
+import { Grid, Divider, Toolbar } from '@mui/material'
 
 import { Copyright } from 'parts/Copyright'
 import { HeaderTitle } from 'parts/Header'
@@ -16,10 +16,10 @@ export const AuthLayout: React.FC = ({ children }) => (
 	>
 		<Grid item>
 			<HeaderTitle />
+			<Toolbar sx={{ height: '77px' }} />
 		</Grid>
 		<S.Content container>{children}</S.Content>
 		<Grid container flexDirection="column" alignItems="center">
-			<Divider flexItem sx={{ marginY: 3 }} />
 			<Copyright />
 		</Grid>
 	</S.Container>
