@@ -5,8 +5,9 @@ import { Grid, Typography, Hidden, TextField, IconButton } from '@mui/material'
 import iziToast from 'izitoast'
 import { useForm } from 'react-hook-form'
 import { MdArrowBack as ArrowBackIcon } from 'react-icons/md'
-import { useMutation, useQuery } from 'react-query'
+import { useMutation } from 'react-query'
 import { Link, useHistory } from 'react-router-dom'
+import { useTheme } from 'styled-components'
 
 import doctorImage from 'assets/images/login-image.png'
 import { PasswordInput } from 'components/PasswordInput'
@@ -25,6 +26,7 @@ export interface LoginForm {
 }
 
 export const Login = () => {
+	const theme = useTheme()
 	const { dispatch } = useStoreon()
 	const intl = useIntl()
 	const history = useHistory()
@@ -128,8 +130,8 @@ export const Login = () => {
 						<Grid item>
 							<Typography
 								variant="display3"
-								color="HighlightText"
 								fontWeight={600}
+								sx={{ color: theme.colors.alternative }}
 								textAlign="center"
 							>
 								{intl.formatMessage({ id: 'login.title' })}
