@@ -59,25 +59,18 @@ export const ProfessionalInformation = () => {
 						render={({ field: { onChange, onBlur, value, name, ref } }) => (
 							<Autocomplete
 								multiple
-								freeSolo
 								options={intl.locale === 'en' ? rolesEn : rolesPtBR}
 								filterSelectedOptions
+								value={value}
+								onChange={(_, res) => {
+									onChange(res)
+								}}
 								renderInput={params => (
 									<TextField
 										{...params}
 										name={name}
 										inputRef={ref}
 										required
-										onBlur={e => {
-											if (
-												e.target.value &&
-												!value.some(
-													({ name: specialtyName }) => specialtyName === e.target.value
-												)
-											)
-												onChange(e.target.value)
-											onBlur()
-										}}
 										label={intl.formatMessage({ id: 'signup.form.professional.areas' })}
 									/>
 								)}
