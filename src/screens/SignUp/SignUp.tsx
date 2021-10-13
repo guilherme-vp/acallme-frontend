@@ -1,15 +1,19 @@
 /* eslint-disable indent */
 import React, { useState } from 'react'
-import { Grid, Button, Typography } from '@mui/material'
-import { useTheme } from 'styled-components'
-import { FormProvider, useForm } from 'react-hook-form'
-import iziToast from 'izitoast'
+
 import { LoadingButton } from '@mui/lab'
-import { useIntl } from 'hooks'
-import { RolesEnum, GenderEnum } from 'services/entities'
+import { Grid, Button, Typography } from '@mui/material'
+import iziToast from 'izitoast'
+import { FormProvider, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
+import { useTheme } from 'styled-components'
+
+import { useIntl } from 'hooks'
 import { LOGIN } from 'routes'
+import { RolesEnum, User, Specialist } from 'services/entities'
 import { capitalizeLetter } from 'utils/capitalize-letter'
+
+import { SuccessModal } from './components/SuccessModal'
 import {
 	AccountInformation,
 	PersonalInformation,
@@ -18,29 +22,18 @@ import {
 	SessionDetails
 } from './containers'
 
-export interface PersonalForm {
-	name: string
+export type PersonalForm = Pick<User, 'name' | 'birth' | 'phone' | 'gender'> & {
 	photo?: File
-	birth: Date | null
-	phone: string
-	gender: GenderEnum
 }
 
-export interface AccountForm {
-	email: string
-	password: string
-	cpf: string
-	cnpj?: string
-}
+export type AccountForm = Pick<Specialist, 'email' | 'password' | 'cpf' | 'cnpj'>
 
-export interface ProfessionalForm {
-	about: string
-	location: string
-	areas: string[]
-}
+export type ProfessionalForm = Pick<
+	Specialist,
+	'about' | 'crm' | 'crp' | 'specialties' | 'location'
+>
 
 export interface SessionForm {
-	works: string
 	cost: number
 }
 
@@ -51,10 +44,7 @@ export const SignUp = () => {
 	const [openModal, setOpenModal] = useState(false)
 	const theme = useTheme()
 	const personalMethods = useForm<PersonalForm>({
-		mode: 'all',
-		defaultValues: {
-			birth: null
-		}
+		mode: 'all'
 	})
 	const accountMethods = useForm<AccountForm>({
 		mode: 'all'
@@ -73,6 +63,17 @@ export const SignUp = () => {
 	const handlePreviousStep = () => {
 		if (step !== 0) {
 			setStep(step - 1)
+		}
+	}
+
+	const handleSubmit = () => {
+		const personalValues = personalMethods.getValues()
+		const accountValues = accountMethods.getValues()
+		const professionalValues = professionalMethods.getValues()
+		const sessionValues = sessionMethods.getValues()
+
+		if (chosen === RolesEnum.Patient) {
+			console.log('send ')
 		}
 	}
 
@@ -127,9 +128,15 @@ export const SignUp = () => {
 		if (step === 1 && accountMethods.formState.isValid) {
 			return setStep(step + 1)
 		}
+
 		if (step === 2 && personalMethods.formState.isValid) {
+			if (chosen === RolesEnum.Patient) {
+				return
+			}
+
 			return setStep(step + 1)
 		}
+
 		if (step === 3 && professionalMethods.formState.isValid) {
 			return setStep(step + 1)
 		}
@@ -217,6 +224,7 @@ export const SignUp = () => {
 					</Grid>
 				</Grid>
 			</Grid>
+			<SuccessModal open={openModal} onClose={() => console.log('clicked')} />
 		</form>
 	)
 }

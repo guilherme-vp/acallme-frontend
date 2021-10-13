@@ -1,4 +1,6 @@
 import React, { useCallback, useState } from 'react'
+
+import { DesktopDatePicker } from '@mui/lab'
 import {
 	FormControl,
 	FormControlLabel,
@@ -10,17 +12,18 @@ import {
 	useMediaQuery
 } from '@mui/material'
 import { Theme } from '@mui/system'
-import { useDropzone } from 'react-dropzone'
-import { DesktopDatePicker } from '@mui/lab'
 import * as datefns from 'date-fns'
+import iziToast from 'izitoast'
+import { useDropzone } from 'react-dropzone'
 import { useFormContext } from 'react-hook-form'
 import { MdOutlineAddAPhoto } from 'react-icons/md'
-import iziToast from 'izitoast'
-import { capitalizeLetter } from 'utils/capitalize-letter'
+
 import { useIntl } from 'hooks'
 import { GenderEnum } from 'services/entities'
-import { ImageAvatar, ImageSelector, PhotoContainer } from '../SignUp.styled'
+import { capitalizeLetter } from 'utils/capitalize-letter'
+
 import type { PersonalForm } from '../SignUp'
+import { ImageAvatar, ImageSelector, PhotoContainer } from '../SignUp.styled'
 
 export const PersonalInformation = () => {
 	const intl = useIntl()

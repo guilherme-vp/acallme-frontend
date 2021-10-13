@@ -1,5 +1,6 @@
-import styled, { css } from 'styled-components'
 import { Paper, DialogContent } from '@mui/material'
+import styled, { css } from 'styled-components'
+
 // eslint-disable-next-line import/no-cycle
 import { ModalProps } from './Modal'
 

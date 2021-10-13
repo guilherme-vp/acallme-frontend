@@ -1,9 +1,12 @@
 import React from 'react'
+
 import { AppBar, Grid, Button, useMediaQuery, Theme, Hidden } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { useIntl } from 'hooks'
+
 import { SmoothLink } from 'components/SmoothLink'
+import { useIntl } from 'hooks'
 import { LOGIN } from 'routes'
+
 import {
 	ContactButton,
 	Container,

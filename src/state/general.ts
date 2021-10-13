@@ -1,4 +1,5 @@
 import { StoreonModule } from 'storeon'
+
 import { Locales } from '../locales'
 
 export interface GeneralEvents {

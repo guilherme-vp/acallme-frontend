@@ -1,8 +1,9 @@
 import React, { ReactNode } from 'react'
+
 import { useIntl as useBaseIntl, IntlShape as Shape } from 'react-intl'
 
-import { ptBrLocales } from '../locales/pt-BR'
 import { ILocale } from '../locales/ILocale'
+import { ptBrLocales } from '../locales/pt-BR'
 
 interface MessageDescriptor {
 	id: keyof ILocale

@@ -1,11 +1,14 @@
 import React from 'react'
+
 import { Grid, TextField } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
-import { useIntl } from 'hooks'
-import { cnpjRegex, cpfRegex, createStringRequirements, emailRegex } from 'utils/regexs'
+
 import { PasswordInput } from 'components/PasswordInput'
+import { useIntl } from 'hooks'
 import { RolesEnum } from 'services/entities'
 import { capitalizeLetter } from 'utils/capitalize-letter'
+import { cnpjRegex, cpfRegex, createStringRequirements, emailRegex } from 'utils/regexs'
+
 import type { AccountForm } from '../SignUp'
 
 const passwordRegex = createStringRequirements({ includeSpecial: false })

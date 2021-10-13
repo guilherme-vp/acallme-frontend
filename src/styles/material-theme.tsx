@@ -1,6 +1,7 @@
 import { alpha, createTheme, ThemeOptions } from '@mui/material/styles'
-import { theme as colorTheme, Theme } from './theme'
+
 import { pxToRem } from '../utils/px-to-rem'
+import { theme as colorTheme, Theme } from './theme'
 
 declare module '@mui/material/styles' {
 	interface TypographyVariants {

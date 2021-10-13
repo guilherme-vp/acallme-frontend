@@ -1,8 +1,10 @@
 import React from 'react'
+
 import { AppBar, Grid } from '@mui/material'
 import { Link } from 'react-router-dom'
 
 import { LanguagePicker } from 'components/LanguagePicker'
+
 import { Container, Content, Title, RightContent } from './Header.styled'
 
 export const HeaderTitle = () => (

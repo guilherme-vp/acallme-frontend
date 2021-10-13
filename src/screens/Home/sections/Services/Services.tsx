@@ -1,15 +1,15 @@
 import React from 'react'
+
 import { Grid, Typography } from '@mui/material'
 
-import { useIntl } from 'hooks'
-
 import heart from 'assets/icons/heart.png'
-import videoChat from 'assets/icons/video-chat.png'
 import schedule from 'assets/icons/schedule.png'
 import smiley from 'assets/icons/smiley.png'
+import videoChat from 'assets/icons/video-chat.png'
+import { useIntl } from 'hooks'
 
-import { FullPageSection } from '../../components/Section'
 import { Icon } from '../../components/Icon'
+import { FullPageSection } from '../../components/Section'
 import { ServicesModel } from './Services.models'
 
 export const services: ServicesModel[] = [

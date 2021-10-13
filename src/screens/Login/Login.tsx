@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { useIntl } from 'hooks'
+
 import { Grid, Button, IconButton } from '@mui/material'
-import { BiEnvelope } from 'react-icons/bi'
-import { useTheme } from 'styled-components'
 import { AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
+import { BiEnvelope } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
+import { useTheme } from 'styled-components'
+
+import { useIntl } from 'hooks'
 import { SIGNUP } from 'routes'
+
 import { DivLogin, ContainerLogin, Dados, DivButtonDados, DivInfo } from './Login.styled'
 
 export const Login = () => {

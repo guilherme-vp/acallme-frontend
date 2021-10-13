@@ -1,6 +1,9 @@
-import { Grid, Typography } from '@mui/material'
-import { useIntl } from 'hooks'
 import React from 'react'
+
+import { Grid, Typography } from '@mui/material'
+
+import { useIntl } from 'hooks'
+
 import { BoxContainer, BoxDivider, Description, SectionGrid } from './ContentBox.styled'
 
 export const ContentBox = () => {

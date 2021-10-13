@@ -1,13 +1,14 @@
 import React from 'react'
+
 import { Button, Grid, Hidden, Typography } from '@mui/material'
 
+import psychologistImage from 'assets/images/psychologist.png'
+import { ListGlow } from 'components/ListGlow'
 import { useIntl } from 'hooks'
 import { chunkArray } from 'utils/chunk-array'
-import { ListGlow } from 'components/ListGlow'
 
-import psychologistImage from 'assets/images/psychologist.png'
-import { FullPageSection } from '../../components/Section'
 import { Image } from '../../components/Image'
+import { FullPageSection } from '../../components/Section'
 
 export const About = () => {
 	const intl = useIntl()

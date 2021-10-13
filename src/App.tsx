@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react'
+
 import { useMediaQuery } from '@mui/material'
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
 import iziToast from 'izitoast'
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
+
+import { LOGIN, SIGNUP, HOME } from 'routes'
 import { Home } from 'screens/Home'
 import { Login } from 'screens/Login'
 import { SignUp } from 'screens/SignUp'
-import { LOGIN, SIGNUP, HOME } from 'routes'
-import { HomeLayout } from './layouts/Home'
+
 import { AuthLayout } from './layouts/Auth'
+import { HomeLayout } from './layouts/Home'
 import 'izitoast/dist/css/iziToast.min.css'
 
 iziToast.settings({

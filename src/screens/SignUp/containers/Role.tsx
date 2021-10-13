@@ -1,10 +1,13 @@
-import { Grid, Typography } from '@mui/material'
 import React from 'react'
-import { RolesEnum } from 'services/entities'
-import { CardButton } from 'components/CardButton'
-import { useIntl } from 'hooks'
+
+import { Grid, Typography } from '@mui/material'
+
 import patient from 'assets/images/signup-patient.png'
 import specialist from 'assets/images/signup-specialist.png'
+import { CardButton } from 'components/CardButton'
+import { useIntl } from 'hooks'
+import { RolesEnum } from 'services/entities'
+
 import { ChosenImage } from '../SignUp.styled'
 
 export interface RoleProps {

@@ -1,7 +1,9 @@
 import React from 'react'
+
 import { Typography, Grid } from '@mui/material'
-import { useIntl } from 'hooks'
+
 import { LanguagePicker } from 'components/LanguagePicker'
+import { useIntl } from 'hooks'
 
 export const Footer = () => {
 	const intl = useIntl()

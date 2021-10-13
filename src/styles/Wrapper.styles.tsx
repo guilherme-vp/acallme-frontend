@@ -1,10 +1,11 @@
 import React from 'react'
-import { ThemeProvider } from 'styled-components'
-import { ThemeProvider as MuiThemeProvider } from '@mui/system'
 
-import { theme } from './theme'
-import { materialTheme } from './material-theme'
+import { ThemeProvider as MuiThemeProvider } from '@mui/system'
+import { ThemeProvider } from 'styled-components'
+
 import { GlobalStyle } from './Global.styles'
+import { materialTheme } from './material-theme'
+import { theme } from './theme'
 
 export const StylesWrapper: React.FC = ({ children }) => (
 	<MuiThemeProvider theme={materialTheme}>

@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
-import { useMediaQuery, Theme, Typography, Hidden, Divider, Grid } from '@mui/material'
-import { useIntl } from 'hooks'
+
 import { Instagram, Facebook, Twitter } from '@mui/icons-material'
+import { useMediaQuery, Theme, Typography, Hidden, Divider, Grid } from '@mui/material'
 import { useTheme } from 'styled-components'
+
 import { LanguagePicker } from 'components/LanguagePicker'
+import { useIntl } from 'hooks'
 
 export const FooterHome = () => {
 	const theme = useTheme()
