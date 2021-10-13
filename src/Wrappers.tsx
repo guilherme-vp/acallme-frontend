@@ -1,11 +1,11 @@
 import React from 'react'
-import { IntlProvider } from 'react-intl/'
+
 import { LocalizationProvider } from '@mui/lab'
 import DateFnsUtils from '@mui/lab/AdapterDateFns'
+import { IntlProvider } from 'react-intl/'
 
 import { useStoreon } from './hooks'
 import { locales } from './locales'
-
 import { StylesWrapper } from './styles/Wrapper.styles'
 
 export const Wrappers: React.FC = ({ children }) => {

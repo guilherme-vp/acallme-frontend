@@ -1,6 +1,7 @@
 import { alpha, createTheme, ThemeOptions } from '@mui/material/styles'
-import { theme as colorTheme, Theme } from './theme'
+
 import { pxToRem } from '../utils/px-to-rem'
+import { theme as colorTheme, Theme } from './theme'
 
 declare module '@mui/material/styles' {
 	interface TypographyVariants {
@@ -97,16 +98,17 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 				root: {
 					textTransform: 'initial',
 					fontSize: pxToRem(14),
-					borderRadius: '25px'
+					borderRadius: '25px',
+					fontWeight: 600
 				},
 				contained: {
-					padding: '8px 22px'
+					padding: '8px 30px'
 				},
 				containedSizeSmall: {
 					padding: '6px 10px'
 				},
 				outlined: {
-					padding: '8px 16px',
+					padding: '6px 30px',
 					borderWidth: '2px !important'
 				},
 				text: {
@@ -160,24 +162,12 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 					borderRadius: 6,
 					border: `1px solid ${theme.border.thin}`,
 					fontSize: pxToRem(15),
-					marginTop: '0 !important',
-					'&.Mui-focused': {
-						borderColor: theme.border.darker
-					}
+					marginTop: '0 !important'
 				},
 				input: {
 					padding: '14px 16px 15px',
 					'&::placeholder': {
 						color: theme.grey.main
-					}
-				}
-			}
-		},
-		MuiInputBase: {
-			styleOverrides: {
-				root: {
-					'&.Mui-disabled': {
-						WebkitTextFillColor: null
 					}
 				}
 			}

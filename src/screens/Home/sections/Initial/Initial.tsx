@@ -1,12 +1,13 @@
 import React from 'react'
+
 import { Button, Grid, Hidden, Typography } from '@mui/material'
 
-import { useIntl } from 'hooks'
-import { ContentBox } from 'components/ContentBox'
 import doctorImage from 'assets/images/pointing-doctor.png'
+import { ContentBox } from 'components/ContentBox'
+import { useIntl } from 'hooks'
 
-import { FullPageSection } from '../../components/Section'
 import { Image } from '../../components/Image'
+import { FullPageSection } from '../../components/Section'
 
 export const Initial = () => {
 	const intl = useIntl()

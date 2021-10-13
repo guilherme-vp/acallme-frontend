@@ -41,6 +41,10 @@ export const GlobalStyle = createGlobalStyle`
 		color: ${props => props.theme.text.link};
 	}
 
+	form {
+		width: 100%;
+	}
+
 	.custom-scrollbar {
 		outline: none;
 		scrollbar-color: rgba(1, 1, 1, 0.06);

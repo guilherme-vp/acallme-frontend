@@ -1,8 +1,9 @@
 import React from 'react'
+
 import { Select, SelectChangeEvent } from '@mui/material'
 
-import { useIntl, useStoreon } from '../../hooks'
-import { AvailableLanguages, Locales } from '../../locales'
+import { useIntl, useStoreon } from 'hooks'
+import { AvailableLanguages, Locales } from 'locales'
 
 import { Item } from './LanguagePicker.styled'
 
@@ -17,7 +18,13 @@ export const LanguagePicker = () => {
 	}
 
 	return (
-		<Select onChange={handleChange} value={language} variant="outlined" sx={{ padding: 0 }}>
+		<Select
+			size="small"
+			onChange={handleChange}
+			value={language}
+			variant="outlined"
+			sx={{ padding: 0 }}
+		>
 			<Item disableRipple value={AvailableLanguages.ENGLISH} selected={language === 'en'}>
 				{intl.formatMessage({ id: 'en' })}
 			</Item>

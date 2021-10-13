@@ -1,8 +1,11 @@
 import React from 'react'
-import { AppBar } from '@mui/material'
+
+import { AppBar, Grid } from '@mui/material'
 import { Link } from 'react-router-dom'
 
-import { Container, Content, Title } from './Header.styled'
+import { LanguagePicker } from 'components/LanguagePicker'
+
+import { Container, Content, Title, RightContent } from './Header.styled'
 
 export const HeaderTitle = () => (
 	<AppBar position="fixed" style={{ border: 'none' }}>
@@ -12,6 +15,13 @@ export const HeaderTitle = () => (
 					<Title variant="h1">ACall Me</Title>
 				</Link>
 			</Content>
+			<RightContent>
+				<Grid container alignItems="center" justifyContent="flex-end">
+					<Grid item>
+						<LanguagePicker />
+					</Grid>
+				</Grid>
+			</RightContent>
 		</Container>
 	</AppBar>
 )

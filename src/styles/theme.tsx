@@ -4,10 +4,12 @@ export const theme = {
 	colors: {
 		primary: '#0e63f4',
 		secondary: '#4362BA',
-		darker: '#1D2B4E'
+		darker: '#1D2B4E',
+		alternative: '#F49F0E'
 	},
 	background: {
-		main: '#F8F9FE'
+		main: '#F8F9FE',
+		disabled: '#EFEFEF'
 	},
 	text: {
 		main: '#1D2B4E',
@@ -21,11 +23,13 @@ export const theme = {
 	},
 	tags: {
 		black: '#000000',
-		white: '#FFFFFF'
+		white: '#FFFFFF',
+		yellow: '#F49F0E'
 	},
 	border: {
 		thin: '#EBEFF2',
-		darker: '#E2E2EA'
+		darker: '#E2E2EA',
+		colored: '#F49F0E'
 	},
 	button: {
 		background: '#0e63f4',
