@@ -21,7 +21,7 @@ export const SessionDetails = () => {
 	return (
 		<Grid container item mt={3} justifyContent="center" spacing={2}>
 			<Grid container item justifyContent="space-between" xs={12} md={7} spacing={1}>
-				<Grid item xs={12} md>
+				<Grid item xs>
 					<Autocomplete
 						options={[hourOptions]}
 						defaultValue={hourOptions}
@@ -38,7 +38,7 @@ export const SessionDetails = () => {
 						)}
 					/>
 				</Grid>
-				<Grid item xs={12} md>
+				<Grid item xs>
 					<TextField
 						{...register('cost', {
 							required: true
