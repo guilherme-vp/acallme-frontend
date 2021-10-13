@@ -79,6 +79,21 @@ export const ptBrLocales = {
 		'A ACall Me te ajuda a enfrentar o distanciamento social te aproximando dos melhores especialistas para lidar com os problemas causados pela pandemia.',
 	'home.footer.copyright': 'Copyright © 2021 - Todos os direitos reservados por Vortechs.',
 
+	'login.title': 'Bem-Vindo!',
+	'login.description.0': 'Qual é Sua Função?',
+	'login.description.1': 'Insira suas Informações',
+	'login.option.username': 'Email ou CPF',
+	'login.option.username.placeholder': 'Ex: example@gmail.com ou 12345678910',
+	'login.option.username.specialist': 'Email, CPF ou CNPJ',
+	'login.option.username.specialist.placeholder':
+		'Ex: example@gmail.com, 12345678910 ou 12345678000190',
+	'login.option.password': 'Senha',
+	'login.a.forgetPassword': 'Esqueceu a senha?',
+	'login.submit': 'Entrar',
+	'login.dontHaveAnAccount': 'Não tem uma conta?',
+	'login.createAccount': 'Criar Conta!',
+	'login.error': 'Os dados enviados estão incorretos ou não existem',
+
 	'signup.title.0': 'Qual é Sua Função?',
 	'signup.title.1': 'Informações da Conta',
 	'signup.title.2': 'Informações Pessoais',
@@ -106,12 +121,6 @@ export const ptBrLocales = {
 	'signup.modal.success.description':
 		'Agora você pode fazer o quê é melhor para você e para sua saúde.',
 	'signup.modal.success.button': 'Começar!',
-
-	'login.welcome': 'Bem-Vindo!',
-	'login.option.password': 'Senha',
-	'login.a.forgetPassword': 'Esqueceu a senha?',
-	'login.submit': 'Entrar',
-	'login.createAccount': 'Criar conta',
 
 	en: 'Inglês',
 	'pt-BR': 'Português'
