@@ -18,7 +18,6 @@ export const Content = styled(Grid)`
 
 	@media only screen and (max-width: 600px) {
 		width: 100%;
-		min-height: 100vh;
 		border-radius: 0;
 		margin: 0;
 		padding: 60px 15px;
