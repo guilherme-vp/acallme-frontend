@@ -28,10 +28,9 @@ export type PersonalForm = Pick<User, 'name' | 'birth' | 'phone' | 'gender'> & {
 
 export type AccountForm = Pick<Specialist, 'email' | 'password' | 'cpf' | 'cnpj'>
 
-export type ProfessionalForm = Pick<
-	Specialist,
-	'about' | 'crm' | 'crp' | 'specialties' | 'location'
->
+export type ProfessionalForm = Pick<Specialist, 'about' | 'crm' | 'crp' | 'location'> & {
+	specialties: string[]
+}
 
 export interface SessionForm {
 	cost: number
@@ -72,9 +71,9 @@ export const SignUp = () => {
 		const professionalValues = professionalMethods.getValues()
 		const sessionValues = sessionMethods.getValues()
 
-		if (chosen === RolesEnum.Patient) {
-			console.log('send ')
-		}
+		console.log(personalValues, accountValues, professionalValues, sessionValues)
+
+		setOpenModal(true)
 	}
 
 	const buttonMessage = ((): string => {
@@ -86,7 +85,7 @@ export const SignUp = () => {
 			return intl.formatMessage({ id: 'signup.choose.next' })
 		}
 
-		if (step === 5) {
+		if (step === 4) {
 			return intl.formatMessage({ id: 'signup.choose.next.last' })
 		}
 
@@ -131,7 +130,7 @@ export const SignUp = () => {
 
 		if (step === 2 && personalMethods.formState.isValid) {
 			if (chosen === RolesEnum.Patient) {
-				return
+				return handleSubmit()
 			}
 
 			return setStep(step + 1)
@@ -141,12 +140,7 @@ export const SignUp = () => {
 			return setStep(step + 1)
 		}
 		if (step === 4 && sessionMethods.formState.isValid) {
-			console.log(chosen)
-			console.log(accountMethods.watch)
-			console.log(personalMethods.watch)
-			console.log(professionalMethods.watch)
-			console.log(sessionMethods.watch)
-			setOpenModal(true)
+			return handleSubmit()
 		}
 
 		iziToast.error({
@@ -224,7 +218,7 @@ export const SignUp = () => {
 					</Grid>
 				</Grid>
 			</Grid>
-			<SuccessModal open={openModal} onClose={() => console.log('clicked')} />
+			<SuccessModal open={openModal} onClose={() => setOpenModal(false)} />
 		</form>
 	)
 }
