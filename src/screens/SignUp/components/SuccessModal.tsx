@@ -29,7 +29,7 @@ export const SuccessModal = ({ onClose, open }: SuccessProps) => {
 					<SuccessStar sx={{ fontSize: '10rem', color: theme.tags.yellow }} />
 				</Grid>
 				<Grid container item justifyContent="center">
-					<Typography textAlign="center" variant="display2" fontWeight={600}>
+					<Typography textAlign="center" variant="display2" fontWeight={700}>
 						{intl.formatMessage({ id: 'signup.modal.success.title' })}
 					</Typography>
 				</Grid>
