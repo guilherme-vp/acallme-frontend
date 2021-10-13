@@ -94,7 +94,7 @@ export const enLocales: ILocale = {
 	'login.submit': 'Login',
 	'login.dontHaveAnAccount': `Don't have an account?`,
 	'login.createAccount': 'Create Account',
-	'login.error': 'The given user is wrong or does not exist',
+	'login.error': 'The given user and password are incorrect or it does not exist',
 
 	'signup.title.0': `What's your Role?`,
 	'signup.title.1': 'Account Information',

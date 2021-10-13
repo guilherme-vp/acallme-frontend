@@ -92,7 +92,7 @@ export const ptBrLocales = {
 	'login.submit': 'Entrar',
 	'login.dontHaveAnAccount': 'Não tem uma conta?',
 	'login.createAccount': 'Criar Conta!',
-	'login.error': 'Os dados enviados estão incorretos ou não existem',
+	'login.error': 'Os dados enviados estão incorretos ou o usuário não existe',
 
 	'signup.title.0': 'Qual é Sua Função?',
 	'signup.title.1': 'Informações da Conta',
