@@ -28,14 +28,14 @@ import { ImageAvatar, ImageSelector, PhotoContainer } from '../SignUp.styled'
 export const PersonalInformation = () => {
 	const intl = useIntl()
 	const [avatar, setAvatar] = useState<string>()
-	const [_, setAvatarFile] = useState<File>()
+	const [, setAvatarFile] = useState<File>()
 	const { register, setValue, watch } = useFormContext<PersonalForm>()
 	const isSmDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'))
 
 	const maxDate = datefns.subYears(new Date(), 18)
 	const minDate = datefns.subYears(new Date(), 90)
 
-	const { birth } = watch()
+	const { birth, gender } = watch()
 
 	const onDrop = useCallback(([file], [error]) => {
 		if (file) {
@@ -109,7 +109,7 @@ export const PersonalInformation = () => {
 						<FormLabel component="legend">
 							{capitalizeLetter(intl.formatMessage({ id: 'gender' }))}*
 						</FormLabel>
-						<RadioGroup row>
+						<RadioGroup row value={gender}>
 							<FormControlLabel
 								value={GenderEnum.F}
 								control={<Radio {...register('gender', { required: true })} />}
