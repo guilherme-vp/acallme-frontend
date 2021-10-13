@@ -51,7 +51,7 @@
 		"react/react-in-jsx-scope": "off",
 		"class-methods-use-this": "off",
 		"no-useless-constructor": "off",
-		"no-unused-vars": "off",
+		"no-unused-vars": "warn",
 		"no-extra-parens": "off",
 		"react/jsx-filename-extension": [
 			1,
@@ -153,6 +153,35 @@
 		"@typescript-eslint/explicit-member-accessibility": "off",
 		"@typescript-eslint/explicit-module-boundary-types": "off",
 		"prettier/prettier": "error",
+		"import/no-cycle": "warn",
+		"import/order": [
+			"error",
+			{
+				"groups": [
+					"builtin",
+					"external",
+					"internal"
+				],
+				"pathGroups": [
+					{
+						"pattern": "react",
+						"group": "builtin",
+						"position": "before"
+					},
+					{
+						"pattern": "@/**",
+						"group": "external"
+					}
+				],
+				"pathGroupsExcludedImportTypes": [
+					"builtin"
+				],
+				"newlines-between": "always",
+				"alphabetize": {
+					"order": "asc"
+				}
+			}
+		],
 		"import/extensions": [
 			"error",
 			"ignorePackages",
