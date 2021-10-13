@@ -5,7 +5,7 @@ import { LoadingButton } from '@mui/lab'
 import { Grid, Button, Typography } from '@mui/material'
 import iziToast from 'izitoast'
 import { FormProvider, useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useTheme } from 'styled-components'
 
 import { useIntl } from 'hooks'
@@ -38,6 +38,7 @@ export interface SessionForm {
 
 export const SignUp = () => {
 	const intl = useIntl()
+	const history = useHistory()
 	const [step, setStep] = useState(0)
 	const [chosen, setChosen] = useState<RolesEnum>()
 	const [openModal, setOpenModal] = useState(false)
@@ -72,6 +73,7 @@ export const SignUp = () => {
 		const sessionValues = sessionMethods.getValues()
 
 		console.log(personalValues, accountValues, professionalValues, sessionValues)
+		history.push(LOGIN)
 
 		setOpenModal(true)
 	}
