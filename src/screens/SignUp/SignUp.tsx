@@ -9,16 +9,17 @@ import { Link, useHistory } from 'react-router-dom'
 import { useTheme } from 'styled-components'
 
 import { useIntl } from 'hooks'
+import { ChoseRole } from 'parts/ChoseRole'
 import { LOGIN } from 'routes'
 import { RolesEnum, User, Specialist } from 'services/entities'
 import { capitalizeLetter } from 'utils/capitalize-letter'
 
+import { StyledForm } from './SignUp.styled'
 import { SuccessModal } from './components/SuccessModal'
 import {
 	AccountInformation,
 	PersonalInformation,
 	ProfessionalInformation,
-	Role,
 	SessionDetails
 } from './containers'
 
@@ -151,8 +152,8 @@ export const SignUp = () => {
 	}
 
 	return (
-		<form noValidate onSubmit={e => e.preventDefault()}>
-			<Grid container item xs={12} justifyContent="center">
+		<StyledForm noValidate onSubmit={e => e.preventDefault()}>
+			<Grid container item xs={12} md={10} justifyContent="center">
 				<Grid item xs={12} sx={{ textAlign: 'center' }}>
 					<Typography
 						align="center"
@@ -164,7 +165,7 @@ export const SignUp = () => {
 					</Typography>
 				</Grid>
 				{step === 0 ? (
-					<Role roleChosen={chosen} handleClick={handleChoseRole} />
+					<ChoseRole roleChosen={chosen} handleClick={handleChoseRole} />
 				) : step === 1 ? (
 					<FormProvider {...accountMethods}>
 						<AccountInformation role={chosen} />
@@ -212,7 +213,7 @@ export const SignUp = () => {
 							{capitalizeLetter(buttonMessage)}
 						</LoadingButton>
 					</Grid>
-					<Grid item xs={12} mt={2}>
+					<Grid item xs={12} mt={4}>
 						<Typography variant="h5" textAlign="center">
 							{intl.formatMessage({ id: 'signup.alreadyHaveAccount' })}{' '}
 							<Link to={LOGIN}>{intl.formatMessage({ id: 'signup.login' })}</Link>
@@ -221,7 +222,7 @@ export const SignUp = () => {
 				</Grid>
 			</Grid>
 			<SuccessModal open={openModal} onClose={() => setOpenModal(false)} />
-		</form>
+		</StyledForm>
 	)
 }
 
