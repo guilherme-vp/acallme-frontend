@@ -90,6 +90,11 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 		}
 	},
 	components: {
+		MuiTypography: {
+			defaultProps: {
+				color: theme.text.main
+			}
+		},
 		MuiButton: {
 			defaultProps: {
 				disableElevation: true
@@ -98,7 +103,8 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 				root: {
 					textTransform: 'initial',
 					fontSize: pxToRem(14),
-					borderRadius: '25px'
+					borderRadius: '25px',
+					fontWeight: 600
 				},
 				contained: {
 					padding: '8px 30px'

@@ -23,7 +23,8 @@ export const theme = {
 	},
 	tags: {
 		black: '#000000',
-		white: '#FFFFFF'
+		white: '#FFFFFF',
+		yellow: '#F49F0E'
 	},
 	border: {
 		thin: '#EBEFF2',
