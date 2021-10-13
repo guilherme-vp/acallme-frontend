@@ -88,7 +88,7 @@ export const Modal = ({
 		{...dialogProps}
 	>
 		{!onlyContent && (
-			<DialogTitle style={{ paddingTop: showCloseButton ? 30 : undefined }}>
+			<DialogTitle style={{ paddingTop: showCloseButton ? 24 : undefined }}>
 				<Box
 					sx={{
 						display: 'flex',
@@ -130,66 +130,68 @@ export const Modal = ({
 					</DialogContentText>
 				</DialogContent>
 			))}
-		{footer && !onlyContent && (
-			<DialogActions>
-				{(typeof footer === 'boolean' || (footer as FooterProps).cancelButton) && (
-					<Button
-						fullWidth
-						onClick={
-							onCancel
-								? customOnCancel
-									? onCancel
-									: e => {
-											onCancel(e)
-											if (closeOnCancel) onClose()
-									  }
-								: onClose
-						}
-						disabled={okLoading}
-						variant="contained"
-						color="secondary"
-						{...buttonProps}
-						{...cancelButtonProps}
-						style={{
-							minWidth: 100,
-							width: 'fit-content',
-							...buttonProps?.style,
-							...cancelButtonProps?.style
-						}}
-					>
-						{cancelText}
-					</Button>
-				)}
-				{(typeof footer === 'boolean' || (footer as FooterProps).finishButton) && (
-					<LoadingButton
-						disabled={onOkDisabled}
-						onClick={
-							onOk
-								? customOnOk
-									? onOk
-									: e => {
-											onOk(e)
-											if (closeOnOk) onClose()
-									  }
-								: onClose
-						}
-						loading={okLoading}
-						fullWidth
-						variant="contained"
-						{...buttonProps}
-						{...okButtonProps}
-						style={{
-							minWidth: 100,
-							width: 'fit-content',
-							...buttonProps?.style,
-							...okButtonProps?.style
-						}}
-					>
-						{okText}
-					</LoadingButton>
-				)}
-			</DialogActions>
-		)}
+		<DialogActions>
+			{footer && !onlyContent && (
+				<>
+					{(typeof footer === 'boolean' || (footer as FooterProps).cancelButton) && (
+						<Button
+							fullWidth
+							onClick={
+								onCancel
+									? customOnCancel
+										? onCancel
+										: e => {
+												onCancel(e)
+												if (closeOnCancel) onClose()
+										  }
+									: onClose
+							}
+							disabled={okLoading}
+							variant="contained"
+							color="secondary"
+							{...buttonProps}
+							{...cancelButtonProps}
+							style={{
+								minWidth: 100,
+								width: 'fit-content',
+								...buttonProps?.style,
+								...cancelButtonProps?.style
+							}}
+						>
+							{cancelText}
+						</Button>
+					)}
+					{(typeof footer === 'boolean' || (footer as FooterProps).finishButton) && (
+						<LoadingButton
+							disabled={onOkDisabled}
+							onClick={
+								onOk
+									? customOnOk
+										? onOk
+										: e => {
+												onOk(e)
+												if (closeOnOk) onClose()
+										  }
+									: onClose
+							}
+							loading={okLoading}
+							fullWidth
+							variant="contained"
+							{...buttonProps}
+							{...okButtonProps}
+							style={{
+								minWidth: 100,
+								width: 'fit-content',
+								...buttonProps?.style,
+								...okButtonProps?.style
+							}}
+						>
+							{okText}
+						</LoadingButton>
+					)}
+				</>
+			)}
+		</DialogActions>
 	</Dialog>
 )
 
