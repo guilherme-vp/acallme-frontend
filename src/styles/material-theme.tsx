@@ -90,11 +90,6 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 		}
 	},
 	components: {
-		MuiTypography: {
-			defaultProps: {
-				color: theme.text.main
-			}
-		},
 		MuiButton: {
 			defaultProps: {
 				disableElevation: true
