@@ -8,24 +8,26 @@ import { CardButton } from 'components/CardButton'
 import { useIntl } from 'hooks'
 import { RolesEnum } from 'services/entities'
 
-import { ChosenImage } from '../SignUp.styled'
+import { ChosenImage } from '../../screens/SignUp/SignUp.styled'
 
 export interface RoleProps {
 	roleChosen?: RolesEnum
 	handleClick: (role: RolesEnum) => void
+	cardSize?: 'small' | 'large'
 }
 
-export const Role = ({ roleChosen, handleClick }: RoleProps) => {
+export const ChoseRole = ({ roleChosen, handleClick, cardSize }: RoleProps) => {
 	const intl = useIntl()
 
 	return (
-		<Grid container justifyContent="center" mt={3} spacing={2}>
-			<Grid container item xs={12} md={5}>
+		<Grid container item justifyContent="center" mt={3} spacing={2}>
+			<Grid container item xs={12} sm={5}>
 				<CardButton
 					fullWidth
 					variant="outlined"
 					selected={roleChosen === RolesEnum.Patient}
 					onClick={() => handleClick(RolesEnum.Patient)}
+					size={cardSize}
 				>
 					<ChosenImage src={patient} alt="patient-option" />
 					<Typography variant="h4">
@@ -33,13 +35,14 @@ export const Role = ({ roleChosen, handleClick }: RoleProps) => {
 					</Typography>
 				</CardButton>
 			</Grid>
-			<Grid container item xs={12} md={5}>
+			<Grid container item xs={12} sm={5}>
 				<CardButton
 					fullWidth
 					variant="outlined"
 					color="success"
 					selected={roleChosen === RolesEnum.Specialist}
 					onClick={() => handleClick(RolesEnum.Specialist)}
+					size={cardSize}
 				>
 					<ChosenImage src={specialist} alt="specialist-option" />
 					<Typography variant="h4">
@@ -51,4 +54,4 @@ export const Role = ({ roleChosen, handleClick }: RoleProps) => {
 	)
 }
 
-export default Role
+export default ChoseRole
