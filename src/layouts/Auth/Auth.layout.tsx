@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Grid, Divider, Toolbar } from '@mui/material'
+import { Grid, Toolbar } from '@mui/material'
 
 import { Copyright } from 'parts/Copyright'
 import { HeaderTitle } from 'parts/Header'
