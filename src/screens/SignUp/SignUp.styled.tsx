@@ -1,5 +1,6 @@
-import { Avatar, Box } from '@mui/material'
 import styled from 'styled-components'
+
+import { Avatar, Box } from '@mui/material'
 
 export const StyledForm = styled.form`
 	display: flex;

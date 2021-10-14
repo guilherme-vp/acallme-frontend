@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { Grid, Typography, Button } from '@mui/material'
 import { useTheme } from 'styled-components'
+
+import { Grid, Typography, Button } from '@mui/material'
 
 import { SuccessStar } from 'assets/icons/SuccessStar'
 import { useIntl } from 'hooks'
