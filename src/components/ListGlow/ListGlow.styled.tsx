@@ -1,5 +1,6 @@
-import { alpha } from '@mui/material/styles'
 import styled from 'styled-components'
+
+import { alpha } from '@mui/material/styles'
 
 export const ListGlow = styled.ul`
 	list-style: none;
@@ -7,7 +8,7 @@ export const ListGlow = styled.ul`
 	li {
 		margin-bottom: 20px;
 		&::before {
-			content: '';
+			content: '" "';
 			display: inline-block;
 			width: 7px;
 			height: 7px;
