@@ -1,0 +1,186 @@
+/* eslint-disable react/jsx-wrap-multilines */
+import React, { useRef, useState } from 'react'
+
+import {
+	List,
+	Badge,
+	Divider,
+	IconButton,
+	Typography,
+	ListSubheader,
+	Grid
+} from '@mui/material'
+import {
+	MdNotifications as FilledBell,
+	MdNotificationsNone as OutlinedBell
+} from 'react-icons/md'
+import { useHistory } from 'react-router'
+
+import { MenuPopover } from 'components/MenuPopover'
+import { NotificationItem } from 'components/NotificationItem'
+import { Scrollbar } from 'components/Scrollbar'
+import { useIntl } from 'hooks'
+import { VIDEOCALL } from 'routes'
+import { Notification } from 'services/entities'
+import { capitalizeLetter } from 'utils/capitalize-letter'
+
+import { NOTIFICATIONS } from './Notifications.mock'
+
+export const NotificationsPopover = () => {
+	const history = useHistory()
+	const intl = useIntl()
+	const anchorRef = useRef(null)
+	const [open, setOpen] = useState(false)
+	const [notifications, setNotifications] = useState<Notification[]>(NOTIFICATIONS)
+	const sortedNotifications = notifications.sort((a, b) => {
+		if (a.type === 'appointment_call' && !a.isFinished) {
+			return -1
+		}
+
+		if (a.createdAt > b.createdAt) {
+			return -1
+		}
+		return 1
+	})
+	const unReadNotifications = sortedNotifications.filter(
+		({ isUnRead }) => isUnRead === true
+	)
+	const readNotifications = sortedNotifications.filter(({ isUnRead }) => isUnRead === false)
+	const totalUnRead = unReadNotifications.length
+	const totalRead = readNotifications.length
+
+	const handleMarkAllAsRead = () => {
+		setNotifications(
+			notifications.map(notification => ({
+				...notification,
+				isUnRead: false
+			}))
+		)
+	}
+
+	const handleOpen = () => {
+		setOpen(true)
+	}
+
+	const handleClose = () => {
+		setOpen(false)
+		handleMarkAllAsRead()
+	}
+
+	const handleConfirm = (notificationId: string, appointmentId: number) => {
+		const notificationIndex = notifications.findIndex(({ id }) => id === notificationId)
+		const newNotifications = [...notifications]
+
+		newNotifications[notificationIndex] = {
+			...newNotifications[notificationIndex],
+			isConfirmed: true
+		}
+
+		setNotifications([...newNotifications])
+		// TODO: update in backend
+	}
+
+	const handleReject = (notificationId: string, appointmentId: number) => {
+		const notificationIndex = notifications.findIndex(({ id }) => id === notificationId)
+		const newNotifications = [...notifications]
+
+		newNotifications[notificationIndex] = {
+			...newNotifications[notificationIndex],
+			isConfirmed: false
+		}
+
+		setNotifications([...newNotifications])
+		// TODO: update in backend
+	}
+
+	const handleEnter = (notificationId: string, appointmentId: number) => {
+		history.push(`/${VIDEOCALL}/${appointmentId}`)
+	}
+
+	return (
+		<>
+			<IconButton ref={anchorRef} size="large" color="primary" onClick={handleOpen}>
+				<Badge color="error" badgeContent={totalUnRead} max={5}>
+					{totalUnRead > 0 ? <FilledBell /> : <OutlinedBell />}
+				</Badge>
+			</IconButton>
+
+			<MenuPopover
+				open={open}
+				onClose={handleClose}
+				anchorEl={anchorRef.current}
+				sx={{ width: 360 }}
+			>
+				<Grid container alignItems="center" px={2} py={2}>
+					<Grid item xs={12} flexGrow={1}>
+						<Typography variant="subtitle1">
+							{capitalizeLetter(intl.formatMessage({ id: 'notification' }, { length: 2 }))}
+						</Typography>
+						<Typography variant="body2" sx={{ color: 'text.secondary' }}>
+							{totalUnRead === 0
+								? intl.formatMessage({ id: 'notifications.noNew' })
+								: intl.formatMessage(
+										{ id: 'notifications.totalUnRead' },
+										{ length: totalUnRead }
+								  )}
+						</Typography>
+					</Grid>
+				</Grid>
+
+				<Divider />
+
+				<Scrollbar sx={{ maxHeight: { xs: 400 } }}>
+					{totalUnRead > 0 && (
+						<List
+							disablePadding
+							subheader={
+								<ListSubheader
+									disableSticky
+									sx={{ pt: 1, px: 2.5, typography: 'overline' }}
+								>
+									{intl.formatMessage({ id: 'notifications.new.title' })}
+								</ListSubheader>
+							}
+						>
+							{unReadNotifications.map(notification => (
+								<NotificationItem
+									key={notification.id}
+									notification={notification}
+									handleConfirm={handleConfirm}
+									handleEnter={handleEnter}
+									handleReject={handleReject}
+								/>
+							))}
+						</List>
+					)}
+
+					{totalRead > 0 && (
+						<List
+							disablePadding
+							subheader={
+								<ListSubheader
+									disableSticky
+									sx={{ pt: 1, px: 2.5, typography: 'overline' }}
+								>
+									{intl.formatMessage({ id: 'notifications.old.title' })}
+								</ListSubheader>
+							}
+						>
+							{readNotifications.map(notification => (
+								<NotificationItem
+									key={notification.id}
+									notification={notification}
+									handleConfirm={handleConfirm}
+									handleEnter={handleEnter}
+									handleReject={handleReject}
+								/>
+							))}
+						</List>
+					)}
+				</Scrollbar>
+			</MenuPopover>
+		</>
+	)
+}
+
+export default NotificationsPopover
