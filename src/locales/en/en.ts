@@ -28,6 +28,7 @@ export const enLocales: ILocale = {
 	birthDate: 'date of birth',
 	phone: 'phone',
 	start: 'start',
+	notification: '{length, plural, =1 {notification} other {notifications}}',
 
 	'home.title': 'Home',
 	'home.header.home': 'Home',
@@ -122,6 +123,28 @@ export const enLocales: ILocale = {
 	'signup.modal.success.description':
 		'Now you can do what is better for your like and health',
 	'signup.modal.success.button': 'Start Now!',
+
+	'notifications.new.title': 'New Notifications',
+	'notifications.old.title': 'Read Notifications',
+	'notifications.noNew': `You don't have any new notifications`,
+	'notifications.totalUnRead':
+		'You have {length} not read {length, plural, =1 {notification} other {notifications}}',
+	'notification.newAppointment.title': 'New Appointment',
+	'notification.newAppointment.description':
+		'{name} scheduled an appointment with you at {date}. Do you want to confirm it?',
+	'notification.confirmedAppointment.description.specialist':
+		'You confirmed this appointment',
+	'notification.rejectedAppointment.description.specialist':
+		'You rejected this appointment',
+	'notification.confirmedAppointment.title': 'Appointment Confirmed',
+	'notification.confirmedAppointment.description':
+		'Your appointment at {date} was confirmed',
+	'notification.rejectedAppointment.title': 'Appointment Rejected',
+	'notification.rejectedAppointment.description':
+		'Unfortunately, your appointment with {name} was rejected',
+	'notification.callAppointment.title': 'Appointment Call',
+	'notification.callAppointment.description': 'Your appointment is happening now. Enter?',
+	'notification.callAppointment.description.ended': 'This appointment already ended',
 
 	// Languages
 	en: 'English',

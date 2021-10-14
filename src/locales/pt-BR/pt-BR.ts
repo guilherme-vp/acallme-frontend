@@ -26,6 +26,7 @@ export const ptBrLocales = {
 	birthDate: 'data de nascimento',
 	phone: 'telefone',
 	start: 'começar',
+	notification: '{length, plural, =1 {notificação} other {notificações}}',
 
 	'home.title': 'Home',
 	'home.header.home': 'Home',
@@ -121,6 +122,27 @@ export const ptBrLocales = {
 	'signup.modal.success.description':
 		'Agora você pode fazer o quê é melhor para você e para sua saúde.',
 	'signup.modal.success.button': 'Começar!',
+
+	'notifications.new.title': 'Novas Notificações',
+	'notifications.old.title': 'Notificações Lidas',
+	'notifications.noNew': 'Você não tem nenhuma notificação nova',
+	'notifications.totalUnRead':
+		'Você tem {length} {length, plural, =1 {notificação não lida} other {notificações não lidas}}',
+	'notification.newAppointment.title': 'Nova Consulta',
+	'notification.newAppointment.description':
+		'{name} agendou uma consulta com você as {date}. Você quer confirmar essa consulta?',
+	'notification.confirmedAppointment.title': 'Consulta Confirmada',
+	'notification.confirmedAppointment.description.specialist':
+		'Você confirmou essa consulta',
+	'notification.rejectedAppointment.description.specialist': 'Você rejeitou essa consulta',
+	'notification.confirmedAppointment.description': 'Sua consulta em {date} foi confirmada',
+	'notification.rejectedAppointment.title': 'Consulta Rejeitada',
+	'notification.rejectedAppointment.description':
+		'Infelizmente, sua consulta com {name} foi rejeitada',
+	'notification.callAppointment.title': 'Chamada',
+	'notification.callAppointment.description':
+		'Sua consulta está ocorrendo agora! Você quer entrar na chamada?',
+	'notification.callAppointment.description.ended': 'Essa consulta já se encerrou',
 
 	en: 'Inglês',
 	'pt-BR': 'Português'
