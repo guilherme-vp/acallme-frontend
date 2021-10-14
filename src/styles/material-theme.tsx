@@ -172,6 +172,13 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 				}
 			}
 		},
+		MuiListItem: {
+			styleOverrides: {
+				root: {
+					padding: '8px 20px'
+				}
+			}
+		},
 		MuiMenuItem: {
 			styleOverrides: {
 				root: {
