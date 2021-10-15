@@ -1,6 +1,9 @@
 import React from 'react'
-import AppWrappers from '../src/Wrappers'
+import { IntlProvider } from 'react-intl'
+
+import { locales } from '../src/locales'
 import { theme } from '../src/styles/theme'
+import { StylesWrapper } from '../src/styles/Wrapper.styles'
 
 export const parameters = {
 	actions: { argTypesRegex: '^on[A-Z].*' },
@@ -16,8 +19,10 @@ export const parameters = {
 }
 export const decorators = [
 	Story => (
-		<AppWrappers>
-			<Story />
-		</AppWrappers>
+		<StylesWrapper>
+			<IntlProvider locale="en" defaultLocale="en" messages={locales['en']}>
+				<Story />
+			</IntlProvider>
+		</StylesWrapper>
 	)
 ]
