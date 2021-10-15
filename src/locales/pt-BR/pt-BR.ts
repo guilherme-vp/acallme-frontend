@@ -157,6 +157,7 @@ export const ptBrLocales = {
 	'notification.callAppointment.description.ended': 'Essa consulta já se encerrou',
 
 	// Dashboard
+	'dashboard.welcome': 'Bem-vindo(a), {name}!',
 	'dashboard.card.book': 'Agendar Consulta',
 
 	en: 'Inglês',

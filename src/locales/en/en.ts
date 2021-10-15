@@ -159,6 +159,7 @@ export const enLocales: ILocale = {
 	'notification.callAppointment.description.ended': 'This appointment already ended',
 
 	// Dashboard
+	'dashboard.welcome': 'Bem-vindo(a), {name}!',
 	'dashboard.card.book': 'Book Consultation',
 
 	// Languages
