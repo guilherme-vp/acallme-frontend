@@ -28,6 +28,7 @@ export const ptBrLocales = {
 	start: 'começar',
 	notification: '{length, plural, =1 {notificação} other {notificações}}',
 	general: 'geral',
+	sort: 'Ordenar por:',
 
 	// Home
 	'home.title': 'Home',
@@ -159,6 +160,9 @@ export const ptBrLocales = {
 	// Dashboard
 	'dashboard.welcome': 'Bem-vindo(a), {name}!',
 	'dashboard.card.book': 'Agendar Consulta',
+	'dashboard.forYou': 'Melhores para Você',
+	'dashboard.findTheBest':
+		'Encontre o melhor especialista para você! Nossos profissionais irão te ajudar a encontrar a melhor decisão para resolver seus problemas!',
 
 	en: 'Inglês',
 	'pt-BR': 'Português'

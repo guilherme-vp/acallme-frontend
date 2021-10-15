@@ -30,6 +30,7 @@ export const enLocales: ILocale = {
 	start: 'start',
 	notification: '{length, plural, =1 {notification} other {notifications}}',
 	general: 'general',
+	sort: 'Sort by:',
 
 	// Home
 	'home.title': 'Home',
@@ -161,6 +162,9 @@ export const enLocales: ILocale = {
 	// Dashboard
 	'dashboard.welcome': 'Bem-vindo(a), {name}!',
 	'dashboard.card.book': 'Book Consultation',
+	'dashboard.forYou': 'Best for You',
+	'dashboard.findTheBest':
+		'Find the best specialist for yourself! Our professionals will help you to find the best decisions for solving your problems!',
 
 	// Languages
 	en: 'English',
