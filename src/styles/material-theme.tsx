@@ -96,7 +96,7 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 			},
 			styleOverrides: {
 				root: {
-					textTransform: 'initial',
+					textTransform: 'capitalize',
 					fontSize: pxToRem(14),
 					borderRadius: '25px',
 					fontWeight: 600
@@ -139,7 +139,6 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 		MuiChip: {
 			styleOverrides: {
 				root: {
-					backgroundColor: alpha(theme.background.calm, 0.2),
 					height: 24,
 					'&:hover': {
 						backgroundColor: alpha(theme.colors.primary, 0.2)
@@ -147,10 +146,10 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 				},
 				sizeSmall: {
 					fontWeight: 500,
-					padding: '5px'
+					padding: '5px 10px'
 				},
 				label: {
-					fontSize: pxToRem(10)
+					fontSize: pxToRem(12)
 				},
 				deleteIconColorPrimary: {
 					color: theme.colors.primary,
