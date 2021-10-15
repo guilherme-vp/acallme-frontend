@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-wrap-multilines */
 import React from 'react'
 
-import { ListItem, ListItemIcon, Tooltip, Typography } from '@mui/material'
+import { ListItem, ListItemIcon, Tooltip, Typography, useMediaQuery } from '@mui/material'
+import { Theme } from '@mui/system'
 
 import { useIntl } from 'hooks'
 
@@ -27,6 +28,7 @@ export const SidebarOption = ({
 	const intl = useIntl()
 	const linkTab = link.split('/')[1] || ''
 	const isSelected = actualTab === linkTab
+	const isMdDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'))
 
 	const tab = (
 		<MenuTab
@@ -34,7 +36,7 @@ export const SidebarOption = ({
 			icon={
 				<ListItem>
 					<ListItemIcon>{icon}</ListItemIcon>
-					{open && (
+					{(open || isMdDown) && (
 						<Typography
 							variant="body2"
 							sx={{ textTransform: 'capitalize' }}
