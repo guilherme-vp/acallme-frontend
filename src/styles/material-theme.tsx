@@ -217,6 +217,36 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 					}
 				}
 			}
+		},
+		MuiDrawer: {
+			styleOverrides: {
+				paper: {
+					borderRight: 0,
+					backgroundColor: theme.background.light
+				}
+			}
+		},
+		MuiTab: {
+			styleOverrides: {
+				root: {
+					paddingTop: 0,
+					paddingBottom: 0,
+					fontSize: pxToRem(14),
+					color: theme.text.main,
+					transition: 'all 0.3s linear',
+					borderTopRightRadius: '16px',
+					borderBottomRightRadius: '16px',
+					fontWeight: 500,
+					'&:hover': {
+						backgroundColor: alpha(theme.grey.secondary, 0.4)
+					},
+					'&.Mui-selected': {
+						fontWeight: 700,
+						color: theme.colors.primary,
+						backgroundColor: alpha(theme.colors.primary, 0.1)
+					}
+				}
+			}
 		}
 	}
 })
