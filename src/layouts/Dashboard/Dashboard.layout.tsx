@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Grid, Hidden, SwipeableDrawer, Toolbar } from '@mui/material'
+import { Hidden, SwipeableDrawer, Toolbar } from '@mui/material'
 import {
 	MdChevronLeft as ArrowCloseIcon,
 	MdChevronRight as ArrowOpenIcon
@@ -30,9 +30,14 @@ export const DashboardLayout: React.FC = ({ children }) => {
 
 	return (
 		<S.DashboardContainer>
-			<HeaderLogged />
+			<HeaderLogged openDrawer={() => handleOpen()} />
 			<Hidden mdUp>
-				<SwipeableDrawer open={open} onOpen={handleOpen} onClose={handleClose}>
+				<SwipeableDrawer
+					open={open}
+					onOpen={handleOpen}
+					onClose={handleClose}
+					SlideProps={{ style: { width: '240px' } }}
+				>
 					<Sidebar onClose={handleClose} open={open} />
 				</SwipeableDrawer>
 			</Hidden>

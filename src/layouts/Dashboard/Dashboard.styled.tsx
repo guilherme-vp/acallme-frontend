@@ -72,8 +72,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
 	transition: theme.transitions.create('width', {
 		duration: theme.transitions.duration.leavingScreen
 	}),
-	overflowX: 'hidden',
-	width: 100
+	overflowX: 'hidden'
 })
 
 export const Drawer = muiStyled(MuiDrawer, { shouldForwardProp: prop => prop !== 'open' })(
