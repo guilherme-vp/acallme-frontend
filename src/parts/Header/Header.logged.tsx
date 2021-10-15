@@ -11,10 +11,10 @@ export const HeaderLogged = () => (
 	// const { user } = useStoreon('user')
 	// const [firstName, lastName] = (user?.name as string).split(' ')
 
-	<AppBar style={{ border: 'none' }}>
+	<AppBar sx={{ border: 'none' }}>
 		<Container>
-			<Grid container justifyContent="flex-end" spacing={2}>
-				<Grid item>
+			<Grid container justifyContent="flex-end" alignItems="center">
+				<Grid item mr={2}>
 					<NotificationsPopover />
 				</Grid>
 				<Grid item>
