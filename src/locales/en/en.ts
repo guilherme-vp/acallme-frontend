@@ -31,6 +31,7 @@ export const enLocales: ILocale = {
 	notification: '{length, plural, =1 {notification} other {notifications}}',
 	general: 'general',
 
+	// Home
 	'home.title': 'Home',
 	'home.header.home': 'Home',
 	'home.header.about': 'About',
@@ -83,6 +84,7 @@ export const enLocales: ILocale = {
 		'ACall Me helps to face social distancing by bringing you the best specialists to deal with the mental problems caused by the pandemic.',
 	'home.footer.copyright': 'Copyright © 2021 - All Rights Reserved by Vortechs.',
 
+	// Login
 	'login.title': 'Welcome back!',
 	'login.description.0': `What's your Role?`,
 	'login.description.1': 'Insert Your Data',
@@ -98,6 +100,7 @@ export const enLocales: ILocale = {
 	'login.createAccount': 'Create Account',
 	'login.error': 'The given user and password are incorrect or it does not exist',
 
+	// Signup
 	'signup.title.0': `What's your Role?`,
 	'signup.title.1': 'Account Information',
 	'signup.title.2': 'Personal Information',
@@ -125,12 +128,14 @@ export const enLocales: ILocale = {
 		'Now you can do what is better for your like and health',
 	'signup.modal.success.button': 'Start Now!',
 
+	// Dashboard Navigation items
 	'nav.dashboard': 'Dashboard',
 	'nav.specialists': 'Specialists',
 	'nav.schedule': 'Schedule',
 	'nav.history': 'History',
 	'nav.logout': 'Log out',
 
+	// Notifications
 	'notifications.new.title': 'New Notifications',
 	'notifications.old.title': 'Read Notifications',
 	'notifications.noNew': `You don't have any new notifications`,
@@ -152,6 +157,9 @@ export const enLocales: ILocale = {
 	'notification.callAppointment.title': 'Appointment Call',
 	'notification.callAppointment.description': 'Your appointment is happening now. Enter?',
 	'notification.callAppointment.description.ended': 'This appointment already ended',
+
+	// Dashboard
+	'dashboard.card.book': 'Book Consultation',
 
 	// Languages
 	en: 'English',

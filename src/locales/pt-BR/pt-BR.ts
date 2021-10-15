@@ -29,6 +29,7 @@ export const ptBrLocales = {
 	notification: '{length, plural, =1 {notificação} other {notificações}}',
 	general: 'geral',
 
+	// Home
 	'home.title': 'Home',
 	'home.header.home': 'Home',
 	'home.header.about': 'Sobre',
@@ -81,6 +82,7 @@ export const ptBrLocales = {
 		'A ACall Me te ajuda a enfrentar o distanciamento social te aproximando dos melhores especialistas para lidar com os problemas causados pela pandemia.',
 	'home.footer.copyright': 'Copyright © 2021 - Todos os direitos reservados por Vortechs.',
 
+	// Login
 	'login.title': 'Bem-Vindo de Volta!',
 	'login.description.0': 'Qual é Sua Função?',
 	'login.description.1': 'Insira suas Informações',
@@ -96,6 +98,7 @@ export const ptBrLocales = {
 	'login.createAccount': 'Criar Conta!',
 	'login.error': 'Os dados enviados estão incorretos ou o usuário não existe',
 
+	// Signup
 	'signup.title.0': 'Qual é Sua Função?',
 	'signup.title.1': 'Informações da Conta',
 	'signup.title.2': 'Informações Pessoais',
@@ -124,12 +127,14 @@ export const ptBrLocales = {
 		'Agora você pode fazer o quê é melhor para você e para sua saúde.',
 	'signup.modal.success.button': 'Começar!',
 
+	// Dashboard Navigation items
 	'nav.dashboard': 'Dashboard',
 	'nav.schedule': 'Agenda',
 	'nav.specialists': 'Especialistas',
 	'nav.history': 'Histórico',
 	'nav.logout': 'Sair',
 
+	// Notifications
 	'notifications.new.title': 'Novas Notificações',
 	'notifications.old.title': 'Notificações Lidas',
 	'notifications.noNew': 'Você não tem nenhuma notificação nova',
@@ -150,6 +155,9 @@ export const ptBrLocales = {
 	'notification.callAppointment.description':
 		'Sua consulta está ocorrendo agora! Você quer entrar na chamada?',
 	'notification.callAppointment.description.ended': 'Essa consulta já se encerrou',
+
+	// Dashboard
+	'dashboard.card.book': 'Agendar Consulta',
 
 	en: 'Inglês',
 	'pt-BR': 'Português'
