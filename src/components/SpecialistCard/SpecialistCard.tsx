@@ -81,7 +81,7 @@ export const SpecialistCard = ({
 						</Grid>
 					)}
 				</Grid>
-				<Grid container item spacing={1} mt={0.5} alignItems="center">
+				<Grid container item spacing={1} alignItems="center">
 					<Grid item xs={12} sm={5}>
 						<Typography variant="h3" fontWeight={600} textAlign="center">
 							${intl.formatNumber(cost, { currencySign: 'standard' })}/h
