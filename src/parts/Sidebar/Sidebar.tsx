@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 
-import { Grid, Divider, Collapse, Typography } from '@mui/material'
+import { Grid, Typography, useMediaQuery, Theme } from '@mui/material'
 import { GoCalendar as CalendarIcon } from 'react-icons/go'
 import {
 	MdOutlineDashboard as DashboardIcon,
@@ -26,6 +26,7 @@ type Options = Omit<SidebarOptionProps, 'open'>[]
 export const Sidebar = ({ open, onClose }: Props) => {
 	const location = useLocation()
 	const intl = useIntl()
+	const isMdDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'))
 
 	const options: Options = [
 		{
@@ -55,7 +56,7 @@ export const Sidebar = ({ open, onClose }: Props) => {
 	return (
 		<SidebarContent open={open}>
 			<Grid container>
-				<Grid container item mb={1}>
+				<Grid container item mb={1} mt={isMdDown ? 5 : 0}>
 					<Typography textAlign="center" variant="body2" sx={{ color: 'text.secondary' }}>
 						{capitalizeLetter(intl.formatMessage({ id: 'general' }))}
 					</Typography>
