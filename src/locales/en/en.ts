@@ -29,6 +29,7 @@ export const enLocales: ILocale = {
 	phone: 'phone',
 	start: 'start',
 	notification: '{length, plural, =1 {notification} other {notifications}}',
+	general: 'general',
 
 	'home.title': 'Home',
 	'home.header.home': 'Home',
@@ -123,6 +124,12 @@ export const enLocales: ILocale = {
 	'signup.modal.success.description':
 		'Now you can do what is better for your like and health',
 	'signup.modal.success.button': 'Start Now!',
+
+	'nav.dashboard': 'Dashboard',
+	'nav.specialists': 'Specialists',
+	'nav.schedule': 'Schedule',
+	'nav.history': 'History',
+	'nav.logout': 'Log out',
 
 	'notifications.new.title': 'New Notifications',
 	'notifications.old.title': 'Read Notifications',

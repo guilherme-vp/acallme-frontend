@@ -27,6 +27,7 @@ export const ptBrLocales = {
 	phone: 'telefone',
 	start: 'começar',
 	notification: '{length, plural, =1 {notificação} other {notificações}}',
+	general: 'geral',
 
 	'home.title': 'Home',
 	'home.header.home': 'Home',
@@ -122,6 +123,12 @@ export const ptBrLocales = {
 	'signup.modal.success.description':
 		'Agora você pode fazer o quê é melhor para você e para sua saúde.',
 	'signup.modal.success.button': 'Começar!',
+
+	'nav.dashboard': 'Dashboard',
+	'nav.schedule': 'Agenda',
+	'nav.specialists': 'Especialistas',
+	'nav.history': 'Histórico',
+	'nav.logout': 'Sair',
 
 	'notifications.new.title': 'Novas Notificações',
 	'notifications.old.title': 'Notificações Lidas',
