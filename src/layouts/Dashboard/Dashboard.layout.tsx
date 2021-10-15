@@ -61,7 +61,7 @@ export const DashboardLayout: React.FC = ({ children }) => {
 				</Hidden>
 			</S.SidebarContainer>
 			<S.DashboardMain>
-				<Toolbar sx={{ height: '77px' }} />
+				<Toolbar sx={{ height: '66px' }} />
 				{children}
 			</S.DashboardMain>
 		</S.DashboardContainer>

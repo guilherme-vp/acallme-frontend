@@ -10,7 +10,7 @@ const drawerWidth = 240
 export const DashboardContainer = styled.div`
 	display: flex;
 	min-height: 100vh;
-	background-color: ${props => props.theme.background.main};
+	background-color: ${props => props.theme.background.light};
 `
 
 export const Title = styled(Typography)`
@@ -54,6 +54,7 @@ export const DashboardMain = styled.main`
 	display: flex;
 	flex-direction: column;
 	padding: 22px 40px;
+	background-color: ${props => props.theme.background.main};
 
 	@media only screen and (max-width: 600px) {
 		padding: 16px 20px;
