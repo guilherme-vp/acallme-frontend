@@ -136,6 +136,31 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 				}
 			}
 		},
+		MuiChip: {
+			styleOverrides: {
+				root: {
+					backgroundColor: alpha(theme.background.calm, 0.2),
+					height: 24,
+					'&:hover': {
+						backgroundColor: alpha(theme.colors.primary, 0.2)
+					}
+				},
+				sizeSmall: {
+					fontWeight: 500,
+					padding: '5px'
+				},
+				label: {
+					fontSize: pxToRem(10)
+				},
+				deleteIconColorPrimary: {
+					color: theme.colors.primary,
+					fontSize: pxToRem(14),
+					'&:hover, &:active': {
+						color: alpha(theme.colors.primary, 0.7)
+					}
+				}
+			}
+		},
 		MuiSelect: {
 			styleOverrides: {
 				root: {
