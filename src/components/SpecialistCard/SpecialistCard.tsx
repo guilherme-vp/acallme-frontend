@@ -2,10 +2,11 @@ import React from 'react'
 
 import { Chip, Grid, Icon, Typography } from '@mui/material'
 import faker from 'faker'
-import { MdOutlineShareLocation as PinIcon } from 'react-icons/md'
+import { GoLocation as PinIcon } from 'react-icons/go'
 
 import { useIntl } from 'hooks'
 import { getInitials } from 'utils/get-initials'
+import { pxToRem } from 'utils/px-to-rem'
 
 import { BookButton, CardContainer, MiniAvatar } from './SpecialistCard.styled'
 
@@ -44,19 +45,19 @@ export const SpecialistCard = ({
 						</MiniAvatar>
 					</Grid>
 					<Grid container item xs justifyContent="center">
-						<Grid container item>
+						<Grid container item spacing={0.5}>
 							<Grid item xs={12}>
 								<Typography variant="body1" fontWeight={600}>
 									{name}
 								</Typography>
 							</Grid>
-							<Grid item xs={12} mb={1}>
-								<Typography variant="body2" sx={{ color: 'text.secondary' }}>
+							<Grid item xs={12}>
+								<Typography variant="h5" sx={{ color: 'text.secondary' }}>
 									{role}
 								</Typography>
 							</Grid>
-							<Grid container item xs={12} alignItems="center">
-								<Icon fontSize="small" sx={{ mr: 1 }}>
+							<Grid container item xs={12}>
+								<Icon sx={{ mr: 0.5, fontSize: pxToRem(16) }}>
 									<PinIcon />
 								</Icon>
 								<Typography variant="body2">{location}</Typography>
@@ -64,7 +65,7 @@ export const SpecialistCard = ({
 						</Grid>
 					</Grid>
 				</Grid>
-				<Grid container item mt={1} spacing={1}>
+				<Grid container item spacing={1} mt={0.5} sx={{ height: '72px' }}>
 					{slicedSpecializations.map((value, index) => (
 						<Grid item key={index}>
 							<Chip size="small" label={value} />
@@ -80,9 +81,9 @@ export const SpecialistCard = ({
 						</Grid>
 					)}
 				</Grid>
-				<Grid container item spacing={1} mt={1}>
+				<Grid container item spacing={1} mt={0.5} alignItems="center">
 					<Grid item xs={12} sm={5}>
-						<Typography variant="h5" fontWeight={600} textAlign="center">
+						<Typography variant="h3" fontWeight={600} textAlign="center">
 							${intl.formatNumber(cost, { currencySign: 'standard' })}/h
 						</Typography>
 					</Grid>

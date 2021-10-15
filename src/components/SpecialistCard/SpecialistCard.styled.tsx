@@ -8,7 +8,8 @@ export const CardContainer = styled(Paper).attrs({ elevation: 0 })`
 	align-items: center;
 	max-width: 350px;
 	box-shadow: -2px 4px 6px 0 rgba(0, 0, 0, 0.1) !important;
-	border-radius: 12px;
+	border-radius: 16px !important;
+	background-color: ${props => props.theme.background.light} !important;
 `
 
 export const BookButton = styled(Button).attrs({
@@ -16,8 +17,7 @@ export const BookButton = styled(Button).attrs({
 		borderRadius: '24px',
 		fontWeight: 600,
 		paddingRight: '16px',
-		paddingLeft: '16px',
-		textTransform: 'capitalize'
+		paddingLeft: '16px'
 	}
 })`
 	margin-top: 8px;
