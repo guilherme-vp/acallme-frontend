@@ -13,7 +13,7 @@ export interface GeneralState {
 }
 
 export const generalModule: StoreonModule<GeneralState, GeneralEvents> = store => {
-	store.on('@init', () => ({ language: 'pt-BR', expanded: false }))
+	store.on('@init', () => ({ language: 'pt-BR', expanded: true }))
 	store.on('language/change', (_state, choosenLanguage) => ({ language: choosenLanguage }))
 	store.on('drawer/set', (_state, value) => ({ expanded: value }))
 }
