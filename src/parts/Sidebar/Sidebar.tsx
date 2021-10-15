@@ -1,0 +1,77 @@
+import React, { useMemo } from 'react'
+
+import { Grid, Divider, Collapse, Typography } from '@mui/material'
+import { GoCalendar as CalendarIcon } from 'react-icons/go'
+import {
+	MdOutlineDashboard as DashboardIcon,
+	MdOutlineGroup as GroupIcon,
+	MdOutlineHistory as HistoryIcon
+} from 'react-icons/md'
+import { useLocation } from 'react-router'
+
+import { useIntl } from 'hooks'
+import { DASHBOARD, HISTORY, SCHEDULE, SPECIALISTS } from 'routes'
+import { capitalizeLetter } from 'utils/capitalize-letter'
+
+import { SidebarContent } from './Sidebar.styled'
+import { SidebarOptionProps, SidebarOption } from './SidebarOption'
+
+interface Props {
+	onClose?: () => void
+	open: boolean
+}
+
+type Options = Omit<SidebarOptionProps, 'open'>[]
+
+export const Sidebar = ({ open, onClose }: Props) => {
+	const location = useLocation()
+	const intl = useIntl()
+
+	const options: Options = [
+		{
+			icon: <DashboardIcon />,
+			option: 'dashboard',
+			link: DASHBOARD
+		},
+		{
+			icon: <GroupIcon />,
+			option: 'specialists',
+			link: SPECIALISTS
+		},
+		{
+			icon: <CalendarIcon />,
+			option: 'schedule',
+			link: SCHEDULE
+		},
+		{
+			icon: <HistoryIcon />,
+			option: 'history',
+			link: HISTORY
+		}
+	]
+
+	const [, tab] = useMemo(() => location.pathname.split('/'), [location.pathname])
+
+	return (
+		<SidebarContent open={open}>
+			<Grid container>
+				<Grid container item mb={1}>
+					<Typography textAlign="center" variant="body2" sx={{ color: 'text.secondary' }}>
+						{capitalizeLetter(intl.formatMessage({ id: 'general' }))}
+					</Typography>
+				</Grid>
+				{options.map(option => (
+					<SidebarOption
+						key={option.option}
+						{...option}
+						actualTab={tab}
+						onClose={onClose}
+						open={open}
+					/>
+				))}
+			</Grid>
+		</SidebarContent>
+	)
+}
+
+export default Sidebar
