@@ -2,11 +2,12 @@ import React, { useEffect } from 'react'
 
 import { CircularProgress, useMediaQuery } from '@mui/material'
 import iziToast from 'izitoast'
+import { RouteComponentProps, RouteProps } from 'react-router'
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
 
 import { useStoreon } from 'hooks'
 import { DashboardLayout } from 'layouts/Dashboard'
-import { LOGIN, SIGNUP, HOME, DASHBOARD } from 'routes'
+import { LOGIN, SIGNUP, HOME, DASHBOARD, SCHEDULE, HISTORY, SPECIALISTS } from 'routes'
 import { Home } from 'screens/Home'
 import { Login } from 'screens/Login'
 import { SignUp } from 'screens/SignUp'
@@ -20,6 +21,24 @@ iziToast.settings({
 	position: 'bottomLeft',
 	maxWidth: 400
 })
+
+interface WrapperProps extends RouteProps {
+	component: React.ComponentType<RouteComponentProps>
+	layout: React.ComponentType<RouteComponentProps>
+}
+
+function RouteWrapper({ component: Component, layout: Layout, ...rest }: WrapperProps) {
+	return (
+		<Route
+			{...rest}
+			render={props => (
+				<Layout {...props}>
+					<Component {...props} />
+				</Layout>
+			)}
+		/>
+	)
+}
 
 const App = () => {
 	const { loadingUser } = useStoreon('loadingUser')
@@ -45,26 +64,31 @@ const App = () => {
 	) : (
 		<Router>
 			<Switch>
-				<Route path={HOME} exact>
-					<HomeLayout>
-						<Home />
-					</HomeLayout>
-				</Route>
-				<Route path={LOGIN}>
-					<AuthLayout>
-						<Login />
-					</AuthLayout>
-				</Route>
-				<Route path={SIGNUP}>
-					<AuthLayout>
-						<SignUp />
-					</AuthLayout>
-				</Route>
-				<Route path={DASHBOARD}>
-					<DashboardLayout>
-						<h1>Oi</h1>
-					</DashboardLayout>
-				</Route>
+				<RouteWrapper path={HOME} exact layout={HomeLayout} component={Home} />
+				<RouteWrapper path={LOGIN} layout={AuthLayout} component={Login} />
+				<RouteWrapper path={SIGNUP} layout={AuthLayout} component={SignUp} />
+				<RouteWrapper
+					path={DASHBOARD}
+					layout={DashboardLayout}
+					component={() => <h1>DASHBOARD</h1>}
+				/>
+				<RouteWrapper
+					path={SPECIALISTS}
+					layout={DashboardLayout}
+					component={() => <h1>SPECIALISTS</h1>}
+				/>
+				<RouteWrapper
+					path={SCHEDULE}
+					layout={DashboardLayout}
+					component={() => <h1>SCHEDULE</h1>}
+				/>
+				<RouteWrapper
+					path={HISTORY}
+					layout={DashboardLayout}
+					component={() => <h1>HISTORY</h1>}
+				/>
+
+				{/* <Redirect to={HOME} /> */}
 			</Switch>
 		</Router>
 	)
