@@ -21,6 +21,8 @@ export const theme = {
 	grey: {
 		main: '#918C9B',
 		secondary: '#B5BED2',
+		third: '#DEDEDE',
+		fourth: '#EFEFEF',
 		darker: '#666b7f'
 	},
 	tags: {
@@ -29,7 +31,7 @@ export const theme = {
 		yellow: '#F49F0E'
 	},
 	border: {
-		thin: '#EBEFF2',
+		thin: '#E9ECEE',
 		darker: '#E2E2EA',
 		colored: '#F49F0E'
 	},
