@@ -41,7 +41,7 @@ function RouteWrapper({ component: Component, layout: Layout, ...rest }: Wrapper
 }
 
 const App = () => {
-	const { loadingUser } = useStoreon('loadingUser')
+	const { dispatch, loadingUser } = useStoreon('loadingUser')
 	const smDown = useMediaQuery('(max-width: 600px)')
 
 	useEffect(() => {
@@ -49,13 +49,14 @@ const App = () => {
 			iziToast.settings({
 				position: 'topLeft'
 			})
+			dispatch('drawer/set', false)
 		} else {
 			iziToast.settings({
 				position: 'bottomLeft',
 				maxWidth: 400
 			})
 		}
-	}, [smDown])
+	}, [dispatch, smDown])
 
 	return loadingUser ? (
 		<CircularProgress
