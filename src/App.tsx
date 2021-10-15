@@ -8,6 +8,7 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
 import { useStoreon } from 'hooks'
 import { DashboardLayout } from 'layouts/Dashboard'
 import { LOGIN, SIGNUP, HOME, DASHBOARD, SCHEDULE, HISTORY, SPECIALISTS } from 'routes'
+import { Dashboard } from 'screens/Dashboard'
 import { Home } from 'screens/Home'
 import { Login } from 'screens/Login'
 import { SignUp } from 'screens/SignUp'
@@ -68,11 +69,7 @@ const App = () => {
 				<RouteWrapper path={HOME} exact layout={HomeLayout} component={Home} />
 				<RouteWrapper path={LOGIN} layout={AuthLayout} component={Login} />
 				<RouteWrapper path={SIGNUP} layout={AuthLayout} component={SignUp} />
-				<RouteWrapper
-					path={DASHBOARD}
-					layout={DashboardLayout}
-					component={() => <h1>DASHBOARD</h1>}
-				/>
+				<RouteWrapper path={DASHBOARD} layout={DashboardLayout} component={Dashboard} />
 				<RouteWrapper
 					path={SPECIALISTS}
 					layout={DashboardLayout}
