@@ -8,7 +8,7 @@ export const ListGlow = styled.ul`
 	li {
 		margin-bottom: 20px;
 		&::before {
-			content: '" "';
+			content: ' ';
 			display: inline-block;
 			width: 7px;
 			height: 7px;
