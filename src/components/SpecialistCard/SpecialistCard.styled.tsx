@@ -6,10 +6,14 @@ export const CardContainer = styled(Paper).attrs({ elevation: 0 })`
 	padding: 16px;
 	display: flex;
 	align-items: center;
-	max-width: 350px;
-	box-shadow: -2px 4px 6px 0 rgba(0, 0, 0, 0.1) !important;
+	width: 100%;
 	border-radius: 16px !important;
-	background-color: ${props => props.theme.background.light} !important;
+	background-color: ${props => props.theme.background.light};
+	border: 1px solid ${props => props.theme.border.darker};
+
+	@media only screen and (min-width: 768px) {
+		max-width: 350px;
+	}
 `
 
 export const BookButton = styled(Button).attrs({
