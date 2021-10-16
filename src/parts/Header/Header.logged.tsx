@@ -4,6 +4,7 @@ import { AppBar, Avatar, Grid, Hidden, IconButton } from '@mui/material'
 import faker from 'faker'
 import { BiMenuAltLeft as MenuIcon } from 'react-icons/bi'
 
+import { LanguagePicker } from 'components/LanguagePicker'
 import { NotificationsPopover } from 'parts/Notifications'
 
 import { Container } from './Header.styled'
@@ -26,7 +27,10 @@ export const HeaderLogged = ({ openDrawer }: HeaderProps) => (
 						</IconButton>
 					</Hidden>
 				</Grid>
-				<Grid container item xs justifyContent="flex-end">
+				<Grid container item xs justifyContent="flex-end" alignItems="center">
+					<Grid item mr={2}>
+						<LanguagePicker />
+					</Grid>
 					<Grid item mr={2}>
 						<NotificationsPopover />
 					</Grid>
