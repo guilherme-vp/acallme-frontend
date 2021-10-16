@@ -23,6 +23,7 @@ export const LanguagePicker = () => {
 			onChange={handleChange}
 			value={language}
 			variant="outlined"
+			color="secondary"
 			sx={{ padding: 0 }}
 		>
 			<Item disableRipple value={AvailableLanguages.ENGLISH} selected={language === 'en'}>
