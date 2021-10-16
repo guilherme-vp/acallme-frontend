@@ -3,14 +3,13 @@ import React, { useMemo } from 'react'
 import { Grid, Typography, useMediaQuery, Theme } from '@mui/material'
 import { GoCalendar as CalendarIcon } from 'react-icons/go'
 import {
-	MdOutlineDashboard as DashboardIcon,
 	MdOutlineGroup as GroupIcon,
 	MdOutlineHistory as HistoryIcon
 } from 'react-icons/md'
 import { useLocation } from 'react-router'
 
 import { useIntl } from 'hooks'
-import { DASHBOARD, HISTORY, SCHEDULE, SPECIALISTS } from 'routes'
+import { HISTORY, SCHEDULE, SPECIALISTS } from 'routes'
 import { capitalizeLetter } from 'utils/capitalize-letter'
 
 import { SidebarContent } from './Sidebar.styled'
@@ -29,11 +28,6 @@ export const Sidebar = ({ open, onClose }: Props) => {
 	const isMdDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'))
 
 	const options: Options = [
-		{
-			icon: <DashboardIcon />,
-			option: 'dashboard',
-			link: DASHBOARD
-		},
 		{
 			icon: <GroupIcon />,
 			option: 'specialists',

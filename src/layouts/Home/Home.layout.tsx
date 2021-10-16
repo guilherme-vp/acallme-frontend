@@ -8,7 +8,7 @@ import { useStoreon } from 'hooks'
 import { Copyright } from 'parts/Copyright'
 import { FooterHome } from 'parts/Footer'
 import { HeaderHome } from 'parts/Header'
-import { DASHBOARD } from 'routes'
+import { SPECIALISTS } from 'routes'
 
 import { Container, LayoutDivider, Main } from './Home.styled'
 
@@ -17,7 +17,7 @@ export const HomeLayout: React.FC = ({ children }) => {
 	const { token } = useStoreon('token')
 
 	if (token) {
-		return <Redirect to={DASHBOARD} />
+		return <Redirect to={SPECIALISTS} />
 	}
 
 	return (
