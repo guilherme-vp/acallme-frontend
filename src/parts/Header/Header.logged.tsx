@@ -20,7 +20,7 @@ export const HeaderLogged = ({ openDrawer }: HeaderProps) => (
 	<AppBar sx={{ border: 'none' }}>
 		<Container>
 			<Grid container justifyContent="space-between" alignItems="center">
-				<Grid container item xs>
+				<Grid container item xs="auto">
 					<Hidden mdUp>
 						<IconButton color="secondary" edge="start" onClick={() => openDrawer()}>
 							<MenuIcon />
