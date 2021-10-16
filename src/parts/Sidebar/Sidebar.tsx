@@ -56,13 +56,9 @@ export const Sidebar = ({ open, onClose }: Props) => {
 					</Typography>
 				</Grid>
 				{options.map(option => (
-					<SidebarOption
-						key={option.option}
-						{...option}
-						actualTab={tab}
-						onClose={onClose}
-						open={open}
-					/>
+					<Grid item key={option.option}>
+						<SidebarOption {...option} actualTab={tab} onClose={onClose} open={open} />
+					</Grid>
 				))}
 			</Grid>
 		</SidebarContent>
