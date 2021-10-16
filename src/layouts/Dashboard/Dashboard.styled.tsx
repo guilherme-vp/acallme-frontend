@@ -6,6 +6,7 @@ import { styled as muiStyled, Theme, CSSObject } from '@mui/material/styles'
 import { pxToRem } from 'utils/px-to-rem'
 
 const drawerWidth = 240
+const drawerClosedWidth = 100
 
 export const DashboardContainer = styled.div`
 	display: flex;
@@ -28,9 +29,10 @@ export const DrawerHeader = muiStyled('div')(({ theme }) => ({
 
 export const ContainerButton = muiStyled('div')(({ theme }) => ({
 	position: 'fixed',
-	top: 'calc(50% - 48px)',
+	marginTop: '66px',
 	marginLeft: '-16px',
-	border: '0 none',
+	border: `1px solid ${theme.palette.divider}`,
+	borderRadius: '50%',
 	zIndex: theme.zIndex.drawer + 2
 }))
 
@@ -73,7 +75,8 @@ const closedMixin = (theme: Theme): CSSObject => ({
 	transition: theme.transitions.create('width', {
 		duration: theme.transitions.duration.leavingScreen
 	}),
-	overflowX: 'hidden'
+	overflowX: 'hidden',
+	width: drawerClosedWidth
 })
 
 export const Drawer = muiStyled(MuiDrawer, { shouldForwardProp: prop => prop !== 'open' })(
