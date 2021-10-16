@@ -47,7 +47,8 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 		},
 		background: {
 			paper: theme.background.main
-		}
+		},
+		divider: theme.border.darker
 	},
 	typography: {
 		display1: {
