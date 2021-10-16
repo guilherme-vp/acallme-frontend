@@ -33,6 +33,7 @@ export const SidebarOption = ({
 	const tab = (
 		<MenuTab
 			selected={isSelected}
+			open={open}
 			icon={
 				<ListItem>
 					<ListItemIcon>{icon}</ListItemIcon>

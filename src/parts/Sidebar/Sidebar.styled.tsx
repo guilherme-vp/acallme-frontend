@@ -26,8 +26,9 @@ export const StyledLink = styled(Link)`
 	margin-left: -40px;
 `
 
-export const MenuTab = styled(Tab).withConfig<{ selected?: boolean }>({})`
-	width: 230px !important;
+export const MenuTab = styled(Tab).withConfig<{ selected?: boolean; open?: boolean }>({})`
+	width: ${props => (props.open ? '230px !important' : '100%')};
+	transition: width 0.1s;
 
 	.MuiListItemIcon-root {
 		color: inherit;
