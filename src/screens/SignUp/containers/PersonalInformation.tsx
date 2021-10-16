@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 import React, { useCallback, useState } from 'react'
 
 import { DesktopDatePicker } from '@mui/lab'
@@ -16,8 +17,13 @@ import * as datefns from 'date-fns'
 import iziToast from 'izitoast'
 import { useDropzone } from 'react-dropzone'
 import { useFormContext } from 'react-hook-form'
-import { MdOutlineAddAPhoto } from 'react-icons/md'
+import {
+	MdOutlineAddAPhoto as PhotoIcon,
+	MdPhoneInTalk as PhoneIcon,
+	MdPerson as NameIcon
+} from 'react-icons/md'
 
+import { InputIconContainer } from 'components/InputAdornment'
 import { useIntl } from 'hooks'
 import { GenderEnum } from 'services/entities'
 import { capitalizeLetter } from 'utils/capitalize-letter'
@@ -82,7 +88,7 @@ export const PersonalInformation = () => {
 							<ImageAvatar {...getRootProps()} src={avatar} />
 							<div className="image-selector" {...getRootProps()}>
 								<input {...getInputProps()} type="file" accept="image/*" />
-								<MdOutlineAddAPhoto />
+								<PhotoIcon />
 							</div>
 						</>
 					) : (
@@ -103,6 +109,13 @@ export const PersonalInformation = () => {
 						placeholder="Ex: Guilherme Vieira"
 						required
 						{...register('name', { required: true, minLength: 3 })}
+						InputProps={{
+							startAdornment: (
+								<InputIconContainer position="start">
+									<NameIcon />
+								</InputIconContainer>
+							)
+						}}
 					/>
 				</Grid>
 				<Grid item>
@@ -144,7 +157,6 @@ export const PersonalInformation = () => {
 				</Grid>
 				<Grid item>
 					<TextField
-						focused
 						{...register('phone', { required: true, maxLength: 15, minLength: 11 })}
 						fullWidth
 						label={capitalizeLetter(intl.formatMessage({ id: 'phone' }))}
@@ -152,6 +164,13 @@ export const PersonalInformation = () => {
 						placeholder="Ex: (11) 99999-9999"
 						required
 						inputProps={{ minLength: 11, maxLength: 15 }}
+						InputProps={{
+							startAdornment: (
+								<InputIconContainer position="start">
+									<PhoneIcon />
+								</InputIconContainer>
+							)
+						}}
 					/>
 				</Grid>
 			</Grid>

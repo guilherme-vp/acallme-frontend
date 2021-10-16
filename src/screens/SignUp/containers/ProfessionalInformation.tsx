@@ -2,7 +2,9 @@ import React from 'react'
 
 import { Autocomplete, Grid, TextField } from '@mui/material'
 import { Controller, useFormContext } from 'react-hook-form'
+import { MdCreate as AboutIcon, MdPinDrop as LocationIcon } from 'react-icons/md'
 
+import { InputIconContainer } from 'components/InputAdornment'
 import rolesEn from 'data/roles/roles.en.json'
 import rolesPtBR from 'data/roles/roles.pt-br.json'
 import { useIntl } from 'hooks'
@@ -38,7 +40,14 @@ export const ProfessionalInformation = () => {
 						})}
 						error={!!errors.about}
 						name="about"
-						rows={5}
+						rows={3}
+						InputProps={{
+							startAdornment: (
+								<InputIconContainer position="start">
+									<AboutIcon />
+								</InputIconContainer>
+							)
+						}}
 					/>
 				</Grid>
 				<Grid item>
@@ -54,6 +63,13 @@ export const ProfessionalInformation = () => {
 						placeholder="Ex: São Paulo, São Paulo"
 						error={!!errors.location}
 						name="location"
+						InputProps={{
+							startAdornment: (
+								<InputIconContainer position="start">
+									<LocationIcon />
+								</InputIconContainer>
+							)
+						}}
 					/>
 				</Grid>
 				<Grid item>

@@ -6,11 +6,16 @@ import { LoadingButton } from '@mui/lab'
 import { Grid, Typography, Hidden, TextField, IconButton } from '@mui/material'
 import iziToast from 'izitoast'
 import { useForm } from 'react-hook-form'
-import { MdArrowBack as ArrowBackIcon } from 'react-icons/md'
+import {
+	MdArrowBack as ArrowBackIcon,
+	MdLock as PasswordIcon,
+	MdPermContactCalendar as IdentityIcon
+} from 'react-icons/md'
 import { useMutation } from 'react-query'
 import { Link, useHistory } from 'react-router-dom'
 
 import doctorImage from 'assets/images/login-image.png'
+import { InputIconContainer } from 'components/InputAdornment'
 import { PasswordInput } from 'components/PasswordInput'
 import { useIntl, useStoreon } from 'hooks'
 import { ChoseRole } from 'parts/ChoseRole'
@@ -158,7 +163,6 @@ export const Login = () => {
 						>
 							<Grid item>
 								<TextField
-									focused
 									{...register('username', { required: true, minLength: 1 })}
 									fullWidth
 									label={capitalizeLetter(intl.formatMessage({ id: 'email' }))}
@@ -172,18 +176,31 @@ export const Login = () => {
 												? 'login.option.username.placeholder'
 												: 'login.option.username.specialist.placeholder'
 									})}
+									InputProps={{
+										startAdornment: (
+											<InputIconContainer position="start">
+												<IdentityIcon />
+											</InputIconContainer>
+										)
+									}}
 								/>
 							</Grid>
 							<Grid item>
 								<PasswordInput
 									{...register('password', { required: true, minLength: 1 })}
-									focused
 									fullWidth
 									required
 									error={!!errors.password}
 									label={capitalizeLetter(intl.formatMessage({ id: 'password' }))}
 									isCorrect={allFields.password ? !errors.password : true}
 									name="password"
+									InputProps={{
+										startAdornment: (
+											<InputIconContainer position="start">
+												<PasswordIcon />
+											</InputIconContainer>
+										)
+									}}
 								/>
 							</Grid>
 						</Grid>

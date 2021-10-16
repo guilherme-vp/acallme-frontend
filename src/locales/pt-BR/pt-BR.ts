@@ -91,10 +91,10 @@ export const ptBrLocales = {
 	'login.description.0': 'Qual é Sua Função?',
 	'login.description.1': 'Insira suas Informações',
 	'login.option.username': 'Email ou CPF',
-	'login.option.username.placeholder': 'Ex: example@gmail.com ou 12345678910',
+	'login.option.username.placeholder': 'Ex: exemplo@gmail.com ou 12345678910',
 	'login.option.username.specialist': 'Email, CPF ou CNPJ',
 	'login.option.username.specialist.placeholder':
-		'Ex: example@gmail.com, 12345678910 ou 12345678000190',
+		'Ex: exemplo@gmail.com, 12345678910 ou 12345678000190',
 	'login.option.password': 'Senha',
 	'login.a.forgetPassword': 'Esqueceu a senha?',
 	'login.submit': 'Entrar',

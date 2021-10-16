@@ -1,8 +1,16 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 import React from 'react'
 
 import { Grid, TextField } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
+import {
+	MdAlternateEmail as EmailIcon,
+	MdLock as PasswordIcon,
+	MdPermContactCalendar as IdentityIcon,
+	MdBusiness as BusinessIcon
+} from 'react-icons/md'
 
+import { InputIconContainer } from 'components/InputAdornment'
 import { PasswordInput } from 'components/PasswordInput'
 import { useIntl } from 'hooks'
 import { RolesEnum } from 'services/entities'
@@ -31,7 +39,6 @@ export const AccountInformation = ({ role }: RoleProp) => {
 			<Grid container item flexDirection="column" spacing={2} xs={12} md={7}>
 				<Grid item>
 					<TextField
-						focused
 						{...register('email', {
 							required: true,
 							pattern: emailRegex
@@ -45,11 +52,17 @@ export const AccountInformation = ({ role }: RoleProp) => {
 						name="email"
 						type="email"
 						autoComplete="email"
+						InputProps={{
+							startAdornment: (
+								<InputIconContainer position="start">
+									<EmailIcon />
+								</InputIconContainer>
+							)
+						}}
 					/>
 				</Grid>
 				<Grid item>
 					<TextField
-						focused
 						{...register('cpf', {
 							required: true,
 							pattern: cpfRegex
@@ -62,13 +75,21 @@ export const AccountInformation = ({ role }: RoleProp) => {
 						placeholder="123.456.789-10"
 						name="cpf"
 						autoComplete="cpf"
-						inputProps={{ maxLength: 14 }}
+						inputProps={{
+							maxLength: 14
+						}}
+						InputProps={{
+							startAdornment: (
+								<InputIconContainer position="start">
+									<IdentityIcon />
+								</InputIconContainer>
+							)
+						}}
 					/>
 				</Grid>
 				{role === RolesEnum.Specialist && (
 					<Grid item>
 						<TextField
-							focused
 							{...register('cnpj', {
 								required: true,
 								pattern: cnpjRegex
@@ -81,7 +102,16 @@ export const AccountInformation = ({ role }: RoleProp) => {
 							placeholder="12.345.678/0001-90"
 							name="cnpj"
 							autoComplete="cnpj"
-							inputProps={{ maxLength: 18 }}
+							inputProps={{
+								maxLength: 18
+							}}
+							InputProps={{
+								startAdornment: (
+									<InputIconContainer position="start">
+										<BusinessIcon />
+									</InputIconContainer>
+								)
+							}}
 						/>
 					</Grid>
 				)}
@@ -99,6 +129,13 @@ export const AccountInformation = ({ role }: RoleProp) => {
 						error={!!errors.password}
 						label={capitalizeLetter(intl.formatMessage({ id: 'password' }))}
 						isCorrect={allFields.password ? !errors.password : true}
+						InputProps={{
+							startAdornment: (
+								<InputIconContainer position="start">
+									<PasswordIcon />
+								</InputIconContainer>
+							)
+						}}
 					/>
 				</Grid>
 			</Grid>

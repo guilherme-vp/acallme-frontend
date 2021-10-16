@@ -139,10 +139,7 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 		MuiChip: {
 			styleOverrides: {
 				root: {
-					height: 24,
-					'&:hover': {
-						backgroundColor: alpha(theme.colors.primary, 0.2)
-					}
+					height: 24
 				},
 				sizeSmall: {
 					fontWeight: 500,
