@@ -42,6 +42,11 @@ export const theme = {
 	},
 	input: {
 		borderFocus: '#0e63f4'
+	},
+	shadow: {
+		first: '0 3px 10px rgba(0, 0, 0, 0.04)',
+		second: '0 7px 60px rgba(0, 0, 0, 0.12)',
+		third: '0 2px 5px rgba(112, 144, 176, 0.12)'
 	}
 }
 
