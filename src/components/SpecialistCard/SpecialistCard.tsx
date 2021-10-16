@@ -15,7 +15,7 @@ export interface SpecialistCardProps {
 	name: string
 	role: string
 	location: string
-	specializations: string[]
+	specialties: string[]
 	avatar: string | null
 	cost: number
 	onBook: (id: number) => void
@@ -26,14 +26,14 @@ export const SpecialistCard = ({
 	name,
 	role,
 	location,
-	specializations,
+	specialties,
 	avatar,
 	cost,
 	onBook
 }: SpecialistCardProps) => {
 	const intl = useIntl()
-	const totalSpecializations = specializations.length
-	const slicedSpecializations = specializations.slice(0, 5)
+	const totalSpecialties = specialties.length
+	const slicedSpecialties = specialties.slice(0, 5)
 
 	return (
 		<CardContainer>
@@ -66,18 +66,14 @@ export const SpecialistCard = ({
 					</Grid>
 				</Grid>
 				<Grid container item spacing={1} mt={0.5} sx={{ height: '72px' }}>
-					{slicedSpecializations.map((value, index) => (
+					{slicedSpecialties.map((value, index) => (
 						<Grid item key={index}>
 							<Chip size="small" label={value} />
 						</Grid>
 					))}
-					{totalSpecializations > slicedSpecializations.length && (
+					{totalSpecialties > slicedSpecialties.length && (
 						<Grid item>
-							<Chip
-								size="small"
-								label={`${totalSpecializations - 5}+`}
-								variant="outlined"
-							/>
+							<Chip size="small" label={`${totalSpecialties - 5}+`} variant="outlined" />
 						</Grid>
 					)}
 				</Grid>

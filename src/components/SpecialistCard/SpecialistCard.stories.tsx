@@ -24,7 +24,7 @@ basic.args = {
 	name: faker.name.findName(),
 	onBook: () => {},
 	role: faker.name.jobType(),
-	specializations: Array(faker.datatype.number({ min: 1, max: 10 }))
+	specialties: Array(faker.datatype.number({ min: 1, max: 10 }))
 		.fill(null)
 		.map(() => faker.name.jobType())
 } as StoryArgs
