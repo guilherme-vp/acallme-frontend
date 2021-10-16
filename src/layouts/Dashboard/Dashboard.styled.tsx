@@ -29,8 +29,8 @@ export const DrawerHeader = muiStyled('div')(({ theme }) => ({
 
 export const ContainerButton = muiStyled('div')(({ theme }) => ({
 	position: 'fixed',
-	marginTop: '66px',
-	marginLeft: '-16px',
+	top: 'calc(50% - 48px)',
+	marginLeft: '-17px',
 	border: `1px solid ${theme.palette.divider}`,
 	borderRadius: '50%',
 	zIndex: theme.zIndex.drawer + 2
