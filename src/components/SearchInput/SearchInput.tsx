@@ -9,12 +9,13 @@ import { SearchContainer, SearchInputBase } from './SearchInput.style'
 
 export interface SearchInputProps extends Omit<InputBaseProps, 'ref'> {
 	containerStyle?: React.CSSProperties
+	showIcon?: boolean
 }
 
 export const SearchInput = React.forwardRef(
-	({ containerStyle, ...props }: SearchInputProps, ref) => (
+	({ containerStyle, showIcon = true, ...props }: SearchInputProps, ref) => (
 		<SearchContainer style={{ fontSize: pxToRem(16), ...containerStyle }}>
-			<SearchIcon style={{ fontSize: 'inherit' }} />
+			{showIcon && <SearchIcon style={{ fontSize: 'inherit' }} />}
 			{/* @ts-ignore */}
 			<SearchInputBase {...props} ref={ref} />
 		</SearchContainer>
