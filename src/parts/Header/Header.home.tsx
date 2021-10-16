@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AppBar, Grid, Button, useMediaQuery, Theme, Hidden } from '@mui/material'
+import { AppBar, Grid, Button, useMediaQuery, Theme } from '@mui/material'
 import { Link } from 'react-router-dom'
 
 import { SmoothLink } from 'components/SmoothLink'
