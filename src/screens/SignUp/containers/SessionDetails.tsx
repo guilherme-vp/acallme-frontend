@@ -4,6 +4,7 @@ import { useTheme } from 'styled-components'
 
 import { Autocomplete, Grid, InputAdornment, TextField } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
+import { MdMonetizationOn as CostIcon, MdWatchLater as ClockIcon } from 'react-icons/md'
 
 import { useIntl } from 'hooks'
 import { capitalizeLetter } from 'utils/capitalize-letter'
@@ -35,6 +36,13 @@ export const SessionDetails = () => {
 								name="duration"
 								defaultValue={hourOptions}
 								label={capitalizeLetter(intl.formatMessage({ id: 'duration' }))}
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position="start">
+											<ClockIcon />
+										</InputAdornment>
+									)
+								}}
 							/>
 						)}
 					/>
@@ -51,7 +59,11 @@ export const SessionDetails = () => {
 						label={intl.formatMessage({ id: 'signup.form.session.cost' })}
 						name="cost"
 						InputProps={{
-							startAdornment: <InputAdornment position="start">$</InputAdornment>
+							startAdornment: (
+								<InputAdornment position="start">
+									<CostIcon />
+								</InputAdornment>
+							)
 						}}
 					/>
 				</Grid>
