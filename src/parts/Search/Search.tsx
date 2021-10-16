@@ -150,9 +150,9 @@ export const Search = ({ onSearch, loading, onSearchInputChange }: SearchProps) 
 				item
 				xs={12}
 				md="auto"
-				sx={{ marginLeft: 2, padding: 1 }}
+				sx={{ marginLeft: 2, marginTop: 1.5 }}
 				justifyContent="flex-end"
-				alignItems="center"
+				alignItems="flex-end"
 			>
 				<Hidden mdDown>
 					<S.SearchButton
