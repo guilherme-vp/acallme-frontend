@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-wrap-multilines */
 import React from 'react'
 
-import { ListItem, ListItemIcon, Tooltip, Typography, useMediaQuery } from '@mui/material'
+import { ListItem, ListItemIcon, Typography, useMediaQuery } from '@mui/material'
 import { Theme } from '@mui/system'
 
 import { useIntl } from 'hooks'
@@ -53,14 +53,7 @@ export const SidebarOption = ({
 
 	return (
 		<StyledLink to={link} onClick={onClose}>
-			{open ? (
-				// @ts-ignore
-				<Tooltip title={intl.formatMessage({ id: `nav.${option}` })} placement="right">
-					{tab}
-				</Tooltip>
-			) : (
-				tab
-			)}
+			{tab}
 		</StyledLink>
 	)
 }
