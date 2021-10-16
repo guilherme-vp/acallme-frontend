@@ -65,7 +65,7 @@ export const SpecialistCard = ({
 						</Grid>
 					</Grid>
 				</Grid>
-				<Grid container item spacing={1} mt={0.5}>
+				<Grid container item spacing={1} mt={0.5} sx={{ minHeight: '80px' }}>
 					{slicedSpecialties.map((value, index) => (
 						<Grid item key={index}>
 							<Chip size="small" label={value} />

@@ -10,6 +10,7 @@ export const CardContainer = styled(Paper).attrs({ elevation: 0 })`
 	border-radius: 16px !important;
 	background-color: ${props => props.theme.background.light};
 	border: 1px solid ${props => props.theme.border.darker};
+	height: 100%;
 
 	@media only screen and (min-width: 768px) {
 		max-width: 350px;
