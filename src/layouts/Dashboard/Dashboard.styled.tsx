@@ -22,7 +22,7 @@ export const Title = styled(Typography)`
 export const DrawerHeader = muiStyled('div')(({ theme }) => ({
 	display: 'flex',
 	alignItems: 'center',
-	padding: '40px',
+	padding: theme.breakpoints.up('md') ? '26px 40px 40px' : '8px 40px 20px',
 	// necessary for content to be below app bar
 	...theme.mixins.toolbar
 }))
