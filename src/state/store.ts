@@ -1,4 +1,6 @@
+import { persistState } from '@storeon/localstorage'
 import { createStoreon } from 'storeon'
+import { storeonDevtools } from 'storeon/devtools'
 
 import { GeneralEvents, GeneralState, generalModule } from './general'
 import { UserEvents, UserState, userModule } from './user'
@@ -19,4 +21,11 @@ declare module 'storeon/react' {
 	): useStoreon.StoreData<AppState, AppEvents>
 }
 
-export const store = createStoreon<AppState, AppEvents>([generalModule, userModule])
+export const store = createStoreon<AppState, AppEvents>(
+	[
+		generalModule,
+		userModule,
+		persistState<AppState>(['token']),
+		process.env.NODE_ENV !== 'production' && storeonDevtools
+	].filter(Boolean)
+)

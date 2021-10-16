@@ -28,7 +28,14 @@ export const enLocales: ILocale = {
 	birthDate: 'date of birth',
 	phone: 'phone',
 	start: 'start',
+	notification: '{length, plural, =1 {notification} other {notifications}}',
+	general: 'general',
+	sort: 'Sort by:',
+	search: 'search',
+	all: 'all',
+	loading: 'loading',
 
+	// Home
 	'home.title': 'Home',
 	'home.header.home': 'Home',
 	'home.header.about': 'About',
@@ -81,6 +88,7 @@ export const enLocales: ILocale = {
 		'ACall Me helps to face social distancing by bringing you the best specialists to deal with the mental problems caused by the pandemic.',
 	'home.footer.copyright': 'Copyright © 2021 - All Rights Reserved by Vortechs.',
 
+	// Login
 	'login.title': 'Welcome back!',
 	'login.description.0': `What's your Role?`,
 	'login.description.1': 'Insert Your Data',
@@ -96,6 +104,7 @@ export const enLocales: ILocale = {
 	'login.createAccount': 'Create Account',
 	'login.error': 'The given user and password are incorrect or it does not exist',
 
+	// Signup
 	'signup.title.0': `What's your Role?`,
 	'signup.title.1': 'Account Information',
 	'signup.title.2': 'Personal Information',
@@ -122,6 +131,48 @@ export const enLocales: ILocale = {
 	'signup.modal.success.description':
 		'Now you can do what is better for your like and health',
 	'signup.modal.success.button': 'Start Now!',
+
+	// Dashboard Navigation items
+	'nav.specialists': 'Specialists',
+	'nav.schedule': 'Schedule',
+	'nav.history': 'History',
+	'nav.logout': 'Log out',
+
+	// Notifications
+	'notifications.new.title': 'New Notifications',
+	'notifications.old.title': 'Read Notifications',
+	'notifications.noNew': `You don't have any new notifications`,
+	'notifications.totalUnRead':
+		'You have {length} not read {length, plural, =1 {notification} other {notifications}}',
+	'notification.newAppointment.title': 'New Appointment',
+	'notification.newAppointment.description':
+		'{name} scheduled an appointment with you at {date}. Do you want to confirm it?',
+	'notification.confirmedAppointment.description.specialist':
+		'You confirmed this appointment',
+	'notification.rejectedAppointment.description.specialist':
+		'You rejected this appointment',
+	'notification.confirmedAppointment.title': 'Appointment Confirmed',
+	'notification.confirmedAppointment.description':
+		'Your appointment at {date} was confirmed',
+	'notification.rejectedAppointment.title': 'Appointment Rejected',
+	'notification.rejectedAppointment.description':
+		'Unfortunately, your appointment with {name} was rejected',
+	'notification.callAppointment.title': 'Appointment Call',
+	'notification.callAppointment.description': 'Your appointment is happening now. Enter?',
+	'notification.callAppointment.description.ended': 'This appointment already ended',
+
+	// Dashboard
+	'dashboard.welcome': 'Bem-vindo(a), {name}!',
+	'dashboard.card.book': 'Book Consultation',
+	'dashboard.forYou': 'Best for You',
+	'dashboard.findTheBest':
+		'Find the best specialist for yourself! Our professionals will help you to find the best decisions for solving your problems!',
+
+	// Search
+	'search.name.label': 'Specialist name',
+	'search.location.label': 'Locations',
+	'search.specialty.label': 'Specialties',
+	'search.specialty.placeholder': 'Select one or more specialties...',
 
 	// Languages
 	en: 'English',

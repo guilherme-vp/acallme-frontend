@@ -9,7 +9,9 @@ export const theme = {
 	},
 	background: {
 		main: '#F8F9FE',
-		disabled: '#EFEFEF'
+		disabled: '#EFEFEF',
+		light: '#FFF',
+		calm: '#F9FAFF'
 	},
 	text: {
 		main: '#1D2B4E',
@@ -19,6 +21,8 @@ export const theme = {
 	grey: {
 		main: '#918C9B',
 		secondary: '#B5BED2',
+		third: '#DEDEDE',
+		fourth: '#EFEFEF',
 		darker: '#666b7f'
 	},
 	tags: {
@@ -27,7 +31,7 @@ export const theme = {
 		yellow: '#F49F0E'
 	},
 	border: {
-		thin: '#EBEFF2',
+		thin: '#E9ECEE',
 		darker: '#E2E2EA',
 		colored: '#F49F0E'
 	},
@@ -38,6 +42,11 @@ export const theme = {
 	},
 	input: {
 		borderFocus: '#0e63f4'
+	},
+	shadow: {
+		first: '0 3px 10px rgba(0, 0, 0, 0.04)',
+		second: '0 7px 60px rgba(0, 0, 0, 0.12)',
+		third: '0 2px 5px rgba(112, 144, 176, 0.12)'
 	}
 }
 

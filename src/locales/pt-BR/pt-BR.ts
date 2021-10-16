@@ -26,7 +26,14 @@ export const ptBrLocales = {
 	birthDate: 'data de nascimento',
 	phone: 'telefone',
 	start: 'começar',
+	notification: '{length, plural, =1 {notificação} other {notificações}}',
+	general: 'geral',
+	sort: 'Ordenar por:',
+	search: 'buscar',
+	all: 'todos(as)',
+	loading: 'carregando',
 
+	// Home
 	'home.title': 'Home',
 	'home.header.home': 'Home',
 	'home.header.about': 'Sobre',
@@ -79,6 +86,7 @@ export const ptBrLocales = {
 		'A ACall Me te ajuda a enfrentar o distanciamento social te aproximando dos melhores especialistas para lidar com os problemas causados pela pandemia.',
 	'home.footer.copyright': 'Copyright © 2021 - Todos os direitos reservados por Vortechs.',
 
+	// Login
 	'login.title': 'Bem-Vindo de Volta!',
 	'login.description.0': 'Qual é Sua Função?',
 	'login.description.1': 'Insira suas Informações',
@@ -94,6 +102,7 @@ export const ptBrLocales = {
 	'login.createAccount': 'Criar Conta!',
 	'login.error': 'Os dados enviados estão incorretos ou o usuário não existe',
 
+	// Signup
 	'signup.title.0': 'Qual é Sua Função?',
 	'signup.title.1': 'Informações da Conta',
 	'signup.title.2': 'Informações Pessoais',
@@ -121,6 +130,47 @@ export const ptBrLocales = {
 	'signup.modal.success.description':
 		'Agora você pode fazer o quê é melhor para você e para sua saúde.',
 	'signup.modal.success.button': 'Começar!',
+
+	// Dashboard Navigation items
+	'nav.schedule': 'Agenda',
+	'nav.specialists': 'Especialistas',
+	'nav.history': 'Histórico',
+	'nav.logout': 'Sair',
+
+	// Notifications
+	'notifications.new.title': 'Novas Notificações',
+	'notifications.old.title': 'Notificações Lidas',
+	'notifications.noNew': 'Você não tem nenhuma notificação nova',
+	'notifications.totalUnRead':
+		'Você tem {length} {length, plural, =1 {notificação não lida} other {notificações não lidas}}',
+	'notification.newAppointment.title': 'Nova Consulta',
+	'notification.newAppointment.description':
+		'{name} agendou uma consulta com você as {date}. Você quer confirmar essa consulta?',
+	'notification.confirmedAppointment.title': 'Consulta Confirmada',
+	'notification.confirmedAppointment.description.specialist':
+		'Você confirmou essa consulta',
+	'notification.rejectedAppointment.description.specialist': 'Você rejeitou essa consulta',
+	'notification.confirmedAppointment.description': 'Sua consulta em {date} foi confirmada',
+	'notification.rejectedAppointment.title': 'Consulta Rejeitada',
+	'notification.rejectedAppointment.description':
+		'Infelizmente, sua consulta com {name} foi rejeitada',
+	'notification.callAppointment.title': 'Chamada',
+	'notification.callAppointment.description':
+		'Sua consulta está ocorrendo agora! Você quer entrar na chamada?',
+	'notification.callAppointment.description.ended': 'Essa consulta já se encerrou',
+
+	// Dashboard
+	'dashboard.welcome': 'Bem-vindo(a), {name}!',
+	'dashboard.card.book': 'Agendar Consulta',
+	'dashboard.forYou': 'Melhores para Você',
+	'dashboard.findTheBest':
+		'Encontre o melhor especialista para você! Nossos profissionais irão te ajudar a encontrar a melhor decisão para resolver seus problemas!',
+
+	// Search
+	'search.name.label': 'Nome do Especialista',
+	'search.location.label': 'Localizações',
+	'search.specialty.label': 'Especializações',
+	'search.specialty.placeholder': 'Selecione uma ou mais especialidades...',
 
 	en: 'Inglês',
 	'pt-BR': 'Português'

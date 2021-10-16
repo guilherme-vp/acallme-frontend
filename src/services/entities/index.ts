@@ -1,4 +1,5 @@
 export * from './Gender.enum'
+export * from './Notification.entity'
 export * from './Patient.entity'
 export * from './Roles.enum'
 export * from './Specialist.entity'

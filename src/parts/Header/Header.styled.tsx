@@ -1,9 +1,10 @@
-import { Button, Toolbar, Typography } from '@mui/material'
 import styled from 'styled-components'
+
+import { Button, Toolbar, Typography } from '@mui/material'
 
 export const Container = styled(Toolbar)`
 	height: 77px;
-	padding: 16px;
+	padding: 40px 16px 0;
 	border-bottom-left-radius: 24px;
 	border-bottom-right-radius: 24px;
 
@@ -16,8 +17,8 @@ export const Container = styled(Toolbar)`
 
 	@media only screen and (min-width: 960px) {
 		&.MuiToolbar-gutters {
-			padding-left: 80px;
-			padding-right: 80px;
+			padding-left: 40px;
+			padding-right: 40px;
 		}
 	}
 

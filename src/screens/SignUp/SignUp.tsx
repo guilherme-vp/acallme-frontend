@@ -1,12 +1,13 @@
 /* eslint-disable indent */
 import React, { useState } from 'react'
 
+import { useTheme } from 'styled-components'
+
 import { LoadingButton } from '@mui/lab'
 import { Grid, Button, Typography } from '@mui/material'
 import iziToast from 'izitoast'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Link, useHistory } from 'react-router-dom'
-import { useTheme } from 'styled-components'
 
 import { useIntl } from 'hooks'
 import { ChoseRole } from 'parts/ChoseRole'

@@ -1,8 +1,9 @@
 import React from 'react'
 
+import { useTheme } from 'styled-components'
+
 import { Autocomplete, Grid, InputAdornment, TextField } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
-import { useTheme } from 'styled-components'
 
 import { useIntl } from 'hooks'
 import { capitalizeLetter } from 'utils/capitalize-letter'

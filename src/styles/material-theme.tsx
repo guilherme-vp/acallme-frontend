@@ -96,7 +96,7 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 			},
 			styleOverrides: {
 				root: {
-					textTransform: 'initial',
+					textTransform: 'capitalize',
 					fontSize: pxToRem(14),
 					borderRadius: '25px',
 					fontWeight: 600
@@ -136,11 +136,36 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 				}
 			}
 		},
+		MuiChip: {
+			styleOverrides: {
+				root: {
+					height: 24,
+					'&:hover': {
+						backgroundColor: alpha(theme.colors.primary, 0.2)
+					}
+				},
+				sizeSmall: {
+					fontWeight: 500,
+					padding: '5px 10px'
+				},
+				label: {
+					fontSize: pxToRem(12)
+				},
+				deleteIconColorPrimary: {
+					color: theme.colors.primary,
+					fontSize: pxToRem(14),
+					'&:hover, &:active': {
+						color: alpha(theme.colors.primary, 0.7)
+					}
+				}
+			}
+		},
 		MuiSelect: {
 			styleOverrides: {
 				root: {
 					border: `1px solid ${theme.border.thin}`,
-					padding: '12px 15px'
+					padding: '12px 15px',
+					fontSize: pxToRem(12)
 				},
 				icon: {
 					right: 2
@@ -161,7 +186,7 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 				root: {
 					borderRadius: 6,
 					border: `1px solid ${theme.border.thin}`,
-					fontSize: pxToRem(15),
+					fontSize: pxToRem(14),
 					marginTop: '0 !important'
 				},
 				input: {
@@ -169,6 +194,13 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 					'&::placeholder': {
 						color: theme.grey.main
 					}
+				}
+			}
+		},
+		MuiListItem: {
+			styleOverrides: {
+				root: {
+					padding: '8px 20px'
 				}
 			}
 		},
@@ -207,6 +239,36 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 				withChildrenVertical: {
 					'&::after, &::before': {
 						borderColor: theme.grey.main
+					}
+				}
+			}
+		},
+		MuiDrawer: {
+			styleOverrides: {
+				paper: {
+					borderRight: 0,
+					backgroundColor: theme.background.light
+				}
+			}
+		},
+		MuiTab: {
+			styleOverrides: {
+				root: {
+					paddingTop: 0,
+					paddingBottom: 0,
+					fontSize: pxToRem(14),
+					color: theme.text.main,
+					transition: 'all 0.3s linear',
+					borderTopRightRadius: '16px',
+					borderBottomRightRadius: '16px',
+					fontWeight: 500,
+					'&:hover': {
+						backgroundColor: alpha(theme.grey.secondary, 0.4)
+					},
+					'&.Mui-selected': {
+						fontWeight: 700,
+						color: theme.colors.primary,
+						backgroundColor: alpha(theme.colors.primary, 0.1)
 					}
 				}
 			}

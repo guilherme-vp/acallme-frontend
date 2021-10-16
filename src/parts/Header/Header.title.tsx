@@ -8,7 +8,7 @@ import { LanguagePicker } from 'components/LanguagePicker'
 import { Container, Content, Title, RightContent } from './Header.styled'
 
 export const HeaderTitle = () => (
-	<AppBar position="fixed" style={{ border: 'none' }}>
+	<AppBar style={{ border: 'none' }}>
 		<Container>
 			<Content>
 				<Link to="/">

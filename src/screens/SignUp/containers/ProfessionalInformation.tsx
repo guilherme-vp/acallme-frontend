@@ -58,7 +58,7 @@ export const ProfessionalInformation = () => {
 				</Grid>
 				<Grid item>
 					<Controller
-						render={({ field: { onChange, onBlur, value, name, ref } }) => (
+						render={({ field: { onChange, value, name, ref } }) => (
 							<Autocomplete
 								multiple
 								options={intl.locale === 'en' ? rolesEn : rolesPtBR}
