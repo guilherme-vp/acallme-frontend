@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 
-import { Button, Grid, IconButton, Theme, Typography, useMediaQuery } from '@mui/material'
-import { differenceInYears, addWeeks, subWeeks } from 'date-fns'
-import { differenceInWeeks } from 'date-fns/esm'
+import { Container, Grid, IconButton, Typography } from '@mui/material'
+import { differenceInYears, addWeeks, subWeeks, differenceInDays } from 'date-fns'
 import { MdArrowBack as PrevIcon, MdArrowForward as NextIcon } from 'react-icons/md'
 
 import { useIntl } from 'hooks'
 
-import { getWeek, WeekState } from './date.utils'
+import { BookButton, Table, TBody } from './Schedule.styled'
+import { getWeek, ScheduleContent } from './date.utils'
 
 export interface ScheduleProps {
 	onClick: (scheduleId: number) => void
@@ -19,12 +19,11 @@ export const Schedule = ({ onClick, patientId, specialistId }: ScheduleProps) =>
 	const now = new Date()
 	const intl = useIntl()
 	const [date, setDate] = useState(now)
-	const [week, setWeek] = useState<WeekState>(
+	const [week, setWeek] = useState<ScheduleContent>(
 		getWeek({ date, patientId, specialistId, locale: intl.locale })
 	)
-	const isMdDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'))
-	const isPrevDisabled = differenceInWeeks(now, date) <= 0
-	const isNextDisabled = differenceInYears(now, addWeeks(date, 1)) <= 0
+	const isPrevDisabled = differenceInDays(date, now) <= 7
+	const isNextDisabled = differenceInYears(now, addWeeks(date, 1)) > 0
 
 	useEffect(() => {
 		setWeek(getWeek({ date, patientId, specialistId, locale: intl.locale }))
@@ -44,57 +43,72 @@ export const Schedule = ({ onClick, patientId, specialistId }: ScheduleProps) =>
 	}
 
 	return (
-		<Grid container>
-			<Grid container item justifyContent="space-between">
-				<Grid item>
+		<Grid container justifyContent="center">
+			<Container maxWidth="md">
+				<Grid container item>
 					<Typography variant="display3">Book Session</Typography>
 				</Grid>
-				<Grid
-					container
-					item
-					justifyContent={isMdDown ? 'center' : 'flex-start'}
-					xs={12}
-					md="auto"
-					spacing={2}
-				>
+				<Grid container item justifyContent="flex-end" spacing={2}>
 					<Grid item>
 						<Typography variant="display3">{week.selector}</Typography>
 					</Grid>
 					<Grid item>
-						<IconButton onClick={() => handlePrevWeek()} disabled={isPrevDisabled}>
+						<IconButton
+							onClick={() => handlePrevWeek()}
+							disabled={isPrevDisabled}
+							color="primary"
+							disableRipple
+						>
 							<PrevIcon />
 						</IconButton>
-						<IconButton onClick={() => handleNextWeek()} disabled={isNextDisabled}>
+						<IconButton
+							onClick={() => handleNextWeek()}
+							disabled={isNextDisabled}
+							color="primary"
+							disableRipple
+						>
 							<NextIcon />
 						</IconButton>
 					</Grid>
 				</Grid>
-			</Grid>
-			<Grid container item>
-				<table>
-					{week.schedule.map(({ title, desc, ranges }) => (
-						<>
-							<th>
-								{title}
-								<br />
-								{desc}
-							</th>
-							{ranges.map(({ hour, isDisabled, isScheduled, scheduleId }) => (
-								<td key={scheduleId}>
-									<Button
-										onClick={() => onClick(scheduleId)}
-										disabled={isDisabled}
-										variant="contained"
-										color={isScheduled ? 'primary' : 'inherit'}
-									>
-										{hour}
-									</Button>
-								</td>
+				<Grid container justifyContent="center">
+					<Table>
+						<thead>
+							<tr>
+								{week.schedule.weeks.map(({ title, desc }) => (
+									<th key={title}>
+										<Typography fontWeight={700} color="secondary" variant="body1">
+											{title}
+										</Typography>
+										<Typography fontWeight={600} color="text.secondary" variant="h5">
+											{desc}
+										</Typography>
+									</th>
+								))}
+							</tr>
+						</thead>
+						<TBody>
+							{week.schedule.hours.map((hourRanges, index) => (
+								<tr key={index}>
+									{hourRanges.map(({ hour, isDisabled, isScheduled, scheduleId }) => (
+										<td key={scheduleId}>
+											<BookButton
+												onClick={() => onClick(scheduleId)}
+												disabled={isDisabled}
+												isScheduled={isScheduled}
+												variant={isScheduled ? 'contained' : 'text'}
+												color="inherit"
+											>
+												{isDisabled ? <s>{hour}</s> : hour}
+											</BookButton>
+										</td>
+									))}
+								</tr>
 							))}
-						</>
-					))}
-				</table>
-			</Grid>
+						</TBody>
+					</Table>
+				</Grid>
+			</Container>
 		</Grid>
 	)
 }
