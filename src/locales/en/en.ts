@@ -31,6 +31,9 @@ export const enLocales: ILocale = {
 	notification: '{length, plural, =1 {notification} other {notifications}}',
 	general: 'general',
 	sort: 'Sort by:',
+	search: 'search',
+	all: 'all',
+	loading: 'loading',
 
 	// Home
 	'home.title': 'Home',
@@ -130,7 +133,6 @@ export const enLocales: ILocale = {
 	'signup.modal.success.button': 'Start Now!',
 
 	// Dashboard Navigation items
-	'nav.dashboard': 'Dashboard',
 	'nav.specialists': 'Specialists',
 	'nav.schedule': 'Schedule',
 	'nav.history': 'History',
@@ -165,6 +167,12 @@ export const enLocales: ILocale = {
 	'dashboard.forYou': 'Best for You',
 	'dashboard.findTheBest':
 		'Find the best specialist for yourself! Our professionals will help you to find the best decisions for solving your problems!',
+
+	// Search
+	'search.name.label': 'Specialist name',
+	'search.location.label': 'Locations',
+	'search.specialty.label': 'Specialties',
+	'search.specialty.placeholder': 'Select one or more specialties...',
 
 	// Languages
 	en: 'English',

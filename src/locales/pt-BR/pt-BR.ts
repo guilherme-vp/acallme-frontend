@@ -29,6 +29,9 @@ export const ptBrLocales = {
 	notification: '{length, plural, =1 {notificação} other {notificações}}',
 	general: 'geral',
 	sort: 'Ordenar por:',
+	search: 'buscar',
+	all: 'todos(as)',
+	loading: 'carregando',
 
 	// Home
 	'home.title': 'Home',
@@ -129,7 +132,6 @@ export const ptBrLocales = {
 	'signup.modal.success.button': 'Começar!',
 
 	// Dashboard Navigation items
-	'nav.dashboard': 'Dashboard',
 	'nav.schedule': 'Agenda',
 	'nav.specialists': 'Especialistas',
 	'nav.history': 'Histórico',
@@ -163,6 +165,12 @@ export const ptBrLocales = {
 	'dashboard.forYou': 'Melhores para Você',
 	'dashboard.findTheBest':
 		'Encontre o melhor especialista para você! Nossos profissionais irão te ajudar a encontrar a melhor decisão para resolver seus problemas!',
+
+	// Search
+	'search.name.label': 'Nome do Especialista',
+	'search.location.label': 'Localizações',
+	'search.specialty.label': 'Especializações',
+	'search.specialty.placeholder': 'Selecione uma ou mais especialidades...',
 
 	en: 'Inglês',
 	'pt-BR': 'Português'
