@@ -164,7 +164,8 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 			styleOverrides: {
 				root: {
 					border: `1px solid ${theme.border.thin}`,
-					padding: '12px 15px'
+					padding: '12px 15px',
+					fontSize: pxToRem(12)
 				},
 				icon: {
 					right: 2
@@ -185,7 +186,7 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 				root: {
 					borderRadius: 6,
 					border: `1px solid ${theme.border.thin}`,
-					fontSize: pxToRem(15),
+					fontSize: pxToRem(14),
 					marginTop: '0 !important'
 				},
 				input: {
