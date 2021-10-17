@@ -6,16 +6,16 @@ import { MdArrowBack as PrevIcon, MdArrowForward as NextIcon } from 'react-icons
 
 import { useIntl } from 'hooks'
 
-import { BookButton, Table, TBody } from './Schedule.styled'
+import { BookButton, Table, TBody, TData } from './Agenda.styled'
 import { getWeek, ScheduleContent } from './date.utils'
 
-export interface ScheduleProps {
+export interface AgendaProps {
 	onClick: (scheduleId: number) => void
 	specialistId: number
 	patientId: number
 }
 
-export const Schedule = ({ onClick, patientId, specialistId }: ScheduleProps) => {
+export const Agenda = ({ onClick, patientId, specialistId }: AgendaProps) => {
 	const now = new Date()
 	const intl = useIntl()
 	const [date, setDate] = useState(now)
@@ -46,13 +46,15 @@ export const Schedule = ({ onClick, patientId, specialistId }: ScheduleProps) =>
 
 	return (
 		<Grid container justifyContent="center">
-			<Container maxWidth="md">
+			<Container maxWidth="lg">
 				<Grid container item>
 					<Typography variant="display3">Book Session</Typography>
 				</Grid>
-				<Grid container item justifyContent="flex-end" spacing={2}>
+				<Grid container item justifyContent="flex-end" spacing={2} alignItems="center">
 					<Grid item>
-						<Typography variant="display3">{week.selector}</Typography>
+						<Typography variant="h2" fontWeight={600}>
+							{week.selector}
+						</Typography>
 					</Grid>
 					<Grid item>
 						<IconButton
@@ -93,7 +95,7 @@ export const Schedule = ({ onClick, patientId, specialistId }: ScheduleProps) =>
 							{week.schedule.hours.map((hourRanges, index) => (
 								<tr key={index}>
 									{hourRanges.map(({ hour, isDisabled, isScheduled, scheduleId }) => (
-										<td key={scheduleId}>
+										<TData key={scheduleId}>
 											<BookButton
 												onClick={() => onClick(scheduleId)}
 												disabled={isDisabled}
@@ -103,7 +105,7 @@ export const Schedule = ({ onClick, patientId, specialistId }: ScheduleProps) =>
 											>
 												{isDisabled ? <s>{hour}</s> : hour}
 											</BookButton>
-										</td>
+										</TData>
 									))}
 								</tr>
 							))}
@@ -115,4 +117,4 @@ export const Schedule = ({ onClick, patientId, specialistId }: ScheduleProps) =>
 	)
 }
 
-export default Schedule
+export default Agenda

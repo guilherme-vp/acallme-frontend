@@ -14,6 +14,10 @@ export const Table = styled.table`
 	width: 100%;
 `
 
+export const TData = styled.td`
+	text-align: center;
+`
+
 export const TBody = styled.tbody`
 	&::before {
 		line-height: 16px;
