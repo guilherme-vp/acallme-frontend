@@ -97,12 +97,10 @@ export function getWeek({
 		return format(oldDate, 'd', { locale: intlLocale })
 	}
 
-	const now = new Date()
-
-	const firstDay = startOfWeek(now, { weekStartsOn: 1 })
-	const lastDay = endOfWeek(now, { weekStartsOn: 1 })
+	const firstDay = startOfWeek(date, { weekStartsOn: 1 })
+	const lastDay = endOfWeek(date, { weekStartsOn: 1 })
 	const startWeekMonth = format(firstDay, 'MMM')
-	const year = format(now, 'yyyy')
+	const year = format(date, 'yyyy')
 
 	const allWeek = getWeekAndHours({ date, patientId, specialistId })
 

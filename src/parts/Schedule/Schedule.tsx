@@ -26,7 +26,9 @@ export const Schedule = ({ onClick, patientId, specialistId }: ScheduleProps) =>
 	const isNextDisabled = differenceInYears(now, addWeeks(date, 1)) > 0
 
 	useEffect(() => {
-		setWeek(getWeek({ date, patientId, specialistId, locale: intl.locale }))
+		const ranges = getWeek({ date, patientId, specialistId, locale: intl.locale })
+
+		setWeek(ranges)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [date])
 
