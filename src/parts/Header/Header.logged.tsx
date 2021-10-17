@@ -17,7 +17,7 @@ export const HeaderLogged = ({ openDrawer }: HeaderProps) => (
 	// const { user } = useStoreon('user')
 	// const [firstName, lastName] = (user?.name as string).split(' ')
 
-	<AppBar sx={{ border: 'none' }}>
+	<AppBar sx={{ border: 'none' }} className="dashboard">
 		<Container>
 			<Grid container justifyContent="space-between" alignItems="center">
 				<Grid container item xs="auto">

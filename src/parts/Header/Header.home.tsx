@@ -21,7 +21,7 @@ export const HeaderHome = () => {
 	const smDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'))
 
 	return (
-		<AppBar position="fixed" style={{ border: 'none' }}>
+		<AppBar position="fixed" style={{ border: 'none' }} className="home">
 			<Container>
 				<Content>
 					<Link to="/">
