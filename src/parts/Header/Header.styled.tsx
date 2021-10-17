@@ -24,8 +24,16 @@ export const Container = styled(Toolbar)`
 	}
 
 	@media only screen and (min-width: 1280px) {
-		&.MuiToolbar-gutters {
+		.home &.MuiToolbar-gutters {
 			padding: 0 144px;
+		}
+
+		.auth &.MuiToolbar-gutters {
+			padding: 0 80px;
+		}
+
+		.dashboard &.MuiToolbar-gutters {
+			padding: 0 40px;
 		}
 	}
 `

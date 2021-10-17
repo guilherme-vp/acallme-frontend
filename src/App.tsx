@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 import { CircularProgress, useMediaQuery } from '@mui/material'
 import iziToast from 'izitoast'
-import { RouteComponentProps, RouteProps } from 'react-router'
+import { Redirect, RouteComponentProps, RouteProps } from 'react-router'
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
 
 import { useStoreon } from 'hooks'
@@ -15,8 +15,10 @@ import { Specialists } from 'screens/Specialists'
 
 import { AuthLayout } from './layouts/Auth'
 import { HomeLayout } from './layouts/Home'
+
 import 'izitoast/dist/css/iziToast.min.css'
 import 'simplebar/dist/simplebar.min.css'
+import Schedule from 'screens/Schedule'
 
 iziToast.settings({
 	position: 'bottomLeft',
@@ -70,18 +72,14 @@ const App = () => {
 				<RouteWrapper path={LOGIN} layout={AuthLayout} component={Login} />
 				<RouteWrapper path={SIGNUP} layout={AuthLayout} component={SignUp} />
 				<RouteWrapper path={SPECIALISTS} layout={DashboardLayout} component={Specialists} />
-				<RouteWrapper
-					path={SCHEDULE}
-					layout={DashboardLayout}
-					component={() => <h1>SCHEDULE</h1>}
-				/>
+				<RouteWrapper path={SCHEDULE} layout={DashboardLayout} component={Schedule} />
 				<RouteWrapper
 					path={HISTORY}
 					layout={DashboardLayout}
 					component={() => <h1>HISTORY</h1>}
 				/>
 
-				{/* <Redirect to={HOME} /> */}
+				<Redirect to={HOME} />
 			</Switch>
 		</Router>
 	)
