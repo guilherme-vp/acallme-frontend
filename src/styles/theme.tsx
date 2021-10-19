@@ -11,12 +11,15 @@ export const theme = {
 		main: '#F8F9FE',
 		disabled: '#EFEFEF',
 		light: '#FFF',
-		calm: '#F9FAFF'
+		calm: '#F9FAFF',
+		foreground: '#f3f4f8',
+		darker: '#6c7288'
 	},
 	text: {
 		main: '#1D2B4E',
 		description: '#656A80',
-		link: '#4a90e2'
+		link: '#4a90e2',
+		light: '#fff'
 	},
 	grey: {
 		main: '#918C9B',
