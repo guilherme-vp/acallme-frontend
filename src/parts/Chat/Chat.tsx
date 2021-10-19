@@ -68,7 +68,7 @@ export const Chat = ({ listener, speaker }: ChatProps) => {
 				{messages
 					.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime())
 					.map((message, idx) => (
-						<Message {...message} key={idx} id={`message-${idx}`} />
+						<Message {...message} key={idx} />
 					))}
 			</S.MessageWrapper>
 			<S.SenderContainer>
