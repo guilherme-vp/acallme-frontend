@@ -15,7 +15,7 @@ type StoryArgs = Partial<CallSettingsProps>
 const Template: Story<CallSettingsProps> = args => {
 	const baseDate = new Date()
 
-	const [duration, setDuration] = useState<string>()
+	const [duration, setDuration] = useState<string>('')
 	const [audio, setAudio] = useState(true)
 	const [camera, setCamera] = useState(true)
 	const [fullScreen, setFullscreen] = useState(false)
@@ -29,7 +29,7 @@ const Template: Story<CallSettingsProps> = args => {
 
 			const { hours, minutes, seconds } = interval
 
-			const formatNumber = (n: number): string =>
+			const formatNumber = (n = 0): string =>
 				n.toLocaleString('en-US', { minimumIntegerDigits: 2 })
 
 			const final = `${formatNumber(hours)}:${formatNumber(minutes)}:${formatNumber(
@@ -43,14 +43,14 @@ const Template: Story<CallSettingsProps> = args => {
 
 	return (
 		<CallSettings
-			duration={duration}
 			audio={audio}
 			camera={camera}
 			fullscreen={fullScreen}
-			handleToggleAudio={prev => setAudio(!prev)}
-			handleToggleCamera={prev => setCamera(!prev)}
-			handleToggleFullscreen={prev => setFullscreen(!prev)}
 			{...args}
+			duration={duration}
+			handleToggleAudio={() => setAudio(prev => !prev)}
+			handleToggleCamera={() => setCamera(prev => !prev)}
+			handleToggleFullscreen={() => setFullscreen(prev => !prev)}
 		/>
 	)
 }
