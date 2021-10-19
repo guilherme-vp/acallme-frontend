@@ -22,7 +22,7 @@ export const Message = ({
 	name,
 	createdAt
 }: MessageProps) => (
-	<Grid container flexDirection={isSpeaker ? 'row-reverse' : 'row'}>
+	<Grid container flexDirection={isSpeaker ? 'row-reverse' : 'row'} sx={{ padding: 1 }}>
 		<Grid item mx={1}>
 			<S.MiniAvatar src={avatarUrl ?? undefined}>{getInitials(name)}</S.MiniAvatar>
 		</Grid>
