@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import { Grid, Input } from '@mui/material'
+import { Grid, TextField } from '@mui/material'
+import { useForm } from 'react-hook-form'
 import { AiOutlineSend as SendIcon } from 'react-icons/ai'
 
 import { useIntl } from 'hooks'
@@ -13,35 +14,34 @@ export interface ChatSenderProps {
 
 export const ChatSender = ({ onSend }: ChatSenderProps) => {
 	const intl = useIntl()
-	const [message, setMessage] = useState<string>('')
+	const {
+		register,
+		handleSubmit,
+		clearErrors,
+		reset,
+		formState: { errors }
+	} = useForm<{ message: string }>({
+		mode: 'all'
+	})
 
-	const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-		const { value } = e.target
-
-		setMessage(value)
-	}
-
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-
-		onSend(message)
-		setMessage('')
-	}
+	const onSubmit = handleSubmit((data: { message: string }) => {
+		onSend(data.message)
+		clearErrors()
+		reset()
+	})
 
 	return (
-		<form onSubmit={handleSubmit} noValidate>
+		<form onSubmit={onSubmit} noValidate>
 			<Grid container alignItems="center" spacing={2}>
 				<Grid item xs>
-					<Input
+					<TextField
+						{...register('message', { required: true, maxLength: 1000 })}
 						fullWidth
 						placeholder={intl.formatMessage({ id: 'chat.placeholder' })}
-						name="chat"
-						type="text"
-						onChange={handleChange}
-						value={message}
 						required
+						error={!!errors.message}
 						sx={{
-							borderRadius: '12px',
+							borderRadius: '16px',
 							backgroundColor: theme => theme.palette.background.default
 						}}
 					/>
