@@ -12,7 +12,7 @@ export const theme = {
 		disabled: '#EFEFEF',
 		light: '#FFF',
 		calm: '#F9FAFF',
-		foreground: '#f3f4f8',
+		foreground: '#DEDEDE',
 		darker: '#6c7288'
 	},
 	text: {
