@@ -172,6 +172,9 @@ export const ptBrLocales = {
 	'search.specialty.label': 'Especializações',
 	'search.specialty.placeholder': 'Selecione uma ou mais especialidades...',
 
+	// Chat
+	'chat.placeholder': 'Envie uma mensagem...',
+
 	en: 'Inglês',
 	'pt-BR': 'Português'
 }

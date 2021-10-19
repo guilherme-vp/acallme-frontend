@@ -174,6 +174,9 @@ export const enLocales: ILocale = {
 	'search.specialty.label': 'Specialties',
 	'search.specialty.placeholder': 'Select one or more specialties...',
 
+	// Chat
+	'chat.placeholder': 'Send a message...',
+
 	// Languages
 	en: 'English',
 	'pt-BR': 'Portuguese'
