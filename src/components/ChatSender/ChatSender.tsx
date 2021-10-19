@@ -25,6 +25,7 @@ export const ChatSender = ({ onSend }: ChatSenderProps) => {
 		e.preventDefault()
 
 		onSend(message)
+		setMessage('')
 	}
 
 	return (
@@ -37,6 +38,7 @@ export const ChatSender = ({ onSend }: ChatSenderProps) => {
 						name="chat"
 						type="text"
 						onChange={handleChange}
+						value={message}
 						required
 						sx={{
 							borderRadius: '12px',
