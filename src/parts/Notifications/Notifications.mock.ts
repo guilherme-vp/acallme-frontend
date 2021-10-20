@@ -8,7 +8,7 @@ export const NOTIFICATIONS: Notification[] = [
 		.fill(null)
 		.map<Notification>(() => ({
 			id: faker.datatype.uuid(),
-			appointmentId: faker.datatype.number(),
+			scheduleId: faker.datatype.number(),
 			name: faker.name.firstName(),
 			avatar: faker.image.people(40, 40),
 			// @ts-ignore
@@ -21,7 +21,7 @@ export const NOTIFICATIONS: Notification[] = [
 		})),
 	{
 		id: faker.datatype.uuid(),
-		appointmentId: faker.datatype.number(),
+		scheduleId: faker.datatype.number(),
 		name: faker.name.firstName(),
 		avatar: faker.image.people(36, 36),
 		type: 'appointment_confirmation',
@@ -31,7 +31,7 @@ export const NOTIFICATIONS: Notification[] = [
 	},
 	{
 		id: faker.datatype.uuid(),
-		appointmentId: faker.datatype.number(),
+		scheduleId: faker.datatype.number(),
 		name: faker.name.firstName(),
 		avatar: faker.image.business(),
 		type: 'appointment_call',
@@ -40,7 +40,7 @@ export const NOTIFICATIONS: Notification[] = [
 	},
 	{
 		id: faker.datatype.uuid(),
-		appointmentId: faker.datatype.number(),
+		scheduleId: faker.datatype.number(),
 		name: faker.name.firstName(),
 		avatar: faker.image.business(),
 		type: 'appointment_call',
