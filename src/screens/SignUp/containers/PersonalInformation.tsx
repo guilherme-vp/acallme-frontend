@@ -24,6 +24,7 @@ import {
 } from 'react-icons/md'
 
 import { InputIconContainer } from 'components/InputAdornment'
+import { dateFormat } from 'constants/date-format'
 import { useIntl } from 'hooks'
 import { GenderEnum } from 'services/entities'
 import { capitalizeLetter } from 'utils/capitalize-letter'
@@ -150,7 +151,7 @@ export const PersonalInformation = () => {
 						maxDate={maxDate}
 						disableFuture
 						mask="__/__/____"
-						onChange={value => setValue('birth', value)}
+						onChange={value => setValue('birth', datefns.format(value as Date, dateFormat))}
 						value={birth}
 						renderInput={props => <TextField focused required {...props} />}
 					/>
