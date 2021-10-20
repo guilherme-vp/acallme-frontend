@@ -27,6 +27,6 @@ export function renderAvatar({
 	}
 
 	return {
-		avatar: getInitials(name)
+		avatar: name ? getInitials(name) : 'AC'
 	}
 }

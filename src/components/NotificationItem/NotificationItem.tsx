@@ -27,9 +27,9 @@ import { renderAvatar } from './renderAvatar'
 
 interface NotificationItemProps {
 	notification: Notification
-	handleConfirm: (id: string, appointmentId: number) => void
-	handleReject: (id: string, appointmentId: number) => void
-	handleEnter: (id: string, appointmentId: number) => void
+	handleConfirm: (id: string, scheduleId: number) => void
+	handleReject: (id: string, scheduleId: number) => void
+	handleEnter: (id: string, scheduleId: number) => void
 }
 
 export const NotificationItem = ({
@@ -38,17 +38,8 @@ export const NotificationItem = ({
 	handleEnter,
 	handleReject
 }: NotificationItemProps) => {
-	const {
-		id,
-		avatar,
-		createdAt,
-		appointmentId,
-		name,
-		when,
-		type,
-		isConfirmed,
-		isFinished
-	} = notification
+	const { id, avatar, createdAt, scheduleId, name, when, type, isConfirmed, isFinished } =
+		notification
 	const intl = useIntl()
 
 	const formatDate = () => when && `${datefns.format(when, dateFormat)}`
@@ -114,14 +105,14 @@ export const NotificationItem = ({
 				type === 'appointment_new' && typeof isConfirmed === 'undefined' ? (
 					<ActionContainer>
 						<IconButton
-							onClick={() => handleConfirm(id, appointmentId)}
+							onClick={() => handleConfirm(id, scheduleId)}
 							color="success"
 							sx={{ p: 0.5 }}
 						>
 							<CheckIcon />
 						</IconButton>
 						<IconButton
-							onClick={() => handleReject(id, appointmentId)}
+							onClick={() => handleReject(id, scheduleId)}
 							color="error"
 							sx={{ p: 0.5 }}
 						>
@@ -132,7 +123,7 @@ export const NotificationItem = ({
 					type === 'appointment_call' &&
 					!isFinished && (
 						<ActionContainer>
-							<IconButton onClick={() => handleEnter(id, appointmentId)}>
+							<IconButton onClick={() => handleEnter(id, scheduleId)}>
 								<MobileIcon />
 							</IconButton>
 						</ActionContainer>
