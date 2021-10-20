@@ -177,6 +177,10 @@ export const enLocales: ILocale = {
 	// Chat
 	'chat.placeholder': 'Send a message...',
 
+	// Call
+	'call.close.warn.title': 'Appointment Finishing',
+	'call.close.warn.desc': 'The appointment will finish in 5 minutes!',
+
 	// Languages
 	en: 'English',
 	'pt-BR': 'Portuguese'

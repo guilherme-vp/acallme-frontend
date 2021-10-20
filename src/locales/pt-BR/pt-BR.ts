@@ -175,6 +175,10 @@ export const ptBrLocales = {
 	// Chat
 	'chat.placeholder': 'Envie uma mensagem...',
 
+	// Call
+	'call.close.warn.title': 'Consulta Encerrando',
+	'call.close.warn.desc': 'A consulta se encerrará em 5 minutos!',
+
 	en: 'Inglês',
 	'pt-BR': 'Português'
 }
