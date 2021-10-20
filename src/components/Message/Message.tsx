@@ -9,7 +9,7 @@ import * as S from './Message.styled'
 
 export interface MessageProps {
 	name: string
-	avatarUrl: string | null
+	avatarUrl?: string
 	message: string
 	isSpeaker: boolean
 	createdAt: Date

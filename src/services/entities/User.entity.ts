@@ -1,13 +1,16 @@
 import { GenderEnum } from './Gender.enum'
+// eslint-disable-next-line import/no-cycle
+import { Schedule } from './Schedule.entity'
 
 export interface User {
 	id?: number
-	scheduleId?: number
 	email: string
 	name: string
 	password?: string
-	birth: Date | null
+	avatarUrl?: string
+	birth: string
 	gender: GenderEnum
 	cpf: string
-	phone?: string
+	phone: string
+	schedule?: Schedule[]
 }
