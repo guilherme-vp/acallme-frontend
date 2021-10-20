@@ -20,6 +20,7 @@
 		"noEmit": true,
 		"jsx": "react",
 		"incremental": true,
+		"downlevelIteration": true,
 		"baseUrl": "src"
 	},
 	"include": [
