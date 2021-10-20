@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
-import faker from 'faker'
 import { animateScroll } from 'react-scroll'
 
 import { ChatSender } from 'components/ChatSender'
@@ -8,19 +7,12 @@ import { Message, MessageProps } from 'components/Message'
 
 import * as S from './Chat.styled'
 
-interface Interlocutor {
-	name: string
-	avatarUrl: string
-}
-
 export interface ChatProps {
-	speaker: Interlocutor
-	listener: Interlocutor
+	chat: MessageProps[]
+	sendMessage: (content: string) => void
 }
 
-export const Chat = ({ listener, speaker }: ChatProps) => {
-	const [messages, setMessages] = useState<MessageProps[]>([])
-
+export const Chat = ({ chat, sendMessage }: ChatProps) => {
 	const scrollToBottom = () => {
 		animateScroll.scrollToBottom({
 			containerId: 'container-wrapper',
@@ -29,43 +21,14 @@ export const Chat = ({ listener, speaker }: ChatProps) => {
 		})
 	}
 
-	const addMessage = (content: Omit<MessageProps, 'createdAt' | 'id'>) => {
-		const newMessage = {
-			...content,
-			createdAt: new Date()
-		}
-
-		setMessages(prev => [...prev, newMessage])
-	}
-
-	const sendMessage = (content: string) => {
-		addMessage({
-			...speaker,
-			isSpeaker: true,
-			message: content
-		})
-
-		scrollToBottom()
-	}
-
 	useEffect(() => {
-		const intervalId = setInterval(() => {
-			addMessage({
-				...listener,
-				message: faker.lorem.text(),
-				isSpeaker: false
-			})
-			scrollToBottom()
-		}, 5000)
-
-		return () => clearInterval(intervalId)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+		scrollToBottom()
+	}, [chat])
 
 	return (
 		<S.ChatContainer>
 			<S.MessageWrapper id="container-wrapper">
-				{messages
+				{chat
 					.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime())
 					.map((message, idx) => (
 						<Message {...message} key={idx} />
