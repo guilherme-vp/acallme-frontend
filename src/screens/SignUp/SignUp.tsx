@@ -30,7 +30,7 @@ export type PersonalForm = Pick<User, 'name' | 'birth' | 'phone' | 'gender'> & {
 
 export type AccountForm = Pick<Specialist, 'email' | 'password' | 'cpf' | 'cnpj'>
 
-export type ProfessionalForm = Pick<Specialist, 'about' | 'crm' | 'crp' | 'location'> & {
+export type ProfessionalForm = Pick<Specialist, 'about' | 'crm' | 'crp'> & {
 	specialties: string[]
 }
 
