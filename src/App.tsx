@@ -6,7 +6,6 @@ import { Redirect, RouteComponentProps, RouteProps } from 'react-router'
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
 
 import { useStoreon } from 'hooks'
-import { DashboardLayout } from 'layouts/Dashboard'
 import { LOGIN, SIGNUP, HOME, SPECIALISTS, SCHEDULE, HISTORY, VIDEOCALL } from 'routes'
 import { Home } from 'screens/Home'
 import { Login } from 'screens/Login'
@@ -16,7 +15,9 @@ import { Specialists } from 'screens/Specialists'
 import { Videocall } from 'screens/Videocall'
 
 import { AuthLayout } from './layouts/Auth'
+import { DashboardLayout } from './layouts/Dashboard'
 import { HomeLayout } from './layouts/Home'
+import { VideocallLayout } from './layouts/Videocall'
 
 import 'izitoast/dist/css/iziToast.min.css'
 import 'simplebar/dist/simplebar.min.css'
@@ -83,7 +84,7 @@ const App = () => {
 					layout={DashboardLayout}
 					component={() => <h1>HISTORY</h1>}
 				/>
-				<RouteWrapper path={VIDEOCALL} component={Videocall} />
+				<RouteWrapper path={VIDEOCALL} layout={VideocallLayout} component={Videocall} />
 
 				<Redirect to={HOME} />
 			</Switch>
