@@ -50,7 +50,7 @@ function RouteWrapper({ component: Component, layout: Layout, ...rest }: Wrapper
 }
 
 const App = () => {
-	const { dispatch, loadingUser } = useStoreon('loadingUser')
+	const { dispatch, loading } = useStoreon('loading')
 	const smDown = useMediaQuery('(max-width: 600px)')
 
 	useEffect(() => {
@@ -67,7 +67,7 @@ const App = () => {
 		}
 	}, [dispatch, smDown])
 
-	return loadingUser ? (
+	return loading ? (
 		<CircularProgress
 			style={{ position: 'absolute', left: 0, right: 0, margin: '0 auto', zIndex: 3000 }}
 		/>
