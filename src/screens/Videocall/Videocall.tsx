@@ -122,6 +122,9 @@ export const Videocall = () => {
 					handleToggleAudio={handleToggleAudio}
 					handleToggleCamera={handleToggleCamera}
 					openSettings={handleOpenSettings}
+					openChat={handleOpenChat}
+					openRecord={() => {}}
+					isSpecialist
 					{...status}
 				/>
 			</Grid>
