@@ -19,7 +19,7 @@ const Template: Story<CallSettingsProps> = args => {
 
 	const [duration, setDuration] = useState<string>('')
 	const [audio, setAudio] = useState(true)
-	const [camera, setCamera] = useState(true)
+	const [video, setVideo] = useState(true)
 	const [open, setOpen] = useState(false)
 
 	useEffect(() => {
@@ -47,11 +47,11 @@ const Template: Story<CallSettingsProps> = args => {
 		<>
 			<CallSettings
 				audio={audio}
-				camera={camera}
+				video={video}
 				{...args}
 				duration={duration}
 				handleToggleAudio={() => setAudio(prev => !prev)}
-				handleToggleCamera={() => setCamera(prev => !prev)}
+				handleToggleVideo={() => setVideo(prev => !prev)}
 				openSettings={() => setOpen(true)}
 			/>
 			<ChangeDevicesModal

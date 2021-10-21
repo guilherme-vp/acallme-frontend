@@ -17,10 +17,10 @@ import * as S from './CallSettings.styled'
 
 export interface CallSettingsProps {
 	duration: string
-	camera?: boolean
+	video?: boolean
 	audio?: boolean
 	isSpecialist: boolean
-	handleToggleCamera: () => void
+	handleToggleVideo: () => void
 	handleToggleAudio: () => void
 	handleClose: () => void
 	openSettings: () => void
@@ -31,10 +31,10 @@ export interface CallSettingsProps {
 export const CallSettings = ({
 	duration,
 	audio = true,
-	camera = true,
+	video = true,
 	handleClose,
 	handleToggleAudio,
-	handleToggleCamera,
+	handleToggleVideo,
 	openSettings,
 	openChat,
 	isSpecialist,
@@ -49,12 +49,17 @@ export const CallSettings = ({
 					{duration}
 				</Typography>
 			)}
-			<Stack direction="row" spacing={3}>
+			<Stack
+				direction="row"
+				spacing={3}
+				justifyContent="center"
+				sx={!isMdUp ? { width: '100%' } : {}}
+			>
 				<S.OptionButton disableRipple isOff={!audio} onClick={() => handleToggleAudio()}>
 					{audio ? <MicOn /> : <MicOff />}
 				</S.OptionButton>
-				<S.OptionButton disableRipple isOff={!camera} onClick={() => handleToggleCamera()}>
-					{camera ? <VideoOn /> : <VideoOff />}
+				<S.OptionButton disableRipple isOff={!video} onClick={() => handleToggleVideo()}>
+					{video ? <VideoOn /> : <VideoOff />}
 				</S.OptionButton>
 				<S.OptionButton disableRipple onClick={openSettings}>
 					<SettingsIcon />
