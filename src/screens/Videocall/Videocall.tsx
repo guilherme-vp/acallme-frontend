@@ -10,6 +10,8 @@ import { ChangeDevicesModal } from 'components/ChangeDevicesModal'
 import { CallContext } from 'contexts'
 import { useStoreon } from 'hooks'
 import { Chat } from 'parts/Chat'
+import { Record } from 'parts/Record'
+import { FormProps } from 'parts/Record/Record'
 import { RolesEnum } from 'services/entities'
 import { getInitials } from 'utils/get-initials'
 
@@ -30,6 +32,7 @@ export const Videocall = () => {
 		myVideo,
 		userVideo,
 		user,
+		callEnded,
 
 		handleHangout,
 		handleToggleAudio,
@@ -72,6 +75,7 @@ export const Videocall = () => {
 	}
 
 	const handleOpenChat = () => {
+		handleCloseRecord()
 		setOpenChat(true)
 	}
 
@@ -88,7 +92,12 @@ export const Videocall = () => {
 	}
 
 	const handleOpenRecord = () => {
+		handleCloseChat()
 		setOpenRecord(true)
+	}
+
+	const handleRecordSubmit = (data: FormProps) => {
+		console.log(data)
 	}
 
 	return (
@@ -146,6 +155,23 @@ export const Videocall = () => {
 							sendMessage={sendMessage}
 							open={openChat}
 							handleClose={handleCloseChat}
+						/>
+					</Grid>
+				)}
+				{openRecord && (
+					<Grid
+						item
+						sm={3}
+						sx={{
+							height: '100%',
+							padding: '20px 8px 8px'
+						}}
+					>
+						<Record
+							open={openRecord}
+							handleClose={handleCloseRecord}
+							callEnded={callEnded}
+							onSubmit={handleRecordSubmit}
 						/>
 					</Grid>
 				)}
