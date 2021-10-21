@@ -43,7 +43,7 @@ export interface CallContextProps {
 
 	enterCall: () => void
 	sendMessage: (content: string) => void
-	handleToggleCamera: () => void
+	handleToggleVideo: () => void
 	handleToggleAudio: () => void
 	handleEnterFullscreen: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => void
 	handleLeaveFullscreen: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => void
@@ -63,7 +63,7 @@ export const CallProvider: React.FC = ({ children }) => {
 	const [chat, setChat] = useState<MessageProps[]>([])
 	const [me, setMe] = useState<string>()
 	const [user, setUser] = useState<Caller>()
-	const [countUsers, setCountUsers] = useState(0)
+	const [countUsers, setCountUsers] = useState(1)
 	const [callEnded, setCallEnded] = useState(false)
 
 	const [status, setStatus] = useState<Status>({
@@ -227,8 +227,8 @@ export const CallProvider: React.FC = ({ children }) => {
 		})
 	}
 
-	// Toggle Camera
-	const handleToggleCamera = () => {
+	// Toggle Video
+	const handleToggleVideo = () => {
 		setStatus(prev => {
 			const { video } = prev
 
@@ -330,7 +330,7 @@ export const CallProvider: React.FC = ({ children }) => {
 				changeDevicesSource,
 				enterCall,
 				sendMessage,
-				handleToggleCamera,
+				handleToggleVideo,
 				handleToggleAudio,
 				handleEnterFullscreen,
 				handleLeaveFullscreen,
