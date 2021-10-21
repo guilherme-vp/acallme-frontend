@@ -8,8 +8,10 @@ import {
 	Select,
 	MenuItem,
 	SelectChangeEvent,
-	FormControl
+	FormControl,
+	useMediaQuery
 } from '@mui/material'
+import { Theme } from '@mui/system'
 import iziToast from 'izitoast'
 import { FiVideo as VideoIcon, FiMic as MicIcon } from 'react-icons/fi'
 
@@ -36,6 +38,8 @@ export const ChangeDevicesModal = ({
 	open
 }: ChangeDevicesModalProps) => {
 	const intl = useIntl()
+	const isMdUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
+
 	const [tab, setTab] = useState(0)
 	const [video, setVideo] = useState<MediaDeviceInfo>()
 	const [audio, setAudio] = useState<MediaDeviceInfo>()
@@ -98,17 +102,17 @@ export const ChangeDevicesModal = ({
 			title={capitalizeLetter(intl.formatMessage({ id: 'config' }))}
 			footer={false}
 			showCloseButton
+			maxWidth="xl"
 			size="big"
-			dialogProps={{ fullWidth: true, sx: { paddingX: 0 } }}
 		>
-			<Box sx={{ flexGrow: 1, display: 'flex', height: 224 }}>
+			<Box sx={isMdUp ? { flexGrow: 1, display: 'flex', height: 224 } : { height: '100%' }}>
 				<Tabs
-					orientation="vertical"
-					variant="scrollable"
+					orientation={isMdUp ? 'vertical' : 'horizontal'}
+					variant="fullWidth"
 					value={tab}
 					onChange={(_, newValue) => changeTab(newValue)}
 					TabIndicatorProps={{ hidden: true }}
-					sx={{ borderRight: 1, borderColor: 'divider', paddingRight: 1 }}
+					sx={isMdUp ? { borderRight: 1, borderColor: 'divider', paddingRight: 1 } : {}}
 				>
 					<StyledTab
 						icon={<MicIcon />}
@@ -119,15 +123,23 @@ export const ChangeDevicesModal = ({
 						label={capitalizeLetter(intl.formatMessage({ id: 'video' }))}
 					/>
 				</Tabs>
-				<Stack sx={{ paddingX: 3 }} direction="column">
+				<Stack sx={{ paddingX: { md: 3 } }} direction="column">
 					<Box sx={{ width: '100%' }}>
 						{tab === 0 && (
 							<>
-								<Typography variant="h5" color="primary">
+								<Typography
+									variant="body1"
+									color="text.secondary"
+									textAlign="center"
+									sx={{ marginBottom: '24px' }}
+								>
+									{capitalizeLetter(intl.formatMessage({ id: 'settings.select.audio' }))}
+								</Typography>
+								<Typography variant="h5" color="primary" sx={{ marginBottom: '6px' }}>
 									{capitalizeLetter(intl.formatMessage({ id: 'audio' }))}
 								</Typography>
-								<FormControl variant="standard" sx={{ minWidth: 300 }}>
-									<Select value={audio?.label} onChange={handleChangeAudio}>
+								<FormControl variant="standard" fullWidth>
+									<Select fullWidth value={audio?.label} onChange={handleChangeAudio}>
 										{audioDevices.map(device => (
 											<MenuItem key={device.deviceId} value={device.deviceId}>
 												{device.label}
@@ -140,11 +152,19 @@ export const ChangeDevicesModal = ({
 
 						{tab === 1 && (
 							<>
-								<Typography variant="h5" color="primary">
+								<Typography
+									variant="body1"
+									color="text.secondary"
+									textAlign="center"
+									sx={{ marginBottom: '24px' }}
+								>
+									{intl.formatMessage({ id: 'settings.select.video' })}
+								</Typography>
+								<Typography variant="h5" color="primary" sx={{ marginBottom: '6px' }}>
 									{capitalizeLetter(intl.formatMessage({ id: 'video' }))}
 								</Typography>
-								<FormControl variant="standard" sx={{ minWidth: 300 }}>
-									<Select value={video?.label} onChange={handleChangeVideo}>
+								<FormControl variant="standard" fullWidth>
+									<Select fullWidth value={video?.label} onChange={handleChangeVideo}>
 										{videoDevices.map(device => (
 											<MenuItem key={device.deviceId} value={device.deviceId}>
 												{device.label}
