@@ -35,7 +35,23 @@ export const nodeApi = new Axios({
 		'Content-type': 'application/json',
 		authorization: token ? `Bearer ${token}` : ''
 	},
-	validateStatus: status => status >= 200 && status < 400
+	validateStatus: status => status >= 200 && status < 400,
+	transformRequest: [
+		function transformRequest(data) {
+			if (data && JSON.stringify(data)) {
+				const formattedData = JSON.stringify(data)
+
+				return formattedData
+			}
+
+			return data
+		}
+	],
+	transformResponse: [
+		function transformResponse(data) {
+			return JSON.parse(data)
+		}
+	]
 })
 export const javaApi = new Axios({
 	baseURL: apiUrls.java,
