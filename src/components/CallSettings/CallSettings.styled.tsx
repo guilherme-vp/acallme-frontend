@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import styled from 'styled-components'
 
-import { Box, IconButton } from '@mui/material'
+import { Box, Fab, IconButton } from '@mui/material'
 
 export const SettingsContainer = styled(Box)`
 	background-color: ${props => props.theme.background.videocall};
@@ -32,5 +32,18 @@ export const OptionButton = styled(IconButton).withConfig<{
 	&:hover {
 		background-color: ${({ theme, isHangout, isOff }) =>
 			isHangout || isOff ? theme.tags.red : theme.grey.fifth};
+	}
+`
+
+export const FabButton = styled(Fab)`
+	position: absolute;
+	right: 16px;
+	width: 50px;
+	height: 50px;
+	background-color: ${({ theme }) => theme.grey.fifth};
+	color: ${props => props.theme.tags.white};
+
+	&:hover {
+		background-color: ${({ theme }) => theme.grey.fifth};
 	}
 `

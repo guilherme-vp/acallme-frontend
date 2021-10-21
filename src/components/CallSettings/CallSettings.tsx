@@ -80,6 +80,16 @@ export const CallSettings = ({
 					)}
 				</Stack>
 			)}
+			{!isMdUp && (
+				<>
+					<S.FabButton sx={{ top: '16px' }} onClick={openChat}>
+						<ChatIcon />
+					</S.FabButton>
+					<S.FabButton sx={{ top: 'calc(56px + 24px)' }} onClick={openRecord}>
+						<DocumentIcon />
+					</S.FabButton>
+				</>
+			)}
 		</S.SettingsContainer>
 	)
 }
