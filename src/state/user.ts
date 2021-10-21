@@ -37,6 +37,12 @@ export const userModule: IStoreonModule = store => {
 	store.on('user/verifyToken', async state => {
 		if (state.token) {
 			const token = jwt.decode(state.token) as JUser
+
+			if (!token) {
+				store.dispatch('user/removeToken')
+				return
+			}
+
 			const expiresIn = token.exp * 1000
 			if (Date.now() > expiresIn) {
 				store.dispatch('user/removeToken')
