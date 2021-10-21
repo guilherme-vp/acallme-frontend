@@ -11,24 +11,31 @@ export const theme = {
 		main: '#F8F9FE',
 		disabled: '#EFEFEF',
 		light: '#FFF',
-		calm: '#F9FAFF'
+		calm: '#F9FAFF',
+		foreground: '#DEDEDE',
+		darker: '#6c7288',
+		videocall: '#202124'
 	},
 	text: {
 		main: '#1D2B4E',
 		description: '#656A80',
-		link: '#4a90e2'
+		link: '#4a90e2',
+		light: '#fff'
 	},
 	grey: {
 		main: '#918C9B',
 		secondary: '#B5BED2',
 		third: '#DEDEDE',
 		fourth: '#EFEFEF',
+		fifth: '#3c4043',
 		darker: '#666b7f'
 	},
 	tags: {
 		black: '#000000',
 		white: '#FFFFFF',
-		yellow: '#F49F0E'
+		yellow: '#F49F0E',
+		red: '#FF4336',
+		green: '#00C48C'
 	},
 	border: {
 		thin: '#E9ECEE',

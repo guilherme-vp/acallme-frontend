@@ -68,7 +68,7 @@ export const NotificationsPopover = () => {
 		handleMarkAllAsRead()
 	}
 
-	const handleConfirm = (notificationId: string, appointmentId: number) => {
+	const handleConfirm = (notificationId: string, scheduleId: number) => {
 		const notificationIndex = notifications.findIndex(({ id }) => id === notificationId)
 		const newNotifications = [...notifications]
 
@@ -81,21 +81,26 @@ export const NotificationsPopover = () => {
 		// TODO: update in backend
 	}
 
-	const handleReject = (notificationId: string, appointmentId: number) => {
+	const handleReject = (notificationId: string, scheduleId: number) => {
 		const notificationIndex = notifications.findIndex(({ id }) => id === notificationId)
-		const newNotifications = [...notifications]
 
-		newNotifications[notificationIndex] = {
-			...newNotifications[notificationIndex],
-			isConfirmed: false
-		}
+		setNotifications(prev => {
+			const newNotifications = [...prev]
 
-		setNotifications([...newNotifications])
+			newNotifications[notificationIndex] = {
+				...newNotifications[notificationIndex],
+				isConfirmed: false
+			}
+
+			return newNotifications
+		})
 		// TODO: update in backend
 	}
 
-	const handleEnter = (notificationId: string, appointmentId: number) => {
-		history.push(`/${VIDEOCALL}/${appointmentId}`)
+	const handleEnter = (notificationId: string, scheduleId: number) => {
+		setNotifications(prev => prev.filter(({ id }) => id !== notificationId))
+
+		history.push(`/${VIDEOCALL}/${scheduleId}`)
 	}
 
 	return (

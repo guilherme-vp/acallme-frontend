@@ -4,7 +4,7 @@ import { AppBar, Grid, Button, useMediaQuery, Theme } from '@mui/material'
 import { Link } from 'react-router-dom'
 
 import { SmoothLink } from 'components/SmoothLink'
-import { useIntl } from 'hooks'
+import { useIntl, useStoreon } from 'hooks'
 import { LOGIN } from 'routes'
 
 import {
@@ -15,10 +15,16 @@ import {
 	RightContent,
 	Title
 } from './Header.styled'
+import { ProfileMenu } from './components/ProfileMenu'
 
 export const HeaderHome = () => {
 	const intl = useIntl()
 	const smDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'))
+	const { dispatch, user } = useStoreon('user')
+
+	const onSignOut = () => {
+		dispatch('user/signOut')
+	}
 
 	return (
 		<AppBar position="fixed" style={{ border: 'none' }} className="home">
@@ -64,13 +70,17 @@ export const HeaderHome = () => {
 								</>
 							)}
 
-							<Grid item>
-								<Link to={LOGIN}>
-									<ContactButton variant="contained">
-										{intl.formatMessage({ id: 'home.header.login' })}
-									</ContactButton>
-								</Link>
-							</Grid>
+							{user ? (
+								<ProfileMenu {...user} onSignOut={onSignOut} />
+							) : (
+								<Grid item>
+									<Link to={LOGIN}>
+										<ContactButton variant="contained">
+											{intl.formatMessage({ id: 'home.header.login' })}
+										</ContactButton>
+									</Link>
+								</Grid>
+							)}
 						</Grid>
 					</RightContent>
 				</Content>

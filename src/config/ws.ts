@@ -1,3 +1,3 @@
 const { GATEWAY_URL } = process.env
 
-export const gatewayUrl = GATEWAY_URL ?? 'http://localhost:5005'
+export const wsUrl = GATEWAY_URL ?? 'localhost:5005'

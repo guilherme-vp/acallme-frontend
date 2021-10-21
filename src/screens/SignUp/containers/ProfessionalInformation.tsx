@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Autocomplete, Grid, TextField } from '@mui/material'
 import { Controller, useFormContext } from 'react-hook-form'
-import { MdCreate as AboutIcon, MdPinDrop as LocationIcon } from 'react-icons/md'
+import { MdCreate as AboutIcon } from 'react-icons/md'
 
 import { InputIconContainer } from 'components/InputAdornment'
 import rolesEn from 'data/roles/roles.en.json'
@@ -50,7 +50,7 @@ export const ProfessionalInformation = () => {
 						}}
 					/>
 				</Grid>
-				<Grid item>
+				{/* <Grid item>
 					<TextField
 						focused
 						{...register('location', {
@@ -71,7 +71,7 @@ export const ProfessionalInformation = () => {
 							)
 						}}
 					/>
-				</Grid>
+				</Grid> */}
 				<Grid item>
 					<Controller
 						render={({ field: { onChange, value, name, ref } }) => (

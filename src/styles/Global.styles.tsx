@@ -47,11 +47,11 @@ export const GlobalStyle = createGlobalStyle`
 
 	.custom-scrollbar {
 		outline: none;
-		scrollbar-color: rgba(1, 1, 1, 0.06);
-		scrollbar-width: 5px;
+		scrollbar-color: rgba(1, 1, 1, 0.4);
+		scrollbar-width: 6x;
 		&::-webkit-scrollbar {
 			-webkit-appearance: none;
-			width: 5px;
+			width: 6px;
 			height: 5px;
 		}
 
@@ -61,7 +61,7 @@ export const GlobalStyle = createGlobalStyle`
 
 		&::-webkit-scrollbar-thumb {
 			max-height: 100px;
-			background-color: rgba(1, 1, 1, 0.06);
+			background-color: rgba(1, 1, 1, 0.4);
 			border-radius: 5px;
 		}
 

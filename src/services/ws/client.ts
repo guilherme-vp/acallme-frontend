@@ -1,5 +1,7 @@
-import socketio from 'socket.io-client'
+import io from 'socket.io-client'
 
-import { gatewayUrl } from 'config/ws'
+import { wsUrl } from 'config/ws'
 
-export const WSclient = socketio({ host: gatewayUrl })
+export const mainSocket = io(wsUrl)
+
+export const callSocket = io(`${wsUrl}/videocall`)

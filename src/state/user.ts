@@ -2,6 +2,8 @@ import jwt from 'jsonwebtoken'
 import { IStoreonModule } from 'storeon'
 
 import { queryClient } from '../services/api/client'
+import { fetchMe as fetchPatient } from '../services/api/patient'
+import { fetchMe as fetchSpecialist } from '../services/api/specialist'
 import type { RolesEnum, JUser, User } from '../services/entities'
 
 export interface UserState {
@@ -37,6 +39,12 @@ export const userModule: IStoreonModule = store => {
 	store.on('user/verifyToken', async state => {
 		if (state.token) {
 			const token = jwt.decode(state.token) as JUser
+
+			if (!token) {
+				store.dispatch('user/removeToken')
+				return
+			}
+
 			const expiresIn = token.exp * 1000
 			if (Date.now() > expiresIn) {
 				store.dispatch('user/removeToken')
@@ -46,20 +54,29 @@ export const userModule: IStoreonModule = store => {
 		}
 	})
 
-	store.on('user/getUser', async () => {
+	store.on('user/getUser', async state => {
 		store.dispatch('user/loading', true)
+
+		let ok = false
+
 		try {
-			// const { data, error } = await queryClient.fetchQuery('', () => {})
-			// if (error) {
-			// store.dispatch('user/signOut')
-			// } else if (data.me) {
-			// store.dispatch('user/setUser', data.me.user)
-			// }
-		} catch {
-			store.dispatch('user/signOut')
-		} finally {
-			store.dispatch('user/loading', false)
+			const patientData = await fetchPatient(state.token)
+
+			store.dispatch('user/setUser', patientData)
+			ok = true
+		} catch {}
+
+		if (!ok) {
+			try {
+				const specialistData = await fetchSpecialist()
+
+				store.dispatch('user/setUser', specialistData)
+			} catch {
+				store.dispatch('user/signOut')
+			}
 		}
+
+		store.dispatch('user/loading', false)
 	})
 
 	store.on('user/signOut', () => {
@@ -72,6 +89,11 @@ export const userModule: IStoreonModule = store => {
 
 	store.on('user/setUser', (_state, data) => ({
 		user: data
+	}))
+
+	store.on('user/set', (state, payload) => ({
+		...state,
+		...payload
 	}))
 
 	store.on('user/loading', (_state, isLoading) => ({

@@ -32,6 +32,14 @@ export const ptBrLocales = {
 	search: 'buscar',
 	all: 'todos(as)',
 	loading: 'carregando',
+	dashboard: 'Dashboard',
+	logout: 'Logout',
+	config: 'configurações',
+	camera: 'câmera',
+	video: 'vídeo',
+	audio: 'áudio',
+	success: 'sucesso',
+	fail: 'falha',
 
 	// Home
 	'home.title': 'Home',
@@ -158,6 +166,7 @@ export const ptBrLocales = {
 	'notification.callAppointment.description':
 		'Sua consulta está ocorrendo agora! Você quer entrar na chamada?',
 	'notification.callAppointment.description.ended': 'Essa consulta já se encerrou',
+	'notification.device.success': 'Suas configurações foram salvas!',
 
 	// Dashboard
 	'dashboard.welcome': 'Bem-vindo(a), {name}!',
@@ -171,6 +180,31 @@ export const ptBrLocales = {
 	'search.location.label': 'Localizações',
 	'search.specialty.label': 'Especializações',
 	'search.specialty.placeholder': 'Selecione uma ou mais especialidades...',
+
+	// Chat
+	'chat.placeholder': 'Envie uma mensagem...',
+	'chat.title': 'Mensagens na Chamada',
+	'chat.titleMessage':
+		'As mensagens só podem ser vistas pelas pessoas na chamada e são excluídas quando ela termina.',
+
+	// Record
+	'record.title': 'Formulário de Prontuário',
+	'record.description':
+		'Por favor preencha o formulário com o máximo de detalhes possíveis. O prontuário será criado e enviado quando a ligação se encerrar.',
+	'record.sent': 'Prontuário Enviado',
+	'record.observation': 'Observações',
+	'record.observation.placeholder':
+		'Aqui você pode anotar qualquer observação que possa a ser útil para o tratamento.',
+	'record.diagnosis': 'Diagnóstico',
+	'record.diagnosis.placeholder': 'Ex: Ansiedade e TDAH',
+
+	// Call
+	'call.close.warn.title': 'Consulta Encerrando',
+	'call.close.warn.desc': 'A consulta se encerrará em 5 minutos!',
+
+	// Settings
+	'settings.select.audio': 'Selecione um dispositivo de entrada de áudio',
+	'settings.select.video': 'Selecione um dispositivo de entrada de vídeo',
 
 	en: 'Inglês',
 	'pt-BR': 'Português'

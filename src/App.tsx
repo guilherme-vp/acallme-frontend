@@ -6,19 +6,21 @@ import { Redirect, RouteComponentProps, RouteProps } from 'react-router'
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
 
 import { useStoreon } from 'hooks'
-import { DashboardLayout } from 'layouts/Dashboard'
-import { LOGIN, SIGNUP, HOME, SPECIALISTS, SCHEDULE, HISTORY } from 'routes'
+import { LOGIN, SIGNUP, HOME, SPECIALISTS, SCHEDULE, HISTORY, VIDEOCALL } from 'routes'
 import { Home } from 'screens/Home'
 import { Login } from 'screens/Login'
+import { Schedule } from 'screens/Schedule'
 import { SignUp } from 'screens/SignUp'
 import { Specialists } from 'screens/Specialists'
+import { Videocall } from 'screens/Videocall'
 
 import { AuthLayout } from './layouts/Auth'
+import { DashboardLayout } from './layouts/Dashboard'
 import { HomeLayout } from './layouts/Home'
+import { VideocallLayout } from './layouts/Videocall'
 
 import 'izitoast/dist/css/iziToast.min.css'
 import 'simplebar/dist/simplebar.min.css'
-import Schedule from 'screens/Schedule'
 
 iziToast.settings({
 	position: 'bottomLeft',
@@ -27,41 +29,45 @@ iziToast.settings({
 
 interface WrapperProps extends RouteProps {
 	component: React.ComponentType<RouteComponentProps>
-	layout: React.ComponentType<RouteComponentProps>
+	layout?: React.ComponentType<RouteComponentProps>
 }
 
 function RouteWrapper({ component: Component, layout: Layout, ...rest }: WrapperProps) {
 	return (
 		<Route
 			{...rest}
-			render={props => (
-				<Layout {...props}>
+			render={props =>
+				Layout ? (
+					<Layout {...props}>
+						<Component {...props} />
+					</Layout>
+				) : (
 					<Component {...props} />
-				</Layout>
-			)}
+				)
+			}
 		/>
 	)
 }
 
 const App = () => {
-	const { dispatch, loadingUser } = useStoreon('loadingUser')
+	const { dispatch, loading } = useStoreon('loading')
 	const smDown = useMediaQuery('(max-width: 600px)')
 
 	useEffect(() => {
 		if (smDown) {
 			iziToast.settings({
-				position: 'topLeft'
+				position: 'topRight'
 			})
 			dispatch('drawer/set', false)
 		} else {
 			iziToast.settings({
-				position: 'bottomLeft',
+				position: 'bottomRight',
 				maxWidth: 400
 			})
 		}
 	}, [dispatch, smDown])
 
-	return loadingUser ? (
+	return loading ? (
 		<CircularProgress
 			style={{ position: 'absolute', left: 0, right: 0, margin: '0 auto', zIndex: 3000 }}
 		/>
@@ -78,6 +84,7 @@ const App = () => {
 					layout={DashboardLayout}
 					component={() => <h1>HISTORY</h1>}
 				/>
+				<RouteWrapper path={VIDEOCALL} layout={VideocallLayout} component={Videocall} />
 
 				<Redirect to={HOME} />
 			</Switch>

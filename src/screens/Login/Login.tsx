@@ -19,8 +19,9 @@ import { InputIconContainer } from 'components/InputAdornment'
 import { PasswordInput } from 'components/PasswordInput'
 import { useIntl, useStoreon } from 'hooks'
 import { ChoseRole } from 'parts/ChoseRole'
-import { LOGIN, SIGNUP } from 'routes'
-import { loginPatient } from 'services/api/patient'
+import { SCHEDULE, SIGNUP } from 'routes'
+import { loginPatient, LoginResponse as LoginPResponse } from 'services/api/patient'
+import { loginSpecialist, LoginResponse as LoginSResponse } from 'services/api/specialist'
 import { RolesEnum } from 'services/entities'
 import { capitalizeLetter } from 'utils/capitalize-letter'
 
@@ -36,11 +37,10 @@ export const Login = () => {
 	const { dispatch } = useStoreon()
 	const intl = useIntl()
 	const history = useHistory()
-	const { isLoading, mutateAsync } = useMutation(loginPatient, {
-		onError: () => {
-			iziToast.error({ message: intl.formatMessage({ id: 'login.error' }) })
-		}
-	})
+	const { isLoading: loadingPatient, mutateAsync: mutatePatient } =
+		useMutation(loginPatient)
+	const { isLoading: loadingSpecialist, mutateAsync: mutateSpecialist } =
+		useMutation(loginSpecialist)
 	const [step, setStep] = useState(0)
 	const [chosen, setChosen] = useState<RolesEnum>()
 	const {
@@ -57,12 +57,23 @@ export const Login = () => {
 
 	const handleSubmit = async () => {
 		const formData = getValues()
-		const mutationData = await mutateAsync(formData)
 
-		if (mutationData) {
-			dispatch('user/setToken', mutationData.token)
-			dispatch('user/setUser', mutationData.user)
-			history.push(LOGIN)
+		function setData(data: LoginPResponse | LoginSResponse, role: RolesEnum) {
+			const { token, user } = data
+
+			dispatch('user/set', { user, token, loadingUser: false, role })
+			history.push(SCHEDULE)
+		}
+
+		if (chosen === RolesEnum.Patient) {
+			const mutationData = await mutatePatient(formData)
+
+			setData(mutationData, RolesEnum.Patient)
+		}
+		if (chosen === RolesEnum.Specialist) {
+			const mutationData = await mutateSpecialist(formData)
+
+			setData(mutationData, RolesEnum.Specialist)
 		}
 	}
 
@@ -170,6 +181,7 @@ export const Login = () => {
 									required
 									error={!!errors.username}
 									name="username"
+									autoComplete="email"
 									placeholder={intl.formatMessage({
 										id:
 											chosen === RolesEnum.Patient
@@ -194,6 +206,7 @@ export const Login = () => {
 									label={capitalizeLetter(intl.formatMessage({ id: 'password' }))}
 									isCorrect={allFields.password ? !errors.password : true}
 									name="password"
+									autoComplete="password"
 									InputProps={{
 										startAdornment: (
 											<InputIconContainer position="start">
@@ -211,7 +224,7 @@ export const Login = () => {
 							variant="contained"
 							type="submit"
 							disabled={buttonDisabled}
-							loading={isLoading}
+							loading={loadingSpecialist || loadingPatient}
 						>
 							{buttonMessage.toUpperCase()}
 						</LoadingButton>
