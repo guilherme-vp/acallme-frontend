@@ -19,7 +19,7 @@ import { InputIconContainer } from 'components/InputAdornment'
 import { PasswordInput } from 'components/PasswordInput'
 import { useIntl, useStoreon } from 'hooks'
 import { ChoseRole } from 'parts/ChoseRole'
-import { LOGIN, SIGNUP } from 'routes'
+import { SCHEDULE, SIGNUP } from 'routes'
 import { loginPatient, LoginResponse as LoginPResponse } from 'services/api/patient'
 import { loginSpecialist, LoginResponse as LoginSResponse } from 'services/api/specialist'
 import { RolesEnum } from 'services/entities'
@@ -58,23 +58,22 @@ export const Login = () => {
 	const handleSubmit = async () => {
 		const formData = getValues()
 
-		function setData(data: LoginPResponse | LoginSResponse) {
+		function setData(data: LoginPResponse | LoginSResponse, role: RolesEnum) {
 			const { token, user } = data
 
-			dispatch('user/setToken', token)
-			dispatch('user/setUser', user)
-			history.push(LOGIN)
+			dispatch('user/set', { user, token, loadingUser: false, role })
+			history.push(SCHEDULE)
 		}
 
 		if (chosen === RolesEnum.Patient) {
 			const mutationData = await mutatePatient(formData)
 
-			setData(mutationData)
+			setData(mutationData, RolesEnum.Patient)
 		}
 		if (chosen === RolesEnum.Specialist) {
 			const mutationData = await mutateSpecialist(formData)
 
-			setData(mutationData)
+			setData(mutationData, RolesEnum.Specialist)
 		}
 	}
 
