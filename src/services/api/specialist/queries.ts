@@ -2,7 +2,7 @@ import { Specialist } from 'services/entities'
 
 import { nodeApi } from '../client'
 
-export interface LoginDto {
+interface LoginDto {
 	username: string
 	password: string
 }
@@ -12,26 +12,38 @@ export interface LoginResponse {
 	token: string
 }
 
-export async function fetchSpecialistById(id: number): Promise<Specialist> {
-	const { data } = await nodeApi.get(`specialists/:${id}`)
+// @ts-ignore
+export type SpecialistReponse<T = 'specialist'> = Record<T, Specialist>
 
-	return data as Specialist
+export async function fetchMe(): Promise<Specialist> {
+	const { data } = await nodeApi.get<SpecialistReponse<'me'>>('specialists/me')
+
+	return data.me
+}
+
+export async function fetchSpecialistById(id: number): Promise<Specialist> {
+	const { data } = await nodeApi.get<SpecialistReponse>(`specialists/:${id}`)
+
+	return data.specialist
 }
 
 export async function fetchSpecialists(): Promise<Specialist[]> {
-	const { data } = await nodeApi.get('specialists')
+	const { data } = await nodeApi.get<{ specialists: Specialist[] }>('specialists')
 
-	return data as Specialist[]
+	return data.specialists
 }
 
 export async function createSpecialist(): Promise<Specialist> {
-	const { data } = await nodeApi.get('specialists')
+	const { data } = await nodeApi.post<SpecialistReponse>('specialists')
 
-	return data as Specialist
+	return data.specialist
 }
 
-export async function loginSpecialist(input: LoginDto): Promise<LoginResponse> {
-	const { data } = await nodeApi.post('specialists/login', JSON.stringify(input))
+export async function loginSpecialist(input: LoginDto) {
+	const { data } = await nodeApi.post<LoginResponse>(
+		'specialists/login',
+		JSON.stringify(input)
+	)
 
 	return data as LoginResponse
 }

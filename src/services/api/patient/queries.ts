@@ -15,8 +15,11 @@ export interface LoginResponse {
 // @ts-ignore
 export type PatientReponse<T = 'patient'> = Record<T, Patient>
 
-export async function fetchMe(): Promise<Patient> {
-	const { data } = await nodeApi.get<PatientReponse<'me'>>('patients/me')
+export async function fetchMe(token?: string | null): Promise<Patient> {
+	const { data } = await nodeApi.get<PatientReponse<'me'>>(
+		'patients/me',
+		token ? { headers: { authorization: `Bearer ${token}` } } : {}
+	)
 
 	return data.me
 }
