@@ -6,18 +6,23 @@ export const Container = styled(Grid)`
 	height: 100%;
 `
 
-export const VideoContainer = styled(Box)`
+export const VideoContainer = styled(Grid)`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 40px 16px;
-	width: 100%;
 	height: 100%;
+
+	@media only screen and (min-width: 768px) {
+		padding: 20px 16px 8px;
+	}
 `
 
 export const VideoWrapper = styled(Box)`
 	width: 100%;
 	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	position: relative;
 
 	video {
@@ -26,5 +31,6 @@ export const VideoWrapper = styled(Box)`
 		object-fit: cover;
 		position: absolute;
 		transform: scaleX(-1);
+		border-radius: 12px;
 	}
 `
