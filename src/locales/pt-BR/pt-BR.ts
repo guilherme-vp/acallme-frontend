@@ -191,6 +191,10 @@ export const ptBrLocales = {
 	'call.close.warn.title': 'Consulta Encerrando',
 	'call.close.warn.desc': 'A consulta se encerrará em 5 minutos!',
 
+	// Settings
+	'settings.select.audio': 'Selecione um dispositivo de entrada de áudio',
+	'settings.select.video': 'Selecione um dispositivo de entrada de vídeo',
+
 	en: 'Inglês',
 	'pt-BR': 'Português'
 }

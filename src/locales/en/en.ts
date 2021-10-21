@@ -193,6 +193,10 @@ export const enLocales: ILocale = {
 	'call.close.warn.title': 'Appointment Finishing',
 	'call.close.warn.desc': 'The appointment will finish in 5 minutes!',
 
+	// Settings
+	'settings.select.audio': 'Select an input audio device',
+	'settings.select.video': 'Select a video device',
+
 	// Languages
 	en: 'English',
 	'pt-BR': 'Portuguese'
