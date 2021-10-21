@@ -34,6 +34,14 @@ export const enLocales: ILocale = {
 	search: 'search',
 	all: 'all',
 	loading: 'loading',
+	dashboard: 'Dashboard',
+	logout: 'Logout',
+	config: 'configurations',
+	camera: 'camera',
+	video: 'video',
+	audio: 'audio',
+	success: 'success',
+	fail: 'failure',
 
 	// Home
 	'home.title': 'Home',
@@ -160,6 +168,7 @@ export const enLocales: ILocale = {
 	'notification.callAppointment.title': 'Appointment Call',
 	'notification.callAppointment.description': 'Your appointment is happening now. Enter?',
 	'notification.callAppointment.description.ended': 'This appointment already ended',
+	'notification.device.success': 'Your configurations were saved',
 
 	// Dashboard
 	'dashboard.welcome': 'Welcome, {name}!',
@@ -176,6 +185,9 @@ export const enLocales: ILocale = {
 
 	// Chat
 	'chat.placeholder': 'Send a message...',
+	'chat.title': 'In-Call Messages',
+	'chat.titleMessage':
+		'Messages can only be seen by people in the call and are deleted when the call ends',
 
 	// Call
 	'call.close.warn.title': 'Appointment Finishing',

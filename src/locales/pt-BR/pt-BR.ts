@@ -32,6 +32,14 @@ export const ptBrLocales = {
 	search: 'buscar',
 	all: 'todos(as)',
 	loading: 'carregando',
+	dashboard: 'Dashboard',
+	logout: 'Logout',
+	config: 'configurações',
+	camera: 'câmera',
+	video: 'vídeo',
+	audio: 'áudio',
+	success: 'sucesso',
+	fail: 'falha',
 
 	// Home
 	'home.title': 'Home',
@@ -158,6 +166,7 @@ export const ptBrLocales = {
 	'notification.callAppointment.description':
 		'Sua consulta está ocorrendo agora! Você quer entrar na chamada?',
 	'notification.callAppointment.description.ended': 'Essa consulta já se encerrou',
+	'notification.device.success': 'Suas configurações foram salvas!',
 
 	// Dashboard
 	'dashboard.welcome': 'Bem-vindo(a), {name}!',
@@ -174,6 +183,9 @@ export const ptBrLocales = {
 
 	// Chat
 	'chat.placeholder': 'Envie uma mensagem...',
+	'chat.title': 'Mensagens na Chamada',
+	'chat.titleMessage':
+		'As mensagens só podem ser vistas pelas pessoas na chamada e são excluídas quando ela termina.',
 
 	// Call
 	'call.close.warn.title': 'Consulta Encerrando',
