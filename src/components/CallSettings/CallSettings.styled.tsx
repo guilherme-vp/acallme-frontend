@@ -10,6 +10,10 @@ export const SettingsContainer = styled(Box)`
 	justify-content: space-between;
 	width: 100%;
 	padding: 8px 16px;
+
+	@media only screen and (min-width: 768px) {
+		padding: 8px 36px;
+	}
 `
 
 export const OptionButton = styled(IconButton).withConfig<{
