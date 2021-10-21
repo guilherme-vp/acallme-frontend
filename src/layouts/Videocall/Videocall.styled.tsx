@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 
-import { Grid } from '@mui/material'
+import { Box } from '@mui/material'
 
-export const Container = styled(Grid)`
-	min-height: 100vh;
-	background-color: ${props => props.theme.tags.black};
+export const Container = styled(Box)`
+	height: 100vh;
+	width: 100%;
+	background-color: ${props => props.theme.background.videocall};
 `
