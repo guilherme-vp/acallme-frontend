@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { Story, Meta } from '@storybook/react/types-6-0'
 import { intervalToDuration } from 'date-fns'
+import faker from 'faker'
 
 import { ChangeDevicesModal } from '../ChangeDevicesModal'
 import { CallSettings, CallSettingsProps } from './CallSettings'
@@ -65,5 +66,7 @@ const Template: Story<CallSettingsProps> = args => {
 export const basic = Template.bind({})
 
 basic.args = {
-	handleClose: () => console.log('Close call')
+	handleClose: () => console.log('Close call'),
+	isSpecialist: faker.datatype.boolean(),
+	openRecord: () => {}
 } as StoryArgs
