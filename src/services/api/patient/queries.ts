@@ -7,7 +7,7 @@ interface LoginDto {
 	password: string
 }
 
-interface LoginResponse {
+export interface LoginResponse {
 	user: Patient
 	token: string
 }
@@ -25,13 +25,13 @@ export async function fetchPatients(): Promise<Patient[]> {
 }
 
 export async function createPatient(): Promise<Patient> {
-	const { data } = await nodeApi.get('patients')
+	const { data } = await nodeApi.post('patients')
 
 	return data as Patient
 }
 
-export async function loginPatient(input: LoginDto): Promise<LoginResponse> {
-	const { data } = await nodeApi.post('patients/login', input)
+export async function loginPatient(input: LoginDto) {
+	const { data } = await nodeApi.post('specialists/login', JSON.stringify(input))
 
 	return data as LoginResponse
 }
