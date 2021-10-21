@@ -1,5 +1,6 @@
-import { Grid, Box } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import styled from 'styled-components'
+
+import { Grid, Box, Avatar } from '@mui/material'
 
 export const Container = styled(Grid)`
 	padding: 16px;
@@ -17,7 +18,9 @@ export const VideoContainer = styled(Grid)`
 	}
 `
 
-export const VideoWrapper = styled(Box)`
+export const VideoWrapper = styled(Box).withConfig<{ status: boolean }>({
+	shouldForwardProp: props => !['status'].includes(props)
+})`
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -32,5 +35,14 @@ export const VideoWrapper = styled(Box)`
 		position: absolute;
 		transform: scaleX(-1);
 		border-radius: 12px;
+		display: ${({ status }) => (status ? 'block' : 'none')};
 	}
+`
+
+export const UserAvatar = styled(Avatar).withConfig<{ status: boolean }>({
+	shouldForwardProp: props => !['status'].includes(props)
+})`
+	width: 120px;
+	height: 120px;
+	opacity: ${({ status }) => (status ? 0 : 1)};
 `
