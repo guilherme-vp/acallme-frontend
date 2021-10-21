@@ -12,26 +12,35 @@ export interface LoginResponse {
 	token: string
 }
 
-export async function fetchPatientById(id: number): Promise<Patient> {
-	const { data } = await nodeApi.get(`patients/:${id}`)
+// @ts-ignore
+export type PatientReponse<T = 'patient'> = Record<T, Patient>
 
-	return data as Patient
+export async function fetchMe(): Promise<Patient> {
+	const { data } = await nodeApi.get<PatientReponse<'me'>>('patients/me')
+
+	return data.me
+}
+
+export async function fetchPatientById(id: number): Promise<Patient> {
+	const { data } = await nodeApi.get<PatientReponse>(`patients/:${id}`)
+
+	return data.patient
 }
 
 export async function fetchPatients(): Promise<Patient[]> {
-	const { data } = await nodeApi.get('patients')
+	const { data } = await nodeApi.get<{ patients: Patient[] }>('patients')
 
-	return data as Patient[]
+	return data.patients
 }
 
 export async function createPatient(): Promise<Patient> {
-	const { data } = await nodeApi.post('patients')
+	const { data } = await nodeApi.post<PatientReponse>('patients')
 
-	return data as Patient
+	return data.patient
 }
 
-export async function loginPatient(input: LoginDto) {
-	const { data } = await nodeApi.post('specialists/login', JSON.stringify(input))
+export async function loginPatient(input: LoginDto): Promise<LoginResponse> {
+	const { data } = await nodeApi.post('patients/login', input)
 
 	return data as LoginResponse
 }
