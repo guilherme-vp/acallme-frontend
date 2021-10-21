@@ -1,26 +1,40 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import React, { useState, useContext, useLayoutEffect, useEffect } from 'react'
 
-import { Grid } from '@mui/material'
+import { Grid, useMediaQuery, Zoom } from '@mui/material'
+import { Theme } from '@mui/system'
 import { intervalToDuration } from 'date-fns'
 
 import { CallSettings } from 'components/CallSettings'
 import { ChangeDevicesModal } from 'components/ChangeDevicesModal'
 import { CallContext } from 'contexts'
+import { useStoreon } from 'hooks'
 import { Chat } from 'parts/Chat'
+import { RolesEnum } from 'services/entities'
+import { getInitials } from 'utils/get-initials'
 
-import { VideoContainer, VideoWrapper } from './Videocall.styled'
+import { VideoContainer, VideoWrapper, UserAvatar } from './Videocall.styled'
 
 export const Videocall = () => {
-	const [openChat, setOpenChat] = useState(true)
+	const isMdUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
+	const { user: loggedUser, role } = useStoreon('user', 'role')
+
+	const [openChat, setOpenChat] = useState(false)
+	const [openRecord, setOpenRecord] = useState(false)
 	const [openSettings, setOpenSettings] = useState(false)
 	const { chat, sendMessage } = useContext(CallContext)
 	const {
-		stream,
 		status,
+		userStatus,
+		countUsers,
 		myVideo,
-		handleToggleAudio,
-		handleToggleCamera,
+		userVideo,
+		user,
 
+		handleHangout,
+		handleToggleAudio,
+		handleToggleVideo,
+		changeDevicesSource,
 		enterCall
 	} = useContext(CallContext)
 	const baseDate = new Date()
@@ -69,6 +83,14 @@ export const Videocall = () => {
 		setOpenSettings(true)
 	}
 
+	const handleCloseRecord = () => {
+		setOpenRecord(false)
+	}
+
+	const handleOpenRecord = () => {
+		setOpenRecord(true)
+	}
+
 	return (
 		<Grid container sx={{ height: '100%' }} flexDirection="column">
 			<Grid container item sx={{ height: '90%' }} justifyContent="space-between">
@@ -76,24 +98,38 @@ export const Videocall = () => {
 					container
 					item
 					sm={openChat ? 9 : 12}
-					justifyContent="center"
+					justifyContent="space-between"
 					alignItems="center"
 				>
-					{stream && myVideo && (
-						<VideoContainer>
-							<VideoWrapper>
-								<video
-									playsInline
-									muted
-									ref={myVideo}
-									autoPlay
-									className="video-active"
-									style={{
-										opacity: `${status.video ? '1' : '0'}`
-									}}
-								/>
-							</VideoWrapper>
-						</VideoContainer>
+					{(isMdUp || countUsers <= 1) && (
+						<Zoom in={!!myVideo}>
+							<VideoContainer container item xs={12} md={countUsers <= 1 ? 12 : true}>
+								<VideoWrapper status={!!status.video}>
+									<video muted playsInline ref={myVideo} autoPlay />
+									<UserAvatar src={loggedUser?.avatarUrl} status={!!status.video}>
+										{getInitials(loggedUser?.name as string)}
+									</UserAvatar>
+								</VideoWrapper>
+							</VideoContainer>
+						</Zoom>
+					)}
+					{countUsers > 1 && (
+						<Zoom in={!!userVideo}>
+							<VideoContainer container item xs={12} md={countUsers <= 1 ? 12 : true}>
+								<VideoWrapper status={!!userStatus.video}>
+									<video
+										muted
+										playsInline
+										ref={userVideo}
+										autoPlay
+										style={{ display: status.video ? 'block' : 'none' }}
+									/>
+									<UserAvatar src={user?.avatarUrl} status={!!userStatus.video}>
+										{getInitials(user?.name as string)}
+									</UserAvatar>
+								</VideoWrapper>
+							</VideoContainer>
+						</Zoom>
 					)}
 				</Grid>
 				{openChat && (
@@ -102,7 +138,7 @@ export const Videocall = () => {
 						sm={3}
 						sx={{
 							height: '100%',
-							padding: '16px 8px 16px'
+							padding: '20px 8px 8px'
 						}}
 					>
 						<Chat
@@ -118,19 +154,23 @@ export const Videocall = () => {
 			<Grid container item sx={{ height: '10%' }}>
 				<CallSettings
 					duration={duration}
-					handleClose={() => {}}
+					handleClose={handleHangout}
 					handleToggleAudio={handleToggleAudio}
-					handleToggleCamera={handleToggleCamera}
+					handleToggleVideo={handleToggleVideo}
 					openSettings={handleOpenSettings}
 					openChat={handleOpenChat}
-					openRecord={() => {}}
-					isSpecialist
+					openRecord={handleOpenRecord}
+					isSpecialist={role === RolesEnum.Specialist}
 					{...status}
 				/>
 			</Grid>
 			<ChangeDevicesModal
 				open={openSettings}
-				handleChangeDevice={() => {}}
+				handleChangeDevice={({ sourceId, type }) =>
+					changeDevicesSource(
+						type === 'audio' ? { audioId: sourceId } : { videoId: sourceId }
+					)
+				}
 				onClose={handleCloseSettings}
 			/>
 		</Grid>
