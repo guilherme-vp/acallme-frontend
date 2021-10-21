@@ -113,7 +113,7 @@ export const Videocall = () => {
 							</VideoContainer>
 						</Zoom>
 					)}
-					{countUsers > 1 && (
+					{countUsers > 1 && user && (
 						<Zoom in={!!userVideo}>
 							<VideoContainer container item xs={12} md={countUsers <= 1 ? 12 : true}>
 								<VideoWrapper status={!!userStatus.video}>
