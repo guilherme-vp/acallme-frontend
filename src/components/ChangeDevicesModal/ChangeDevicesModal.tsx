@@ -59,6 +59,9 @@ export const ChangeDevicesModal = ({
 
 			setVideoDevices(videos)
 			setAudioDevices(audios)
+
+			setVideo(videos[0])
+			setAudio(audios[0])
 		})()
 	}, [])
 
@@ -139,7 +142,7 @@ export const ChangeDevicesModal = ({
 									{capitalizeLetter(intl.formatMessage({ id: 'audio' }))}
 								</Typography>
 								<FormControl variant="standard" fullWidth>
-									<Select fullWidth value={audio?.label} onChange={handleChangeAudio}>
+									<Select fullWidth value={audio?.deviceId} onChange={handleChangeAudio}>
 										{audioDevices.map(device => (
 											<MenuItem key={device.deviceId} value={device.deviceId}>
 												{device.label}
@@ -164,7 +167,7 @@ export const ChangeDevicesModal = ({
 									{capitalizeLetter(intl.formatMessage({ id: 'video' }))}
 								</Typography>
 								<FormControl variant="standard" fullWidth>
-									<Select fullWidth value={video?.label} onChange={handleChangeVideo}>
+									<Select fullWidth value={video?.deviceId} onChange={handleChangeVideo}>
 										{videoDevices.map(device => (
 											<MenuItem key={device.deviceId} value={device.deviceId}>
 												{device.label}
