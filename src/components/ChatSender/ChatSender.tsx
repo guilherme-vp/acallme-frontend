@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Grid, TextField } from '@mui/material'
+import { Grid, Input } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { AiOutlineSend as SendIcon } from 'react-icons/ai'
 
@@ -34,16 +34,13 @@ export const ChatSender = ({ onSend }: ChatSenderProps) => {
 		<form onSubmit={onSubmit} noValidate>
 			<Grid container alignItems="center" spacing={2}>
 				<Grid item xs>
-					<TextField
+					<Input
 						{...register('message', { required: true, maxLength: 1000 })}
 						fullWidth
 						placeholder={intl.formatMessage({ id: 'chat.placeholder' })}
 						required
 						error={!!errors.message}
-						sx={{
-							borderRadius: '16px',
-							backgroundColor: theme => theme.palette.background.default
-						}}
+						sx={{ border: 0 }}
 					/>
 				</Grid>
 				<Grid item>
