@@ -23,6 +23,11 @@ interface Status {
 	audio?: boolean
 }
 
+export interface Authorization {
+	videoId?: string
+	audioId?: string
+}
+
 export interface CallContextProps {
 	stream?: MediaStream
 	chat: MessageProps[]
@@ -43,6 +48,7 @@ export interface CallContextProps {
 	handleEnterFullscreen: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => void
 	handleLeaveFullscreen: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => void
 	handleHangout: () => void
+	changeDevicesSource: (sources: Authorization) => void
 }
 
 // @ts-ignore
@@ -74,11 +80,16 @@ export const CallProvider: React.FC = ({ children }) => {
 	const userVideo = useRef<HTMLVideoElement>(null)
 	const connectionRef = useRef<Peer.Instance>()
 
-	const requestAuthorization = async () => {
+	const requestAuthorization = async ({ videoId, audioId }: Authorization = {}) => {
 		try {
 			const mediaStream = await navigator.mediaDevices.getUserMedia({
-				video: true,
-				audio: true
+				video: {
+					deviceId: { ideal: videoId },
+					facingMode: 'user'
+				},
+				audio: {
+					deviceId: { ideal: audioId }
+				}
 			})
 
 			setStream(mediaStream)
@@ -91,7 +102,6 @@ export const CallProvider: React.FC = ({ children }) => {
 
 	useEffect(() => {
 		;(async () => {
-			// Request User Media Autorization
 			await requestAuthorization()
 
 			// Get User Socket Id From Server
@@ -298,6 +308,10 @@ export const CallProvider: React.FC = ({ children }) => {
 		socket.emit(WsEvents.END_CALL, { id: me })
 	}
 
+	const changeDevicesSource = async ({ audioId, videoId }: Authorization) => {
+		await requestAuthorization({ audioId, videoId })
+	}
+
 	return (
 		<CallContext.Provider
 			value={{
@@ -313,6 +327,7 @@ export const CallProvider: React.FC = ({ children }) => {
 				myVideo,
 				userVideo,
 
+				changeDevicesSource,
 				enterCall,
 				sendMessage,
 				handleToggleCamera,
