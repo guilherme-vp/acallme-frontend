@@ -187,6 +187,17 @@ export const ptBrLocales = {
 	'chat.titleMessage':
 		'As mensagens só podem ser vistas pelas pessoas na chamada e são excluídas quando ela termina.',
 
+	// Record
+	'record.title': 'Formulário de Prontuário',
+	'record.description':
+		'Por favor preencha o formulário com o máximo de detalhes possíveis. O prontuário será criado e enviado quando a ligação se encerrar.',
+	'record.sent': 'Prontuário Enviado',
+	'record.observation': 'Observações',
+	'record.observation.placeholder':
+		'Aqui você pode anotar qualquer observação que possa a ser útil para o tratamento.',
+	'record.diagnosis': 'Diagnóstico',
+	'record.diagnosis.placeholder': 'Ex: Ansiedade e TDAH',
+
 	// Call
 	'call.close.warn.title': 'Consulta Encerrando',
 	'call.close.warn.desc': 'A consulta se encerrará em 5 minutos!',

@@ -189,6 +189,17 @@ export const enLocales: ILocale = {
 	'chat.titleMessage':
 		'Messages can only be seen by people in the call and are deleted when the call ends',
 
+	// Record
+	'record.title': 'Medical Record Form',
+	'record.description':
+		'Please fill in the form with as much detail as possible. The record will be created and sent when the call ends. ',
+	'record.sent': 'Record Sent',
+	'record.observation': 'Observations',
+	'record.observation.placeholder':
+		'Here you can note any observations that can be useful for the treatment.',
+	'record.diagnosis': 'Diagnosis',
+	'record.diagnosis.placeholder': 'Ex: Anxiety and ADHD',
+
 	// Call
 	'call.close.warn.title': 'Appointment Finishing',
 	'call.close.warn.desc': 'The appointment will finish in 5 minutes!',
