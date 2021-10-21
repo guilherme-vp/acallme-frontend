@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Story, Meta } from '@storybook/react/types-6-0'
 import { intervalToDuration } from 'date-fns'
 
+import { ChangeDevicesModal } from '../ChangeDevicesModal'
 import { CallSettings, CallSettingsProps } from './CallSettings'
 
 export default {
@@ -18,7 +19,7 @@ const Template: Story<CallSettingsProps> = args => {
 	const [duration, setDuration] = useState<string>('')
 	const [audio, setAudio] = useState(true)
 	const [camera, setCamera] = useState(true)
-	const [fullScreen, setFullscreen] = useState(false)
+	const [open, setOpen] = useState(false)
 
 	useEffect(() => {
 		setInterval(() => {
@@ -42,16 +43,22 @@ const Template: Story<CallSettingsProps> = args => {
 	}, [])
 
 	return (
-		<CallSettings
-			audio={audio}
-			camera={camera}
-			fullscreen={fullScreen}
-			{...args}
-			duration={duration}
-			handleToggleAudio={() => setAudio(prev => !prev)}
-			handleToggleCamera={() => setCamera(prev => !prev)}
-			handleToggleFullscreen={() => setFullscreen(prev => !prev)}
-		/>
+		<>
+			<CallSettings
+				audio={audio}
+				camera={camera}
+				{...args}
+				duration={duration}
+				handleToggleAudio={() => setAudio(prev => !prev)}
+				handleToggleCamera={() => setCamera(prev => !prev)}
+				openSettings={() => setOpen(true)}
+			/>
+			<ChangeDevicesModal
+				handleChangeDevice={() => {}}
+				open={open}
+				onClose={() => setOpen(false)}
+			/>
+		</>
 	)
 }
 
