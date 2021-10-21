@@ -1,14 +1,13 @@
 import React from 'react'
 
-import { IconButton, Stack, Typography } from '@mui/material'
+import { Stack, Typography } from '@mui/material'
 import {
 	MdMic as MicOn,
 	MdMicOff as MicOff,
 	MdVideocam as VideoOn,
 	MdVideocamOff as VideoOff,
 	MdCallEnd as EndCall,
-	MdFullscreen as FullScreen,
-	MdFullscreenExit as ExitFullScreen
+	MdMoreVert as SettingsIcon
 } from 'react-icons/md'
 
 import * as S from './CallSettings.styled'
@@ -19,41 +18,38 @@ export interface CallSettingsProps {
 	handleToggleCamera: () => void
 	audio?: boolean
 	handleToggleAudio: () => void
-	fullscreen?: boolean
-	handleToggleFullscreen: () => void
 	handleClose: () => void
+	openSettings: () => void
 }
 
 export const CallSettings = ({
 	duration,
 	audio = true,
 	camera = true,
-	fullscreen = false,
 	handleClose,
 	handleToggleAudio,
 	handleToggleCamera,
-	handleToggleFullscreen
+	openSettings
 }: CallSettingsProps) => (
 	<S.SettingsContainer>
+		<Typography textAlign="center" color="white" variant="body1">
+			{duration}
+		</Typography>
 		<Stack direction="row" spacing={3}>
-			<IconButton onClick={() => handleToggleAudio()}>
+			<S.OptionButton disableRipple isOff={!audio} onClick={() => handleToggleAudio()}>
 				{audio ? <MicOn /> : <MicOff />}
-			</IconButton>
-			<IconButton onClick={() => handleToggleCamera()}>
+			</S.OptionButton>
+			<S.OptionButton disableRipple isOff={!camera} onClick={() => handleToggleCamera()}>
 				{camera ? <VideoOn /> : <VideoOff />}
-			</IconButton>
-			<IconButton onClick={() => handleClose()} color="error">
+			</S.OptionButton>
+			<S.OptionButton disableRipple onClick={openSettings}>
+				<SettingsIcon />
+			</S.OptionButton>
+			<S.OptionButton disableRipple onClick={() => handleClose()} isHangout>
 				<EndCall />
-			</IconButton>
-			<IconButton onClick={() => handleToggleFullscreen()}>
-				{fullscreen ? <FullScreen /> : <ExitFullScreen />}
-			</IconButton>
+			</S.OptionButton>
 		</Stack>
-		<div>
-			<Typography textAlign="center" variant="body2">
-				{duration}
-			</Typography>
-		</div>
+		<div />
 	</S.SettingsContainer>
 )
 
