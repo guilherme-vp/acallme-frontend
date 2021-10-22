@@ -182,6 +182,7 @@ export const ptBrLocales = {
 	'search.specialty.label': 'Especializações',
 	'search.specialty.placeholder': 'Selecione uma ou mais especialidades...',
 	'search.button': 'Buscar',
+	'search.result': 'Exibindo {pageTotal} especialistas',
 
 	// Specialist
 	'specialist.specialties': 'Especialidades',

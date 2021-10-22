@@ -184,6 +184,7 @@ export const enLocales: ILocale = {
 	'search.specialty.label': 'Specialties',
 	'search.specialty.placeholder': 'Select one or more specialties...',
 	'search.button': 'Search',
+	'search.result': 'Showing {pageTotal} specialists',
 
 	// Specialist
 	'specialist.specialties': 'Specialities',
