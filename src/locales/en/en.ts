@@ -224,6 +224,8 @@ export const enLocales: ILocale = {
 	'schedule.confirmationModal.title': 'Appointment Confirmation',
 	'schedule.disableModal.title': 'Disable Date',
 	'schedule.disableModal.desc': `Don't worry, you can enable it again.`,
+	'schedule.card.book': 'Book an appointment',
+	'schedule.card.hours': 'Available hours',
 
 	// Languages
 	en: 'English',

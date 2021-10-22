@@ -223,6 +223,8 @@ export const ptBrLocales = {
 	'schedule.disableModal.title': 'Desabilitar Data',
 	'schedule.disableModal.desc':
 		'Não se preocupe, você poderá habilitar esse horário novamente',
+	'schedule.card.book': 'Marque uma consulta',
+	'schedule.card.hours': 'Horários disponíveis',
 
 	en: 'Inglês',
 	'pt-BR': 'Português'
