@@ -10,7 +10,7 @@ import { User } from 'services/entities'
 import { getInitials } from 'utils/get-initials'
 
 export interface ConfirmationModalProps {
-	patient: Pick<User, 'id' | 'avatarUrl' | 'name'>
+	user: Pick<User, 'id' | 'avatarUrl' | 'name'>
 	scheduleId: number
 	date: Date
 	open: boolean
@@ -20,7 +20,7 @@ export interface ConfirmationModalProps {
 }
 
 export const ConfirmationModal = ({
-	patient,
+	user,
 	scheduleId,
 	date,
 	open,
@@ -54,14 +54,14 @@ export const ConfirmationModal = ({
 				sx={{ marginY: '24px' }}
 			>
 				<Grid item>
-					<Avatar sx={{ width: '96px', height: '96px' }} src={patient.avatarUrl}>
-						{getInitials(patient.name)}
+					<Avatar sx={{ width: '96px', height: '96px' }} src={user.avatarUrl}>
+						{getInitials(user.name)}
 					</Avatar>
 				</Grid>
 				<Grid container item spacing={1} justifyContent="center">
 					<Grid item xs={12}>
 						<Typography fontWeight={600} variant="h3" textAlign="center">
-							{patient.name}
+							{user.name}
 						</Typography>
 					</Grid>
 					<Grid item xs={12}>
