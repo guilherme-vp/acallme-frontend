@@ -26,7 +26,7 @@ export const Specialists = () => {
 	const { getValues } = formMethods
 	const { data, isLoading, refetch } = useQuery(
 		['specialists', page],
-		() => fetchSpecialists({ ...getValues(), page }),
+		() => fetchSpecialists({ ...getValues(), page, limit: 9 }),
 		{ keepPreviousData: true, refetchOnWindowFocus: false }
 	)
 	// eslint-disable-next-line react-hooks/rules-of-hooks
