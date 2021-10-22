@@ -29,14 +29,14 @@ export const Sidebar = ({ open, onClose }: Props) => {
 
 	const options: Options = [
 		{
-			icon: <GroupIcon />,
-			option: 'specialists',
-			link: SPECIALISTS
-		},
-		{
 			icon: <CalendarIcon />,
 			option: 'schedule',
 			link: SCHEDULE
+		},
+		{
+			icon: <GroupIcon />,
+			option: 'specialists',
+			link: SPECIALISTS
 		},
 		{
 			icon: <HistoryIcon />,
