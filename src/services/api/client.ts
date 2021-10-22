@@ -16,11 +16,15 @@ export const queryClient = new QueryClient({
 	defaultOptions: {
 		mutations: {
 			onError: (error: any) => {
-				const errorData = JSON.parse(error.response.data)
+				try {
+					const errorData = JSON.parse(error.response.data)
 
-				if (errorData.error) {
-					iziToast.error({ message: errorData.error })
-				} else {
+					if (errorData.error) {
+						iziToast.error({ message: errorData.error })
+					}
+					iziToast.error({ message: 'Um erro ocorreu, tente novamente.' })
+				} catch (e) {
+					console.error(e)
 					iziToast.error({ message: 'Um erro ocorreu, tente novamente.' })
 				}
 			}
