@@ -135,8 +135,14 @@ export const Search = ({ onSearch, loading, onSearchInputChange }: SearchProps) 
 					</S.SearchButton>
 				</Hidden>
 				<Hidden mdUp>
-					<LoadingButton variant="contained" color="primary" fullWidth sx={{ mt: 1 }}>
-						{capitalizeLetter(intl.formatMessage({ id: 'loading' }))}
+					<LoadingButton
+						loading={loading}
+						variant="contained"
+						color="primary"
+						fullWidth
+						sx={{ mt: 1 }}
+					>
+						{capitalizeLetter(intl.formatMessage({ id: loading ? 'loading' : 'search' }))}
 					</LoadingButton>
 				</Hidden>
 			</Grid>
