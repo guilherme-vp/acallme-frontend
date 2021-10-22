@@ -7,6 +7,13 @@ interface LoginDto {
 	password: string
 }
 
+interface GetManyDto {
+	specialties?: string[]
+	name?: string
+	page?: number
+	limit?: number
+}
+
 export interface LoginResponse {
 	user: Specialist
 	token: string
@@ -30,8 +37,10 @@ export async function fetchSpecialistById(id: number): Promise<Specialist> {
 	return data.specialist
 }
 
-export async function fetchSpecialists(): Promise<Specialist[]> {
-	const { data } = await nodeApi.get<{ specialists: Specialist[] }>('specialists')
+export async function fetchSpecialists(queries: GetManyDto): Promise<Specialist[]> {
+	const { data } = await nodeApi.get<{ specialists: Specialist[] }>('specialists', {
+		params: queries
+	})
 
 	return data.specialists
 }
