@@ -25,16 +25,14 @@ export const Schedule = () => {
 		date: new Date()
 	})
 
-	const {
-		data: disableData,
-		isLoading: disableLoading,
-		mutate: disableMutation
-	} = useMutation('disableSchedule', disableSchedule)
-	const {
-		data: confirmData,
-		isLoading: confirmLoading,
-		mutate: confirmMutation
-	} = useMutation('confirmSchedule', confirmSchedule)
+	const { isLoading: disableLoading, mutate: disableMutation } = useMutation(
+		'disableSchedule',
+		disableSchedule
+	)
+	const { isLoading: confirmLoading, mutate: confirmMutation } = useMutation(
+		'confirmSchedule',
+		confirmSchedule
+	)
 
 	const [openConfirm, setOpenConfirm] = useState(false)
 	const [openDisable, setOpenDisable] = useState(false)

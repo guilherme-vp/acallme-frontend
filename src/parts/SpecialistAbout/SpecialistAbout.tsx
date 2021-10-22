@@ -21,7 +21,6 @@ import {
 } from 'react-icons/md'
 
 import { useIntl } from 'hooks'
-import { Agenda } from 'parts/Agenda'
 import { Specialist } from 'services/entities'
 import { getInitials } from 'utils/get-initials'
 
