@@ -2,7 +2,6 @@ import React from 'react'
 
 import {
 	AppBar,
-	CircularProgress,
 	Dialog,
 	IconButton,
 	Slide,
@@ -11,18 +10,19 @@ import {
 	Grid,
 	Divider,
 	Stack,
-	Chip
+	Chip,
+	Container
 } from '@mui/material'
 import { TransitionProps } from '@mui/material/transitions'
 import {
 	MdClose as CloseIcon,
-	MdPhone as PhoneIcon,
-	MdMail as MailIcon
+	MdOutlinePhone as PhoneIcon,
+	MdOutlineMail as MailIcon
 } from 'react-icons/md'
-import { useQuery } from 'react-query'
 
 import { useIntl } from 'hooks'
-import { fetchSpecialistById } from 'services/api/specialist'
+import { Agenda } from 'parts/Agenda'
+import { Specialist } from 'services/entities'
 import { getInitials } from 'utils/get-initials'
 
 import * as S from './SpecialistAbout.styled'
@@ -30,7 +30,11 @@ import * as S from './SpecialistAbout.styled'
 export interface SpecialistAboutProps {
 	open: boolean
 	handleClose: () => void
-	specialistId: number
+	specialist: Omit<
+		Specialist,
+		'gender' | 'crp' | 'crm' | 'cpf' | 'cnpj' | 'birth' | 'schedule'
+	>
+	userId: number
 }
 
 const Transition = React.forwardRef(function Transition(
@@ -43,14 +47,11 @@ const Transition = React.forwardRef(function Transition(
 })
 
 export const SpecialistAbout = ({
-	specialistId,
+	specialist,
 	handleClose,
-	open
+	open,
+	userId
 }: SpecialistAboutProps) => {
-	const { data, isLoading } = useQuery('specialistById', async () =>
-		fetchSpecialistById(specialistId)
-	)
-
 	const intl = useIntl()
 
 	return (
@@ -65,77 +66,86 @@ export const SpecialistAbout = ({
 					</Typography>
 				</Toolbar>
 			</AppBar>
-			{isLoading || !data ? (
-				<Grid container justifyContent="space-between" alignItems="center">
+
+			<Container maxWidth="sm">
+				<Grid container spacing={3} alignItems="center" flexDirection="column">
 					<Grid item>
-						<CircularProgress />
+						<S.BigAvatar src={specialist.avatarUrl}>
+							{getInitials(specialist.name)}
+						</S.BigAvatar>
+					</Grid>
+					<Grid item>
+						<Typography textAlign="center" variant="h1" fontWeight={700}>
+							{specialist.name}
+						</Typography>
+					</Grid>
+					<Grid item>
+						<Stack direction="row" alignItems="center" spacing={2}>
+							<Stack direction="row" spacing={1} alignItems="center">
+								<MailIcon />
+								<Typography
+									sx={{ marginLeft: '8px' }}
+									variant="body1"
+									color="text.secondary"
+								>
+									{specialist.email}
+								</Typography>
+							</Stack>
+							<Stack direction="row" spacing={1} alignItems="center">
+								<PhoneIcon />
+								<Typography
+									sx={{ marginLeft: '8px' }}
+									variant="body1"
+									color="text.secondary"
+								>
+									{specialist.phone}
+								</Typography>
+							</Stack>
+						</Stack>
 					</Grid>
 				</Grid>
-			) : (
-				<Grid container justifyContent="center" flexDirection="column">
-					<Grid
-						container
-						item
-						alignItems="center"
-						justifyContent="center"
-						flexDirection="column"
-						spacing={3}
-					>
+				<Grid item xs={12} sx={{ width: '100%', marginTop: 2 }}>
+					<Divider flexItem />
+				</Grid>
+				<Grid container item spacing={3} sx={{ mt: 1 }}>
+					<Grid container item alignItems="center" flexDirection="column" spacing={1}>
 						<Grid item>
-							<S.BigAvatar src={data.avatarUrl}>{getInitials(data.name)}</S.BigAvatar>
-						</Grid>
-						<Grid item>
-							<Typography textAlign="center" variant="h1" fontWeight={700}>
-								{data.name}
+							<Typography color="text.secondary" variant="h3">
+								{intl.formatMessage({ id: 'signup.form.session.cost' })}
 							</Typography>
 						</Grid>
 						<Grid item>
-							<Stack direction="row" spacing={2}>
-								<Typography variant="body1">
-									<MailIcon />
-									{data.email}
-								</Typography>
-								<Typography variant="body1">
-									<PhoneIcon />
-									{data.phone}
-								</Typography>
-							</Stack>
+							<Typography textAlign="center" variant="display3" fontWeight={700}>
+								${specialist.cost}/h
+							</Typography>
 						</Grid>
-						<Grid item>
-							<Typography textAlign="center" variant="h3" fontWeight={700}>
-								${data.cost}
+					</Grid>
+					<Grid container item spacing={1}>
+						<Grid item xs={12}>
+							<Typography color="text.secondary" variant="h3">
+								{intl.formatMessage({ id: 'specialist.specialties' })}
+							</Typography>
+						</Grid>
+						<Grid container item spacing={2}>
+							{specialist.specialties?.map(specialty => (
+								<Grid item key={specialty.id}>
+									<Chip label={specialty.name} />
+								</Grid>
+							))}
+						</Grid>
+					</Grid>
+					<Grid container item spacing={1}>
+						<Grid item xs={12}>
+							<Typography color="text.secondary" variant="h3">
+								{intl.formatMessage({ id: 'specialist.about' })}
 							</Typography>
 						</Grid>
 						<Grid item xs={12}>
-							<Divider flexItem />
-						</Grid>
-						<Grid container item spacing={1} sx={{ maxWidth: '500px' }}>
-							<Grid item>
-								<Typography variant="h3">
-									{intl.formatMessage({ id: 'specialist.about' })}
-								</Typography>
-							</Grid>
-							<Grid item>
-								<Typography variant="body1">{data.about}</Typography>
-							</Grid>
-						</Grid>
-						<Grid container item spacing={1}>
-							<Grid item>
-								<Typography variant="h3">
-									{intl.formatMessage({ id: 'specialist.specialties' })}
-								</Typography>
-							</Grid>
-							<Grid item>
-								<Stack spacing={2}>
-									{data.specialties?.map(specialty => (
-										<Chip label={specialty} />
-									))}
-								</Stack>
-							</Grid>
+							<Typography variant="h5">{specialist.about}</Typography>
 						</Grid>
 					</Grid>
 				</Grid>
-			)}
+			</Container>
 		</Dialog>
 	)
 }
