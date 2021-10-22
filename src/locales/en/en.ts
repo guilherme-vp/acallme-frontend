@@ -43,6 +43,8 @@ export const enLocales: ILocale = {
 	audio: 'audio',
 	success: 'success',
 	fail: 'failure',
+	schedule: 'Schedule',
+	disable: 'Disable',
 
 	// Home
 	'home.title': 'Home',
@@ -214,6 +216,12 @@ export const enLocales: ILocale = {
 	// Settings
 	'settings.select.audio': 'Select an input audio device',
 	'settings.select.video': 'Select a video device',
+
+	// Schedule
+	'schedule.to': 'This Appointment is scheduled to ocurr in {date}',
+	'schedule.confirmationModal.title': 'Appointment Confirmation',
+	'schedule.disableModal.title': 'Disable Date',
+	'schedule.disableModal.desc': `Don't worry, you can enable it again.`,
 
 	// Languages
 	en: 'English',

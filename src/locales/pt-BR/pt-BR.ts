@@ -41,6 +41,8 @@ export const ptBrLocales = {
 	audio: 'áudio',
 	success: 'sucesso',
 	fail: 'falha',
+	schedule: 'Agenda',
+	disable: 'Desabilitar',
 
 	// Home
 	'home.title': 'Home',
@@ -212,6 +214,13 @@ export const ptBrLocales = {
 	// Settings
 	'settings.select.audio': 'Selecione um dispositivo de entrada de áudio',
 	'settings.select.video': 'Selecione um dispositivo de entrada de vídeo',
+
+	// Schedule
+	'schedule.to': 'Essa consulta está agendada para ocorrer em {date}',
+	'schedule.confirmationModal.title': 'Confirmação de Consulta',
+	'schedule.disableModal.title': 'Desabilitar Data',
+	'schedule.disableModal.desc':
+		'Não se preocupe, você poderá habilitar esse horário novamente',
 
 	en: 'Inglês',
 	'pt-BR': 'Português'
