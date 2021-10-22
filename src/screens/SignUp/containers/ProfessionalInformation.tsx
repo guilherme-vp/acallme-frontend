@@ -5,8 +5,7 @@ import { Controller, useFormContext } from 'react-hook-form'
 import { MdCreate as AboutIcon } from 'react-icons/md'
 
 import { InputIconContainer } from 'components/InputAdornment'
-import rolesEn from 'data/roles/roles.en.json'
-import rolesPtBR from 'data/roles/roles.pt-br.json'
+import roles from 'data/roles/roles.json'
 import { useIntl } from 'hooks'
 
 import type { ProfessionalForm } from '../SignUp'
@@ -77,7 +76,7 @@ export const ProfessionalInformation = () => {
 						render={({ field: { onChange, value, name, ref } }) => (
 							<Autocomplete
 								multiple
-								options={intl.locale === 'en' ? rolesEn : rolesPtBR}
+								options={roles}
 								filterSelectedOptions
 								value={value}
 								onChange={(_, res) => {

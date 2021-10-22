@@ -6,8 +6,7 @@ import { Controller, useFormContext } from 'react-hook-form'
 import { MdOutlineSearch as SearchIcon } from 'react-icons/md'
 
 import { SearchInput } from 'components/SearchInput'
-import rolesEn from 'data/roles/roles.en.json'
-import rolesPtBR from 'data/roles/roles.pt-br.json'
+import roles from 'data/roles/roles.json'
 import { useIntl } from 'hooks/useIntl'
 import { capitalizeLetter } from 'utils/capitalize-letter'
 
@@ -83,7 +82,7 @@ export const Search = ({ onSearch, loading, onSearchInputChange }: SearchProps) 
 									<S.StyledAutocomplete
 										multiple
 										freeSolo
-										options={intl.locale === 'en' ? rolesEn : rolesPtBR}
+										options={roles}
 										value={value}
 										fullWidth
 										onChange={(_, res) => {
