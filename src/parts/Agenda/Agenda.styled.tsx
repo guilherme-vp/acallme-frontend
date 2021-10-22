@@ -37,7 +37,9 @@ export const BookButton = styled(Button).withConfig<{
 			? 'transparent'
 			: isScheduled && !isConfirmed
 			? theme.colors.alternative
-			: theme.colors.secondary} !important;
+			: isScheduled && isConfirmed
+			? theme.colors.secondary
+			: 'transparent'} !important;
 	color: ${({ isScheduled, theme }) =>
 		!isScheduled ? theme.text.description : theme.tags.white};
 	padding: 8px 30px;
