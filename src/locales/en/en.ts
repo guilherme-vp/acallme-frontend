@@ -183,6 +183,7 @@ export const enLocales: ILocale = {
 	'search.location.label': 'Locations',
 	'search.specialty.label': 'Specialties',
 	'search.specialty.placeholder': 'Select one or more specialties...',
+	'search.button': 'Search',
 
 	// Specialist
 	'specialist.specialties': 'Specialities',
