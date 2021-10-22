@@ -44,7 +44,7 @@ export const SpecialistCard = ({
 						</Typography>
 					</Grid>
 				</Grid>
-				<Grid container item spacing={1} mt={0.5} sx={{ minHeight: '80px' }}>
+				<Grid container item spacing={1} mt={0.5} sx={{ minHeight: '0' }}>
 					{slicedSpecialties.map(value => (
 						<Grid item key={value.id}>
 							<Chip size="small" label={value.name} />
@@ -59,7 +59,7 @@ export const SpecialistCard = ({
 				<Grid container item spacing={1} alignItems="center" sx={{ marginTop: '4px' }}>
 					<Grid item xs={12} sm={5}>
 						<Typography variant="h3" fontWeight={600} textAlign="center">
-							$ {intl.formatNumber(cost, { currencySign: 'standard' })}/h
+							${intl.formatNumber(cost, { currencySign: 'standard' })}/h
 						</Typography>
 					</Grid>
 					<Grid container item xs={12} sm>
