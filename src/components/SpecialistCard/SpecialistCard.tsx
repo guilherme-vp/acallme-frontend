@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { Chip, Grid, Typography } from '@mui/material'
-import faker from 'faker'
 
 import { useIntl } from 'hooks'
+import { Specialty } from 'services/entities'
 import { getInitials } from 'utils/get-initials'
 
 import { BookButton, CardContainer, MiniAvatar } from './SpecialistCard.styled'
@@ -11,8 +11,8 @@ import { BookButton, CardContainer, MiniAvatar } from './SpecialistCard.styled'
 export interface SpecialistCardProps {
 	id: number
 	name: string
-	specialties: string[]
-	avatar: string | null
+	specialties?: Specialty[]
+	avatarUrl?: string
 	cost: number
 	onBook: (id: number) => void
 }
@@ -20,8 +20,8 @@ export interface SpecialistCardProps {
 export const SpecialistCard = ({
 	id,
 	name,
-	specialties,
-	avatar,
+	specialties = [],
+	avatarUrl,
 	cost,
 	onBook
 }: SpecialistCardProps) => {
@@ -34,7 +34,7 @@ export const SpecialistCard = ({
 			<Grid container spacing={1}>
 				<Grid container item justifyContent="space-between" alignItems="center" spacing={2}>
 					<Grid item>
-						<MiniAvatar src={avatar || faker.image.people(48, 48)} alt={`${name}-booking`}>
+						<MiniAvatar src={avatarUrl} alt={`${name}-booking`}>
 							{getInitials(name)}
 						</MiniAvatar>
 					</Grid>
@@ -45,9 +45,9 @@ export const SpecialistCard = ({
 					</Grid>
 				</Grid>
 				<Grid container item spacing={1} mt={0.5} sx={{ minHeight: '80px' }}>
-					{slicedSpecialties.map((value, index) => (
-						<Grid item key={index}>
-							<Chip size="small" label={value} />
+					{slicedSpecialties.map(value => (
+						<Grid item key={value.id}>
+							<Chip size="small" label={value.name} />
 						</Grid>
 					))}
 					{totalSpecialties > slicedSpecialties.length && (

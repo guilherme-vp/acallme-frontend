@@ -18,7 +18,7 @@ export const basic = Template.bind({})
 
 basic.args = {
 	id: faker.datatype.number(),
-	avatar: faker.image.people(),
+	avatarUrl: faker.image.people(),
 	cost: +faker.finance.amount(100, 1000),
 	location: faker.name.jobType(),
 	name: faker.name.findName(),
@@ -26,5 +26,5 @@ basic.args = {
 	role: faker.name.jobType(),
 	specialties: Array(faker.datatype.number({ min: 1, max: 10 }))
 		.fill(null)
-		.map(() => faker.name.jobType())
+		.map(() => ({ name: faker.name.jobType(), id: faker.datatype.number() }))
 } as StoryArgs
