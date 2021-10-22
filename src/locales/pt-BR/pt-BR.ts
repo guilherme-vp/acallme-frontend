@@ -225,6 +225,7 @@ export const ptBrLocales = {
 		'Não se preocupe, você poderá habilitar esse horário novamente',
 	'schedule.card.book': 'Marque uma consulta',
 	'schedule.card.hours': 'Horários disponíveis',
+	'schedule.success': 'Sua consulta foi criada com sucesso1',
 
 	en: 'Inglês',
 	'pt-BR': 'Português'
