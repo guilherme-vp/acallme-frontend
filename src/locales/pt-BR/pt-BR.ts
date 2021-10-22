@@ -6,7 +6,8 @@ export const ptBrLocales = {
 	accept: 'aceitar',
 	reject: 'rejeitar',
 	continue: 'continuar',
-	goBack: 'voltar',
+	goBack: 'anterior',
+	back: 'voltar',
 	gender: 'gênero',
 	female: 'feminino',
 	male: 'masculino',
@@ -180,6 +181,10 @@ export const ptBrLocales = {
 	'search.location.label': 'Localizações',
 	'search.specialty.label': 'Especializações',
 	'search.specialty.placeholder': 'Selecione uma ou mais especialidades...',
+
+	// Specialist
+	'specialist.specialties': 'Especialidades',
+	'specialist.about': 'Sobre',
 
 	// Chat
 	'chat.placeholder': 'Envie uma mensagem...',

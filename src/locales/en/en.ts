@@ -9,6 +9,7 @@ export const enLocales: ILocale = {
 	reject: 'reject',
 	continue: 'continue',
 	goBack: 'previous',
+	back: 'back',
 	gender: 'gender',
 	female: 'female',
 	male: 'male',
@@ -182,6 +183,10 @@ export const enLocales: ILocale = {
 	'search.location.label': 'Locations',
 	'search.specialty.label': 'Specialties',
 	'search.specialty.placeholder': 'Select one or more specialties...',
+
+	// Specialist
+	'specialist.specialties': 'Specialities',
+	'specialist.about': 'About',
 
 	// Chat
 	'chat.placeholder': 'Send a message...',
