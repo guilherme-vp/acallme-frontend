@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { AppBar, Grid, Hidden, IconButton } from '@mui/material'
-import faker from 'faker'
 import { BiMenuAltLeft as MenuIcon } from 'react-icons/bi'
 
 import { LanguagePicker } from 'components/LanguagePicker'
@@ -40,14 +39,11 @@ export const HeaderLogged = ({ openDrawer }: HeaderProps) => {
 						<Grid item>
 							<NotificationsPopover />
 						</Grid>
-						<Grid item>
-							<ProfileMenu
-								{...user}
-								name={faker.name.firstName()}
-								avatarUrl={faker.image.people()}
-								onSignOut={onSignOut}
-							/>
-						</Grid>
+						{user && (
+							<Grid item>
+								<ProfileMenu {...user} onSignOut={onSignOut} />
+							</Grid>
+						)}
 					</Grid>
 				</Grid>
 			</Container>
