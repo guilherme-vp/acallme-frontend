@@ -13,12 +13,13 @@ import {
 import { MdArrowBack as PrevIcon, MdArrowForward as NextIcon } from 'react-icons/md'
 import { useQuery } from 'react-query'
 
+import { BookButton } from 'components/BookButton'
 import { useIntl, useStoreon } from 'hooks'
 import { dayEnds, dayStart, HoursRange, useSchedule } from 'hooks/useSchedule'
 import { fetchSchedules } from 'services/api/schedule'
 import { RolesEnum } from 'services/entities'
 
-import { BookButton, Table, TBody, TData } from './Agenda.styled'
+import { Table, TBody, TData } from './Agenda.styled'
 
 export interface AgendaProps {
 	role: RolesEnum
