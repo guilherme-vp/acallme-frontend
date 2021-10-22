@@ -45,6 +45,7 @@ export const enLocales: ILocale = {
 	fail: 'failure',
 	schedule: 'Schedule',
 	disable: 'Disable',
+	confirm: 'Confirm',
 
 	// Home
 	'home.title': 'Home',
@@ -219,6 +220,7 @@ export const enLocales: ILocale = {
 
 	// Schedule
 	'schedule.to': 'This Appointment is scheduled to ocurr in {date}',
+	'schedule.viewData': 'View Appointment',
 	'schedule.confirmationModal.title': 'Appointment Confirmation',
 	'schedule.disableModal.title': 'Disable Date',
 	'schedule.disableModal.desc': `Don't worry, you can enable it again.`,

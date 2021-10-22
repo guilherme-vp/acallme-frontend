@@ -43,6 +43,7 @@ export const ptBrLocales = {
 	fail: 'falha',
 	schedule: 'Agenda',
 	disable: 'Desabilitar',
+	confirm: 'Confirmar',
 
 	// Home
 	'home.title': 'Home',
@@ -217,6 +218,7 @@ export const ptBrLocales = {
 
 	// Schedule
 	'schedule.to': 'Essa consulta está agendada para ocorrer em {date}',
+	'schedule.viewData': 'Ver agendamento',
 	'schedule.confirmationModal.title': 'Confirmação de Consulta',
 	'schedule.disableModal.title': 'Desabilitar Data',
 	'schedule.disableModal.desc':
