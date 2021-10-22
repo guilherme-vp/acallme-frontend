@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
+import { CalendarPicker } from '@mui/lab'
 import {
 	AppBar,
 	Dialog,
@@ -11,17 +12,25 @@ import {
 	Divider,
 	Stack,
 	Chip,
-	Container
+	Container,
+	CircularProgress,
+	Button
 } from '@mui/material'
 import { TransitionProps } from '@mui/material/transitions'
+import { addHours, endOfDay, startOfDay, subHours } from 'date-fns'
 import {
 	MdClose as CloseIcon,
 	MdOutlinePhone as PhoneIcon,
 	MdOutlineMail as MailIcon
 } from 'react-icons/md'
+import { useQuery, useMutation } from 'react-query'
 
+import { BookButton } from 'components/BookButton'
 import { useIntl } from 'hooks'
-import { Specialist } from 'services/entities'
+import { HoursRange } from 'hooks/useSchedule'
+import { createSchedule, fetchSchedules } from 'services/api/schedule'
+import { Schedule, Specialist } from 'services/entities'
+import { formatHours } from 'utils/get-all-hours'
 import { getInitials } from 'utils/get-initials'
 
 import * as S from './SpecialistAbout.styled'
@@ -45,6 +54,8 @@ const Transition = React.forwardRef(function Transition(
 	return <Slide direction="left" ref={ref} {...props} />
 })
 
+const minDate = new Date()
+
 export const SpecialistAbout = ({
 	specialist,
 	handleClose,
@@ -52,6 +63,41 @@ export const SpecialistAbout = ({
 	userId
 }: SpecialistAboutProps) => {
 	const intl = useIntl()
+	const [date, setDate] = useState<Date | null>(null)
+	const [chosenDay, setChosenDay] = useState<Date>()
+
+	const { data, isLoading, refetch } = useQuery('schedules', () =>
+		fetchSchedules({
+			specialistId: specialist.id,
+			disabled: false,
+			confirmed: false,
+			rangeStart: addHours(startOfDay(date ?? minDate), 6).toISOString(),
+			rangeEnd: subHours(endOfDay(date ?? minDate), 3).toISOString()
+		})
+	)
+	const { data: creationData, mutate } = useMutation(createSchedule)
+	const [hours, setHours] = useState<HoursRange[]>()
+
+	useEffect(() => {
+		refetch()
+
+		if (data) {
+			setHours(formatHours(data as Schedule[], date ?? minDate))
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [date])
+
+	if (isLoading || !data) {
+		return <CircularProgress />
+	}
+
+	const handleClick = (day: Date) => {
+		setChosenDay(day)
+	}
+
+	const createAppointment = () => {
+		const a = 'oi'
+	}
 
 	return (
 		<Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
@@ -142,6 +188,54 @@ export const SpecialistAbout = ({
 						<Grid item xs={12}>
 							<Typography variant="h5">{specialist.about}</Typography>
 						</Grid>
+					</Grid>
+					<Grid container item mt={1} spacing={2}>
+						<Grid item xs={12}>
+							<Typography variant="h4">
+								{intl.formatMessage({ id: 'schedule.card.book' })}
+							</Typography>
+						</Grid>
+						<Grid item xs={12}>
+							<CalendarPicker
+								date={date}
+								onChange={newDate => (newDate ? setDate(newDate) : undefined)}
+								minDate={minDate}
+							/>
+						</Grid>
+						{hours && (
+							<>
+								<Grid item xs={12}>
+									<Typography variant="body1">
+										{intl.formatMessage({ id: 'schedule.card.hours' })}
+									</Typography>
+								</Grid>
+								<Grid item xs={12}>
+									{hours?.map(({ day, hour, isDisabled, isScheduled, scheduleId }) => (
+										<BookButton
+											key={scheduleId ?? hour}
+											onClick={() => handleClick(day)}
+											disabled={isDisabled}
+											isScheduled={isScheduled as boolean}
+											variant={chosenDay === day ? 'contained' : 'text'}
+											isChosen={chosenDay === day}
+											color="inherit"
+										>
+											{isDisabled ? <s>{hour}</s> : hour}
+										</BookButton>
+									))}
+								</Grid>
+								<Grid item xs={12}>
+									<Button
+										disabled={!chosenDay}
+										onClick={createAppointment}
+										variant="contained"
+										color="primary"
+									>
+										{intl.formatMessage({ id: 'schedule.card.book' })}
+									</Button>
+								</Grid>
+							</>
+						)}
 					</Grid>
 				</Grid>
 			</Container>
