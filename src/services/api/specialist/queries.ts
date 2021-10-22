@@ -1,3 +1,5 @@
+import qs from 'querystring'
+
 import { Specialist } from 'services/entities'
 
 import { nodeApi } from '../client'
@@ -36,7 +38,8 @@ export async function fetchSpecialistById(id: number): Promise<Specialist> {
 
 export async function fetchSpecialists(queries: GetManyDto): Promise<Specialist[]> {
 	const { data } = await nodeApi.get<{ specialists: Specialist[] }>('specialists', {
-		params: queries
+		params: queries,
+		paramsSerializer: params => qs.stringify(params)
 	})
 
 	return data.specialists
