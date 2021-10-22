@@ -60,7 +60,7 @@ export const userModule: IStoreonModule = store => {
 		let ok = false
 
 		try {
-			const patientData = await fetchPatient(state.token)
+			const patientData = await fetchPatient()
 
 			store.dispatch('user/setUser', patientData)
 			ok = true
