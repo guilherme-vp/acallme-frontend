@@ -2,7 +2,7 @@ import React from 'react'
 
 import { LoadingButton } from '@mui/lab'
 import { Grid, Hidden, Typography } from '@mui/material'
-import { Controller, useForm } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import { MdOutlineSearch as SearchIcon } from 'react-icons/md'
 
 import { SearchInput } from 'components/SearchInput'
@@ -16,20 +16,18 @@ import * as S from './Search.styled'
 export interface SearchProps {
 	loading: boolean
 	onSearch: () => void
-	onSearchInputChange?: (value: string) => void
+	onSearchInputChange: () => void
 }
 
 export interface FormSearchProps {
 	name?: string
-	location: string
 	specialties: string[]
 }
 
 export const Search = ({ onSearch, loading, onSearchInputChange }: SearchProps) => {
 	const intl = useIntl()
 
-	// const { control } = useFormContext<FormSearchProps>()
-	const { control } = useForm<FormSearchProps>()
+	const { control } = useFormContext<FormSearchProps>()
 
 	const handleKeyDown: React.KeyboardEventHandler<
 		HTMLInputElement | HTMLTextAreaElement | HTMLDivElement
@@ -64,41 +62,12 @@ export const Search = ({ onSearch, loading, onSearchInputChange }: SearchProps) 
 										onChange={e => {
 											onChange(e.target.value)
 											if (onSearchInputChange) {
-												onSearchInputChange(e.target.value)
+												onSearchInputChange()
 											}
 										}}
 									/>
 								)}
 								control={control}
-							/>
-						</Grid>
-					</Grid>
-					<Grid container item xs={12} md flexDirection="column">
-						<Grid item>
-							<Typography variant="body2" color="GrayText">
-								{intl.formatMessage({ id: 'search.location.label' })}
-							</Typography>
-						</Grid>
-						<Grid item>
-							<Controller
-								render={({ field: { onChange, value, name, ref } }) => (
-									<SearchInput
-										name={name}
-										fullWidth
-										showIcon={false}
-										placeholder="Ex: São Paulo"
-										ref={ref}
-										value={value}
-										onChange={e => {
-											onChange(e.target.value)
-											if (onSearchInputChange) {
-												onSearchInputChange(e.target.value)
-											}
-										}}
-									/>
-								)}
-								control={control}
-								name="location"
 							/>
 						</Grid>
 					</Grid>
