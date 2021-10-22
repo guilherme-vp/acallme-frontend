@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 /* eslint-disable react/jsx-wrap-multilines */
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 
 import {
 	List,
@@ -20,19 +20,19 @@ import { useHistory } from 'react-router'
 import { MenuPopover } from 'components/MenuPopover'
 import { NotificationItem } from 'components/NotificationItem'
 import { Scrollbar } from 'components/Scrollbar'
+import { WsEvents } from 'constants/ws-events'
 import { useIntl } from 'hooks'
 import { VIDEOCALL } from 'routes'
 import { Notification } from 'services/entities'
+import { callSocket as socket } from 'services/ws/client'
 import { capitalizeLetter } from 'utils/capitalize-letter'
-
-import { NOTIFICATIONS } from './Notifications.mock'
 
 export const NotificationsPopover = () => {
 	const history = useHistory()
 	const intl = useIntl()
 	const anchorRef = useRef(null)
 	const [open, setOpen] = useState(false)
-	const [notifications, setNotifications] = useState<Notification[]>(NOTIFICATIONS)
+	const [notifications, setNotifications] = useState<Notification[]>([])
 	const sortedNotifications = notifications.sort((a, b) => {
 		if (a.type === 'appointment_call' && !a.isFinished) {
 			return -1
@@ -49,6 +49,12 @@ export const NotificationsPopover = () => {
 	const readNotifications = sortedNotifications.filter(({ isUnRead }) => isUnRead === false)
 	const totalUnRead = unReadNotifications.length
 	const totalRead = readNotifications.length
+
+	useEffect(() => {
+		socket.on(WsEvents.SEND_NOTIFICATION, (notification: Notification) => {
+			setNotifications(prevNotifications => [...prevNotifications, notification])
+		})
+	}, [])
 
 	const handleMarkAllAsRead = () => {
 		setNotifications(
