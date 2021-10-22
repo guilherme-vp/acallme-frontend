@@ -3,10 +3,10 @@ import { GenderEnum } from './Gender.enum'
 import { Schedule } from './Schedule.entity'
 
 export interface User {
-	id?: number
+	id: number
 	email: string
 	name: string
-	password?: string
+	password: string
 	avatarUrl?: string
 	birth: string
 	gender: GenderEnum
