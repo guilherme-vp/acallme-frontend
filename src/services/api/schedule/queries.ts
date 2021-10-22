@@ -47,16 +47,19 @@ export async function createSchedule(input: CreateDto): Promise<Schedule> {
 export async function disableSchedule(
 	input: Pick<CreateDto, 'dateStart' | 'dateEnd'>
 ): Promise<boolean> {
-	const { data } = await nodeApi.put<{ ok: boolean }>('schedules', input)
+	const { data } = await nodeApi.put<{ ok: boolean }>('schedules/disable', input)
 
 	return data.ok
 }
 
-export async function confirmSchedule(
-	scheduleId: number,
-	input: { confirmed: boolean }
-): Promise<boolean> {
-	const { data } = await nodeApi.patch<{ ok: boolean }>(`schedules/${scheduleId}`, input)
+export async function confirmSchedule(input: {
+	scheduleId: number
+	confirmed: boolean
+}): Promise<boolean> {
+	const { data } = await nodeApi.put<{ ok: boolean }>(
+		`schedules/confirm/${input.scheduleId}`,
+		input.confirmed
+	)
 
 	return data.ok
 }
