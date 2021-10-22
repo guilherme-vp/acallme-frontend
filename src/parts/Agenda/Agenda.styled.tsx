@@ -26,11 +26,18 @@ export const TBody = styled.tbody`
 	}
 `
 
-export const BookButton = styled(Button).withConfig<{ isScheduled: boolean }>({
-	shouldForwardProp: props => !['isScheduled'].includes(props)
+export const BookButton = styled(Button).withConfig<{
+	isScheduled: boolean
+	isConfirmed?: boolean
+}>({
+	shouldForwardProp: props => !['isScheduled', 'isConfirmed'].includes(props)
 })`
-	background-color: ${({ disabled, isScheduled, theme }) =>
-		disabled || !isScheduled ? 'transparent' : theme.colors.secondary} !important;
+	background-color: ${({ disabled, isScheduled, isConfirmed, theme }) =>
+		disabled
+			? 'transparent'
+			: isScheduled && !isConfirmed
+			? theme.colors.alternative
+			: theme.colors.secondary} !important;
 	color: ${({ isScheduled, theme }) =>
 		!isScheduled ? theme.text.description : theme.tags.white};
 	padding: 8px 30px;
