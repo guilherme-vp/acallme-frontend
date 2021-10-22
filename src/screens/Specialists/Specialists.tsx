@@ -126,6 +126,15 @@ export const Specialists = () => {
 										)}
 									</Typography>
 								</Grid>
+								{data.length > 0 && (
+									<Grid container item mt={2} justifyContent="flex-end">
+										<Pagination
+											count={data.length >= page * 6 ? page + 1 : page}
+											page={page}
+											onChange={(_e, newValue) => handleChangePage(newValue)}
+										/>
+									</Grid>
+								)}
 								<Grid container item spacing={3} mt={0}>
 									{data.map(eachSpecialist => (
 										<Grid item key={eachSpecialist.id} xs={12} sm="auto">
@@ -133,15 +142,6 @@ export const Specialists = () => {
 										</Grid>
 									))}
 								</Grid>
-								{data.length > 0 && (
-									<Grid item mt={2}>
-										<Pagination
-											count={data.length < page * 6 ? 1 : 2}
-											page={page}
-											onChange={(_e, newValue) => handleChangePage(newValue)}
-										/>
-									</Grid>
-								)}
 							</>
 						)
 					)}
