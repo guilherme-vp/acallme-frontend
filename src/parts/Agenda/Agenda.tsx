@@ -36,7 +36,7 @@ export const Agenda = ({ role, onConfirm, onDisable, onViewDetails }: AgendaProp
 	const [chosen, setChosen] = useState<Omit<HoursRange, 'hour'>>()
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 	const open = Boolean(anchorEl)
-	const isPrevDisabled = differenceInDays(date, now) <= 7
+	const isPrevDisabled = differenceInDays(date, now) <= 6
 	const isNextDisabled = differenceInYears(now, addWeeks(date, 1)) > 0
 
 	const firstDay = startOfWeek(date, { weekStartsOn: 1 })
@@ -161,43 +161,44 @@ export const Agenda = ({ role, onConfirm, onDisable, onViewDetails }: AgendaProp
 								)}
 							</tr>
 						))}
-						<Menu
-							anchorEl={anchorEl}
-							open={open}
-							onClose={handleClose}
-							anchorOrigin={{
-								vertical: 'top',
-								horizontal: 'right'
-							}}
-							transformOrigin={{
-								vertical: 'top',
-								horizontal: 'right'
-							}}
-						>
-							{chosen && !chosen.isDisabled && chosen.isScheduled && chosen.scheduleId && (
+						{chosen && !chosen.isDisabled && chosen.isScheduled && chosen.scheduleId && (
+							<Menu
+								anchorEl={anchorEl}
+								open={open}
+								onClose={handleClose}
+								anchorOrigin={{
+									vertical: 'top',
+									horizontal: 'right'
+								}}
+								transformOrigin={{
+									vertical: 'top',
+									horizontal: 'right'
+								}}
+							>
 								<MenuItem onClick={() => onViewDetails(chosen.scheduleId as number)}>
 									{intl.formatMessage({ id: 'schedule.viewData' })}
 								</MenuItem>
-							)}
-							{chosen && role === RolesEnum.Specialist && (
-								<div>
-									<Divider sx={{ my: 0.5 }} />
-									{!chosen.isConfirmed && !chosen.isDisabled && (
-										<>
-											{chosen.isScheduled && chosen.scheduleId ? (
-												<MenuItem onClick={() => onConfirm(chosen.scheduleId as number)}>
-													{intl.formatMessage({ id: 'confirm' })}
-												</MenuItem>
-											) : (
-												<MenuItem onClick={() => onDisable(chosen.day)}>
-													{intl.formatMessage({ id: 'disable' })}
-												</MenuItem>
-											)}
-										</>
-									)}
-								</div>
-							)}
-						</Menu>
+
+								{chosen && role === RolesEnum.Specialist && (
+									<div>
+										<Divider sx={{ my: 0.5 }} />
+										{!chosen.isConfirmed && !chosen.isDisabled && (
+											<>
+												{chosen.isScheduled && chosen.scheduleId ? (
+													<MenuItem onClick={() => onConfirm(chosen.scheduleId as number)}>
+														{intl.formatMessage({ id: 'confirm' })}
+													</MenuItem>
+												) : (
+													<MenuItem onClick={() => onDisable(chosen.day)}>
+														{intl.formatMessage({ id: 'disable' })}
+													</MenuItem>
+												)}
+											</>
+										)}
+									</div>
+								)}
+							</Menu>
+						)}
 					</TBody>
 				</Table>
 			</Grid>
