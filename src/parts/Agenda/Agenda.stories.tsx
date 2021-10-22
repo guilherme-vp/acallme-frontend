@@ -1,7 +1,8 @@
 import React from 'react'
 
 import { Story, Meta } from '@storybook/react/types-6-0'
-import faker from 'faker'
+
+import { RolesEnum } from 'services/entities'
 
 import { Agenda, AgendaProps } from './Agenda'
 
@@ -17,7 +18,8 @@ const Template: Story<AgendaProps> = args => <Agenda {...args} />
 export const basic = Template.bind({})
 
 basic.args = {
-	patientId: faker.datatype.number(),
-	specialistId: faker.datatype.number(),
-	onClick: (scheduleId: number) => console.log(`Triggered on id: ${scheduleId}`)
+	onConfirm: () => {},
+	onDisable: () => {},
+	onViewDetails: () => {},
+	role: RolesEnum.Patient
 } as StoryArgs
