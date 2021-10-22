@@ -1,7 +1,15 @@
 /* eslint-disable import/no-duplicates */
 import { useState, useEffect } from 'react'
 
-import { format, startOfWeek, daysInWeek, addDays, set, endOfWeek } from 'date-fns'
+import {
+	format,
+	startOfWeek,
+	daysInWeek,
+	addDays,
+	set,
+	endOfWeek,
+	differenceInHours
+} from 'date-fns'
 import { enUS, ptBR } from 'date-fns/locale'
 
 import { Schedule } from 'services/entities'
@@ -68,6 +76,15 @@ export const useSchedule = (
 						})
 
 						const formattedHour = format(aimedDay, 'HH:mm')
+
+						if (differenceInHours(aimedDay, new Date()) <= 0) {
+							return {
+								day: aimedDay,
+								hour: formattedHour,
+								isDisabled: true,
+								isScheduled: false
+							}
+						}
 
 						const scheduleExists = data?.find(
 							({ rangeStart }) => new Date(rangeStart).getTime() === aimedDay.getTime()
