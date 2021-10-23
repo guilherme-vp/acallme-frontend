@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 import React, { useCallback, useState } from 'react'
 
-import { DesktopDatePicker } from '@mui/lab'
+import { DatePicker } from '@mui/lab'
 import {
 	FormControl,
 	FormControlLabel,
@@ -16,7 +16,7 @@ import { Theme } from '@mui/system'
 import * as datefns from 'date-fns'
 import iziToast from 'izitoast'
 import { useDropzone } from 'react-dropzone'
-import { useFormContext } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import {
 	MdOutlineAddAPhoto as PhotoIcon,
 	MdPhoneInTalk as PhoneIcon,
@@ -24,7 +24,6 @@ import {
 } from 'react-icons/md'
 
 import { InputIconContainer } from 'components/InputAdornment'
-import { dateFormat } from 'constants/date-format'
 import { useIntl } from 'hooks'
 import { GenderEnum } from 'services/entities'
 import { capitalizeLetter } from 'utils/capitalize-letter'
@@ -36,13 +35,13 @@ export const PersonalInformation = () => {
 	const intl = useIntl()
 	const [avatar, setAvatar] = useState<string>()
 	const [, setAvatarFile] = useState<File>()
-	const { register, setValue, watch } = useFormContext<PersonalForm>()
+	const { register, control } = useFormContext<PersonalForm>()
 	const isSmDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'))
 
 	const maxDate = datefns.subYears(new Date(), 18)
 	const minDate = datefns.subYears(new Date(), 90)
 
-	const { birth, gender } = watch()
+	const { gender } = watch()
 
 	const onDrop = useCallback(([file], [error]) => {
 		if (file) {
@@ -144,16 +143,24 @@ export const PersonalInformation = () => {
 					</FormControl>
 				</Grid>
 				<Grid item>
-					<DesktopDatePicker
-						label={capitalizeLetter(intl.formatMessage({ id: 'birthDate' }))}
-						inputFormat="dd/MM/yyyy"
-						minDate={minDate}
-						maxDate={maxDate}
-						disableFuture
-						mask="__/__/____"
-						onChange={value => setValue('birth', datefns.format(value as Date, dateFormat))}
-						value={birth}
-						renderInput={props => <TextField focused required {...props} />}
+					<Controller
+						name="birth"
+						control={control}
+						render={({ field: { value, ref, onChange } }) => (
+							// eslint-disable-next-line react/jsx-wrap-multilines
+							<DatePicker
+								disableFuture
+								label={capitalizeLetter(intl.formatMessage({ id: 'birthDate' }))}
+								openTo="year"
+								views={['year', 'month', 'day']}
+								minDate={minDate}
+								maxDate={maxDate}
+								value={value}
+								inputRef={ref}
+								onChange={onChange}
+								renderInput={params => <TextField focused required {...params} />}
+							/>
+						)}
 					/>
 				</Grid>
 				<Grid item>

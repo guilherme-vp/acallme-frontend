@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Autocomplete, Grid, TextField } from '@mui/material'
 import { Controller, useFormContext } from 'react-hook-form'
+import { IoMdPaper as PaperIcon } from 'react-icons/io'
 import { MdCreate as AboutIcon } from 'react-icons/md'
 
 import { InputIconContainer } from 'components/InputAdornment'
@@ -49,28 +50,42 @@ export const ProfessionalInformation = () => {
 						}}
 					/>
 				</Grid>
-				{/* <Grid item>
+				<Grid item>
 					<TextField
 						focused
-						{...register('location', {
-							required: true
-						})}
+						{...register('crp')}
 						fullWidth
-						required
-						label={intl.formatMessage({ id: 'signup.form.professional.location' })}
+						label={intl.formatMessage({ id: 'signup.form.professional.crp' })}
 						variant="outlined"
-						placeholder="Ex: São Paulo, São Paulo"
-						error={!!errors.location}
-						name="location"
+						placeholder="Ex: 12384"
+						error={!!errors.crp}
 						InputProps={{
 							startAdornment: (
 								<InputIconContainer position="start">
-									<LocationIcon />
+									<PaperIcon />
 								</InputIconContainer>
 							)
 						}}
 					/>
-				</Grid> */}
+				</Grid>
+				<Grid item>
+					<TextField
+						focused
+						{...register('crm')}
+						fullWidth
+						label={intl.formatMessage({ id: 'signup.form.professional.crm' })}
+						variant="outlined"
+						placeholder="Ex: 12384"
+						error={!!errors.crm}
+						InputProps={{
+							startAdornment: (
+								<InputIconContainer position="start">
+									<PaperIcon />
+								</InputIconContainer>
+							)
+						}}
+					/>
+				</Grid>
 				<Grid item>
 					<Controller
 						render={({ field: { onChange, value, name, ref } }) => (
