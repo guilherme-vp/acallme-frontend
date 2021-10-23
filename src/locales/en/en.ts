@@ -134,6 +134,8 @@ export const enLocales: ILocale = {
 	'signup.form.professional.about': 'About Me',
 	'signup.form.professional.about.placeholder': 'Please introduce yourself',
 	'signup.form.professional.location': 'Location',
+	'signup.form.professional.crp': 'CRP',
+	'signup.form.professional.crm': 'CRM',
 	'signup.form.professional.areas': 'Area of Expertise',
 	'signup.form.session.cost': 'Price per Hour',
 	'signup.form.session.works': 'How It Works',
@@ -148,6 +150,7 @@ export const enLocales: ILocale = {
 	'nav.specialists': 'Specialists',
 	'nav.schedule': 'Schedule',
 	'nav.history': 'History',
+	'nav.videocall': 'Videocall',
 	'nav.logout': 'Log out',
 
 	// Notifications

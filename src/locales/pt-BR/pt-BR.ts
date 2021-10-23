@@ -133,6 +133,8 @@ export const ptBrLocales = {
 	'signup.form.professional.about': 'Sobre mim',
 	'signup.form.professional.about.placeholder': 'Por favor se introduza',
 	'signup.form.professional.location': 'Localização',
+	'signup.form.professional.crp': 'CRP',
+	'signup.form.professional.crm': 'CRM',
 	'signup.form.professional.areas': 'Áreas de atuação',
 	'signup.form.session.cost': 'Preço por Hora',
 	'signup.form.session.works': 'Como Funciona',
@@ -147,6 +149,7 @@ export const ptBrLocales = {
 	'nav.schedule': 'Agenda',
 	'nav.specialists': 'Especialistas',
 	'nav.history': 'Histórico',
+	'nav.videocall': 'Videocall',
 	'nav.logout': 'Sair',
 
 	// Notifications
