@@ -97,11 +97,11 @@ export const Modal = ({
 					}}
 				>
 					{size === 'big' ? (
-						<Typography variant="h3" fontWeight={500}>
+						<Typography variant="h2" fontWeight={600}>
 							{title}
 						</Typography>
 					) : (
-						<Typography variant="h4" fontWeight={500}>
+						<Typography variant="h3" fontWeight={600}>
 							{title}
 						</Typography>
 					)}

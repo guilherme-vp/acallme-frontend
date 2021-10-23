@@ -8,8 +8,8 @@ export interface Schedule {
 	specialistId: number
 	callId?: number
 	patientId?: number
-	rangeStart: Date
-	rangeEnd: Date
+	rangeStart: string
+	rangeEnd: string
 	confirmed?: boolean
 	disabled?: boolean
 	call?: Call

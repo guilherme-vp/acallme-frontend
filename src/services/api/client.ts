@@ -4,24 +4,19 @@ import { QueryClient } from 'react-query'
 
 import { apiUrls } from 'config/api'
 
-const persistedState = localStorage.getItem('storeon')
-
-let token
-
-if (persistedState) {
-	token = JSON.parse(persistedState).token
-}
-
 export const queryClient = new QueryClient({
 	defaultOptions: {
 		mutations: {
 			onError: (error: any) => {
-				const errorData = JSON.parse(error.response.data)
+				try {
+					const errorData = error.response.data
 
-				if (errorData.error) {
-					iziToast.error({ message: errorData.error })
-				} else {
-					iziToast.error({ message: 'Um erro ocorreu, tente novamente.' })
+					if (errorData.error) {
+						return iziToast.error({ message: errorData.error })
+					}
+					return iziToast.error({ message: 'Um erro ocorreu, tente novamente.' })
+				} catch (e) {
+					return iziToast.error({ message: 'Um erro ocorreu, tente novamente.' })
 				}
 			}
 		}
@@ -32,8 +27,7 @@ export const nodeApi = new Axios({
 	baseURL: apiUrls.node,
 	timeout: 5000,
 	headers: {
-		'Content-type': 'application/json',
-		authorization: token ? `Bearer ${token}` : ''
+		'Content-type': 'application/json'
 	},
 	validateStatus: status => status >= 200 && status < 400,
 	transformRequest: [
@@ -57,8 +51,46 @@ export const javaApi = new Axios({
 	baseURL: apiUrls.java,
 	timeout: 5000,
 	headers: {
-		'Content-type': 'application/json',
-		authorization: token ? `Bearer ${token}` : ''
+		'Content-type': 'application/json'
 	},
 	validateStatus: status => status >= 200 && status < 400
+})
+
+nodeApi.interceptors.request.use(config => {
+	const { headers } = config
+
+	const persistedState = localStorage.getItem('storeon')
+
+	let token
+
+	if (persistedState) {
+		token = JSON.parse(persistedState).token
+	}
+
+	if (token) {
+		const newHeaders = { ...headers, Authorization: `Bearer ${token}` }
+
+		config.headers = newHeaders
+	}
+
+	return config
+})
+javaApi.interceptors.request.use(config => {
+	const { headers } = config
+
+	const persistedState = localStorage.getItem('storeon')
+
+	let token
+
+	if (persistedState) {
+		token = JSON.parse(persistedState).token
+	}
+
+	if (token) {
+		const newHeaders = { ...headers, Authorization: `Bearer ${token}` }
+
+		config.headers = newHeaders
+	}
+
+	return config
 })

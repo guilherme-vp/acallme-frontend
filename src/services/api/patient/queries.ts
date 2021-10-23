@@ -1,4 +1,4 @@
-import { Patient } from 'services/entities'
+import { GenderEnum, Patient } from 'services/entities'
 
 import { nodeApi } from '../client'
 
@@ -12,14 +12,21 @@ export interface LoginResponse {
 	token: string
 }
 
+export interface SignupDto {
+	email: string
+	name: string
+	password: string
+	cpf: string
+	gender: GenderEnum
+	birth: string
+	phone: string
+}
+
 // @ts-ignore
 export type PatientReponse<T = 'patient'> = Record<T, Patient>
 
-export async function fetchMe(token?: string | null): Promise<Patient> {
-	const { data } = await nodeApi.get<PatientReponse<'me'>>(
-		'patients/me',
-		token ? { headers: { authorization: `Bearer ${token}` } } : {}
-	)
+export async function fetchMe(): Promise<Patient> {
+	const { data } = await nodeApi.get<PatientReponse<'me'>>('patients/me')
 
 	return data.me
 }
@@ -36,10 +43,10 @@ export async function fetchPatients(): Promise<Patient[]> {
 	return data.patients
 }
 
-export async function createPatient(): Promise<Patient> {
-	const { data } = await nodeApi.post<PatientReponse>('patients')
+export async function signupPatient(input: SignupDto): Promise<LoginResponse> {
+	const { data } = await nodeApi.post('patients/signup', input)
 
-	return data.patient
+	return data as LoginResponse
 }
 
 export async function loginPatient(input: LoginDto): Promise<LoginResponse> {

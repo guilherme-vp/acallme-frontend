@@ -150,22 +150,22 @@ export const CallProvider: React.FC = ({ children }) => {
 			)
 
 			// Receive Message Event Listener
-			socket.on(
-				WsEvents.RECEIVE_MESSAGE,
-				(data: {
-					id: string
-					name: string
-					avatarUrl?: string
-					createdAt: Date
-					message: string
-				}) => {
-					if (data.id === me) {
-						return
-					}
+			// socket.on(
+			// 	WsEvents.RECEIVE_MESSAGE,
+			// 	(data: {
+			// 		id: string
+			// 		name: string
+			// 		avatarUrl?: string
+			// 		createdAt: Date
+			// 		message: string
+			// 	}) => {
+			// 		if (data.id === me) {
+			// 			return
+			// 		}
 
-					addMessage({ ...data, isSpeaker: false })
-				}
-			)
+			// 		addMessage({ ...data, isSpeaker: false })
+			// 	}
+			// )
 		})()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])

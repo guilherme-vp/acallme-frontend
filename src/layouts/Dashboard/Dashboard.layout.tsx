@@ -5,16 +5,21 @@ import {
 	MdChevronLeft as ArrowCloseIcon,
 	MdChevronRight as ArrowOpenIcon
 } from 'react-icons/md'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import { useStoreon } from 'hooks'
 import { HeaderLogged } from 'parts/Header'
 import { Sidebar } from 'parts/Sidebar'
+import { LOGIN } from 'routes'
 
 import * as S from './Dashboard.styled'
 
 export const DashboardLayout: React.FC = ({ children }) => {
-	const { dispatch, expanded: open } = useStoreon('expanded')
+	const { dispatch, expanded: open, token } = useStoreon('expanded', 'token')
+
+	if (!token) {
+		return <Redirect to={LOGIN} />
+	}
 
 	const handleOpen = () => {
 		dispatch('drawer/set', true)

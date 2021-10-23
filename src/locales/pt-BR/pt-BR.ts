@@ -6,7 +6,8 @@ export const ptBrLocales = {
 	accept: 'aceitar',
 	reject: 'rejeitar',
 	continue: 'continuar',
-	goBack: 'voltar',
+	goBack: 'anterior',
+	back: 'voltar',
 	gender: 'gênero',
 	female: 'feminino',
 	male: 'masculino',
@@ -40,6 +41,9 @@ export const ptBrLocales = {
 	audio: 'áudio',
 	success: 'sucesso',
 	fail: 'falha',
+	schedule: 'Agenda',
+	disable: 'Desabilitar',
+	confirm: 'Confirmar',
 
 	// Home
 	'home.title': 'Home',
@@ -129,6 +133,8 @@ export const ptBrLocales = {
 	'signup.form.professional.about': 'Sobre mim',
 	'signup.form.professional.about.placeholder': 'Por favor se introduza',
 	'signup.form.professional.location': 'Localização',
+	'signup.form.professional.crp': 'CRP',
+	'signup.form.professional.crm': 'CRM',
 	'signup.form.professional.areas': 'Áreas de atuação',
 	'signup.form.session.cost': 'Preço por Hora',
 	'signup.form.session.works': 'Como Funciona',
@@ -143,6 +149,7 @@ export const ptBrLocales = {
 	'nav.schedule': 'Agenda',
 	'nav.specialists': 'Especialistas',
 	'nav.history': 'Histórico',
+	'nav.videocall': 'Videocall',
 	'nav.logout': 'Sair',
 
 	// Notifications
@@ -180,6 +187,12 @@ export const ptBrLocales = {
 	'search.location.label': 'Localizações',
 	'search.specialty.label': 'Especializações',
 	'search.specialty.placeholder': 'Selecione uma ou mais especialidades...',
+	'search.button': 'Buscar',
+	'search.result': 'Exibindo {pageTotal} especialistas',
+
+	// Specialist
+	'specialist.specialties': 'Especialidades',
+	'specialist.about': 'Sobre',
 
 	// Chat
 	'chat.placeholder': 'Envie uma mensagem...',
@@ -205,6 +218,17 @@ export const ptBrLocales = {
 	// Settings
 	'settings.select.audio': 'Selecione um dispositivo de entrada de áudio',
 	'settings.select.video': 'Selecione um dispositivo de entrada de vídeo',
+
+	// Schedule
+	'schedule.to': 'Essa consulta está agendada para ocorrer em {date}',
+	'schedule.viewData': 'Ver agendamento',
+	'schedule.confirmationModal.title': 'Confirmação de Consulta',
+	'schedule.disableModal.title': 'Desabilitar Data',
+	'schedule.disableModal.desc':
+		'Não se preocupe, você poderá habilitar esse horário novamente',
+	'schedule.card.book': 'Marque uma consulta',
+	'schedule.card.hours': 'Horários disponíveis',
+	'schedule.success': 'Sua consulta foi criada com sucesso1',
 
 	en: 'Inglês',
 	'pt-BR': 'Português'

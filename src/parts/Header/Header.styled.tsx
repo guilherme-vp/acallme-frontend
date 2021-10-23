@@ -9,7 +9,7 @@ export const Container = styled(Toolbar)`
 	border-bottom-right-radius: 24px;
 
 	@media only screen and (min-width: 600px) {
-		padding: 40px 16px 0;
+		padding: 16px 16px 0;
 		&.MuiToolbar-gutters {
 			padding-left: 24px;
 			padding-right: 24px;

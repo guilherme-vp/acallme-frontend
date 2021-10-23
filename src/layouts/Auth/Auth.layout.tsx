@@ -6,7 +6,7 @@ import { Redirect } from 'react-router'
 import { useStoreon } from 'hooks'
 import { Copyright } from 'parts/Copyright'
 import { HeaderTitle } from 'parts/Header'
-import { SPECIALISTS } from 'routes'
+import { SCHEDULE } from 'routes'
 
 import * as S from './Auth.styled'
 
@@ -14,7 +14,7 @@ export const AuthLayout: React.FC = ({ children }) => {
 	const { token } = useStoreon('token')
 
 	if (token) {
-		return <Redirect to={SPECIALISTS} />
+		return <Redirect to={SCHEDULE} />
 	}
 
 	return (

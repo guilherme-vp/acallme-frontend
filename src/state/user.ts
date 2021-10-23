@@ -4,7 +4,7 @@ import { IStoreonModule } from 'storeon'
 import { queryClient } from '../services/api/client'
 import { fetchMe as fetchPatient } from '../services/api/patient'
 import { fetchMe as fetchSpecialist } from '../services/api/specialist'
-import type { RolesEnum, JUser, User } from '../services/entities'
+import { RolesEnum, JUser, User } from '../services/entities'
 
 export interface UserState {
 	token: string | null
@@ -17,6 +17,7 @@ export interface UserEvents {
 	'user/set': UserState
 	'user/verifyToken': void
 	'user/setToken': string
+	'user/setRole': RolesEnum
 	'user/removeToken': void
 	'user/getUser': void
 	'user/loading': boolean
@@ -60,9 +61,10 @@ export const userModule: IStoreonModule = store => {
 		let ok = false
 
 		try {
-			const patientData = await fetchPatient(state.token)
+			const patientData = await fetchPatient()
 
 			store.dispatch('user/setUser', patientData)
+			store.dispatch('user/setRole', RolesEnum.Patient)
 			ok = true
 		} catch {}
 
@@ -71,13 +73,19 @@ export const userModule: IStoreonModule = store => {
 				const specialistData = await fetchSpecialist()
 
 				store.dispatch('user/setUser', specialistData)
-			} catch {
+				store.dispatch('user/setRole', RolesEnum.Specialist)
+			} catch (e) {
+				console.log(e)
 				store.dispatch('user/signOut')
 			}
 		}
 
 		store.dispatch('user/loading', false)
 	})
+
+	store.on('user/setRole', (_state, data) => ({
+		role: data
+	}))
 
 	store.on('user/signOut', () => {
 		queryClient.clear()

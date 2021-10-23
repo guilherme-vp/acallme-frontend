@@ -122,8 +122,19 @@ export const Videocall = () => {
 							</VideoContainer>
 						</Zoom>
 					)}
-					{countUsers > 1 && user && (
-						<Zoom in={!!userVideo}>
+
+					<Zoom in={!!myVideo}>
+						<VideoContainer container item xs={12} md={countUsers <= 1 ? 12 : true}>
+							<VideoWrapper status={!!status.video}>
+								<video muted playsInline ref={myVideo} autoPlay />
+								<UserAvatar src={loggedUser?.avatarUrl} status={!!status.video}>
+									{getInitials(loggedUser?.name as string)}
+								</UserAvatar>
+							</VideoWrapper>
+						</VideoContainer>
+					</Zoom>
+
+					{/* <Zoom in={!!userVideo}>
 							<VideoContainer container item xs={12} md={countUsers <= 1 ? 12 : true}>
 								<VideoWrapper status={!!userStatus.video}>
 									<video
@@ -138,8 +149,7 @@ export const Videocall = () => {
 									</UserAvatar>
 								</VideoWrapper>
 							</VideoContainer>
-						</Zoom>
-					)}
+						</Zoom> */}
 				</Grid>
 				{openChat && (
 					<Grid
@@ -152,7 +162,7 @@ export const Videocall = () => {
 					>
 						<Chat
 							chat={chat}
-							sendMessage={sendMessage}
+							sendMessage={message => console.log(message)}
 							open={openChat}
 							handleClose={handleCloseChat}
 						/>
@@ -195,8 +205,7 @@ export const Videocall = () => {
 				handleChangeDevice={({ sourceId, type }) =>
 					changeDevicesSource(
 						type === 'audio' ? { audioId: sourceId } : { videoId: sourceId }
-					)
-				}
+					)}
 				onClose={handleCloseSettings}
 			/>
 		</Grid>

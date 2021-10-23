@@ -7,11 +7,14 @@ import { LoadingButton } from '@mui/lab'
 import { Grid, Button, Typography } from '@mui/material'
 import iziToast from 'izitoast'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useMutation } from 'react-query'
 import { Link, useHistory } from 'react-router-dom'
 
-import { useIntl } from 'hooks'
+import { useIntl, useStoreon } from 'hooks'
 import { ChoseRole } from 'parts/ChoseRole'
-import { LOGIN } from 'routes'
+import { LOGIN, SCHEDULE } from 'routes'
+import { signupPatient, LoginResponse as SignupP } from 'services/api/patient'
+import { LoginResponse as SignupS, signupSpecialist } from 'services/api/specialist'
 import { RolesEnum, User, Specialist } from 'services/entities'
 import { capitalizeLetter } from 'utils/capitalize-letter'
 
@@ -39,12 +42,17 @@ export interface SessionForm {
 }
 
 export const SignUp = () => {
+	const { dispatch } = useStoreon()
 	const intl = useIntl()
 	const history = useHistory()
 	const [step, setStep] = useState(0)
 	const [chosen, setChosen] = useState<RolesEnum>()
 	const [openModal, setOpenModal] = useState(false)
 	const theme = useTheme()
+	const { isLoading: loadingPatient, mutateAsync: mutatePatient } =
+		useMutation(signupPatient)
+	const { isLoading: loadingSpecialist, mutateAsync: mutateSpecialist } =
+		useMutation(signupSpecialist)
 	const personalMethods = useForm<PersonalForm>({
 		mode: 'all'
 	})
@@ -68,14 +76,42 @@ export const SignUp = () => {
 		}
 	}
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		const personalValues = personalMethods.getValues()
 		const accountValues = accountMethods.getValues()
 		const professionalValues = professionalMethods.getValues()
 		const sessionValues = sessionMethods.getValues()
 
-		console.log(personalValues, accountValues, professionalValues, sessionValues)
-		history.push(LOGIN)
+		function setData(data: SignupP | SignupS, role: RolesEnum) {
+			const { token, user } = data
+
+			dispatch('user/set', { user, token, loadingUser: false, role })
+			history.push(SCHEDULE)
+		}
+
+		function formatPhone(phone: string) {
+			return phone.replace('(', '').replace(')', '').replace('-', '').replace(' ', '')
+		}
+
+		if (chosen === RolesEnum.Patient) {
+			const data = await mutatePatient({
+				...personalValues,
+				...accountValues,
+				phone: formatPhone(personalValues.phone)
+			})
+
+			setData(data, RolesEnum.Patient)
+		} else {
+			const data = await mutateSpecialist({
+				...personalValues,
+				phone: formatPhone(personalValues.phone),
+				...accountValues,
+				...professionalValues,
+				...sessionValues
+			})
+
+			setData(data, RolesEnum.Specialist)
+		}
 
 		setOpenModal(true)
 	}
@@ -124,7 +160,7 @@ export const SignUp = () => {
 		return false
 	})()
 
-	const handleNextStep = (): void => {
+	const handleNextStep = () => {
 		if (step === 0 && chosen) {
 			return setStep(step + 1)
 		}
@@ -210,6 +246,7 @@ export const SignUp = () => {
 							onClick={() => handleNextStep()}
 							variant="contained"
 							type="submit"
+							loading={loadingPatient || loadingSpecialist}
 						>
 							{capitalizeLetter(buttonMessage)}
 						</LoadingButton>

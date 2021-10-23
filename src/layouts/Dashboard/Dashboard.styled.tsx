@@ -55,7 +55,7 @@ export const DashboardMain = styled.main`
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
-	padding: 22px 40px;
+	padding: 22px 40px 80px;
 	background-color: ${props => props.theme.background.main};
 
 	@media only screen and (max-width: 600px) {

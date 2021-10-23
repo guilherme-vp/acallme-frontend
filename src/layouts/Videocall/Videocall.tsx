@@ -1,17 +1,19 @@
-import React, { useLayoutEffect } from 'react'
+import React from 'react'
 
-import { useParams } from 'react-router'
+import { Redirect } from 'react-router'
 
 import { CallProvider } from 'contexts'
+import { useStoreon } from 'hooks'
+import { LOGIN } from 'routes'
 
 import * as S from './Videocall.styled'
 
 export const VideocallLayout: React.FC = ({ children }) => {
-	const { scheduleId } = useParams<{ scheduleId: string }>()
+	const { token } = useStoreon('token')
 
-	useLayoutEffect(() => {
-		// TODO: add api verification checking if user is allowed to enter this call
-	}, [])
+	if (!token) {
+		return <Redirect to={LOGIN} />
+	}
 
 	return (
 		<S.Container>

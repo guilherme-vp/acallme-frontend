@@ -9,6 +9,7 @@ export const enLocales: ILocale = {
 	reject: 'reject',
 	continue: 'continue',
 	goBack: 'previous',
+	back: 'back',
 	gender: 'gender',
 	female: 'female',
 	male: 'male',
@@ -42,6 +43,9 @@ export const enLocales: ILocale = {
 	audio: 'audio',
 	success: 'success',
 	fail: 'failure',
+	schedule: 'Schedule',
+	disable: 'Disable',
+	confirm: 'Confirm',
 
 	// Home
 	'home.title': 'Home',
@@ -130,6 +134,8 @@ export const enLocales: ILocale = {
 	'signup.form.professional.about': 'About Me',
 	'signup.form.professional.about.placeholder': 'Please introduce yourself',
 	'signup.form.professional.location': 'Location',
+	'signup.form.professional.crp': 'CRP',
+	'signup.form.professional.crm': 'CRM',
 	'signup.form.professional.areas': 'Area of Expertise',
 	'signup.form.session.cost': 'Price per Hour',
 	'signup.form.session.works': 'How It Works',
@@ -144,6 +150,7 @@ export const enLocales: ILocale = {
 	'nav.specialists': 'Specialists',
 	'nav.schedule': 'Schedule',
 	'nav.history': 'History',
+	'nav.videocall': 'Videocall',
 	'nav.logout': 'Log out',
 
 	// Notifications
@@ -182,6 +189,12 @@ export const enLocales: ILocale = {
 	'search.location.label': 'Locations',
 	'search.specialty.label': 'Specialties',
 	'search.specialty.placeholder': 'Select one or more specialties...',
+	'search.button': 'Search',
+	'search.result': 'Showing {pageTotal} specialists',
+
+	// Specialist
+	'specialist.specialties': 'Specialities',
+	'specialist.about': 'About',
 
 	// Chat
 	'chat.placeholder': 'Send a message...',
@@ -207,6 +220,16 @@ export const enLocales: ILocale = {
 	// Settings
 	'settings.select.audio': 'Select an input audio device',
 	'settings.select.video': 'Select a video device',
+
+	// Schedule
+	'schedule.to': 'This Appointment is scheduled to ocurr in {date}',
+	'schedule.viewData': 'View Appointment',
+	'schedule.confirmationModal.title': 'Appointment Confirmation',
+	'schedule.disableModal.title': 'Disable Date',
+	'schedule.disableModal.desc': `Don't worry, you can enable it again.`,
+	'schedule.card.book': 'Book an appointment',
+	'schedule.card.hours': 'Available hours',
+	'schedule.success': 'Your appointment was successfully scheduled!',
 
 	// Languages
 	en: 'English',
