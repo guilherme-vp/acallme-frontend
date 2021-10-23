@@ -35,7 +35,7 @@ export const PersonalInformation = () => {
 	const intl = useIntl()
 	const [avatar, setAvatar] = useState<string>()
 	const [, setAvatarFile] = useState<File>()
-	const { register, control } = useFormContext<PersonalForm>()
+	const { register, control, watch } = useFormContext<PersonalForm>()
 	const isSmDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'))
 
 	const maxDate = datefns.subYears(new Date(), 18)
@@ -165,13 +165,13 @@ export const PersonalInformation = () => {
 				</Grid>
 				<Grid item>
 					<TextField
-						{...register('phone', { required: true, maxLength: 15, minLength: 11 })}
+						{...register('phone', { required: true, maxLength: 15, minLength: 7 })}
 						fullWidth
 						label={capitalizeLetter(intl.formatMessage({ id: 'phone' }))}
 						variant="outlined"
 						placeholder="Ex: (11) 99999-9999"
 						required
-						inputProps={{ minLength: 11, maxLength: 15 }}
+						inputProps={{ minLength: 7, maxLength: 15 }}
 						InputProps={{
 							startAdornment: (
 								<InputIconContainer position="start">

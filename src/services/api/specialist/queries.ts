@@ -32,7 +32,7 @@ export interface SignupDto {
 	crm?: string
 	gender: GenderEnum
 	birth: string
-	phone: number
+	phone: string
 	about: string
 	cost: number
 	specialties: string[]

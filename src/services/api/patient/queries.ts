@@ -19,7 +19,7 @@ export interface SignupDto {
 	cpf: string
 	gender: GenderEnum
 	birth: string
-	phone: number
+	phone: string
 }
 
 // @ts-ignore

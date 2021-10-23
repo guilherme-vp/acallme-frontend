@@ -82,7 +82,6 @@ export const SignUp = () => {
 		const professionalValues = professionalMethods.getValues()
 		const sessionValues = sessionMethods.getValues()
 
-		console.log(personalValues, accountValues, professionalValues, sessionValues)
 		function setData(data: SignupP | SignupS, role: RolesEnum) {
 			const { token, user } = data
 
@@ -90,18 +89,22 @@ export const SignUp = () => {
 			history.push(SCHEDULE)
 		}
 
+		function formatPhone(phone: string) {
+			return phone.replace('(', '').replace(')', '').replace('-', '').replace(' ', '')
+		}
+
 		if (chosen === RolesEnum.Patient) {
 			const data = await mutatePatient({
 				...personalValues,
-				phone: +personalValues.phone,
-				...accountValues
+				...accountValues,
+				phone: formatPhone(personalValues.phone)
 			})
 
 			setData(data, RolesEnum.Patient)
 		} else {
 			const data = await mutateSpecialist({
 				...personalValues,
-				phone: +personalValues.phone,
+				phone: formatPhone(personalValues.phone),
 				...accountValues,
 				...professionalValues,
 				...sessionValues
