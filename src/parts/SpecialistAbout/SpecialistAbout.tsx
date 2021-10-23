@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import { CalendarPicker } from '@mui/lab'
 import {
 	AppBar,
-	Dialog,
 	IconButton,
 	Slide,
 	Toolbar,
@@ -18,6 +17,7 @@ import {
 } from '@mui/material'
 import { TransitionProps } from '@mui/material/transitions'
 import { addHours, endOfDay, startOfDay, subHours } from 'date-fns'
+import iziToast from 'izitoast'
 import {
 	MdClose as CloseIcon,
 	MdOutlinePhone as PhoneIcon,
@@ -30,6 +30,8 @@ import { useIntl } from 'hooks'
 import { HoursRange } from 'hooks/useSchedule'
 import { createSchedule, fetchSchedules } from 'services/api/schedule'
 import { Schedule, Specialist } from 'services/entities'
+import { capitalizeLetter } from 'utils/capitalize-letter'
+import { cleanTime } from 'utils/formatTime'
 import { formatHours } from 'utils/get-all-hours'
 import { getInitials } from 'utils/get-initials'
 
@@ -71,11 +73,18 @@ export const SpecialistAbout = ({
 			specialistId: specialist.id,
 			disabled: false,
 			confirmed: false,
-			rangeStart: addHours(startOfDay(date ?? minDate), 6).toISOString(),
-			rangeEnd: subHours(endOfDay(date ?? minDate), 3).toISOString()
+			rangeStart: cleanTime(addHours(startOfDay(date ?? minDate), 6)).toISOString(),
+			rangeEnd: cleanTime(subHours(endOfDay(date ?? minDate), 3)).toISOString()
 		})
 	)
-	const { data: creationData, mutate } = useMutation(createSchedule)
+	const { mutate } = useMutation(createSchedule, {
+		onSuccess: () => {
+			iziToast.success({
+				title: capitalizeLetter(intl.formatMessage({ id: 'success' })),
+				message: intl.formatMessage({ id: 'schedule.success' })
+			})
+		}
+	})
 	const [hours, setHours] = useState<HoursRange[]>()
 
 	useEffect(() => {
@@ -96,11 +105,26 @@ export const SpecialistAbout = ({
 	}
 
 	const createAppointment = () => {
-		const a = 'oi'
+		if (chosenDay) {
+			const endHour = cleanTime(addHours(chosenDay, 1))
+
+			mutate({
+				specialistId: specialist.id,
+				dateStart: chosenDay.toISOString(),
+				dateEnd: endHour.toISOString()
+			})
+
+			refetch()
+		}
 	}
 
 	return (
-		<Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+		<S.Container
+			fullScreen
+			open={open}
+			onClose={handleClose}
+			TransitionComponent={Transition}
+		>
 			<AppBar sx={{ position: 'relative', border: 0 }}>
 				<Toolbar>
 					<IconButton edge="start" color="primary" onClick={handleClose}>
@@ -152,7 +176,7 @@ export const SpecialistAbout = ({
 				<Grid item xs={12} sx={{ width: '100%', marginTop: 2 }}>
 					<Divider flexItem />
 				</Grid>
-				<Grid container item spacing={3} sx={{ mt: 1 }}>
+				<Grid container item spacing={3} sx={{ mt: 1, mb: 5 }}>
 					<Grid container item alignItems="center" flexDirection="column" spacing={1}>
 						<Grid item>
 							<Typography color="text.secondary" variant="h3">
@@ -189,7 +213,7 @@ export const SpecialistAbout = ({
 							<Typography variant="h5">{specialist.about}</Typography>
 						</Grid>
 					</Grid>
-					<Grid container item mt={1} spacing={2}>
+					<Grid container item mt={1} spacing={2} justifyContent="center">
 						<Grid item xs={12}>
 							<Typography variant="h4">
 								{intl.formatMessage({ id: 'schedule.card.book' })}
@@ -209,7 +233,7 @@ export const SpecialistAbout = ({
 										{intl.formatMessage({ id: 'schedule.card.hours' })}
 									</Typography>
 								</Grid>
-								<Grid item xs={12}>
+								<Grid container item justifyContent="center">
 									{hours?.map(({ day, hour, isDisabled, isScheduled, scheduleId }) => (
 										<BookButton
 											key={scheduleId ?? hour}
@@ -224,7 +248,7 @@ export const SpecialistAbout = ({
 										</BookButton>
 									))}
 								</Grid>
-								<Grid item xs={12}>
+								<Grid container item justifyContent="center" alignItems="center">
 									<Button
 										disabled={!chosenDay}
 										onClick={createAppointment}
@@ -239,7 +263,7 @@ export const SpecialistAbout = ({
 					</Grid>
 				</Grid>
 			</Container>
-		</Dialog>
+		</S.Container>
 	)
 }
 

@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
-import { Avatar } from '@mui/material'
+import { Avatar, Dialog } from '@mui/material'
+
+export const Container = styled(Dialog)`
+	padding-bottom: 20px;
+`
 
 export const BigAvatar = styled(Avatar)`
 	width: 80px;
