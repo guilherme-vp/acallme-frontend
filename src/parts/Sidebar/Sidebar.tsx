@@ -2,14 +2,11 @@ import React, { useMemo } from 'react'
 
 import { Grid, Typography, useMediaQuery, Theme } from '@mui/material'
 import { GoCalendar as CalendarIcon } from 'react-icons/go'
-import {
-	MdOutlineGroup as GroupIcon,
-	MdOutlineHistory as HistoryIcon
-} from 'react-icons/md'
+import { MdOutlineGroup as GroupIcon, MdOutlineVideocam as VideoIcon } from 'react-icons/md'
 import { useLocation } from 'react-router'
 
 import { useIntl } from 'hooks'
-import { HISTORY, SCHEDULE, SPECIALISTS } from 'routes'
+import { VIDEOCALL, SCHEDULE, SPECIALISTS } from 'routes'
 import { capitalizeLetter } from 'utils/capitalize-letter'
 
 import { SidebarContent } from './Sidebar.styled'
@@ -39,9 +36,9 @@ export const Sidebar = ({ open, onClose }: Props) => {
 			link: SPECIALISTS
 		},
 		{
-			icon: <HistoryIcon />,
-			option: 'history',
-			link: HISTORY
+			icon: <VideoIcon />,
+			option: 'videocall',
+			link: VIDEOCALL
 		}
 	]
 
