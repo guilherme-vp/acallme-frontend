@@ -1,6 +1,6 @@
 import qs from 'querystring'
 
-import { Specialist } from 'services/entities'
+import { Specialist, GenderEnum } from 'services/entities'
 
 import { nodeApi } from '../client'
 
@@ -21,17 +21,34 @@ export interface LoginResponse {
 	token: string
 }
 
+export interface SignupDto {
+	email: string
+	name: string
+	password: string
+	avatarUrl?: string
+	cnpj: string
+	cpf: string
+	crp?: string
+	crm?: string
+	gender: GenderEnum
+	birth: string
+	phone: number
+	about: string
+	cost: number
+	specialties: string[]
+}
+
 // @ts-ignore
-export type SpecialistReponse<T = 'specialist'> = Record<T, Specialist>
+export type SpecialistResponse<T = 'specialist'> = Record<T, Specialist>
 
 export async function fetchMe(): Promise<Specialist> {
-	const { data } = await nodeApi.get<SpecialistReponse<'me'>>('specialists/me')
+	const { data } = await nodeApi.get<SpecialistResponse<'me'>>('specialists/me')
 
 	return data.me
 }
 
 export async function fetchSpecialistById(id: number): Promise<Specialist> {
-	const { data } = await nodeApi.get<SpecialistReponse>(`specialists/:${id}`)
+	const { data } = await nodeApi.get<SpecialistResponse>(`specialists/:${id}`)
 
 	return data.specialist
 }
@@ -45,10 +62,10 @@ export async function fetchSpecialists(queries: GetManyDto): Promise<Specialist[
 	return data.specialists
 }
 
-export async function createSpecialist(): Promise<Specialist> {
-	const { data } = await nodeApi.post<SpecialistReponse>('specialists')
+export async function signupSpecialist(input: SignupDto): Promise<LoginResponse> {
+	const { data } = await nodeApi.post('specialists/signup', input)
 
-	return data.specialist
+	return data as LoginResponse
 }
 
 export async function loginSpecialist(input: LoginDto): Promise<LoginResponse> {

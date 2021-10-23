@@ -3,8 +3,8 @@ import { Specialty } from './Specialty.entity'
 import { User } from './User.entity'
 
 export type Specialist = User & {
-	cpf?: string
-	cnpj?: string
+	cpf: string
+	cnpj: string
 	crp?: string
 	crm?: string
 	cost: number
