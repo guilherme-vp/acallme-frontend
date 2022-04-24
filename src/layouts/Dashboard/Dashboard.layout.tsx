@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { Hidden, SwipeableDrawer, Toolbar } from '@mui/material'
+import { SwipeableDrawer, Theme, Toolbar, useMediaQuery } from '@mui/material'
 import {
 	MdChevronLeft as ArrowCloseIcon,
 	MdChevronRight as ArrowOpenIcon
 } from 'react-icons/md'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Navigate, Outlet } from 'react-router-dom'
 
 import { useStoreon } from 'hooks'
 import { HeaderLogged } from 'parts/Header'
@@ -14,11 +14,12 @@ import { LOGIN } from 'routes'
 
 import * as S from './Dashboard.styled'
 
-export const DashboardLayout: React.FC = ({ children }) => {
+export const DashboardLayout = () => {
 	const { dispatch, expanded: open, token } = useStoreon('expanded', 'token')
+	const isMdUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
 
 	if (!token) {
-		return <Redirect to={LOGIN} />
+		return <Navigate to={LOGIN} />
 	}
 
 	const handleOpen = () => {
@@ -36,38 +37,41 @@ export const DashboardLayout: React.FC = ({ children }) => {
 	return (
 		<S.DashboardContainer>
 			<HeaderLogged openDrawer={() => handleOpen()} />
-			<Hidden mdUp>
+			{isMdUp && (
+				// @ts-ignore
 				<SwipeableDrawer
 					open={open}
 					onOpen={handleOpen}
 					onClose={handleClose}
-					SlideProps={{ style: { width: '240px' } }}
+					// SlideProps={{ style: { width: '240px' } }}
 				>
 					<Sidebar onClose={handleClose} open={open} />
 				</SwipeableDrawer>
-			</Hidden>
+			)}
 			<S.SidebarContainer>
-				<Hidden mdDown>
-					<S.Drawer variant="permanent" open={open} onClose={handleClose}>
-						<S.DrawerHeader>
-							<Link to="/">
-								<S.Title variant="h1">{open ? 'ACall Me' : 'AC'}</S.Title>
-							</Link>
-						</S.DrawerHeader>
-						<Sidebar open={open} />
-					</S.Drawer>
-					<div>
-						<S.ContainerButton>
-							<S.CloseButton size="small" onClick={handleToggle}>
-								{open ? <ArrowCloseIcon /> : <ArrowOpenIcon />}
-							</S.CloseButton>
-						</S.ContainerButton>
-					</div>
-				</Hidden>
+				{!isMdUp && (
+					<>
+						<S.Drawer variant="permanent" open={open} onClose={handleClose}>
+							<S.DrawerHeader>
+								<Link to="/">
+									<S.Title variant="h1">{open ? 'ACall Me' : 'AC'}</S.Title>
+								</Link>
+							</S.DrawerHeader>
+							<Sidebar open={open} />
+						</S.Drawer>
+						<div>
+							<S.ContainerButton>
+								<S.CloseButton size="small" onClick={handleToggle}>
+									{open ? <ArrowCloseIcon /> : <ArrowOpenIcon />}
+								</S.CloseButton>
+							</S.ContainerButton>
+						</div>
+					</>
+				)}
 			</S.SidebarContainer>
 			<S.DashboardMain>
 				<Toolbar sx={{ height: '66px' }} />
-				{children}
+				<Outlet />
 			</S.DashboardMain>
 		</S.DashboardContainer>
 	)

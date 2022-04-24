@@ -2,8 +2,7 @@ import React, { useEffect } from 'react'
 
 import { CircularProgress, useMediaQuery } from '@mui/material'
 import iziToast from 'izitoast'
-import { Redirect, RouteComponentProps, RouteProps } from 'react-router'
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Routes, Navigate } from 'react-router-dom'
 
 import { useStoreon } from 'hooks'
 import { LOGIN, SIGNUP, HOME, SPECIALISTS, SCHEDULE, HISTORY, VIDEOCALL } from 'routes'
@@ -26,28 +25,6 @@ iziToast.settings({
 	position: 'bottomLeft',
 	maxWidth: 400
 })
-
-interface WrapperProps extends RouteProps {
-	component: React.ComponentType<RouteComponentProps>
-	layout?: React.ComponentType<RouteComponentProps>
-}
-
-function RouteWrapper({ component: Component, layout: Layout, ...rest }: WrapperProps) {
-	return (
-		<Route
-			{...rest}
-			render={props =>
-				Layout ? (
-					<Layout {...props}>
-						<Component {...props} />
-					</Layout>
-				) : (
-					<Component {...props} />
-				)
-			}
-		/>
-	)
-}
 
 const App = () => {
 	const { dispatch, loading } = useStoreon('loading')
@@ -73,21 +50,24 @@ const App = () => {
 		/>
 	) : (
 		<Router>
-			<Switch>
-				<RouteWrapper path={HOME} exact layout={HomeLayout} component={Home} />
-				<RouteWrapper path={LOGIN} layout={AuthLayout} component={Login} />
-				<RouteWrapper path={SIGNUP} layout={AuthLayout} component={SignUp} />
-				<RouteWrapper path={SPECIALISTS} layout={DashboardLayout} component={Specialists} />
-				<RouteWrapper path={SCHEDULE} layout={DashboardLayout} component={Schedule} />
-				<RouteWrapper
-					path={HISTORY}
-					layout={DashboardLayout}
-					component={() => <h1>HISTORY</h1>}
-				/>
-				<RouteWrapper path={VIDEOCALL} layout={VideocallLayout} component={Videocall} />
-
-				<Redirect to={HOME} />
-			</Switch>
+			<Routes>
+				<Route element={<HomeLayout />}>
+					<Route index element={<Home />} />
+				</Route>
+				<Route element={<AuthLayout />}>
+					<Route path={LOGIN} element={<Login />} />
+					<Route path={SIGNUP} element={<SignUp />} />
+				</Route>
+				<Route element={<DashboardLayout />}>
+					<Route path={SPECIALISTS} element={<Specialists />} />
+					<Route path={SCHEDULE} element={<Schedule />} />
+					<Route path={HISTORY} element={() => <h1>HISTORY</h1>} />
+				</Route>
+				<Route element={<VideocallLayout />}>
+					<Route path={VIDEOCALL} element={<Videocall />} />
+				</Route>
+				{/* <Navigate to={HOME} /> */}
+			</Routes>
 		</Router>
 	)
 }

@@ -12,7 +12,7 @@ import {
 	MdPermContactCalendar as IdentityIcon
 } from 'react-icons/md'
 import { useMutation } from 'react-query'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import doctorImage from 'assets/images/login-image.png'
 import { InputIconContainer } from 'components/InputAdornment'
@@ -36,7 +36,7 @@ export const Login = () => {
 	const theme = useTheme()
 	const { dispatch } = useStoreon()
 	const intl = useIntl()
-	const history = useHistory()
+	const navigation = useNavigate()
 	const { isLoading: loadingPatient, mutateAsync: mutatePatient } =
 		useMutation(loginPatient)
 	const { isLoading: loadingSpecialist, mutateAsync: mutateSpecialist } =
@@ -62,7 +62,7 @@ export const Login = () => {
 			const { token, user } = data
 
 			dispatch('user/set', { user, token, loadingUser: false, role })
-			history.push(SCHEDULE)
+			navigation(SCHEDULE)
 		}
 
 		if (chosen === RolesEnum.Patient) {
@@ -122,11 +122,11 @@ export const Login = () => {
 
 	return (
 		<Grid container justifyContent="space-between" alignItems="center">
-			<Hidden mdDown>
-				<Grid item xs={12} md={6}>
-					<Image loading="lazy" src={doctorImage} alt="login-doctor" />
-				</Grid>
-			</Hidden>
+			{/* <Hidden mdDown> */}
+			<Grid item xs={12} md={6}>
+				<Image loading="lazy" src={doctorImage} alt="login-doctor" />
+			</Grid>
+			{/* </Hidden> */}
 			<BorderedGrid
 				container
 				item

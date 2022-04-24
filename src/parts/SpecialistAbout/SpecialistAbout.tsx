@@ -238,7 +238,7 @@ export const SpecialistAbout = ({
 										<BookButton
 											key={scheduleId ?? hour}
 											onClick={() => handleClick(day)}
-											disabled={isDisabled}
+											disabled={isDisabled === null ? true : isDisabled}
 											isScheduled={isScheduled as boolean}
 											variant={chosenDay === day ? 'contained' : 'text'}
 											isChosen={chosenDay === day}

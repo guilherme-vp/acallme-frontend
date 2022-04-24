@@ -87,7 +87,7 @@ export const useSchedule = (
 						}
 
 						const scheduleExists = data?.find(
-							({ rangeStart }) => new Date(rangeStart).getTime() === aimedDay.getTime()
+							({ startsAt }) => new Date(startsAt).getTime() === aimedDay.getTime()
 						)
 
 						if (!scheduleExists) {

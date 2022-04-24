@@ -91,13 +91,11 @@ export const AccountInformation = ({ role }: RoleProp) => {
 					<Grid item>
 						<TextField
 							{...register('cnpj', {
-								required: true,
 								pattern: cnpjRegex
 							})}
 							fullWidth
 							label={intl.formatMessage({ id: 'cnpj' })}
 							variant="outlined"
-							required
 							error={!!errors.cnpj}
 							placeholder="12.345.678/0001-90"
 							name="cnpj"

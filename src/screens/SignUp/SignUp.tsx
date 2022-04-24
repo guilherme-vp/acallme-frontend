@@ -8,7 +8,7 @@ import { Grid, Button, Typography } from '@mui/material'
 import iziToast from 'izitoast'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { useIntl, useStoreon } from 'hooks'
 import { ChoseRole } from 'parts/ChoseRole'
@@ -44,7 +44,7 @@ export interface SessionForm {
 export const SignUp = () => {
 	const { dispatch } = useStoreon()
 	const intl = useIntl()
-	const history = useHistory()
+	const navigate = useNavigate()
 	const [step, setStep] = useState(0)
 	const [chosen, setChosen] = useState<RolesEnum>()
 	const [openModal, setOpenModal] = useState(false)
@@ -86,10 +86,10 @@ export const SignUp = () => {
 			const { token, user } = data
 
 			dispatch('user/set', { user, token, loadingUser: false, role })
-			history.push(SCHEDULE)
+			navigate(SCHEDULE)
 		}
 
-		function formatPhone(phone: string) {
+		function formatPhone(phone: string): string {
 			return phone.replace('(', '').replace(')', '').replace('-', '').replace(' ', '')
 		}
 
@@ -107,7 +107,10 @@ export const SignUp = () => {
 				phone: formatPhone(personalValues.phone),
 				...accountValues,
 				...professionalValues,
-				...sessionValues
+				...{
+					...sessionValues,
+					cost: +sessionValues.cost
+				}
 			})
 
 			setData(data, RolesEnum.Specialist)

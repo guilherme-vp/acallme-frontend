@@ -2,12 +2,12 @@
 import React, { useState, useEffect, useRef, createContext, RefObject } from 'react'
 
 import iziToast from 'izitoast'
-import { useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
 import Peer from 'simple-peer'
 
 import { MessageProps } from '../components/Message'
 import { WsEvents } from '../constants/ws-events'
-import { useIntl } from '../hooks'
+import { useIntl, useStoreon } from '../hooks'
 import { callSocket as socket } from '../services/ws/client'
 
 interface Caller {
@@ -31,7 +31,7 @@ export interface Authorization {
 export interface CallContextProps {
 	stream?: MediaStream
 	chat: MessageProps[]
-	me?: string
+	socketId?: string
 	status: Status
 	user?: Caller
 	userStatus: Status
@@ -61,7 +61,8 @@ export const CallProvider: React.FC = ({ children }) => {
 
 	const [stream, setStream] = useState<MediaStream>()
 	const [chat, setChat] = useState<MessageProps[]>([])
-	const [me, setMe] = useState<string>()
+	const [socketId, setSocketId] = useState<string>()
+	const { user: me } = useStoreon('user')
 	const [user, setUser] = useState<Caller>()
 	const [countUsers, setCountUsers] = useState(1)
 	const [callEnded, setCallEnded] = useState(false)
@@ -79,6 +80,7 @@ export const CallProvider: React.FC = ({ children }) => {
 	const myVideo = useRef<HTMLVideoElement>(null)
 	const userVideo = useRef<HTMLVideoElement>(null)
 	const connectionRef = useRef<Peer.Instance>()
+	console.log('$$$ data', stream?.active, chat, socketId, user)
 
 	const requestAuthorization = async ({ videoId, audioId }: Authorization = {}) => {
 		try {
@@ -105,7 +107,7 @@ export const CallProvider: React.FC = ({ children }) => {
 			await requestAuthorization()
 
 			// Get User Socket Id From Server
-			socket.on(WsEvents.ME, (socketId: string) => setMe(socketId))
+			socket.on(WsEvents.ME, (socketId: string) => setSocketId(socketId))
 
 			// Send Appointment Close Notification
 			socket.on(WsEvents.SEND_CLOSE_NOTIFICATION, () => {
@@ -130,8 +132,9 @@ export const CallProvider: React.FC = ({ children }) => {
 					statuses: boolean[]
 				}) => {
 					const { statuses, socketId, type } = data
+					console.log('Update user media', data)
 
-					if (socketId === me) {
+					if (socketId === socketId) {
 						return
 					}
 
@@ -150,22 +153,23 @@ export const CallProvider: React.FC = ({ children }) => {
 			)
 
 			// Receive Message Event Listener
-			// socket.on(
-			// 	WsEvents.RECEIVE_MESSAGE,
-			// 	(data: {
-			// 		id: string
-			// 		name: string
-			// 		avatarUrl?: string
-			// 		createdAt: Date
-			// 		message: string
-			// 	}) => {
-			// 		if (data.id === me) {
-			// 			return
-			// 		}
+			socket.on(
+				WsEvents.RECEIVE_MESSAGE,
+				(data: {
+					id: string
+					name: string
+					avatarUrl?: string
+					createdAt: Date
+					message: string
+				}) => {
+					console.log('Received message', data)
+					if (data.id === socketId) {
+						return
+					}
 
-			// 		addMessage({ ...data, isSpeaker: false })
-			// 	}
-			// )
+					addMessage({ ...data, isSpeaker: false })
+				}
+			)
 		})()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
@@ -175,8 +179,14 @@ export const CallProvider: React.FC = ({ children }) => {
 		const initiator = countUsers === 0
 
 		const peer = new Peer({ initiator, stream })
+		// socket.emit(WsEvents.ENTER_CALL, {
+		// 	signal,
+		// 	room,
+		// 	mediaStatus: status
+		// } as { signal: Peer.SignalData; room: string; mediaStatus: Status })
 
 		peer.on('signal', signal => {
+			console.log('$$$ Emitted enter call event', signal, room)
 			socket.emit(WsEvents.ENTER_CALL, {
 				signal,
 				room,
@@ -185,27 +195,26 @@ export const CallProvider: React.FC = ({ children }) => {
 		})
 
 		peer.on('stream', currentStream => {
+			console.log('Received stream from user', currentStream)
 			userVideo.current!.srcObject = currentStream
 		})
 
+		connectionRef.current = peer
+	}
+
+	useEffect(() => {
 		socket.on(
 			WsEvents.RECEIVE_USER,
 			(data: Caller & { mediaStatus: Omit<Status, 'fullscreen'> }) => {
 				const { mediaStatus, socketId, ...restUser } = data
 
-				if (socketId === me) {
-					return
-				}
-
 				setUser({ socketId, ...restUser })
 				setUserStatus(mediaStatus)
 				setCountUsers(prev => prev + 1)
-				peer.signal(data.signal)
+				connectionRef.current?.signal(data.signal)
 			}
 		)
-
-		connectionRef.current = peer
-	}
+	}, [])
 
 	// Util Function to add a message to Chat
 	const addMessage = (content: Omit<MessageProps, 'createdAt' | 'id'>) => {
@@ -219,12 +228,15 @@ export const CallProvider: React.FC = ({ children }) => {
 
 	// Send Message as Speaker
 	const sendMessage = (content: string) => {
-		addMessage({
-			...user,
-			name: user?.name as string,
-			isSpeaker: true,
-			message: content
-		})
+		if (me) {
+			addMessage({
+				name: me?.name,
+				avatarUrl: me?.avatarUrl,
+				isSpeaker: true,
+				message: content
+			})
+			socket.emit(WsEvents.SEND_MESSAGE, content)
+		}
 	}
 
 	// Toggle Video
@@ -232,6 +244,7 @@ export const CallProvider: React.FC = ({ children }) => {
 		setStatus(prev => {
 			const { video } = prev
 
+			console.log('Emitted update media video')
 			socket.emit(WsEvents.UPDATE_MEDIA, {
 				type: 'video',
 				currentMediaStatus: !video,
@@ -246,6 +259,7 @@ export const CallProvider: React.FC = ({ children }) => {
 
 	// Toggle Audio
 	const handleToggleAudio = () => {
+		console.log('Emitted update media audio')
 		setStatus(prev => {
 			const { audio } = prev
 
@@ -305,7 +319,7 @@ export const CallProvider: React.FC = ({ children }) => {
 		setCallEnded(true)
 
 		connectionRef.current!.destroy()
-		socket.emit(WsEvents.END_CALL, { id: me })
+		// socket.emit(WsEvents.END_CALL, { id: socketId })
 	}
 
 	const changeDevicesSource = async ({ audioId, videoId }: Authorization) => {
@@ -317,7 +331,7 @@ export const CallProvider: React.FC = ({ children }) => {
 			value={{
 				stream,
 				chat,
-				me,
+				socketId,
 				status,
 				user,
 				userStatus,

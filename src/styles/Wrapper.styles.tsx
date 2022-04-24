@@ -12,8 +12,10 @@ export const StylesWrapper: React.FC = ({ children }) => (
 	<StyledEngineProvider injectFirst>
 		<MuiThemeProvider theme={materialTheme}>
 			<ThemeProvider theme={theme}>
-				<GlobalStyle />
-				{children}
+				<>
+					<GlobalStyle />
+					{children}
+				</>
 			</ThemeProvider>
 		</MuiThemeProvider>
 	</StyledEngineProvider>

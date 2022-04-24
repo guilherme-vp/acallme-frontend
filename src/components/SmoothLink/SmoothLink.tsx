@@ -15,6 +15,7 @@ export const SmoothLink: React.FC<SmoothLinkProps> = ({
 	children
 }) => (
 	<Link offset={offset} to={sectionId} spy smooth duration={duration}>
+		{/* @ts-ignore */}
 		{children}
 	</Link>
 )

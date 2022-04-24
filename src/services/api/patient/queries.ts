@@ -12,15 +12,7 @@ export interface LoginResponse {
 	token: string
 }
 
-export interface SignupDto {
-	email: string
-	name: string
-	password: string
-	cpf: string
-	gender: GenderEnum
-	birth: string
-	phone: string
-}
+export type SignupDto = Omit<Patient, 'schedule' | 'avatarUrl' | 'id'>
 
 // @ts-ignore
 export type PatientReponse<T = 'patient'> = Record<T, Patient>

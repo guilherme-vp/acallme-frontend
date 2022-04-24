@@ -160,11 +160,11 @@ const materialBaseTheme = (theme: Theme): ThemeOptions => ({
 		},
 		MuiSelect: {
 			styleOverrides: {
-				root: {
-					border: `1px solid ${theme.border.thin}`,
-					padding: '12px 15px',
-					fontSize: pxToRem(12)
-				},
+				// root: {
+				// 	border: `1px solid ${theme.border.thin}`,
+				// 	padding: '12px 15px',
+				// 	fontSize: pxToRem(12)
+				// },
 				icon: {
 					right: 2
 				},

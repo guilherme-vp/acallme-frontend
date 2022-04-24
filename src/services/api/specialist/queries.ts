@@ -21,20 +21,10 @@ export interface LoginResponse {
 	token: string
 }
 
-export interface SignupDto {
-	email: string
-	name: string
-	password: string
-	avatarUrl?: string
-	cnpj: string
-	cpf: string
-	crp?: string
-	crm?: string
-	gender: GenderEnum
-	birth: string
-	phone: string
-	about: string
-	cost: number
+export type SignupDto = Omit<
+	Specialist,
+	'avatarUrl' | 'schedule' | 'specialties' | 'id'
+> & {
 	specialties: string[]
 }
 
@@ -53,13 +43,18 @@ export async function fetchSpecialistById(id: number): Promise<Specialist> {
 	return data.specialist
 }
 
-export async function fetchSpecialists(queries: GetManyDto): Promise<Specialist[]> {
-	const { data } = await nodeApi.get<{ specialists: Specialist[] }>('specialists', {
-		params: queries,
-		paramsSerializer: params => qs.stringify(params)
-	})
+export async function fetchSpecialists(
+	queries: GetManyDto
+): Promise<{ specialists: Specialist[]; count: number }> {
+	const { data } = await nodeApi.get<{ specialists: Specialist[]; count: number }>(
+		'specialists',
+		{
+			params: queries,
+			paramsSerializer: params => qs.stringify(params)
+		}
+	)
 
-	return data.specialists
+	return data
 }
 
 export async function signupSpecialist(input: SignupDto): Promise<LoginResponse> {

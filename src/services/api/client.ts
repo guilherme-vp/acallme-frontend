@@ -75,22 +75,22 @@ nodeApi.interceptors.request.use(config => {
 
 	return config
 })
-javaApi.interceptors.request.use(config => {
-	const { headers } = config
+// javaApi.interceptors.request.use(config => {
+// 	const { headers } = config
 
-	const persistedState = localStorage.getItem('storeon')
+// 	const persistedState = localStorage.getItem('storeon')
 
-	let token
+// 	let token
 
-	if (persistedState) {
-		token = JSON.parse(persistedState).token
-	}
+// 	if (persistedState) {
+// 		token = JSON.parse(persistedState).token
+// 	}
 
-	if (token) {
-		const newHeaders = { ...headers, Authorization: `Bearer ${token}` }
+// 	if (token) {
+// 		const newHeaders = { ...headers, Authorization: `Bearer ${token}` }
 
-		config.headers = newHeaders
-	}
+// 		config.headers = newHeaders
+// 	}
 
-	return config
-})
+// 	return config
+// })

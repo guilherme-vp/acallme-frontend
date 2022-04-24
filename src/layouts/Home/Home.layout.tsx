@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Toolbar } from '@mui/material'
-import { Redirect } from 'react-router'
+import { Navigate, Outlet } from 'react-router-dom'
 
 import { ScrollToTop } from 'components/ScrollToTop'
 import { useStoreon } from 'hooks'
@@ -12,19 +12,21 @@ import { SPECIALISTS } from 'routes'
 
 import { Container, LayoutDivider, Main } from './Home.styled'
 
-export const HomeLayout: React.FC = ({ children }) => {
+export const HomeLayout = () => {
 	const scrollAnchor = 'top-anchor'
 	const { token } = useStoreon('token')
 
 	if (token) {
-		return <Redirect to={SPECIALISTS} />
+		return <Navigate to={SPECIALISTS} />
 	}
 
 	return (
 		<Container>
 			<HeaderHome />
 			<Toolbar id={scrollAnchor} />
-			<Main>{children}</Main>
+			<Main>
+				<Outlet />
+			</Main>
 			<LayoutDivider />
 			<FooterHome />
 			<LayoutDivider />

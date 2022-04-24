@@ -26,11 +26,11 @@ export const HeaderLogged = ({ openDrawer }: HeaderProps) => {
 			<Container>
 				<Grid container justifyContent="space-between" alignItems="center">
 					<Grid container item xs="auto">
-						<Hidden mdUp>
-							<IconButton color="secondary" edge="start" onClick={() => openDrawer()}>
-								<MenuIcon />
-							</IconButton>
-						</Hidden>
+						{/* <Hidden mdUp> */}
+						<IconButton color="secondary" edge="start" onClick={() => openDrawer()}>
+							<MenuIcon />
+						</IconButton>
+						{/* </Hidden> */}
 					</Grid>
 					<Grid container item xs justifyContent="flex-end" alignItems="center">
 						<Grid item mr={2}>

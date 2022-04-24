@@ -15,7 +15,7 @@ import {
 	MdNotifications as FilledBell,
 	MdNotificationsNone as OutlinedBell
 } from 'react-icons/md'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 
 import { MenuPopover } from 'components/MenuPopover'
 import { NotificationItem } from 'components/NotificationItem'
@@ -28,7 +28,7 @@ import { callSocket as socket } from 'services/ws/client'
 import { capitalizeLetter } from 'utils/capitalize-letter'
 
 export const NotificationsPopover = () => {
-	const history = useHistory()
+	const navigate = useNavigate()
 	const intl = useIntl()
 	const anchorRef = useRef(null)
 	const [open, setOpen] = useState(false)
@@ -106,7 +106,7 @@ export const NotificationsPopover = () => {
 	const handleEnter = (notificationId: string, scheduleId: number) => {
 		setNotifications(prev => prev.filter(({ id }) => id !== notificationId))
 
-		history.push(`/${VIDEOCALL}/${scheduleId}`)
+		navigate(`/${VIDEOCALL}/${scheduleId}`)
 	}
 
 	return (

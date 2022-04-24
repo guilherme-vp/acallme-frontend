@@ -3,7 +3,7 @@ import React, { useMemo } from 'react'
 import { Grid, Typography, useMediaQuery, Theme } from '@mui/material'
 import { GoCalendar as CalendarIcon } from 'react-icons/go'
 import { MdOutlineGroup as GroupIcon, MdOutlineVideocam as VideoIcon } from 'react-icons/md'
-import { useLocation } from 'react-router'
+import { useLocation } from 'react-router-dom'
 
 import { useIntl } from 'hooks'
 import { VIDEOCALL, SCHEDULE, SPECIALISTS } from 'routes'

@@ -68,11 +68,11 @@ export const About = () => {
 						</Grid>
 					</div>
 				</Grid>
-				<Hidden mdDown>
-					<Grid container item md xs={12} justifyContent="center" alignItems="flex-end">
-						<Image src={psychologistImage} alt="about-psychologist" loading="lazy" />
-					</Grid>
-				</Hidden>
+				{/* <Hidden mdDown> */}
+				<Grid container item md xs={12} justifyContent="center" alignItems="flex-end">
+					<Image src={psychologistImage} alt="about-psychologist" loading="lazy" />
+				</Grid>
+				{/* </Hidden> */}
 			</Grid>
 		</FullPageSection>
 	)

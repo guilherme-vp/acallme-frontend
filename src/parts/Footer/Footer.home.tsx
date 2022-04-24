@@ -38,19 +38,19 @@ export const FooterHome = () => {
 						</Grid>
 					</Grid>
 
-					<Hidden smDown>
-						<Grid container item spacing={1} mt={2}>
-							<Grid item xs={12}>
-								<Typography variant="h4" color="textSecondary" fontWeight={500}>
-									{intl.formatMessage({ id: 'home.footer.language' })}
-								</Typography>
-							</Grid>
-
-							<Grid item xs={12}>
-								<LanguagePicker />
-							</Grid>
+					{/* <Hidden smDown> */}
+					<Grid container item spacing={1} mt={2}>
+						<Grid item xs={12}>
+							<Typography variant="h4" color="textSecondary" fontWeight={500}>
+								{intl.formatMessage({ id: 'home.footer.language' })}
+							</Typography>
 						</Grid>
-					</Hidden>
+
+						<Grid item xs={12}>
+							<LanguagePicker />
+						</Grid>
+					</Grid>
+					{/* </Hidden> */}
 				</Grid>
 
 				<Grid
@@ -100,7 +100,7 @@ export const FooterHome = () => {
 					</Grid>
 				</Grid>
 
-				<Hidden smUp>
+				{/* <Hidden smUp>
 					<Grid item xs={12} my={2}>
 						<Divider flexItem />
 					</Grid>
@@ -116,7 +116,7 @@ export const FooterHome = () => {
 							<LanguagePicker />
 						</Grid>
 					</Grid>
-				</Hidden>
+				</Hidden> */}
 			</Grid>
 		</footer>
 	)

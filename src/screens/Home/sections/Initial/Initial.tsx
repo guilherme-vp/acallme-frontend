@@ -38,11 +38,11 @@ export const Initial = () => {
 						</Grid>
 					</div>
 				</Grid>
-				<Hidden mdDown>
-					<Grid container item md xs={12} justifyContent="center" alignItems="flex-end">
-						<Image src={doctorImage} alt="initial-pointing-doctor" loading="lazy" />
-					</Grid>
-				</Hidden>
+				{/* <Hidden mdDown> */}
+				<Grid container item md xs={12} justifyContent="center" alignItems="flex-end">
+					<Image src={doctorImage} alt="initial-pointing-doctor" loading="lazy" />
+				</Grid>
+				{/* </Hidden> */}
 				<Grid container item>
 					<ContentBox />
 				</Grid>

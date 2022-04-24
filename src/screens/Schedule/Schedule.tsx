@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Grid, Container, Typography } from '@mui/material'
 import { addHours } from 'date-fns'
 import { useMutation } from 'react-query'
-import { Redirect } from 'react-router'
+import { Navigate } from 'react-router-dom'
 
 import { useIntl, useStoreon } from 'hooks'
 import { Agenda } from 'parts/Agenda'
@@ -40,7 +40,7 @@ export const Schedule = () => {
 	const intl = useIntl()
 
 	if (loading || !user) {
-		return <Redirect to={LOGIN} />
+		return <Navigate to={LOGIN} />
 	}
 
 	const handleOpenDetails = (id: number) => {

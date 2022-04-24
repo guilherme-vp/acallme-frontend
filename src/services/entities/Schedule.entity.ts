@@ -5,11 +5,11 @@ import { Specialist } from './Specialist.entity'
 
 export interface Schedule {
 	id: number
-	specialistId: number
 	callId?: number
+	specialistId: number
 	patientId?: number
-	rangeStart: string
-	rangeEnd: string
+	startsAt: Date
+	endsAt: Date
 	confirmed?: boolean
 	disabled?: boolean
 	call?: Call

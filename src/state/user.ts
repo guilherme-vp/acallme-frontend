@@ -5,6 +5,7 @@ import { queryClient } from '../services/api/client'
 import { fetchMe as fetchPatient } from '../services/api/patient'
 import { fetchMe as fetchSpecialist } from '../services/api/specialist'
 import { RolesEnum, JUser, User } from '../services/entities'
+import { callSocket, mainSocket } from 'services/ws/client'
 
 export interface UserState {
 	token: string | null
@@ -50,12 +51,14 @@ export const userModule: IStoreonModule = store => {
 			if (Date.now() > expiresIn) {
 				store.dispatch('user/removeToken')
 			} else {
+				mainSocket.auth = token
+				callSocket.auth = token
 				store.dispatch('user/getUser')
 			}
 		}
 	})
 
-	store.on('user/getUser', async state => {
+	store.on('user/getUser', async () => {
 		store.dispatch('user/loading', true)
 
 		let ok = false

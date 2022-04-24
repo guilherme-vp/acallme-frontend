@@ -122,28 +122,28 @@ export const Search = ({ onSearch, loading, onSearchInputChange }: SearchProps) 
 				justifyContent="flex-end"
 				alignItems="flex-end"
 			>
-				<Hidden mdDown>
-					<S.SearchButton
-						onClick={onSearch}
-						aria-label="search talents"
-						variant="contained"
-						color="primary"
-						loading={loading}
-					>
-						<SearchIcon />
-					</S.SearchButton>
-				</Hidden>
-				<Hidden mdUp>
-					<LoadingButton
-						loading={loading}
-						variant="contained"
-						color="primary"
-						fullWidth
-						sx={{ mt: 1 }}
-					>
-						{capitalizeLetter(intl.formatMessage({ id: loading ? 'loading' : 'search' }))}
-					</LoadingButton>
-				</Hidden>
+				{/* <Hidden mdDown> */}
+				<S.SearchButton
+					onClick={onSearch}
+					aria-label="search talents"
+					variant="contained"
+					color="primary"
+					loading={loading}
+				>
+					<SearchIcon />
+				</S.SearchButton>
+				{/* </Hidden> */}
+				{/* <Hidden mdUp> */}
+				<LoadingButton
+					loading={loading}
+					variant="contained"
+					color="primary"
+					fullWidth
+					sx={{ mt: 1 }}
+				>
+					{capitalizeLetter(intl.formatMessage({ id: loading ? 'loading' : 'search' }))}
+				</LoadingButton>
+				{/* </Hidden> */}
 			</Grid>
 		</S.SearchContainer>
 	)

@@ -56,7 +56,9 @@ export const Specialists = () => {
 	}
 
 	const handleOpenDetails = (id: number) => {
-		const foundSpecialist = data?.find(({ id: specialistId }) => specialistId === id)
+		const foundSpecialist = data?.specialists.find(
+			({ id: specialistId }) => specialistId === id
+		)
 
 		if (foundSpecialist) {
 			setSpecialist(foundSpecialist)
@@ -66,6 +68,7 @@ export const Specialists = () => {
 	const handleCloseDetails = () => {
 		setOpen(false)
 	}
+	console.log(data)
 
 	return (
 		<Grid container>
@@ -120,23 +123,20 @@ export const Specialists = () => {
 								</Grid>
 								<Grid item xs={12} mt={0.5}>
 									<Typography variant="h5" color="GrayText">
-										{intl.formatMessage(
-											{ id: 'search.result' },
-											{ pageTotal: data?.length }
-										)}
+										{intl.formatMessage({ id: 'search.result' }, { pageTotal: data.count })}
 									</Typography>
 								</Grid>
-								{data.length > 0 && (
+								{data.specialists.length > 0 && (
 									<Grid container item mt={2} justifyContent="flex-end">
 										<Pagination
-											count={data.length >= page * 6 ? page + 1 : page}
+											count={data.count >= page * 6 ? page + 1 : page}
 											page={page}
 											onChange={(_e, newValue) => handleChangePage(newValue)}
 										/>
 									</Grid>
 								)}
 								<Grid container item spacing={3} mt={0}>
-									{data.map(eachSpecialist => (
+									{data.specialists.map(eachSpecialist => (
 										<Grid item key={eachSpecialist.id} xs={12} sm="auto">
 											<SpecialistCard {...eachSpecialist} onBook={handleOpenDetails} />
 										</Grid>

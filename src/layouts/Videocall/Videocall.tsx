@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Redirect } from 'react-router'
+import { Navigate, Outlet } from 'react-router-dom'
 
 import { CallProvider } from 'contexts'
 import { useStoreon } from 'hooks'
@@ -12,12 +12,14 @@ export const VideocallLayout: React.FC = ({ children }) => {
 	const { token } = useStoreon('token')
 
 	if (!token) {
-		return <Redirect to={LOGIN} />
+		return <Navigate to={LOGIN} />
 	}
 
 	return (
 		<S.Container>
-			<CallProvider>{children}</CallProvider>
+			<CallProvider>
+				<Outlet />
+			</CallProvider>
 		</S.Container>
 	)
 }

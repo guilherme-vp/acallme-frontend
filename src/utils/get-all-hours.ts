@@ -26,7 +26,7 @@ export function formatHours(schedules: Schedule[], day = new Date()): HoursRange
 			}
 
 			const scheduleExists = schedules.find(
-				({ rangeStart }) => new Date(rangeStart).getTime() === aimedDay.getTime()
+				({ startsAt }) => new Date(startsAt).getTime() === aimedDay.getTime()
 			)
 
 			if (!scheduleExists) {

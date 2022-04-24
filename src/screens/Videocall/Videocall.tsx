@@ -44,7 +44,7 @@ export const Videocall = () => {
 
 	const [duration, setDuration] = useState<string>('')
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		enterCall()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
@@ -110,7 +110,7 @@ export const Videocall = () => {
 					justifyContent="space-between"
 					alignItems="center"
 				>
-					{(isMdUp || countUsers <= 1) && (
+					{(isMdUp || countUsers < 1) && (
 						<Zoom in={!!myVideo}>
 							<VideoContainer container item xs={12} md={countUsers <= 1 ? 12 : true}>
 								<VideoWrapper status={!!status.video}>
@@ -123,7 +123,7 @@ export const Videocall = () => {
 						</Zoom>
 					)}
 
-					<Zoom in={!!myVideo}>
+					{/* <Zoom in={!!myVideo}>
 						<VideoContainer container item xs={12} md={countUsers <= 1 ? 12 : true}>
 							<VideoWrapper status={!!status.video}>
 								<video muted playsInline ref={myVideo} autoPlay />
@@ -132,9 +132,10 @@ export const Videocall = () => {
 								</UserAvatar>
 							</VideoWrapper>
 						</VideoContainer>
-					</Zoom>
+					</Zoom> */}
 
-					{/* <Zoom in={!!userVideo}>
+					{/* {userVideo && (
+						<Zoom in={!!userVideo}>
 							<VideoContainer container item xs={12} md={countUsers <= 1 ? 12 : true}>
 								<VideoWrapper status={!!userStatus.video}>
 									<video
@@ -149,7 +150,8 @@ export const Videocall = () => {
 									</UserAvatar>
 								</VideoWrapper>
 							</VideoContainer>
-						</Zoom> */}
+						</Zoom>
+					)} */}
 				</Grid>
 				{openChat && (
 					<Grid
@@ -162,7 +164,7 @@ export const Videocall = () => {
 					>
 						<Chat
 							chat={chat}
-							sendMessage={message => console.log(message)}
+							sendMessage={sendMessage}
 							open={openChat}
 							handleClose={handleCloseChat}
 						/>
@@ -205,7 +207,8 @@ export const Videocall = () => {
 				handleChangeDevice={({ sourceId, type }) =>
 					changeDevicesSource(
 						type === 'audio' ? { audioId: sourceId } : { videoId: sourceId }
-					)}
+					)
+				}
 				onClose={handleCloseSettings}
 			/>
 		</Grid>

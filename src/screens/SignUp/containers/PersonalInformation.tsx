@@ -125,17 +125,17 @@ export const PersonalInformation = () => {
 						</FormLabel>
 						<RadioGroup row value={gender}>
 							<FormControlLabel
-								value={GenderEnum.F}
+								value="F"
 								control={<Radio {...register('gender', { required: true })} />}
 								label={capitalizeLetter(intl.formatMessage({ id: 'female' }))}
 							/>
 							<FormControlLabel
-								value={GenderEnum.M}
+								value="M"
 								control={<Radio {...register('gender', { required: true })} />}
 								label={capitalizeLetter(intl.formatMessage({ id: 'male' }))}
 							/>
 							<FormControlLabel
-								value={GenderEnum.N}
+								value="NB"
 								control={<Radio {...register('gender', { required: true })} />}
 								label={capitalizeLetter(intl.formatMessage({ id: 'other' }))}
 							/>

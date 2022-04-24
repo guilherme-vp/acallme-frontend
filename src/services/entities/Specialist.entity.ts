@@ -2,12 +2,11 @@
 import { Specialty } from './Specialty.entity'
 import { User } from './User.entity'
 
-export type Specialist = User & {
-	cpf: string
-	cnpj: string
+export interface Specialist extends User {
+	cnpj?: string
+	about?: string
+	cost: number
 	crp?: string
 	crm?: string
-	cost: number
-	about: string
 	specialties?: Specialty[]
 }

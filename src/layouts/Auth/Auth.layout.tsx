@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Grid, Toolbar } from '@mui/material'
-import { Redirect } from 'react-router'
+import { Navigate, Outlet } from 'react-router-dom'
 
 import { useStoreon } from 'hooks'
 import { Copyright } from 'parts/Copyright'
@@ -10,11 +10,11 @@ import { SCHEDULE } from 'routes'
 
 import * as S from './Auth.styled'
 
-export const AuthLayout: React.FC = ({ children }) => {
+export const AuthLayout: React.FC = () => {
 	const { token } = useStoreon('token')
 
 	if (token) {
-		return <Redirect to={SCHEDULE} />
+		return <Navigate to={SCHEDULE} />
 	}
 
 	return (
@@ -28,7 +28,9 @@ export const AuthLayout: React.FC = ({ children }) => {
 				<HeaderTitle />
 				<Toolbar sx={{ height: '77px' }} />
 			</Grid>
-			<S.Content container>{children}</S.Content>
+			<S.Content container>
+				<Outlet />
+			</S.Content>
 			<Grid container flexDirection="column" alignItems="center">
 				<Copyright />
 			</Grid>

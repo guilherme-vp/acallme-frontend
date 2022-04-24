@@ -147,7 +147,7 @@ export const Agenda = ({ role, onConfirm, onDisable, onViewDetails }: AgendaProp
 														day
 													})
 												}
-												disabled={isDisabled}
+												disabled={isDisabled === null ? true : isDisabled}
 												isScheduled={isScheduled}
 												isConfirmed={isConfirmed}
 												variant={isScheduled ? 'contained' : 'text'}
