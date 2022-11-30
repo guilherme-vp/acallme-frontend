@@ -45,4 +45,5 @@ export const UserAvatar = styled(Avatar).withConfig<{ status: boolean }>({
 	width: 120px;
 	height: 120px;
 	opacity: ${({ status }) => (status ? 0 : 1)};
+	background-color: ${({ theme }) => theme.background.darker};
 `

@@ -5,22 +5,22 @@ import iziToast from 'izitoast'
 import { useParams } from 'react-router-dom'
 import Peer from 'simple-peer'
 
-import { MessageProps } from '../components/Message'
+import { Message } from '../components/Message'
 import { WsEvents } from '../constants/ws-events'
 import { useIntl, useStoreon } from '../hooks'
 import { callSocket as socket } from '../services/ws/client'
+import { v4 as uuidv4 } from 'uuid'
 
 interface Caller {
 	socketId: string
-	signal: Peer.SignalData
 	name: string
 	avatarUrl?: string
 }
 
 interface Status {
 	fullscreen?: boolean
-	video?: boolean
-	audio?: boolean
+	video: boolean
+	audio: boolean
 }
 
 export interface Authorization {
@@ -29,8 +29,7 @@ export interface Authorization {
 }
 
 export interface CallContextProps {
-	stream?: MediaStream
-	chat: MessageProps[]
+	chat: Message[]
 	socketId?: string
 	status: Status
 	user?: Caller
@@ -41,313 +40,411 @@ export interface CallContextProps {
 	myVideo: RefObject<HTMLVideoElement>
 	userVideo: RefObject<HTMLVideoElement>
 
-	enterCall: () => void
 	sendMessage: (content: string) => void
 	handleToggleVideo: () => void
 	handleToggleAudio: () => void
-	handleEnterFullscreen: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => void
-	handleLeaveFullscreen: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => void
 	handleHangout: () => void
 	changeDevicesSource: (sources: Authorization) => void
 }
 
-// @ts-ignore
-export const CallContext = createContext<CallContextProps>()
+export const CallContext = createContext<CallContextProps>({
+	chat: [],
+	socketId: '',
+	status: { audio: true, video: true },
+	user: undefined,
+	userStatus: { audio: true, video: true },
+	countUsers: 0,
+	callEnded: false,
+	room: '',
+	myVideo: { current: null },
+	userVideo: { current: null },
+
+	handleHangout: () => {},
+	handleToggleAudio: () => {},
+	handleToggleVideo: () => {},
+	sendMessage: () => {},
+	changeDevicesSource: () => {}
+})
 
 export const CallProvider: React.FC = ({ children }) => {
 	const intl = useIntl()
 	const { scheduleId } = useParams<{ scheduleId: string }>()
+	const [socketId, setSocketId] = useState<string>()
 	const room = `room-${scheduleId}`
 
-	const [stream, setStream] = useState<MediaStream>()
-	const [chat, setChat] = useState<MessageProps[]>([])
-	const [socketId, setSocketId] = useState<string>()
 	const { user: me } = useStoreon('user')
 	const [user, setUser] = useState<Caller>()
-	const [countUsers, setCountUsers] = useState(1)
+	const [countUsers, setCountUsers] = useState(0)
+
 	const [callEnded, setCallEnded] = useState(false)
 
+	const [stream, setStream] = useState<MediaStream>()
+
+	const [userPeer, setUserPeer] = useState<Peer.Instance>()
 	const [status, setStatus] = useState<Status>({
 		audio: true,
 		video: true,
 		fullscreen: false
 	})
 	const [userStatus, setUserStatus] = useState<Omit<Status, 'fullscreen'>>({
-		audio: false,
-		video: false
+		audio: true,
+		video: true
 	})
-
 	const myVideo = useRef<HTMLVideoElement>(null)
 	const userVideo = useRef<HTMLVideoElement>(null)
-	const connectionRef = useRef<Peer.Instance>()
-	console.log('$$$ data', stream?.active, chat, socketId, user)
+	const userPeerRef = useRef<{ peer: Peer.Instance }>({
+		peer: {} as Peer.Instance
+	})
+
+	const [chat, setChat] = useState<Message[]>([])
 
 	const requestAuthorization = async ({ videoId, audioId }: Authorization = {}) => {
-		try {
-			const mediaStream = await navigator.mediaDevices.getUserMedia({
-				video: {
-					deviceId: { ideal: videoId },
-					facingMode: 'user'
-				},
-				audio: {
-					deviceId: { ideal: audioId }
-				}
-			})
+		const mediaStream = await navigator.mediaDevices.getUserMedia({
+			video: {
+				deviceId: { ideal: videoId },
+				facingMode: 'user'
+			},
+			audio: {
+				deviceId: { ideal: audioId }
+			}
+		})
 
-			setStream(mediaStream)
-
-			myVideo.current!.srcObject = mediaStream
-		} catch (e) {
-			console.log(e)
+		if (myVideo.current) {
+			myVideo.current.srcObject = mediaStream
 		}
+
+		if (!stream) {
+			setStream(mediaStream)
+		}
+
+		return mediaStream
 	}
 
 	useEffect(() => {
-		;(async () => {
-			await requestAuthorization()
+		setSocketId(socket.id)
 
-			// Get User Socket Id From Server
-			socket.on(WsEvents.ME, (socketId: string) => setSocketId(socketId))
+		async function init() {
+			try {
+				const myStream = await requestAuthorization()
 
-			// Send Appointment Close Notification
-			socket.on(WsEvents.SEND_CLOSE_NOTIFICATION, () => {
-				iziToast.warning({
-					title: intl.formatMessage({ id: 'call.close.warn.title' }),
-					message: intl.formatMessage({ id: 'call.close.warn.desc' })
+				socket.emit(WsEvents.JOIN_CALL, room)
+				setCountUsers(prev => prev + 1)
+
+				socket.once(
+					WsEvents.RECEIVE_USER,
+					(payload: {
+						socketId: string
+						name: string
+						avatarUrl?: string
+						roomId: string
+					}) => {
+						const { name, socketId, avatarUrl } = payload
+
+						if (userPeer || !socketId) {
+							return
+						}
+
+						const peer = createPeer(socketId, myStream)
+
+						setUserPeer(peer)
+						setUser({ name, socketId, avatarUrl })
+						setCountUsers(prev => prev + 1)
+						userPeerRef.current.peer = peer
+					}
+				)
+
+				socket.once(
+					WsEvents.USER_JOINED,
+					(payload: {
+						signal: Peer.SignalData
+						socketId: string
+						name: string
+						avatarUrl?: string
+					}) => {
+						const { name, signal, socketId, avatarUrl } = payload
+
+						if (userPeer) return
+
+						const peer = addPeer(signal, socketId, myStream)
+
+						setUserPeer(peer)
+						setUser({ name, socketId, avatarUrl })
+						setCountUsers(prev => prev + 1)
+						userPeerRef.current.peer = peer
+					}
+				)
+
+				socket.once(
+					WsEvents.RECEIVE_SIGNAL,
+					(payload: { signal: Peer.SignalData; id: string }) => {
+						const { signal } = payload
+						userPeerRef.current.peer.signal(signal)
+					}
+				)
+
+				socket.on(
+					WsEvents.UPDATE_USER_MEDIA,
+					(data: { type: 'audio' | 'video' | 'both'; statuses: boolean[] }) => {
+						const { statuses, type } = data
+
+						switch (type) {
+							case 'video':
+								setUserStatus(prevStatus => ({ ...prevStatus, video: statuses[0] }))
+								break
+							case 'audio':
+								setUserStatus(prevStatus => ({ ...prevStatus, audio: statuses[0] }))
+								break
+							default:
+								setUserStatus(prevStatus => ({
+									...prevStatus,
+									video: statuses[0],
+									audio: statuses[1]
+								}))
+								break
+						}
+					}
+				)
+
+				socket.once(WsEvents.END_CALL, () => {
+					handleHangout()
 				})
-			})
+			} catch (e) {
+				console.log('Erro na requisição de autorização', e)
+			}
+		}
 
-			// Close Call
-			socket.on(WsEvents.END_CALL, () => {
-				setCallEnded(true)
-				connectionRef.current!.destroy()
-			})
-
-			// Update User Media Event Listener
-			socket.on(
-				WsEvents.UPDATE_USER_MEDIA,
-				(data: {
-					socketId: string
-					type: 'audio' | 'video' | 'both'
-					statuses: boolean[]
-				}) => {
-					const { statuses, socketId, type } = data
-					console.log('Update user media', data)
-
-					if (socketId === socketId) {
-						return
-					}
-
-					switch (type) {
-						case 'video':
-							setUserStatus({ ...userStatus, video: statuses[0] })
-							break
-						case 'audio':
-							setUserStatus({ ...userStatus, audio: statuses[0] })
-							break
-						default:
-							setUserStatus({ ...userStatus, video: statuses[0], audio: statuses[1] })
-							break
-					}
-				}
-			)
-
-			// Receive Message Event Listener
-			socket.on(
-				WsEvents.RECEIVE_MESSAGE,
-				(data: {
-					id: string
-					name: string
-					avatarUrl?: string
-					createdAt: Date
-					message: string
-				}) => {
-					console.log('Received message', data)
-					if (data.id === socketId) {
-						return
-					}
-
-					addMessage({ ...data, isSpeaker: false })
-				}
-			)
-		})()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		init()
 	}, [])
 
-	// Enter Call Function
-	const enterCall = () => {
-		const initiator = countUsers === 0
-
-		const peer = new Peer({ initiator, stream })
-		// socket.emit(WsEvents.ENTER_CALL, {
-		// 	signal,
-		// 	room,
-		// 	mediaStatus: status
-		// } as { signal: Peer.SignalData; room: string; mediaStatus: Status })
-
-		peer.on('signal', signal => {
-			console.log('$$$ Emitted enter call event', signal, room)
-			socket.emit(WsEvents.ENTER_CALL, {
-				signal,
-				room,
-				mediaStatus: status
-			} as { signal: Peer.SignalData; room: string; mediaStatus: Status })
-		})
-
-		peer.on('stream', currentStream => {
-			console.log('Received stream from user', currentStream)
-			userVideo.current!.srcObject = currentStream
-		})
-
-		connectionRef.current = peer
-	}
-
+	// Messages
 	useEffect(() => {
 		socket.on(
-			WsEvents.RECEIVE_USER,
-			(data: Caller & { mediaStatus: Omit<Status, 'fullscreen'> }) => {
-				const { mediaStatus, socketId, ...restUser } = data
+			WsEvents.RECEIVE_MESSAGE,
+			(data: { id: string; messageId: string; createdAt: string; message: string }) => {
+				const { id, messageId, message, createdAt } = data
 
-				setUser({ socketId, ...restUser })
-				setUserStatus(mediaStatus)
-				setCountUsers(prev => prev + 1)
-				connectionRef.current?.signal(data.signal)
+				if (id === socketId) return
+
+				addMessage({ id: messageId, message, createdAt, isSpeaker: false })
 			}
 		)
 	}, [])
 
-	// Util Function to add a message to Chat
-	const addMessage = (content: Omit<MessageProps, 'createdAt' | 'id'>) => {
-		const newMessage = {
-			createdAt: new Date(),
-			...content
-		}
-
-		setChat(prev => [...prev, newMessage])
-	}
-
-	// Send Message as Speaker
-	const sendMessage = (content: string) => {
-		if (me) {
-			addMessage({
-				name: me?.name,
-				avatarUrl: me?.avatarUrl,
-				isSpeaker: true,
-				message: content
+	// Notifications
+	useEffect(() => {
+		socket.on(WsEvents.SEND_CLOSE_NOTIFICATION, () => {
+			iziToast.warning({
+				title: intl.formatMessage({ id: 'call.close.warn.title' }),
+				message: intl.formatMessage({ id: 'call.close.warn.desc' })
 			})
-			socket.emit(WsEvents.SEND_MESSAGE, content)
-		}
+		})
+	}, [])
+
+	const createPeer = (userToSignal: string, stream: MediaStream) => {
+		const peer = new Peer({
+			initiator: true,
+			trickle: false,
+			offerOptions: {
+				offerToReceiveAudio: true,
+				offerToReceiveVideo: true
+			},
+			stream
+		})
+
+		peer.on('signal', signal => {
+			console.log(`[P2P] Sending signal to ${userToSignal}`)
+			socket.emit(WsEvents.SEND_SIGNAL, {
+				userToSignal,
+				signal
+			})
+		})
+
+		peer.on('stream', stream => {
+			console.log(`[P2P] setting stream of ${userToSignal}`)
+
+			let newStatus = userStatus
+			stream.getTracks().forEach(track => {
+				newStatus = { ...newStatus, [track.kind]: track.enabled }
+			})
+
+			userVideo.current!.srcObject = stream
+			setUserStatus(newStatus)
+		})
+
+		peer.on('error', error => {
+			console.log(`[P2P] ${error}`)
+		})
+
+		peer.on('connect', () => console.log(`[P2P] Peer connected with ${userToSignal}`))
+
+		peer.on('close', () => console.log(`[P2P] Channel closed with ${userToSignal}`))
+
+		return peer
 	}
 
-	// Toggle Video
+	const addPeer = (
+		incomingSignal: Peer.SignalData,
+		userId: string,
+		stream?: MediaStream
+	) => {
+		const peer = new Peer({
+			initiator: false,
+			trickle: false,
+			stream,
+			answerOptions: {
+				offerToReceiveAudio: false,
+				offerToReceiveVideo: false
+			}
+		})
+
+		peer.on('signal', signal => {
+			console.log(`[P2P] Signal received from ${userId}`)
+			socket.emit(WsEvents.RETURN_SIGNAL, { signal, userId })
+		})
+
+		peer.signal(incomingSignal)
+
+		peer.on('error', error => {
+			console.log(`[P2P] ${error}`)
+		})
+
+		peer.on('connect', () => console.log(`[P2P] Peer connected with ${userId}`))
+
+		peer.on('close', () => console.log(`[P2P] Channel closed with ${userId}`))
+
+		peer.on('stream', userStream => {
+			console.log(`[P2P] Getting stream of ${userId}`)
+			let newStatus = userStatus
+			userStream.getTracks().forEach(track => {
+				newStatus = { ...newStatus, [track.kind]: track.enabled }
+			})
+
+			userVideo.current!.srcObject = userStream
+			setUserStatus(newStatus)
+		})
+
+		return peer
+	}
+
+	// Util Function to add a message to Chat
+	const addMessage = (content: {
+		id: string
+		message: string
+		createdAt?: string
+		isSpeaker: boolean
+	}) => {
+		const { id, message, createdAt, isSpeaker } = content
+
+		const uniqueMessages = new Set(chat)
+		uniqueMessages.add({
+			id,
+			createdAt: createdAt != null ? new Date(createdAt) : new Date(),
+			message,
+			isSpeaker,
+			name: !isSpeaker && user != null ? user.name : 'Eu',
+			avatarUrl: !isSpeaker && user != null ? user.avatarUrl : me?.avatarUrl
+		})
+
+		setChat(Array.from(uniqueMessages))
+	}
+
+	const sendMessage = (content: string) => {
+		const messageId = uuidv4()
+		addMessage({
+			id: messageId,
+			isSpeaker: true,
+			message: content
+		})
+		socket.emit(WsEvents.SEND_MESSAGE, {
+			id: messageId,
+			message: content,
+			createdAt: new Date()
+		})
+	}
+
 	const handleToggleVideo = () => {
+		if (!stream) return
+
+		console.log('Emitted update media video')
 		setStatus(prev => {
 			const { video } = prev
 
-			console.log('Emitted update media video')
 			socket.emit(WsEvents.UPDATE_MEDIA, {
 				type: 'video',
-				currentMediaStatus: !video,
+				currentMediaStatuses: [!video],
 				room
 			})
 
-			stream!.getVideoTracks()[0].enabled = !video
+			stream.getVideoTracks()[0].enabled = !video
 
 			return { ...prev, video: !video }
 		})
 	}
 
-	// Toggle Audio
 	const handleToggleAudio = () => {
+		if (!stream) return
+
 		console.log('Emitted update media audio')
 		setStatus(prev => {
 			const { audio } = prev
 
 			socket.emit(WsEvents.UPDATE_MEDIA, {
 				type: 'audio',
-				currentMediaStatus: !audio,
+				currentMediaStatuses: [!audio],
 				room
 			})
 
-			stream!.getAudioTracks()[0].enabled = !audio
+			stream.getAudioTracks()[0].enabled = !audio
 
 			return { ...prev, audio: !audio }
 		})
 	}
 
-	// Enter Fullscreen
-	const handleEnterFullscreen = (e: any) => {
-		const elem = e.target
-
-		if (elem.requestFullscreen) {
-			elem.requestFullscreen()
-		} else if (elem.mozRequestFullScreen) {
-			/* Firefox */
-			elem.mozRequestFullScreen()
-		} else if (elem.webkitRequestFullscreen) {
-			/* Chrome, Safari & Opera */
-			elem.webkitRequestFullscreen()
-		} else if (elem.msRequestFullscreen) {
-			/* IE/Edge */
-			elem.msRequestFullscreen()
-		}
-
-		setStatus({ ...status, fullscreen: true })
-	}
-	// Leave Fullscreen
-	const handleLeaveFullscreen = (e: any) => {
-		const elem = e.target
-
-		if (elem.requestFullscreen) {
-			elem.requestFullscreen()
-		} else if (elem.mozExitFullscreen) {
-			/* Firefox */
-			elem.mozExitFullscreen()
-		} else if (elem.webkitExitFullscreen) {
-			/* Chrome, Safari & Opera */
-			elem.webkitExitFullscreen()
-		} else if (elem.msExitFullscreen) {
-			/* IE/Edge */
-			elem.msExitFullscreen()
-		}
-
-		setStatus({ ...status, fullscreen: false })
-	}
-
-	// End Call
 	const handleHangout = () => {
 		setCallEnded(true)
+		setUser(undefined)
+		setUserStatus({ audio: false, video: false })
+		userPeer?.destroy()
 
-		connectionRef.current!.destroy()
-		// socket.emit(WsEvents.END_CALL, { id: socketId })
+		socket.emit(WsEvents.LEAVE_CALL, { id: socketId })
 	}
 
 	const changeDevicesSource = async ({ audioId, videoId }: Authorization) => {
-		await requestAuthorization({ audioId, videoId })
+		const oldTracks = stream?.getTracks()
+
+		if (oldTracks == null || stream == null) return
+
+		const newStream = await requestAuthorization({ audioId, videoId })
+
+		const newTracks = newStream.getTracks()
+
+		oldTracks.forEach(oldTrack => {
+			newTracks.forEach(newTrack => {
+				if (oldTrack.kind === newTrack.kind) {
+					userPeerRef.current.peer.replaceTrack(oldTrack, newTrack, stream)
+				}
+			})
+		})
 	}
 
 	return (
 		<CallContext.Provider
 			value={{
-				stream,
 				chat,
 				socketId,
 				status,
 				user,
 				userStatus,
-				countUsers,
 				callEnded,
 				room,
 				myVideo,
 				userVideo,
+				countUsers,
 
 				changeDevicesSource,
-				enterCall,
 				sendMessage,
 				handleToggleVideo,
 				handleToggleAudio,
-				handleEnterFullscreen,
-				handleLeaveFullscreen,
 				handleHangout
 			}}
 		>

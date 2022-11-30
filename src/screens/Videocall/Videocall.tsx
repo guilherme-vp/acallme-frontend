@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { useState, useContext, useLayoutEffect, useEffect } from 'react'
+import React, { useState, useContext, useLayoutEffect, useEffect, useRef } from 'react'
 
 import { Grid, useMediaQuery, Zoom } from '@mui/material'
 import { Theme } from '@mui/system'
@@ -14,18 +14,24 @@ import { Record } from 'parts/Record'
 import { FormProps } from 'parts/Record/Record'
 import { RolesEnum } from 'services/entities'
 import { getInitials } from 'utils/get-initials'
+import { HOME } from 'routes'
 
 import { VideoContainer, VideoWrapper, UserAvatar } from './Videocall.styled'
+import iziToast from 'izitoast'
+import { useNavigate } from 'react-router-dom'
 
 export const Videocall = () => {
 	const isMdUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
+	const navigate = useNavigate()
 	const { user: loggedUser, role } = useStoreon('user', 'role')
 
 	const [openChat, setOpenChat] = useState(false)
 	const [openRecord, setOpenRecord] = useState(false)
 	const [openSettings, setOpenSettings] = useState(false)
-	const { chat, sendMessage } = useContext(CallContext)
 	const {
+		chat,
+		sendMessage,
+
 		status,
 		userStatus,
 		countUsers,
@@ -34,25 +40,16 @@ export const Videocall = () => {
 		user,
 		callEnded,
 
-		handleHangout,
-		handleToggleAudio,
-		handleToggleVideo,
-		changeDevicesSource,
-		enterCall
+		changeDevicesSource
 	} = useContext(CallContext)
-	const baseDate = new Date()
+	const startDate = useRef(new Date())
 
 	const [duration, setDuration] = useState<string>('')
 
 	useEffect(() => {
-		enterCall()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
-
-	useEffect(() => {
 		setInterval(() => {
 			const interval = intervalToDuration({
-				start: baseDate,
+				start: startDate.current,
 				end: new Date()
 			})
 
@@ -67,16 +64,25 @@ export const Videocall = () => {
 
 			setDuration(final)
 		}, 1000)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	const handleCloseChat = () => {
-		setOpenChat(false)
-	}
+	useEffect(() => {
+		if (callEnded) {
+			iziToast.info({
+				title: 'A sua sessão encerrou',
+				message: 'Estamos te redirecionando para a página inicial'
+			})
+			setTimeout(() => {
+				navigate(HOME)
+			}, 3000)
+		}
+	}, [callEnded])
 
-	const handleOpenChat = () => {
-		handleCloseRecord()
-		setOpenChat(true)
+	const handleToggleChat = (open?: boolean) => {
+		if (openRecord) {
+			setOpenRecord(false)
+		}
+		setOpenChat(prev => open ?? !prev)
 	}
 
 	const handleCloseSettings = () => {
@@ -87,13 +93,11 @@ export const Videocall = () => {
 		setOpenSettings(true)
 	}
 
-	const handleCloseRecord = () => {
-		setOpenRecord(false)
-	}
-
-	const handleOpenRecord = () => {
-		handleCloseChat()
-		setOpenRecord(true)
+	const handleToggleRecord = (open?: boolean) => {
+		if (openChat) {
+			setOpenChat(false)
+		}
+		setOpenRecord(prev => open ?? !prev)
 	}
 
 	const handleRecordSubmit = (data: FormProps) => {
@@ -106,52 +110,34 @@ export const Videocall = () => {
 				<Grid
 					container
 					item
-					sm={openChat ? 9 : 12}
+					sm={openRecord || openChat ? 9 : 12}
 					justifyContent="space-between"
 					alignItems="center"
 				>
-					{(isMdUp || countUsers < 1) && (
-						<Zoom in={!!myVideo}>
+					{isMdUp || countUsers === 1 ? (
+						<Zoom in={myVideo.current != null}>
 							<VideoContainer container item xs={12} md={countUsers <= 1 ? 12 : true}>
-								<VideoWrapper status={!!status.video}>
+								<VideoWrapper status={status.video}>
 									<video muted playsInline ref={myVideo} autoPlay />
-									<UserAvatar src={loggedUser?.avatarUrl} status={!!status.video}>
+									<UserAvatar src={loggedUser?.avatarUrl} status={status.video}>
 										{getInitials(loggedUser?.name as string)}
 									</UserAvatar>
 								</VideoWrapper>
 							</VideoContainer>
 						</Zoom>
-					)}
-
-					{/* <Zoom in={!!myVideo}>
-						<VideoContainer container item xs={12} md={countUsers <= 1 ? 12 : true}>
-							<VideoWrapper status={!!status.video}>
-								<video muted playsInline ref={myVideo} autoPlay />
-								<UserAvatar src={loggedUser?.avatarUrl} status={!!status.video}>
-									{getInitials(loggedUser?.name as string)}
-								</UserAvatar>
-							</VideoWrapper>
-						</VideoContainer>
-					</Zoom> */}
-
-					{/* {userVideo && (
-						<Zoom in={!!userVideo}>
+					) : null}
+					{user ? (
+						<Zoom in={userVideo.current != null}>
 							<VideoContainer container item xs={12} md={countUsers <= 1 ? 12 : true}>
-								<VideoWrapper status={!!userStatus.video}>
-									<video
-										muted
-										playsInline
-										ref={userVideo}
-										autoPlay
-										style={{ display: status.video ? 'block' : 'none' }}
-									/>
-									<UserAvatar src={user?.avatarUrl} status={!!userStatus.video}>
-										{getInitials(user?.name as string)}
+								<VideoWrapper status={userStatus.video}>
+									<video playsInline ref={userVideo} autoPlay />
+									<UserAvatar src={user.avatarUrl} status={userStatus.video}>
+										{getInitials(user.name)}
 									</UserAvatar>
 								</VideoWrapper>
 							</VideoContainer>
 						</Zoom>
-					)} */}
+					) : null}
 				</Grid>
 				{openChat && (
 					<Grid
@@ -166,7 +152,7 @@ export const Videocall = () => {
 							chat={chat}
 							sendMessage={sendMessage}
 							open={openChat}
-							handleClose={handleCloseChat}
+							handleClose={() => handleToggleChat(false)}
 						/>
 					</Grid>
 				)}
@@ -181,7 +167,7 @@ export const Videocall = () => {
 					>
 						<Record
 							open={openRecord}
-							handleClose={handleCloseRecord}
+							handleClose={() => handleToggleRecord(false)}
 							callEnded={callEnded}
 							onSubmit={handleRecordSubmit}
 						/>
@@ -192,12 +178,9 @@ export const Videocall = () => {
 			<Grid container item sx={{ height: '10%' }}>
 				<CallSettings
 					duration={duration}
-					handleClose={handleHangout}
-					handleToggleAudio={handleToggleAudio}
-					handleToggleVideo={handleToggleVideo}
 					openSettings={handleOpenSettings}
-					openChat={handleOpenChat}
-					openRecord={handleOpenRecord}
+					toggleChat={handleToggleChat}
+					toggleRecord={handleToggleRecord}
 					isSpecialist={role === RolesEnum.Specialist}
 					{...status}
 				/>
