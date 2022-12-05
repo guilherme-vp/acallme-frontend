@@ -1,4 +1,4 @@
-import { GenderEnum, Patient } from 'services/entities'
+import { Patient } from 'services/entities'
 
 import { nodeApi } from '../client'
 

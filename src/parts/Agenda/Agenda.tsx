@@ -1,15 +1,7 @@
 import React, { useState } from 'react'
 
 import { Divider, Grid, IconButton, Menu, MenuItem, Typography } from '@mui/material'
-import {
-	differenceInYears,
-	addWeeks,
-	subWeeks,
-	differenceInDays,
-	set,
-	startOfWeek,
-	endOfWeek
-} from 'date-fns'
+import { addWeeks, subWeeks, set, startOfWeek, endOfWeek } from 'date-fns'
 import { MdArrowBack as PrevIcon, MdArrowForward as NextIcon } from 'react-icons/md'
 import { useQuery } from 'react-query'
 
@@ -36,8 +28,8 @@ export const Agenda = ({ role, onConfirm, onDisable, onViewDetails }: AgendaProp
 	const [chosen, setChosen] = useState<Omit<HoursRange, 'hour'>>()
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 	const open = Boolean(anchorEl)
-	const isPrevDisabled = differenceInDays(date, now) <= 6
-	const isNextDisabled = differenceInYears(now, addWeeks(date, 1)) > 0
+	// const isPrevDisabled = differenceInDays(date, now) <= 6
+	// const isNextDisabled = differenceInYears(now, addWeeks(date, 1)) > 0
 
 	const firstDay = startOfWeek(date, { weekStartsOn: 1 })
 	const lastDay = endOfWeek(date, { weekStartsOn: 1 })
@@ -45,16 +37,9 @@ export const Agenda = ({ role, onConfirm, onDisable, onViewDetails }: AgendaProp
 	const { data, refetch } = useQuery(
 		'schedules',
 		() => {
-			if (role === RolesEnum.Specialist && user) {
+			if (user != null) {
 				return fetchSchedules({
-					specialistId: user.id,
-					rangeStart: set(firstDay, { hours: dayStart }).toISOString(),
-					rangeEnd: set(lastDay, { hours: dayEnds }).toISOString()
-				})
-			}
-			if (role === RolesEnum.Patient && user) {
-				return fetchSchedules({
-					patientId: user.id,
+					[`${role}Id`]: user.id,
 					rangeStart: set(firstDay, { hours: dayStart }).toISOString(),
 					rangeEnd: set(lastDay, { hours: dayEnds }).toISOString()
 				})
@@ -83,6 +68,7 @@ export const Agenda = ({ role, onConfirm, onDisable, onViewDetails }: AgendaProp
 		setAnchorEl(event.currentTarget)
 		setChosen(input)
 	}
+
 	const handleClose = () => {
 		setAnchorEl(null)
 		refetch()
@@ -99,7 +85,7 @@ export const Agenda = ({ role, onConfirm, onDisable, onViewDetails }: AgendaProp
 				<Grid item>
 					<IconButton
 						onClick={() => handlePrevWeek()}
-						disabled={isPrevDisabled}
+						// disabled={isPrevDisabled}
 						color="primary"
 						disableRipple
 					>
@@ -107,7 +93,7 @@ export const Agenda = ({ role, onConfirm, onDisable, onViewDetails }: AgendaProp
 					</IconButton>
 					<IconButton
 						onClick={() => handleNextWeek()}
-						disabled={isNextDisabled}
+						// disabled={isNextDisabled}
 						color="primary"
 						disableRipple
 					>
@@ -122,10 +108,10 @@ export const Agenda = ({ role, onConfirm, onDisable, onViewDetails }: AgendaProp
 							{schedule.weeks.map(({ title, desc }) => (
 								<th key={title}>
 									<Typography fontWeight={700} color="secondary" variant="body1">
-										{title}
+										{title.charAt(0).toUpperCase() + title.slice(1)}
 									</Typography>
 									<Typography fontWeight={600} color="text.secondary" variant="h5">
-										{desc}
+										{desc.charAt(0).toUpperCase() + desc.slice(1)}
 									</Typography>
 								</th>
 							))}
@@ -147,7 +133,7 @@ export const Agenda = ({ role, onConfirm, onDisable, onViewDetails }: AgendaProp
 														day
 													})
 												}
-												disabled={isDisabled === null ? true : isDisabled}
+												disabled={isDisabled == null ? true : isDisabled}
 												isScheduled={isScheduled}
 												isConfirmed={isConfirmed}
 												variant={isScheduled ? 'contained' : 'text'}
@@ -161,7 +147,7 @@ export const Agenda = ({ role, onConfirm, onDisable, onViewDetails }: AgendaProp
 								)}
 							</tr>
 						))}
-						{chosen && !chosen.isDisabled && chosen.isScheduled && chosen.scheduleId && (
+						{!chosen?.isDisabled && chosen?.isScheduled && chosen?.scheduleId && (
 							<Menu
 								anchorEl={anchorEl}
 								open={open}

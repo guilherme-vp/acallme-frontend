@@ -56,9 +56,9 @@ export async function confirmSchedule(input: {
 	scheduleId: number
 	confirmed: boolean
 }): Promise<boolean> {
-	const { data } = await nodeApi.put<{ ok: boolean }>(
+	const { data } = await nodeApi.post<{ ok: boolean }>(
 		`schedules/confirm/${input.scheduleId}`,
-		input.confirmed
+		{ confirmed: input.confirmed }
 	)
 
 	return data.ok

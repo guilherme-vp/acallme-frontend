@@ -7,7 +7,7 @@ export const Container = styled.div`
 `
 
 export const Table = styled.table`
-	border-spacing: 16px;
+	border-spacing: 8px;
 	border-collapse: separate;
 	width: 100%;
 `

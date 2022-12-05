@@ -1,5 +1,5 @@
 /* eslint-disable import/no-duplicates */
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 import {
 	format,
@@ -48,6 +48,7 @@ export const useSchedule = (
 	date: Date = new Date()
 ): ScheduleContent => {
 	const intl = useIntl()
+	const intlLocale = intl.locale === 'pt-BR' ? ptBR : enUS
 
 	function formatDay(oldDate: Date) {
 		return format(oldDate, 'd', { locale: intlLocale })
@@ -59,17 +60,16 @@ export const useSchedule = (
 	const year = format(date, 'yyyy')
 	const firstDayOfWeek = startOfWeek(date, { weekStartsOn: 1 })
 
-	const intlLocale = intl.locale === 'pt-BR' ? ptBR : enUS
-
-	function getWeekDays() {
-		const allFormattedHours: HoursRange[][] = Array(dayEnds - dayStart) // 21h - 6h = 15h
-			.fill(null)
-			.map((_, index) => {
+	const getWeekDays = useCallback(() => {
+		// 21h - 6h = 15h
+		const allFormattedHours: HoursRange[][] = Array.from(
+			{ length: dayEnds - dayStart },
+			(_, index) => {
 				const hour = index + dayStart // Day start at 6am
 
-				const mockedWeekDays: HoursRange[] = Array(daysInWeek)
-					.fill(null)
-					.map((__, day): HoursRange => {
+				const mockedWeekDays: HoursRange[] = Array.from(
+					{ length: daysInWeek },
+					(__, day): HoursRange => {
 						const aimedDay = set(addDays(firstDayOfWeek, day), {
 							hours: hour,
 							minutes: 0
@@ -107,22 +107,21 @@ export const useSchedule = (
 							isConfirmed: scheduleExists.confirmed,
 							scheduleId: scheduleExists.id
 						}
-					})
-					.sort((a, b) => (a.day > b.day ? 1 : -1))
+					}
+				).sort((a, b) => (a.day > b.day ? 1 : -1))
 
 				return mockedWeekDays
-			}) as HoursRange[][]
+			}
+		) as HoursRange[][]
 
 		const allFormattedWeeks: WeekHeader[] = Array(daysInWeek)
 			.fill(null)
 			.map((_, index) => {
 				const aimedDay = addDays(firstDayOfWeek, index)
 
-				const desc = format(aimedDay, 'LLL do')
-
 				return {
-					title: format(aimedDay, 'E'),
-					desc
+					title: format(aimedDay, 'E', { locale: intlLocale }),
+					desc: format(aimedDay, 'LLL d', { locale: intlLocale })
 				}
 			})
 
@@ -136,19 +135,22 @@ export const useSchedule = (
 			const formattedfirstDay = formatDay(firstDay)
 			const formattedLastDay = formatDay(lastDay)
 
-			selector = `${startWeekMonth} ${formattedfirstDay} - ${nextMonth} ${formattedLastDay}, ${year}`
+			selector = `${startWeekMonth} ${formattedfirstDay} - ${nextMonth
+				.charAt(0)
+				.toUpperCase()}${nextMonth.slice(1)} ${formattedLastDay}, ${year}`
 		} else {
 			selector = `${startWeekMonth} ${formatDay(firstDay)}-${formatDay(lastDay)}, ${year}`
 		}
 
 		return { selector, schedule: allWeek }
-	}
+	}, [date, data, intlLocale])
+
 	const [week, setWeek] = useState<ScheduleContent>(getWeekDays())
 
 	useEffect(() => {
 		setWeek(getWeekDays())
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data, date])
+	}, [data, date, intlLocale])
 
 	return week
 }
