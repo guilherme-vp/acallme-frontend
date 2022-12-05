@@ -4407,6 +4407,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/helpers@npm:^0.3.13":
+  version: 0.3.17
+  resolution: "@swc/helpers@npm:0.3.17"
+  dependencies:
+    tslib: ^2.4.0
+  checksum: ce3a5146d738b707f0608bba731aa1fd0a8e3f75f140ff7281225d775a769f085f085e0293b570a9d201c76e09951af178c9222d8c706d4ed0d1c85b25f55cb6
+  languageName: node
+  linkType: hard
+
 "@testing-library/dom@npm:^7.28.1":
   version: 7.31.2
   resolution: "@testing-library/dom@npm:7.31.2"
@@ -4984,6 +4993,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/uuid@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "@types/uuid@npm:9.0.0"
+  checksum: 59ae56d9547c8758588659da2a2b4c97cce79c2aae1798c892bb29452ef08e87859dea2ec3a66bfa88d0d2153147520be2b1893be920f9f0bc9c53a3207ea6aa
+  languageName: node
+  linkType: hard
+
 "@types/webpack-env@npm:^1.16.0":
   version: 1.16.4
   resolution: "@types/webpack-env@npm:1.16.4"
@@ -5536,6 +5552,7 @@ __metadata:
     "@types/simple-peer": ^9.11.4
     "@types/socket.io-client": ^3.0.0
     "@types/styled-components": ^5.1.25
+    "@types/uuid": ^9.0.0
     axios: ^0.26.1
     babel-loader: 8.1.0
     babel-plugin-import: ^1.13.5
@@ -5551,6 +5568,7 @@ __metadata:
     izitoast: ^1.4.0
     jsonwebtoken: ^8.5.1
     lodash.debounce: ^4.0.8
+    peerjs: ^1.4.7
     prettier: ^2.6.2
     react: ^16.14.0
     react-app-rewired: ^2.2.1
@@ -5570,6 +5588,7 @@ __metadata:
     storeon: ^3.1.5
     styled-components: ^5.3.5
     typescript: ^4.6.3
+    uuid: ^9.0.0
     web-vitals: ^2.1.4
   languageName: unknown
   linkType: soft
@@ -10033,7 +10052,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eventemitter3@npm:^4.0.0":
+"eventemitter3@npm:^4.0.0, eventemitter3@npm:^4.0.7":
   version: 4.0.7
   resolution: "eventemitter3@npm:4.0.7"
   checksum: 1875311c42fcfe9c707b2712c32664a245629b42bb0a5a84439762dd0fd637fc54d078155ea83c2af9e0323c9ac13687e03cfba79b03af9f40c89b4960099374
@@ -16144,6 +16163,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"peerjs-js-binarypack@npm:1.0.1":
+  version: 1.0.1
+  resolution: "peerjs-js-binarypack@npm:1.0.1"
+  checksum: 1b543e339956587ee35b80c61f959e3934e321db074da1f78f91af816f85baaefaeb907e7b5364f726e07c02a49d5daccb14714d62007102aa6ef8d86f5b083a
+  languageName: node
+  linkType: hard
+
+"peerjs@npm:^1.4.7":
+  version: 1.4.7
+  resolution: "peerjs@npm:1.4.7"
+  dependencies:
+    "@swc/helpers": ^0.3.13
+    eventemitter3: ^4.0.7
+    peerjs-js-binarypack: 1.0.1
+    webrtc-adapter: ^7.7.1
+  checksum: 9a1af9134a3d41a703af1716370bf85f73c58f138259a2f922a51c635b8ebbbc19d7c63be0711958d73fb6c41b45505bf067e40ea0e0d94c1f41a5a6a05c5278
+  languageName: node
+  linkType: hard
+
 "performance-now@npm:^2.1.0":
   version: 2.1.0
   resolution: "performance-now@npm:2.1.0"
@@ -18818,6 +18856,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rtcpeerconnection-shim@npm:^1.2.15":
+  version: 1.2.15
+  resolution: "rtcpeerconnection-shim@npm:1.2.15"
+  dependencies:
+    sdp: ^2.6.0
+  checksum: 42a733d8e3846b7e7e3c33b6d5cddec95659ceb39d3f990f0a4437e6d719ed717237fea02352d4a18d86c825a1493eaeb481cc835267d2288b0ce43582b97f46
+  languageName: node
+  linkType: hard
+
 "run-async@npm:^2.2.0, run-async@npm:^2.4.0":
   version: 2.4.1
   resolution: "run-async@npm:2.4.1"
@@ -19007,6 +19054,13 @@ __metadata:
     ajv: ^6.12.5
     ajv-keywords: ^3.5.2
   checksum: fb73f3d759d43ba033c877628fe9751620a26879f6301d3dbeeb48cf2a65baec5cdf99da65d1bf3b4ff5444b2e59cbe4f81c2456b5e0d2ba7d7fd4aed5da29ce
+  languageName: node
+  linkType: hard
+
+"sdp@npm:^2.12.0, sdp@npm:^2.6.0":
+  version: 2.12.0
+  resolution: "sdp@npm:2.12.0"
+  checksum: 5deb20ac50a1aeb4dd5ff2e506c22d1674222c21f08ae97105c9552ae979e90ddc42b8526f2c3dcacfeebc45c7b2e6b6b4254ae2cf335263bf3ddf2ad9b8ec76
   languageName: node
   linkType: hard
 
@@ -20622,6 +20676,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tslib@npm:^2.4.0":
+  version: 2.4.1
+  resolution: "tslib@npm:2.4.1"
+  checksum: 19480d6e0313292bd6505d4efe096a6b31c70e21cf08b5febf4da62e95c265c8f571f7b36fcc3d1a17e068032f59c269fab3459d6cd3ed6949eafecf64315fca
+  languageName: node
+  linkType: hard
+
 "tsutils@npm:^3.17.1":
   version: 3.21.0
   resolution: "tsutils@npm:3.21.0"
@@ -21213,6 +21274,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uuid@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "uuid@npm:9.0.0"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 8dd2c83c43ddc7e1c71e36b60aea40030a6505139af6bee0f382ebcd1a56f6cd3028f7f06ffb07f8cf6ced320b76aea275284b224b002b289f89fe89c389b028
+  languageName: node
+  linkType: hard
+
 "v8-compile-cache@npm:^2.0.3":
   version: 2.3.0
   resolution: "v8-compile-cache@npm:2.3.0"
@@ -21618,6 +21688,16 @@ __metadata:
   bin:
     webpack: bin/webpack.js
   checksum: c297519655f431d749abf0383a0c565d3fdad14baef70fc96b09285f1da6cdad22b24f7f1974ef07314f0d088235ad2e26090ebd497fb4b7fbe5e8372117d734
+  languageName: node
+  linkType: hard
+
+"webrtc-adapter@npm:^7.7.1":
+  version: 7.7.1
+  resolution: "webrtc-adapter@npm:7.7.1"
+  dependencies:
+    rtcpeerconnection-shim: ^1.2.15
+    sdp: ^2.12.0
+  checksum: 16534a721794bf375753b031e538f5c1ce84df3a272085069bbce7fa1b085e5a2d33b92096256a6fdacdf6f9e30f8543e2478a293ccf5a3849bc7143b10b38d3
   languageName: node
   linkType: hard
 
