@@ -47,7 +47,7 @@ export const Sidebar = ({ open, onClose }: Props) => {
 	return (
 		<SidebarContent open={open}>
 			<Grid container>
-				<Grid container item mb={1} mt={isMdDown ? 5 : 0}>
+				<Grid container item mb={1} mt={!isMdDown ? 5 : 0}>
 					<Typography textAlign="center" variant="body2" sx={{ color: 'text.secondary' }}>
 						{capitalizeLetter(intl.formatMessage({ id: 'general' }))}
 					</Typography>

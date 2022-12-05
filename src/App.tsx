@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 
 import { CircularProgress, useMediaQuery } from '@mui/material'
 import iziToast from 'izitoast'
-import { Route, BrowserRouter as Router, Routes, Navigate } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 
 import { useStoreon } from 'hooks'
-import { LOGIN, SIGNUP, HOME, SPECIALISTS, SCHEDULE, HISTORY, VIDEOCALL } from 'routes'
+import { LOGIN, SIGNUP, SPECIALISTS, SCHEDULE, HISTORY, VIDEOCALL } from 'routes'
 import { Home } from 'screens/Home'
 import { Login } from 'screens/Login'
 import { Schedule } from 'screens/Schedule'

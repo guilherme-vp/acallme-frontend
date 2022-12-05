@@ -33,7 +33,7 @@ export const Record = ({ open, handleClose, callEnded, onSubmit }: RecordProps) 
 	}, [callEnded])
 
 	return (
-		<Slide direction="up" in={open}>
+		<Slide direction="left" in={open}>
 			<S.RecordContainer>
 				<S.Header>
 					<Typography variant="body1">

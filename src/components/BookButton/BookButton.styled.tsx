@@ -21,7 +21,7 @@ export const BookButton = styled(Button).withConfig<{
 			: 'transparent'} !important;
 	color: ${({ isScheduled, isChosen, theme }) =>
 		!isScheduled && !isChosen ? theme.text.description : theme.tags.white};
-	padding: 8px 30px;
+	padding: 4px 20px;
 	border-radius: 8px;
 	font-weight: 600;
 `

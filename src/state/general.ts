@@ -15,7 +15,7 @@ export interface GeneralState {
 }
 
 export const generalModule: StoreonModule<GeneralState, GeneralEvents> = store => {
-	store.on('@init', () => ({ language: 'pt-BR', expanded: true }))
+	store.on('@init', () => ({ language: 'pt-BR', expanded: false }))
 	store.on('loading/set', (_state, isLoading) => ({
 		loading: isLoading
 	}))

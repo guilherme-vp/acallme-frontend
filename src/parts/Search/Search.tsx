@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { LoadingButton } from '@mui/lab'
-import { Grid, Hidden, Typography } from '@mui/material'
+import { Grid, Theme, Typography, useMediaQuery } from '@mui/material'
 import { Controller, useFormContext } from 'react-hook-form'
 import { MdOutlineSearch as SearchIcon } from 'react-icons/md'
 
@@ -25,6 +25,7 @@ export interface FormSearchProps {
 
 export const Search = ({ onSearch, loading, onSearchInputChange }: SearchProps) => {
 	const intl = useIntl()
+	const isMdDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'))
 
 	const { control } = useFormContext<FormSearchProps>()
 
@@ -122,28 +123,27 @@ export const Search = ({ onSearch, loading, onSearchInputChange }: SearchProps) 
 				justifyContent="flex-end"
 				alignItems="flex-end"
 			>
-				{/* <Hidden mdDown> */}
-				<S.SearchButton
-					onClick={onSearch}
-					aria-label="search talents"
-					variant="contained"
-					color="primary"
-					loading={loading}
-				>
-					<SearchIcon />
-				</S.SearchButton>
-				{/* </Hidden> */}
-				{/* <Hidden mdUp> */}
-				<LoadingButton
-					loading={loading}
-					variant="contained"
-					color="primary"
-					fullWidth
-					sx={{ mt: 1 }}
-				>
-					{capitalizeLetter(intl.formatMessage({ id: loading ? 'loading' : 'search' }))}
-				</LoadingButton>
-				{/* </Hidden> */}
+				{!isMdDown ? (
+					<S.SearchButton
+						onClick={onSearch}
+						aria-label="search talents"
+						variant="contained"
+						color="primary"
+						loading={loading}
+					>
+						<SearchIcon />
+					</S.SearchButton>
+				) : (
+					<LoadingButton
+						loading={loading}
+						variant="contained"
+						color="primary"
+						fullWidth
+						sx={{ mt: 1 }}
+					>
+						{capitalizeLetter(intl.formatMessage({ id: loading ? 'loading' : 'search' }))}
+					</LoadingButton>
+				)}
 			</Grid>
 		</S.SearchContainer>
 	)

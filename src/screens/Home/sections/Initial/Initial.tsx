@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Button, Grid, Hidden, Typography } from '@mui/material'
+import { Button, Grid, Typography } from '@mui/material'
 
 import doctorImage from 'assets/images/pointing-doctor.png'
 import { ContentBox } from 'components/ContentBox'

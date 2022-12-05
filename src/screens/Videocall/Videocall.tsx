@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { useState, useContext, useLayoutEffect, useEffect, useRef } from 'react'
+import React, { useState, useContext, useEffect, useRef } from 'react'
 
 import { Grid, useMediaQuery, Zoom } from '@mui/material'
 import { Theme } from '@mui/system'
@@ -8,7 +8,7 @@ import { intervalToDuration } from 'date-fns'
 import { CallSettings } from 'components/CallSettings'
 import { ChangeDevicesModal } from 'components/ChangeDevicesModal'
 import { CallContext } from 'contexts'
-import { useStoreon } from 'hooks'
+import { useIntl, useStoreon } from 'hooks'
 import { Chat } from 'parts/Chat'
 import { Record } from 'parts/Record'
 import { FormProps } from 'parts/Record/Record'
@@ -19,8 +19,10 @@ import { HOME } from 'routes'
 import { VideoContainer, VideoWrapper, UserAvatar } from './Videocall.styled'
 import iziToast from 'izitoast'
 import { useNavigate } from 'react-router-dom'
+import usePrevious from 'hooks/usePrevious'
 
 export const Videocall = () => {
+	const intl = useIntl()
 	const isMdUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
 	const navigate = useNavigate()
 	const { user: loggedUser, role } = useStoreon('user', 'role')
@@ -42,9 +44,11 @@ export const Videocall = () => {
 
 		changeDevicesSource
 	} = useContext(CallContext)
+	const prevMessages = usePrevious(chat)
 	const startDate = useRef(new Date())
 
 	const [duration, setDuration] = useState<string>('')
+	const [hasNewMessages, setHasNewMessages] = useState(false)
 
 	useEffect(() => {
 		setInterval(() => {
@@ -69,14 +73,24 @@ export const Videocall = () => {
 	useEffect(() => {
 		if (callEnded) {
 			iziToast.info({
-				title: 'A sua sessão encerrou',
-				message: 'Estamos te redirecionando para a página inicial'
+				title: intl.formatMessage({ id: 'call.close.title' }),
+				message: intl.formatMessage({ id: 'call.close.desc' })
 			})
 			setTimeout(() => {
 				navigate(HOME)
 			}, 3000)
 		}
 	}, [callEnded])
+
+	useEffect(() => {
+		if (!openChat && prevMessages && prevMessages.length !== chat.length) {
+			setHasNewMessages(true)
+		}
+
+		if (openChat) {
+			setHasNewMessages(false)
+		}
+	}, [prevMessages, chat, openChat])
 
 	const handleToggleChat = (open?: boolean) => {
 		if (openRecord) {
@@ -182,6 +196,7 @@ export const Videocall = () => {
 					toggleChat={handleToggleChat}
 					toggleRecord={handleToggleRecord}
 					isSpecialist={role === RolesEnum.Specialist}
+					hasNewMessages={hasNewMessages}
 					{...status}
 				/>
 			</Grid>
