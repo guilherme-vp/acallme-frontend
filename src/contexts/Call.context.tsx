@@ -2,14 +2,15 @@
 import React, { useState, useEffect, useRef, createContext, RefObject } from 'react'
 
 import iziToast from 'izitoast'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Peer from 'simple-peer'
 
-import { Message } from '../components/Message'
+import type { Message } from '../components/Message'
 import { WsEvents } from '../constants/ws-events'
 import { useIntl, useStoreon } from '../hooks'
 import { callSocket as socket } from '../services/ws/client'
 import { v4 as uuidv4 } from 'uuid'
+import { HOME } from 'routes'
 
 interface Caller {
 	socketId: string
@@ -68,6 +69,7 @@ export const CallContext = createContext<CallContextProps>({
 
 export const CallProvider: React.FC = ({ children }) => {
 	const intl = useIntl()
+	const navigate = useNavigate()
 	const { scheduleId } = useParams<{ scheduleId: string }>()
 	const [socketId, setSocketId] = useState<string>()
 	const room = `room-${scheduleId}`
@@ -208,6 +210,15 @@ export const CallProvider: React.FC = ({ children }) => {
 				socket.once(WsEvents.END_CALL, () => {
 					handleHangout()
 				})
+
+				socket.on(WsEvents.LEAVE_CALL, () => {
+					iziToast.info({
+						title: intl.formatMessage({ id: 'call.userLeft.title' }),
+						message: intl.formatMessage({ id: 'call.userLeft.desc' }),
+						position: 'topCenter',
+						timeout: 3000
+					})
+				})
 			} catch (e) {
 				console.log('Erro na requisição de autorização', e)
 			}
@@ -239,6 +250,11 @@ export const CallProvider: React.FC = ({ children }) => {
 			})
 		})
 	}, [])
+
+	if (!me) {
+		navigate(HOME)
+		return null
+	}
 
 	const createPeer = (userToSignal: string, stream: MediaStream) => {
 		const peer = new Peer({
@@ -335,26 +351,28 @@ export const CallProvider: React.FC = ({ children }) => {
 	}) => {
 		const { id, message, createdAt, isSpeaker } = content
 
-		const uniqueMessages = new Set(chat)
-		uniqueMessages.add({
-			id,
-			createdAt: createdAt != null ? new Date(createdAt) : new Date(),
-			message,
-			isSpeaker,
-			name: !isSpeaker && user != null ? user.name : 'Eu',
-			avatarUrl: !isSpeaker && user != null ? user.avatarUrl : me?.avatarUrl
-		})
-
-		setChat(Array.from(uniqueMessages))
+		setChat(prev => [
+			...prev,
+			{
+				id,
+				createdAt: createdAt != null ? new Date(createdAt) : new Date(),
+				message,
+				isSpeaker,
+				name: !isSpeaker && user != null ? user.name : me.name,
+				avatarUrl: !isSpeaker && user != null ? user.avatarUrl : me.avatarUrl
+			}
+		])
 	}
 
 	const sendMessage = (content: string) => {
 		const messageId = uuidv4()
+
 		addMessage({
 			id: messageId,
 			isSpeaker: true,
 			message: content
 		})
+
 		socket.emit(WsEvents.SEND_MESSAGE, {
 			id: messageId,
 			message: content,

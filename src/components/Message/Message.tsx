@@ -3,17 +3,18 @@ import React from 'react'
 import { Grid, Typography } from '@mui/material'
 import { format } from 'date-fns'
 
-import { getInitials } from 'utils/get-initials'
-
 import * as S from './Message.styled'
 
-export interface MessageProps {
+export interface Message {
+	id: string
 	name: string
 	avatarUrl?: string
 	message: string
 	isSpeaker: boolean
 	createdAt: Date
 }
+
+export type MessageProps = Omit<Message, 'id'>
 
 export const Message = ({
 	avatarUrl,
@@ -24,9 +25,6 @@ export const Message = ({
 }: MessageProps) => {
 	return (
 		<Grid container flexDirection={isSpeaker ? 'row-reverse' : 'row'} sx={{ padding: 1 }}>
-			<Grid item mx={1}>
-				{/* <S.MiniAvatar src={avatarUrl ?? undefined}>{getInitials(name)}</S.MiniAvatar> */}
-			</Grid>
 			<Grid
 				container
 				item

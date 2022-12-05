@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
-import { Stack, Typography, useMediaQuery } from '@mui/material'
+import { Badge, Stack, Typography, useMediaQuery } from '@mui/material'
 import { Theme } from '@mui/system'
 import {
 	MdMic as MicOn,
@@ -14,32 +14,31 @@ import {
 } from 'react-icons/md'
 
 import * as S from './CallSettings.styled'
+import { CallContext } from 'contexts'
 
 export interface CallSettingsProps {
 	duration: string
 	video?: boolean
 	audio?: boolean
+	hasNewMessages?: boolean
 	isSpecialist: boolean
-	handleToggleVideo: () => void
-	handleToggleAudio: () => void
-	handleClose: () => void
 	openSettings: () => void
-	openChat: () => void
-	openRecord: () => void
+	toggleChat: (open?: boolean) => void
+	toggleRecord: (open?: boolean) => void
 }
 
 export const CallSettings = ({
 	duration,
 	audio = true,
 	video = true,
-	handleClose,
-	handleToggleAudio,
-	handleToggleVideo,
+	hasNewMessages = false,
 	openSettings,
-	openChat,
-	isSpecialist,
-	openRecord
+	toggleChat,
+	toggleRecord,
+	isSpecialist
 }: CallSettingsProps) => {
+	const { handleHangout, handleToggleAudio, handleToggleVideo } = useContext(CallContext)
+
 	const isMdUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
 
 	return (
@@ -64,17 +63,19 @@ export const CallSettings = ({
 				<S.OptionButton disableRipple onClick={openSettings}>
 					<SettingsIcon />
 				</S.OptionButton>
-				<S.OptionButton disableRipple onClick={() => handleClose()} isHangout>
+				<S.OptionButton disableRipple onClick={() => handleHangout()} isHangout>
 					<EndCall />
 				</S.OptionButton>
 			</Stack>
 			{isMdUp && (
 				<Stack direction="row" spacing={3}>
-					<S.OptionButton onClick={openChat}>
-						<ChatIcon />
+					<S.OptionButton onClick={() => toggleChat()}>
+						<Badge color="secondary" variant="dot" invisible={!hasNewMessages}>
+							<ChatIcon />
+						</Badge>
 					</S.OptionButton>
 					{isSpecialist && (
-						<S.OptionButton onClick={openRecord}>
+						<S.OptionButton onClick={() => toggleRecord()}>
 							<DocumentIcon />
 						</S.OptionButton>
 					)}
@@ -82,10 +83,17 @@ export const CallSettings = ({
 			)}
 			{!isMdUp && (
 				<>
-					<S.FabButton sx={{ top: '16px' }} onClick={openChat}>
-						<ChatIcon />
+					<S.FabButton sx={{ top: '16px' }} onClick={() => toggleChat()}>
+						<Badge
+							color="secondary"
+							variant="standard"
+							sx={{ height: '24px', width: '24px' }}
+							invisible={!hasNewMessages}
+						>
+							<ChatIcon />
+						</Badge>
 					</S.FabButton>
-					<S.FabButton sx={{ top: 'calc(56px + 24px)' }} onClick={openRecord}>
+					<S.FabButton sx={{ top: 'calc(56px + 24px)' }} onClick={() => toggleRecord()}>
 						<DocumentIcon />
 					</S.FabButton>
 				</>

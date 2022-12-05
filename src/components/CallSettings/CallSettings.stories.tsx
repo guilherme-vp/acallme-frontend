@@ -50,8 +50,6 @@ const Template: Story<CallSettingsProps> = args => {
 				video={video}
 				{...args}
 				duration={duration}
-				handleToggleAudio={() => setAudio(prev => !prev)}
-				handleToggleVideo={() => setVideo(prev => !prev)}
 				openSettings={() => setOpen(true)}
 			/>
 			<ChangeDevicesModal

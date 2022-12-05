@@ -4,7 +4,7 @@ import { Box } from '@mui/material'
 import { Story, Meta } from '@storybook/react/types-6-0'
 import faker from 'faker'
 
-import { MessageProps } from 'components/Message'
+import { Message } from 'components/Message'
 
 import { Chat, ChatProps } from './Chat'
 
@@ -14,7 +14,7 @@ export default {
 } as Meta
 
 const Template: Story<ChatProps> = () => {
-	const [chat, setChat] = useState<MessageProps[]>([])
+	const [chat, setChat] = useState<Message[]>([])
 	const name = faker.name.firstName()
 	const avatarUrl = faker.image.people()
 
@@ -23,6 +23,7 @@ const Template: Story<ChatProps> = () => {
 			[
 				...prev,
 				{
+					id: faker.datatype.uuid(),
 					message,
 					createdAt: new Date(),
 					isSpeaker: faker.datatype.boolean(),
