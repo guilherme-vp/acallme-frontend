@@ -36,7 +36,6 @@ export interface CallContextProps {
 	user?: Caller
 	userStatus: Status
 	countUsers: number
-	callEnded: boolean
 	room: string
 	myVideo: RefObject<HTMLVideoElement>
 	userVideo: RefObject<HTMLVideoElement>
@@ -55,7 +54,6 @@ export const CallContext = createContext<CallContextProps>({
 	user: undefined,
 	userStatus: { audio: true, video: true },
 	countUsers: 0,
-	callEnded: false,
 	room: '',
 	myVideo: { current: null },
 	userVideo: { current: null },
@@ -78,11 +76,8 @@ export const CallProvider: React.FC = ({ children }) => {
 	const [user, setUser] = useState<Caller>()
 	const [countUsers, setCountUsers] = useState(0)
 
-	const [callEnded, setCallEnded] = useState(false)
-
 	const [stream, setStream] = useState<MediaStream>()
 
-	const [userPeer, setUserPeer] = useState<Peer.Instance>()
 	const [status, setStatus] = useState<Status>({
 		audio: true,
 		video: true,
@@ -94,6 +89,7 @@ export const CallProvider: React.FC = ({ children }) => {
 	})
 	const myVideo = useRef<HTMLVideoElement>(null)
 	const userVideo = useRef<HTMLVideoElement>(null)
+	const [userPeer, setUserPeer] = useState<Peer.Instance>()
 	const userPeerRef = useRef<{ peer: Peer.Instance }>({
 		peer: {} as Peer.Instance
 	})
@@ -132,7 +128,7 @@ export const CallProvider: React.FC = ({ children }) => {
 				socket.emit(WsEvents.JOIN_CALL, room)
 				setCountUsers(prev => prev + 1)
 
-				socket.once(
+				socket.on(
 					WsEvents.RECEIVE_USER,
 					(payload: {
 						socketId: string
@@ -142,10 +138,11 @@ export const CallProvider: React.FC = ({ children }) => {
 					}) => {
 						const { name, socketId, avatarUrl } = payload
 
-						if (userPeer || !socketId) {
+						if (userPeer != null || !socketId) {
 							return
 						}
 
+						console.log('[P2P] Creating peer for user')
 						const peer = createPeer(socketId, myStream)
 
 						setUserPeer(peer)
@@ -155,7 +152,7 @@ export const CallProvider: React.FC = ({ children }) => {
 					}
 				)
 
-				socket.once(
+				socket.on(
 					WsEvents.USER_JOINED,
 					(payload: {
 						signal: Peer.SignalData
@@ -165,7 +162,7 @@ export const CallProvider: React.FC = ({ children }) => {
 					}) => {
 						const { name, signal, socketId, avatarUrl } = payload
 
-						if (userPeer) return
+						if (userPeer != null) return
 
 						const peer = addPeer(signal, socketId, myStream)
 
@@ -176,10 +173,11 @@ export const CallProvider: React.FC = ({ children }) => {
 					}
 				)
 
-				socket.once(
+				socket.on(
 					WsEvents.RECEIVE_SIGNAL,
 					(payload: { signal: Peer.SignalData; id: string }) => {
 						const { signal } = payload
+						console.log('[P2P] Signaling peer')
 						userPeerRef.current.peer.signal(signal)
 					}
 				)
@@ -212,12 +210,7 @@ export const CallProvider: React.FC = ({ children }) => {
 				})
 
 				socket.on(WsEvents.LEAVE_CALL, () => {
-					iziToast.info({
-						title: intl.formatMessage({ id: 'call.userLeft.title' }),
-						message: intl.formatMessage({ id: 'call.userLeft.desc' }),
-						position: 'topCenter',
-						timeout: 3000
-					})
+					handleUserDisconnection()
 				})
 			} catch (e) {
 				console.log('Erro na requisição de autorização', e)
@@ -287,15 +280,26 @@ export const CallProvider: React.FC = ({ children }) => {
 			setUserStatus(newStatus)
 		})
 
-		peer.on('error', error => {
-			console.log(`[P2P] ${error}`)
-		})
+		peer.on('error', error => console.log(`[P2P] ${error}`))
 
 		peer.on('connect', () => console.log(`[P2P] Peer connected with ${userToSignal}`))
 
 		peer.on('close', () => console.log(`[P2P] Channel closed with ${userToSignal}`))
 
 		return peer
+	}
+
+	const handleUserDisconnection = () => {
+		console.log(`[P2P] Disconnecting user`)
+		iziToast.info({
+			title: intl.formatMessage({ id: 'call.userLeft.title' }),
+			message: intl.formatMessage({ id: 'call.userLeft.desc' }),
+			position: 'topCenter',
+			timeout: 3000
+		})
+		setCountUsers(prev => prev - 1)
+		setUser(undefined)
+		userPeer?.destroy()
 	}
 
 	const addPeer = (
@@ -380,65 +384,80 @@ export const CallProvider: React.FC = ({ children }) => {
 		})
 	}
 
-	const handleToggleVideo = () => {
+	const handleToggleVideo = async () => {
 		if (!stream) return
 
-		console.log('Emitted update media video')
+		const currentVideoTrack = stream.getVideoTracks()[0]
+		if (currentVideoTrack.enabled) {
+			currentVideoTrack.stop()
+			currentVideoTrack.enabled = false
+		} else {
+			await changeDevicesSource({ videoId: currentVideoTrack.id })
+		}
+
 		setStatus(prev => {
 			const { video } = prev
 
+			console.log('Emitted update media video')
 			socket.emit(WsEvents.UPDATE_MEDIA, {
 				type: 'video',
 				currentMediaStatuses: [!video],
 				room
 			})
 
-			stream.getVideoTracks()[0].enabled = !video
-
 			return { ...prev, video: !video }
 		})
 	}
 
-	const handleToggleAudio = () => {
+	const handleToggleAudio = async () => {
 		if (!stream) return
 
-		console.log('Emitted update media audio')
+		const currentAudioTrack = stream.getAudioTracks()[0]
+		if (currentAudioTrack.enabled) {
+			currentAudioTrack.stop()
+			currentAudioTrack.enabled = false
+		} else {
+			await changeDevicesSource({ audioId: currentAudioTrack.id })
+		}
+
 		setStatus(prev => {
 			const { audio } = prev
 
+			console.log('Emitted update media audio')
 			socket.emit(WsEvents.UPDATE_MEDIA, {
 				type: 'audio',
 				currentMediaStatuses: [!audio],
 				room
 			})
 
-			stream.getAudioTracks()[0].enabled = !audio
-
 			return { ...prev, audio: !audio }
 		})
 	}
 
 	const handleHangout = () => {
-		setCallEnded(true)
-		setUser(undefined)
-		setUserStatus({ audio: false, video: false })
-		userPeer?.destroy()
+		socket.emit(WsEvents.LEAVE_CALL)
 
-		socket.emit(WsEvents.LEAVE_CALL, { id: socketId })
+		userVideo.current?.remove()
+		myVideo.current?.remove()
+		userPeer?.destroy()
+		socket.disconnect()
+
+		navigate(HOME)
 	}
 
 	const changeDevicesSource = async ({ audioId, videoId }: Authorization) => {
 		const oldTracks = stream?.getTracks()
 
-		if (oldTracks == null || stream == null) return
-
 		const newStream = await requestAuthorization({ audioId, videoId })
+
+		if (oldTracks == null || stream == null || userPeer == null) return
 
 		const newTracks = newStream.getTracks()
 
 		oldTracks.forEach(oldTrack => {
 			newTracks.forEach(newTrack => {
 				if (oldTrack.kind === newTrack.kind) {
+					// userPeer?.replaceTrack(oldTrack, newTrack, stream)
 					userPeerRef.current.peer.replaceTrack(oldTrack, newTrack, stream)
 				}
 			})
@@ -453,7 +472,6 @@ export const CallProvider: React.FC = ({ children }) => {
 				status,
 				user,
 				userStatus,
-				callEnded,
 				room,
 				myVideo,
 				userVideo,

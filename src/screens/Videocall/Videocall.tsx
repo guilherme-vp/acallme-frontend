@@ -8,23 +8,18 @@ import { intervalToDuration } from 'date-fns'
 import { CallSettings } from 'components/CallSettings'
 import { ChangeDevicesModal } from 'components/ChangeDevicesModal'
 import { CallContext } from 'contexts'
-import { useIntl, useStoreon } from 'hooks'
+import { useStoreon } from 'hooks'
 import { Chat } from 'parts/Chat'
 import { Record } from 'parts/Record'
 import { FormProps } from 'parts/Record/Record'
 import { RolesEnum } from 'services/entities'
 import { getInitials } from 'utils/get-initials'
-import { HOME } from 'routes'
 
 import { VideoContainer, VideoWrapper, UserAvatar } from './Videocall.styled'
-import iziToast from 'izitoast'
-import { useNavigate } from 'react-router-dom'
 import usePrevious from 'hooks/usePrevious'
 
 export const Videocall = () => {
-	const intl = useIntl()
 	const isMdUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
-	const navigate = useNavigate()
 	const { user: loggedUser, role } = useStoreon('user', 'role')
 
 	const [openChat, setOpenChat] = useState(false)
@@ -40,8 +35,6 @@ export const Videocall = () => {
 		myVideo,
 		userVideo,
 		user,
-		callEnded,
-
 		changeDevicesSource
 	} = useContext(CallContext)
 	const prevMessages = usePrevious(chat)
@@ -69,18 +62,6 @@ export const Videocall = () => {
 			setDuration(final)
 		}, 1000)
 	}, [])
-
-	useEffect(() => {
-		if (callEnded) {
-			iziToast.info({
-				title: intl.formatMessage({ id: 'call.close.title' }),
-				message: intl.formatMessage({ id: 'call.close.desc' })
-			})
-			setTimeout(() => {
-				navigate(HOME)
-			}, 3000)
-		}
-	}, [callEnded])
 
 	useEffect(() => {
 		if (!openChat && prevMessages && prevMessages.length !== chat.length) {
@@ -182,7 +163,6 @@ export const Videocall = () => {
 						<Record
 							open={openRecord}
 							handleClose={() => handleToggleRecord(false)}
-							callEnded={callEnded}
 							onSubmit={handleRecordSubmit}
 						/>
 					</Grid>
