@@ -59,7 +59,7 @@ export const DashboardMain = styled.main`
 	background-color: ${props => props.theme.background.main};
 
 	@media only screen and (max-width: 600px) {
-		padding: 16px 20px;
+		padding: 16px 20px 40px;
 	}
 `
 

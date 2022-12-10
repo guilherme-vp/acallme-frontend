@@ -123,7 +123,7 @@ export const Search = ({ onSearch, loading, onSearchInputChange }: SearchProps) 
 				justifyContent="flex-end"
 				alignItems="flex-end"
 			>
-				{!isMdDown ? (
+				{isMdDown ? (
 					<S.SearchButton
 						onClick={onSearch}
 						aria-label="search talents"

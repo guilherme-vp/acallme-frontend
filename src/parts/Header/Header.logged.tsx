@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AppBar, Grid, Hidden, IconButton } from '@mui/material'
+import { AppBar, Grid, Hidden, IconButton, Theme, useMediaQuery } from '@mui/material'
 import { BiMenuAltLeft as MenuIcon } from 'react-icons/bi'
 
 import { LanguagePicker } from 'components/LanguagePicker'
@@ -16,6 +16,7 @@ interface HeaderProps {
 
 export const HeaderLogged = ({ openDrawer }: HeaderProps) => {
 	const { dispatch, user } = useStoreon('user')
+	const isMdDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'))
 
 	const onSignOut = () => {
 		dispatch('user/signOut')
@@ -26,11 +27,11 @@ export const HeaderLogged = ({ openDrawer }: HeaderProps) => {
 			<Container>
 				<Grid container justifyContent="space-between" alignItems="center">
 					<Grid container item xs="auto">
-						{/* <Hidden mdUp> */}
-						<IconButton color="secondary" edge="start" onClick={() => openDrawer()}>
-							<MenuIcon />
-						</IconButton>
-						{/* </Hidden> */}
+						{isMdDown && (
+							<IconButton color="secondary" edge="start" onClick={() => openDrawer()}>
+								<MenuIcon />
+							</IconButton>
+						)}
 					</Grid>
 					<Grid container item xs justifyContent="flex-end" alignItems="center">
 						<Grid item mr={2}>

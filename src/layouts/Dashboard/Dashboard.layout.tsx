@@ -37,7 +37,7 @@ export const DashboardLayout = () => {
 	return (
 		<S.DashboardContainer>
 			<HeaderLogged openDrawer={() => handleOpen()} />
-			{isMdUp && (
+			{!isMdUp && (
 				// @ts-ignore
 				<SwipeableDrawer
 					open={open}
@@ -49,7 +49,7 @@ export const DashboardLayout = () => {
 				</SwipeableDrawer>
 			)}
 			<S.SidebarContainer>
-				{!isMdUp && (
+				{isMdUp && (
 					<>
 						<S.Drawer variant="permanent" open={open} onClose={handleClose}>
 							<S.DrawerHeader>
