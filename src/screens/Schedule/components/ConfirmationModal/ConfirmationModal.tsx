@@ -44,6 +44,7 @@ export const ConfirmationModal = ({
 			cancelButtonProps={{ color: 'error' }}
 			title={intl.formatMessage({ id: 'schedule.confirmationModal.title' })}
 			onOk={() => onConfirm(scheduleId, true)}
+			onCancel={() => onConfirm(scheduleId, false)}
 		>
 			<Grid
 				container

@@ -133,12 +133,12 @@ export const Agenda = ({ role, onConfirm, onDisable, onViewDetails }: AgendaProp
 														day
 													})
 												}
-												disabled={isDisabled == null ? true : isDisabled}
+												disabled={isDisabled === true ? true : isDisabled}
 												isScheduled={isScheduled}
 												isConfirmed={isConfirmed}
 												variant={isScheduled ? 'contained' : 'text'}
 												color="inherit"
-												aria-expanded={open ? 'true' : undefined}
+												aria-expanded={open ? 'true' : 'false'}
 											>
 												{isDisabled ? <s>{hour}</s> : hour}
 											</BookButton>

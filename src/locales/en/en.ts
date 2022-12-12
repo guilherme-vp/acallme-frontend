@@ -159,19 +159,26 @@ export const enLocales: ILocale = {
 	'notifications.noNew': `You don't have any new notifications`,
 	'notifications.totalUnRead':
 		'You have {length} not read {length, plural, =1 {notification} other {notifications}}',
+	// New Appointment
 	'notification.newAppointment.title': 'New Appointment',
 	'notification.newAppointment.description':
 		'{name} scheduled an appointment with you at {date}. Do you want to confirm it?',
+
+	// Confirmed Appointment
+	'notification.confirmedAppointment.title': 'Appointment Confirmed',
 	'notification.confirmedAppointment.description.specialist':
 		'You confirmed this appointment',
+	'notification.confirmedAppointment.description':
+		'Your appointment with {name} at {date} was confirmed',
+
+	// Rejected Appointment
 	'notification.rejectedAppointment.description.specialist':
 		'You rejected this appointment',
-	'notification.confirmedAppointment.title': 'Appointment Confirmed',
-	'notification.confirmedAppointment.description':
-		'Your appointment at {date} was confirmed',
 	'notification.rejectedAppointment.title': 'Appointment Rejected',
 	'notification.rejectedAppointment.description':
-		'Unfortunately, your appointment with {name} was rejected',
+		'Unfortunately, your appointment with {name} at {date} was rejected',
+
+	// Call Appointment
 	'notification.callAppointment.title': 'Appointment Call',
 	'notification.callAppointment.description': 'Your appointment is happening now. Enter?',
 	'notification.callAppointment.description.ended': 'This appointment already ended',
@@ -216,6 +223,11 @@ export const enLocales: ILocale = {
 	// Call
 	'call.close.warn.title': 'Appointment Finishing',
 	'call.close.warn.desc': 'The appointment will finish in 5 minutes!',
+	'call.close.title': 'Your session has ended',
+	'call.close.desc': 'We are redirecting you to the initial page',
+	'call.userLeft.title': 'The user left the videocall',
+	'call.userLeft.desc':
+		'Your videocall will be ended in 10 minutes if the user does not return',
 
 	// Settings
 	'settings.select.audio': 'Select an input audio device',

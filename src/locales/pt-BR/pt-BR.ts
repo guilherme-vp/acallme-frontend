@@ -158,17 +158,25 @@ export const ptBrLocales = {
 	'notifications.noNew': 'Você não tem nenhuma notificação nova',
 	'notifications.totalUnRead':
 		'Você tem {length} {length, plural, =1 {notificação não lida} other {notificações não lidas}}',
+	// New Appointment
 	'notification.newAppointment.title': 'Nova Consulta',
 	'notification.newAppointment.description':
 		'{name} agendou uma consulta com você as {date}. Você quer confirmar essa consulta?',
+
+	// Confirmed Appointment
 	'notification.confirmedAppointment.title': 'Consulta Confirmada',
 	'notification.confirmedAppointment.description.specialist':
 		'Você confirmou essa consulta',
-	'notification.rejectedAppointment.description.specialist': 'Você rejeitou essa consulta',
-	'notification.confirmedAppointment.description': 'Sua consulta em {date} foi confirmada',
+	'notification.confirmedAppointment.description':
+		'Sua consulta com {name} em {date} foi confirmada',
+
+	// Rejected Appointment
 	'notification.rejectedAppointment.title': 'Consulta Rejeitada',
+	'notification.rejectedAppointment.description.specialist': 'Você rejeitou essa consulta',
 	'notification.rejectedAppointment.description':
-		'Infelizmente, sua consulta com {name} foi rejeitada',
+		'Infelizmente, sua consulta com {name} em {date} foi rejeitada',
+
+	// Call Appointment
 	'notification.callAppointment.title': 'Chamada',
 	'notification.callAppointment.description':
 		'Sua consulta está ocorrendo agora! Você quer entrar na chamada?',
@@ -214,6 +222,10 @@ export const ptBrLocales = {
 	// Call
 	'call.close.warn.title': 'Consulta Encerrando',
 	'call.close.warn.desc': 'A consulta se encerrará em 5 minutos!',
+	'call.close.title': 'A sua sessão encerrou',
+	'call.close.desc': 'Estamos te redirecionando para a página inicial',
+	'call.userLeft.title': 'O usuário saiu da chamada',
+	'call.userLeft.desc': 'A chamada será encerrada em 10 minutos caso o usuário não entre',
 
 	// Settings
 	'settings.select.audio': 'Selecione um dispositivo de entrada de áudio',
@@ -228,7 +240,7 @@ export const ptBrLocales = {
 		'Não se preocupe, você poderá habilitar esse horário novamente',
 	'schedule.card.book': 'Marque uma consulta',
 	'schedule.card.hours': 'Horários disponíveis',
-	'schedule.success': 'Sua consulta foi criada com sucesso1',
+	'schedule.success': 'Sua consulta foi criada com sucesso!',
 
 	en: 'Inglês',
 	'pt-BR': 'Português'

@@ -20,6 +20,7 @@ export enum WsEvents {
 	END_CALL = 'end-call',
 
 	// Notifications
+	IDENTIFY = 'identify',
 	SEND_NOTIFICATION = 'send-notification',
 	SEND_CLOSE_NOTIFICATION = 'send-close-notification'
 }

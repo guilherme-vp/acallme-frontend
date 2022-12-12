@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-wrap-multilines */
 import React from 'react'
 
 import {
@@ -19,7 +18,7 @@ import {
 
 import { dateFormat } from 'constants/date-format'
 import { ILocale, useIntl } from 'hooks'
-import { Notification } from 'services/entities'
+import { Notification, NotificationsEnum } from 'services/entities'
 import { capitalizeLetter } from 'utils/capitalize-letter'
 
 import { ActionContainer, ClockIcon } from './NotificationItem.styled'
@@ -27,61 +26,55 @@ import { renderAvatar } from './renderAvatar'
 
 interface NotificationItemProps {
 	notification: Notification
-	handleConfirm: (id: string, scheduleId: number) => void
-	handleReject: (id: string, scheduleId: number) => void
+	handleConfirm: (id: string, scheduleId: number, isConfirmed: boolean) => void
 	handleEnter: (id: string, scheduleId: number) => void
 }
 
 export const NotificationItem = ({
 	notification,
 	handleConfirm,
-	handleEnter,
-	handleReject
+	handleEnter
 }: NotificationItemProps) => {
 	const { id, avatar, createdAt, scheduleId, name, when, type, isConfirmed, isFinished } =
 		notification
 	const intl = useIntl()
 
-	const formatDate = () => when && `${datefns.format(when, dateFormat)}`
+	const formatDate = () => when && `${datefns.format(new Date(when), dateFormat)}`
 
 	const notificationData = ((): { title: string; description: string } => {
-		if (type === 'appointment_new' && when) {
-			const message: Record<'title' | 'desc', keyof ILocale> = {
-				title: 'notification.newAppointment.title',
-				desc: 'notification.newAppointment.description'
-			}
+		if (when) {
+			switch (type) {
+				case NotificationsEnum.APPOINTMENT_NEW:
+					return {
+						title: intl.formatMessage({
+							id: 'notification.newAppointment.title'
+						}),
+						description: intl.formatMessage(
+							{ id: 'notification.newAppointment.description' },
+							{ name, date: formatDate() }
+						)
+					}
+				case NotificationsEnum.APPOINTMENT_CONFIRMATION:
+					const messageConfirmation: Record<'title' | 'desc', keyof ILocale> = {
+						title: isConfirmed
+							? 'notification.confirmedAppointment.title'
+							: 'notification.rejectedAppointment.title',
+						desc: isConfirmed
+							? 'notification.confirmedAppointment.description'
+							: 'notification.rejectedAppointment.description'
+					}
 
-			if (!isConfirmed) {
-				message.desc = 'notification.newAppointment.description'
-			}
-
-			if (typeof isConfirmed === 'boolean') {
-				if (!isConfirmed) {
-					message.desc = 'notification.rejectedAppointment.description.specialist'
-				} else {
-					message.desc = 'notification.confirmedAppointment.description.specialist'
-				}
-			}
-
-			return {
-				title: intl.formatMessage({
-					id: message.title
-				}),
-				description: intl.formatMessage({ id: message.desc }, { name, date: formatDate() })
-			}
-		}
-
-		if (type === 'appointment_confirmation' && when) {
-			return {
-				title: intl.formatMessage({ id: 'notification.confirmedAppointment.title' }),
-				description: intl.formatMessage(
-					{ id: 'notification.confirmedAppointment.description' },
-					{ date: formatDate() }
-				)
+					return {
+						title: intl.formatMessage({ id: messageConfirmation.title }),
+						description: intl.formatMessage(
+							{ id: messageConfirmation.desc },
+							{ name, date: formatDate() }
+						)
+					}
 			}
 		}
 
-		if (type === 'appointment_call' && isFinished) {
+		if (type === NotificationsEnum.APPOINTMENT_CALL && isFinished) {
 			return {
 				title: intl.formatMessage({ id: 'notification.callAppointment.title' }),
 				description: intl.formatMessage({
@@ -102,17 +95,17 @@ export const NotificationItem = ({
 		<ListItem
 			disableGutters
 			secondaryAction={
-				type === 'appointment_new' && typeof isConfirmed === 'undefined' ? (
+				type === NotificationsEnum.APPOINTMENT_NEW && isConfirmed == null ? (
 					<ActionContainer>
 						<IconButton
-							onClick={() => handleConfirm(id, scheduleId)}
+							onClick={() => handleConfirm(id, scheduleId, true)}
 							color="success"
 							sx={{ p: 0.5 }}
 						>
 							<CheckIcon />
 						</IconButton>
 						<IconButton
-							onClick={() => handleReject(id, scheduleId)}
+							onClick={() => handleConfirm(id, scheduleId, false)}
 							color="error"
 							sx={{ p: 0.5 }}
 						>
@@ -120,7 +113,7 @@ export const NotificationItem = ({
 						</IconButton>
 					</ActionContainer>
 				) : (
-					type === 'appointment_call' &&
+					type === NotificationsEnum.APPOINTMENT_CALL &&
 					!isFinished && (
 						<ActionContainer>
 							<IconButton onClick={() => handleEnter(id, scheduleId)}>
