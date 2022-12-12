@@ -20,6 +20,5 @@ basic.args = {
 	open: true,
 	handleClose() {
 		this.open = false
-	},
-	callEnded: false
+	}
 } as StoryArgs

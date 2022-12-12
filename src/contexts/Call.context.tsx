@@ -218,6 +218,7 @@ export const CallProvider: React.FC = ({ children }) => {
 		}
 
 		init()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	// Messages
@@ -232,7 +233,12 @@ export const CallProvider: React.FC = ({ children }) => {
 				addMessage({ id: messageId, message, createdAt, isSpeaker: false })
 			}
 		)
-	}, [])
+
+		return () => {
+			socket.off(WsEvents.RECEIVE_MESSAGE)
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [socketId])
 
 	// Notifications
 	useEffect(() => {
@@ -242,7 +248,11 @@ export const CallProvider: React.FC = ({ children }) => {
 				message: intl.formatMessage({ id: 'call.close.warn.desc' })
 			})
 		})
-	}, [])
+
+		return () => {
+			socket.off(WsEvents.SEND_CLOSE_NOTIFICATION)
+		}
+	}, [intl])
 
 	if (!me) {
 		navigate(HOME)

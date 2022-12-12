@@ -5,7 +5,7 @@ import { MdClose as CloseIcon } from 'react-icons/md'
 import { animateScroll } from 'react-scroll'
 
 import { ChatSender } from 'components/ChatSender'
-import { Message, MessageProps } from 'components/Message'
+import { Message } from 'components/Message'
 import { useIntl } from 'hooks'
 
 import * as S from './Chat.styled'

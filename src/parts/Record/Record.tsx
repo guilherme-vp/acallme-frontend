@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { Divider, Slide, Typography, IconButton, Grid, TextField } from '@mui/material'
 import { useForm } from 'react-hook-form'
@@ -14,23 +14,15 @@ export type FormProps = Pick<RecordEntity, 'diagnosis' | 'observation'>
 
 export interface RecordProps {
 	open: boolean
-	callEnded: boolean
 	onSubmit: (data: FormProps) => void
 	handleClose: () => void
 }
 
-export const Record = ({ open, handleClose, callEnded, onSubmit }: RecordProps) => {
+export const Record = ({ open, handleClose, onSubmit }: RecordProps) => {
 	const intl = useIntl()
-	const { register, formState, getValues } = useForm<FormProps>({ mode: 'all' })
+	const { register, formState } = useForm<FormProps>({ mode: 'all' })
 
 	const { errors } = formState
-
-	useEffect(() => {
-		const formData = getValues()
-
-		onSubmit(formData)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [callEnded])
 
 	return (
 		<Slide direction="left" in={open}>

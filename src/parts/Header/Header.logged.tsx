@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AppBar, Grid, Hidden, IconButton, Theme, useMediaQuery } from '@mui/material'
+import { AppBar, Grid, IconButton, Theme, useMediaQuery } from '@mui/material'
 import { BiMenuAltLeft as MenuIcon } from 'react-icons/bi'
 
 import { LanguagePicker } from 'components/LanguagePicker'

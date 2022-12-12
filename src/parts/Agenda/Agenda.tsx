@@ -122,7 +122,7 @@ export const Agenda = ({ role, onConfirm, onDisable, onViewDetails }: AgendaProp
 							<tr key={index}>
 								{hourRanges.map(
 									({ day, hour, isDisabled, isScheduled, isConfirmed, scheduleId }) => (
-										<TData key={scheduleId}>
+										<TData key={`${day}-${hour}`}>
 											<BookButton
 												onClick={e =>
 													handleClick(e, {

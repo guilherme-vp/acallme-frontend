@@ -25,7 +25,6 @@ import {
 
 import { InputIconContainer } from 'components/InputAdornment'
 import { useIntl } from 'hooks'
-import { GenderEnum } from 'services/entities'
 import { capitalizeLetter } from 'utils/capitalize-letter'
 
 import type { PersonalForm } from '../SignUp'

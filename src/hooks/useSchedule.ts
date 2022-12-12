@@ -50,10 +50,6 @@ export const useSchedule = (
 	const intl = useIntl()
 	const intlLocale = intl.locale === 'pt-BR' ? ptBR : enUS
 
-	function formatDay(oldDate: Date) {
-		return format(oldDate, 'd', { locale: intlLocale })
-	}
-
 	const firstDay = startOfWeek(date, { weekStartsOn: 1 })
 	const lastDay = endOfWeek(date, { weekStartsOn: 1 })
 	const startWeekMonth = format(firstDay, 'MMM')
@@ -61,6 +57,10 @@ export const useSchedule = (
 	const firstDayOfWeek = startOfWeek(date, { weekStartsOn: 1 })
 
 	const getWeekDays = useCallback(() => {
+		function formatDay(oldDate: Date) {
+			return format(oldDate, 'd', { locale: intlLocale })
+		}
+
 		// 21h - 6h = 15h
 		const allFormattedHours: HoursRange[][] = Array.from(
 			{ length: dayEnds - dayStart },
@@ -143,7 +143,7 @@ export const useSchedule = (
 		}
 
 		return { selector, schedule: allWeek }
-	}, [date, data, intlLocale])
+	}, [data, intlLocale, firstDay, firstDayOfWeek, lastDay, startWeekMonth, year])
 
 	const [week, setWeek] = useState<ScheduleContent>(getWeekDays())
 

@@ -1,6 +1,6 @@
 import qs from 'querystring'
 
-import { Specialist, GenderEnum } from 'services/entities'
+import { Specialist } from 'services/entities'
 
 import { nodeApi } from '../client'
 

@@ -5,7 +5,7 @@ import { queryClient } from '../services/api/client'
 import { fetchMe as fetchPatient } from '../services/api/patient'
 import { fetchMe as fetchSpecialist } from '../services/api/specialist'
 import { RolesEnum, JUser, User } from '../services/entities'
-import { callSocket, mainSocket } from 'services/ws/client'
+import { callSocket, mainSocket, notificationSocket } from 'services/ws/client'
 
 export interface UserState {
 	token: string | null
@@ -53,6 +53,8 @@ export const userModule: IStoreonModule = store => {
 			} else {
 				mainSocket.auth = token
 				callSocket.auth = token
+				notificationSocket.auth = token
+
 				store.dispatch('user/getUser')
 			}
 		}
